@@ -65,7 +65,7 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>DASHGUM FREE</b></a>
+            <a href="index.html" class="logo"><b>LIFEPANEL</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -314,13 +314,26 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
 			<form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
 				<input type="hidden" name="id_curso" id="id_curso" value="<?=$_GET['id_curso']?>" />
 				<input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
-
-				<div id="selector_color" >
-					<input type="color" id="select_color" value="<?=$datos_curso['color']?>" />
-					<input type="text" readonly="" id="chose_color" name="chose_color" value="<?=$datos_curso['color']?>" />
-					<span id="muestra_color"><b>Color de las cabeceras</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					Idioma: ES / IN / POR
-				</div>
+                                
+                                <div class="row">
+                                    <div id="selector_color" class="col-md-6 text-left" >
+                                            <input type="color" id="select_color" value="<?=$datos_curso['color']?>" />
+                                            <input type="text" readonly="" id="chose_color" name="chose_color" value="<?=$datos_curso['color']?>" />
+                                            <span id="muestra_color"><b>Color de las cabeceras</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div id="selector_color" class="col-md-6 text-right" >
+                                    <?php
+                                        $idiomas = getIdiomas($mysqli);
+                                        foreach($idiomas as $i=>$j){
+                                            if($j['cod_idioma']==$idioma){
+                                                echo $j['cod_idioma']."&nbsp;/&nbsp;";
+                                            }else{
+                                                echo "<a href='cursos.php?id_curso=".$_GET['id_curso']."&idioma=".$j['cod_idioma']."'>".$j['cod_idioma']."</a>&nbsp;/&nbsp;";
+                                            }
+                                        }
+                                    ?>
+                                    </div>
+                                </div>
 				
 				<div class="row">
 					<div id="sliderPreview">
@@ -354,7 +367,7 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2014 - Alvarez.is
+              <?=date("Y")?> - LifeWeb.com.ar
               <a href="blank.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>

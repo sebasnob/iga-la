@@ -9,6 +9,17 @@ function getDatos($mysqli, $id_curso, $idioma='ES'){
     return $respuesta;
 }
 
+function getIdiomas($mysqli){
+    $resultado = $mysqli->query("SELECT * FROM idiomas");
+    $idiomas = array();
+    while($respuesta = $resultado->fetch_assoc()){
+        $idiomas[] = $respuesta;
+    }
+    $resultado->free();
+    
+    return $idiomas;
+}
+
 function setChanges($mysqli, $id_curso, $color){
 	$resultado = $mysqli->query("UPDATE cursos SET color='".$color."' WHERE id = ".$id_curso);
     if($resultado){

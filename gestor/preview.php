@@ -220,7 +220,7 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
                             <div class="well">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img class="avatar img-thumbnail" src="images/blog/avatar.jpg" alt="">
+                                        <img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="">
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">
@@ -239,7 +239,7 @@ El alumno que cursa “Gastronomía y Alta Cocina” dispone de libros de excele
                              <div class="well">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img class="avatar img-thumbnail" src="images/blog/avatar2.jpg" alt="">
+                                        <img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">
