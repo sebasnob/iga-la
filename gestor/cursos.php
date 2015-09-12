@@ -344,13 +344,15 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
 				<hr/>
 				
 				<div id="materialesPreview">
-					<img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="">
+                                    <h3>Materiales</h3>
+                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="">
 				</div>
 				<input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
 				<hr/>
 				
 				<div id="uniformesPreview">
-					<img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
+                                    <h3>Uniforme</h3>
+                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
 				</div>
 				<input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
 				<hr/>
