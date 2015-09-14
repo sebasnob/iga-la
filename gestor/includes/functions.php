@@ -20,6 +20,17 @@ function getIdiomas($mysqli){
     return $idiomas;
 }
 
+function getCursos($mysqli){
+    $resultado = $mysqli->query("SELECT id, nombre, color FROM cursos");
+    $cursos = array();
+    while($respuesta = $resultado->fetch_assoc()){
+        $cursos[] = $respuesta;
+    }
+    $resultado->free();
+    
+    return $cursos;
+}
+
 function setChanges($mysqli, $id_curso, $color){
 	$resultado = $mysqli->query("UPDATE cursos SET color='".$color."' WHERE id = ".$id_curso);
     if($resultado){

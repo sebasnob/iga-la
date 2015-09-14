@@ -114,6 +114,19 @@ var Script = function () {
             }, 2000)
         })
     }
+    
+    
+    
+    $('#logout').click(function(){
+        $.ajax({
+            type: "POST", 
+            url: "logout.php",  
+            data: {logout:'logout'},
+            success:function(){
+                window.location = 'login.php';
+            }
+        });
+    });
 
 
 }();

@@ -36,6 +36,10 @@ if(isset($_FILES['imageSlider']['name']) && $_FILES['imageSlider']['name'] != ''
         if(file_exists($datos_curso['img_cabecera'])){
             unlink($datos_curso['img_cabecera']);
         }
+        
+        if(!is_dir('images/slider/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/')){
+            mkdir('images/slider/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/');
+        }
 
         $ext = getExtension($_FILES['imageSlider']['name']);
         $ruta_slider = 'images/slider/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
@@ -61,6 +65,10 @@ if(isset($_FILES['imageMateriales']['name']) && $_FILES['imageMateriales']['name
         if(file_exists($datos_curso['img_materiales'])){
             unlink($datos_curso['img_materiales']);
         }
+        
+        if(!is_dir('images/img-materiales/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/')){
+            mkdir('images/img-materiales/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/');
+        }
 
         $ext = getExtension($_FILES['imageMateriales']['name']);
         $ruta_materiales = 'images/img-materiales/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
@@ -85,6 +93,10 @@ if(isset($_FILES['imageUniformes']['name']) && $_FILES['imageUniformes']['name']
         if(file_exists($datos_curso['img_uniforme'])){
            unlink($datos_curso['img_uniforme']); 
         }
+        
+        if(!is_dir('images/img-uniforme/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/')){
+            mkdir('images/img-uniforme/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/');
+        }
 
         $ext = getExtension($_FILES['imageUniformes']['name']);
         $ruta_uniformes = 'images/img-uniforme/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
@@ -104,6 +116,6 @@ if(isset($_FILES['imageUniformes']['name']) && $_FILES['imageUniformes']['name']
     }
 }
 
-header("Location: cursos.php?id_curso=".$_POST['id_curso']);
+header("Location: cursos.php?id_curso=".$_POST['id_curso']."&idioma=".$_POST['idioma']);
 
 ?>
