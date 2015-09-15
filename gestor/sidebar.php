@@ -12,9 +12,9 @@ MAIN SIDEBAR MENU
             <h5 class="centered"><?=strtoupper($_SESSION['username']);?></h5>
 
            <li class="sub-menu">
-                <a href="javascript:;" >
-                    <i class="fa fa-plus-square-o"></i>
-                    <span>Agregar Curso</span>
+               <a href="home_edit.php" >
+                    <i class="fa fa-home fa-lg"></i>
+                    <span>Editar Home</span>
                 </a>
             </li>
 

@@ -21,8 +21,6 @@ if(isset($_GET['idioma'])){
 	$idioma = 'ES';
 }
 
-$datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +64,7 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-              <h1 class="text-center">Edicion de Cursos</h1>
+              <h1 class="text-center">Edicion de Home</h1>
 			<form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
 				<input type="hidden" name="id_curso" id="id_curso" value="<?=$_GET['id_curso']?>" />
 				<input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
@@ -84,35 +82,19 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
                                             if($j['cod_idioma']==$idioma){
                                                 echo $j['cod_idioma']."&nbsp;/&nbsp;";
                                             }else{
-                                                echo "<a href='cursos.php?id_curso=".$_GET['id_curso']."&idioma=".$j['cod_idioma']."'>".$j['cod_idioma']."</a>&nbsp;/&nbsp;";
+                                                echo "<a href='home_edit.php?idioma=".$j['cod_idioma']."'>".$j['cod_idioma']."</a>&nbsp;/&nbsp;";
                                             }
                                         }
                                     ?>
                                     </div>
                                 </div>
-				
+				<hr/>
 				<div class="row">
-					<div id="sliderPreview">
-						<img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['img_cabecera']?>" alt="">
-					</div>
-				</div>
-				<input id="uploadSlider" type="file" name="imageSlider" class="img" />
+                                    <b>Cambiar video</b>
+                                    <input id="uploadSlider" type="file" name="imageSlider" class="img" />
+                                </div>
 				<hr/>
 				
-				<div id="materialesPreview">
-                                    <h3>Materiales</h3>
-                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="">
-				</div>
-				<input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
-				<hr/>
-				
-				<div id="uniformesPreview">
-                                    <h3>Uniforme</h3>
-                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
-				</div>
-				<input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
-				<hr/>
-				<button id="confirm" class="btn btn-success">Aceptar</button>
 				<a id="preview" class="btn btn-default" href="preview.php?id_curso=<?=$_GET['id_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
 				<button id="publicar" class="btn btn-primary">Publicar</button>
 			</form>
@@ -149,59 +131,13 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
 
   </script>
   
-  <script type="text/javascript">
+    <script type="text/javascript">
 	$("#select_color").change(function(){
 		$("#chose_color").val($("#select_color").val());
 		$("h1, h2, h3, h4").css("color", $("#select_color").val());
 		$("#muestra_color").css("color", $("#select_color").val());
 	});
 	
-	$("#confirm").click(function(){
-		//$(".overlay").show();
-		$("#form_change").submit();
-	});
-	
-	
-	$("#uploadSlider").on("change", function(){
-		var files = !!this.files ? this.files : [];
-		if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-		if (/^image/.test( files[0].type)){ // only image file
-			var reader = new FileReader(); // instance of the FileReader
-			reader.readAsDataURL(files[0]); // read the local file
-			reader.onloadend = function(){ // set image data as background of div
-				//$("#imagePreview").css("background-image", "url("+this.result+")");
-				$("#sliderPreview").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
-			}
-		}
-	});
-	
-	$("#uploadMateriales").on("change", function(){
-	var files = !!this.files ? this.files : [];
-		if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-		if (/^image/.test( files[0].type)){ // only image file
-		var reader = new FileReader(); // instance of the FileReader
-			reader.readAsDataURL(files[0]); // read the local file
-			reader.onloadend = function(){ // set image data as background of div
-				//$("#imagePreview").css("background-image", "url("+this.result+")");
-				$("#materialesPreview").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
-			}
-		}
-	});
-	
-	$("#uploadUniformes").on("change", function(){
-	var files = !!this.files ? this.files : [];
-		if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-		if (/^image/.test( files[0].type)){ // only image file
-		var reader = new FileReader(); // instance of the FileReader
-			reader.readAsDataURL(files[0]); // read the local file
-			reader.onloadend = function(){ // set image data as background of div
-				//$("#imagePreview").css("background-image", "url("+this.result+")");
-				$("#uniformesPreview").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
-			}
-		}
-	});
-	
-	</script>
-
+    </script>
   </body>
 </html>
