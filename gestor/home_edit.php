@@ -65,7 +65,7 @@ if(isset($_GET['idioma'])){
       <section id="main-content">
           <section class="wrapper site-min-height">
               <h1 class="text-center">Edicion de Home</h1>
-			<form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
+			<form method="POST" action="#" id="form_change" enctype="multipart/form-data">
 				<input type="hidden" name="id_curso" id="id_curso" value="<?=$_GET['id_curso']?>" />
 				<input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
                                 
