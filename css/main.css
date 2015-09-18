@@ -450,6 +450,18 @@ section {
   padding: 0;
 }
 
+#portfolio .container-fluid, 
+#portfolio .col-md-3  {
+  overflow: hidden;
+  padding: 0;
+}
+
+#portfolio .container-fluid, 
+#portfolio .col-md-6  {
+  overflow: hidden;
+  padding: 0;
+}
+
 #portfolio .folio-item {
   position: relative;
 }
@@ -502,7 +514,7 @@ section {
   background-color: #fff;
   display: inline-block;
   margin-top: 20px;
-  margin-right: 5px;
+  /*margin-right: 5px;*/
 }
 
 .folio-overview a:hover {
