@@ -19,11 +19,11 @@ MAIN SIDEBAR MENU
             </li>
 
             <li class="sub-menu">
-                <a href="javascript:;" >
+                <a href="index.php" >
                     <i class="fa fa-th"></i>
                     <span>Listado de Cursos</span>
                 </a>
-                <ul class="sub">
+<!--                <ul class="sub">
                     <?php 
                     $cursos = getCursos($mysqli);
                     foreach($cursos as $i=>$j){
@@ -32,8 +32,14 @@ MAIN SIDEBAR MENU
                     <?php
                     }
                     ?>
-                </ul>
+                </ul>-->
             </li>
+            <li class="sub-menu">
+                <a href="grilla_edit.php" >
+                    <i class="fa fa-image"></i>
+                    <span>Editar Grilla</span>
+                </a>
+            </li>    
         </ul>
         <!-- sidebar menu end-->
     </div>
