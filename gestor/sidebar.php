@@ -19,7 +19,7 @@ MAIN SIDEBAR MENU
             </li>
 
             <li class="sub-menu">
-                <a href="index.php" >
+                <a href="list_cursos.php" >
                     <i class="fa fa-th"></i>
                     <span>Listado de Cursos</span>
                 </a>
