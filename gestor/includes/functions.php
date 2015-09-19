@@ -214,3 +214,15 @@ function esc_url($url) {
         return $url;
     }
 }
+
+function getImagenesGrilla()
+{
+    //TODO crear select por prioridad
+    $retorno[] = array("id"=>"1","rows"=>"1", "cols"=>"6", "img_url"=>"images/portfolio/7.jpg", "id_curso"=>"1");
+    $retorno[] = array("id"=>"2","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/2.jpg", "id_curso"=>"2");
+    $retorno[] = array("id"=>"3","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/5.jpg", "id_curso"=>"3");
+    $retorno[] = array("id"=>"4","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/3.jpg", "id_curso"=>"4");
+    $retorno[] = array("id"=>"4","rows"=>"1", "cols"=>"6", "img_url"=>"images/portfolio/7.jpg", "id_curso"=>"4");
+    $retorno[] = array("id"=>"4","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/3.jpg", "id_curso"=>"4");
+    return $retorno;
+}
