@@ -3,7 +3,7 @@ session_start();
 include_once 'gestor/includes/db_connect.php';
 include_once 'gestor/includes/functions.php';
 
-if(!$_SESSION['pais']){
+if(!$_SESSION['pais']['cod_pais']){
     detectCountry($mysqli);
 }
 
