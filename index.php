@@ -1,6 +1,7 @@
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
+session_start();
+include_once 'gestor/includes/db_connect.php';
+include_once 'gestor/includes/functions.php';
 
 if(!$_SESSION['pais']){
     detectCountry($mysqli);

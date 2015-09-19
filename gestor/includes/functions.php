@@ -2,7 +2,8 @@
 include_once 'psl-config.php';
  
 function getDatos($mysqli, $id_curso, $idioma='ES'){
-    $resultado = $mysqli->query("SELECT c.color,ci.titulo,ci.img_cabecera,ci.img_materiales,ci.img_uniforme FROM cursos as c INNER JOIN curso_idioma as ci ON ci.id_curso=c.id WHERE ci.idioma='".$idioma."' AND c.id=".$id_curso);
+    $query = "SELECT c.color,cd.titulo,cd.img_cabecera,cd.img_materiales,cd.img_uniforme,ci.id FROM cursos as c INNER JOIN curso_idioma as ci ON ci.id_curso=c.id INNER JOIN curso_datos as cd ON cd.id_curso_idioma=ci.id WHERE ci.idioma='".$idioma."' AND ci.id_curso=".$id_curso;
+    $resultado = $mysqli->query($query);
     $respuesta = $resultado->fetch_assoc();
     $resultado->free();
     
@@ -20,8 +21,8 @@ function getIdiomas($mysqli){
     return $idiomas;
 }
 
-function getCursos($mysqli){
-    $resultado = $mysqli->query("SELECT id, nombre, color FROM cursos");
+function getCursos($mysqli, $idioma='ES'){
+    $resultado = $mysqli->query("SELECT ci.id,cd.titulo FROM curso_idioma as ci INNER JOIN curso_datos as cd ON cd.id_curso_idioma=ci.id WHERE ci.idioma='ES'");
     $cursos = array();
     while($respuesta = $resultado->fetch_assoc()){
         $cursos[] = $respuesta;
@@ -31,15 +32,33 @@ function getCursos($mysqli){
     return $cursos;
 }
 
-function setChanges($mysqli, $id_curso, $color){
-	$resultado = $mysqli->query("UPDATE cursos SET color='".$color."' WHERE id = ".$id_curso);
+function getPais($mysqli, $cod_pais){
+    $query = "SELECT id, pais, cod_pais, flag FROM paises WHERE cod_pais='".$cod_pais."'";
+    $resultado = $mysqli->query($query);
+    $respuesta = $resultado->fetch_assoc();
+    $resultado->free();
+    
+    return $respuesta;
+}
+
+function getPaises($mysqli){
+    $paises = array();
+    $result = $mysqli->query("SELECT id, pais, cod_pais, flag FROM paises");
+    while($pais = $result->fetch_assoc()){
+	$paises[] = array('id'=>$pais['id'],'pais'=>$pais['pais'],'cod_pais'=>$pais['cod_pais'],'flag'=>$pais['flag']);
+    }
+    return json_encode($paises);
+}
+
+/*function setChanges($mysqli, $id_curso, $color){
+    $resultado = $mysqli->query("UPDATE cursos SET color='".$color."' WHERE id = ".$id_curso);
     if($resultado){
 		return true;
 	}else{
 		return false;
 	}
 	$resultado->free();
-}
+}*/
 
 function sec_session_start() {
     $session_name = 'sec_session_id';   // Set a custom session name
@@ -215,6 +234,32 @@ function esc_url($url) {
     }
 }
 
+function detectCountry($mysqli){
+    //$myIp = $_SERVER['REMOTE_ADDR'];
+    $myIp = "190.2.100.6";
+
+    $url = "http://www.telize.com/geoip/".$myIp;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    //Con esta opcion almaceno el resultado en una variable
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    if(curl_exec($ch)){
+        $resp = json_decode(curl_exec($ch));
+        
+        $result = $mysqli->query("SELECT flag FROM paises WHERE cod_pais='".$resp->{'country_code'}."'");
+        $flag = $result->fetch_assoc();
+        
+        $_SESSION['pais'] = array('cod_pais'=>$resp->{'country_code'}, 'flag'=>$flag['flag']);
+        //$_SESSION['ciudad'] = $resp->{'city'};
+    }else{
+        $_SESSION['pais'] = array('cod_pais'=>"AR", 'flag'=>"images/flags/ar.png");
+    }
+    curl_close($ch);
+}
+
 function getImagenesGrilla()
 {
     //TODO crear select por prioridad
@@ -226,3 +271,5 @@ function getImagenesGrilla()
     $retorno[] = array("id"=>"4","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/3.jpg", "id_curso"=>"4");
     return $retorno;
 }
+
+?>

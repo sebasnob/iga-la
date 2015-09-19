@@ -161,3 +161,8 @@ jQuery(function($) {
 	
 });
 
+function descripcionCurso(id_curso)
+{
+    alert(id_curso);
+}
+

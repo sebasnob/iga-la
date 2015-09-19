@@ -27,19 +27,21 @@ if(isset($_POST['edicion_curso'])){
             if(file_exists($datos_curso['img_cabecera'])){
                 unlink($datos_curso['img_cabecera']);
             }
-
-            if(!is_dir('images/slider/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/')){
-                mkdir('images/slider/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/');
+            
+            $ruta_slider = '../images/slider/'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
+            
+            if(!is_dir($ruta_slider)){
+                mkdir($ruta_slider);
             }
 
             $ext = getExtension($_FILES['imageSlider']['name']);
-            $ruta_slider = 'images/slider/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
-            $new_file_name = "slider-curso-".$_POST['id_curso'].".".$ext;
+            
+            $new_file_name = "slider-".$_POST['id_curso'].".".$ext;
 
             $exito = move_uploaded_file($_FILES['imageSlider']['tmp_name'], $ruta_slider.$new_file_name);
 
             if($exito){
-                    $query = "UPDATE curso_idioma SET img_cabecera='".$ruta_slider.$new_file_name."' WHERE id_curso=".$_POST['id_curso']." AND idioma='".$_POST['idioma']."'";
+                    $query = "UPDATE curso_datos as cd INNER JOIN curso_idioma as ci ON ci.id=cd.id_curso_idioma SET cd.img_cabecera='".$ruta_slider.$new_file_name."' WHERE ci.id_curso=".$_POST['id_curso']." AND ci.idioma='".$_POST['idioma']."'";
                     $result = $mysqli->query($query);
                     if($result){
                             $message = "<br/>Imagen de los materiales agregada correctamente.<br/>";
@@ -53,22 +55,22 @@ if(isset($_POST['edicion_curso'])){
 
     if(isset($_FILES['imageMateriales']['name']) && $_FILES['imageMateriales']['name'] != ''){
         if(!$_FILES['imageMateriales']['error']){
+            $ext = getExtension($_FILES['imageMateriales']['name']);
+            $ruta_materiales = '../images/materiales/'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
+            $new_file_name = "materiales.".$ext;
+            
             if(file_exists($datos_curso['img_materiales'])){
                 unlink($datos_curso['img_materiales']);
             }
 
-            if(!is_dir('images/img-materiales/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/')){
-                mkdir('images/img-materiales/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/');
+            if(!is_dir($ruta_materiales)){
+                mkdir($ruta_materiales);
             }
-
-            $ext = getExtension($_FILES['imageMateriales']['name']);
-            $ruta_materiales = 'images/img-materiales/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
-            $new_file_name = "img_materiales.".$ext;
 
             $exito = move_uploaded_file($_FILES['imageMateriales']['tmp_name'], $ruta_materiales.$new_file_name);
 
             if($exito){
-                $query = "UPDATE curso_idioma SET img_materiales='".$ruta_materiales.$new_file_name."' WHERE id_curso=".$_POST['id_curso']." AND idioma='".$_POST['idioma']."'";
+                $query = "UPDATE curso_datos as cd INNER JOIN curso_idioma as ci ON ci.id=cd.id_curso_idioma SET cd.img_materiales='".$ruta_materiales.$new_file_name."' WHERE ci.id_curso=".$_POST['id_curso']." AND ci.idioma='".$_POST['idioma']."'";
                 $result = $mysqli->query($query);
                 if($result){
                         $message = "<br/>Imagen de los materiales agregada correctamente.<br/>";
@@ -81,22 +83,22 @@ if(isset($_POST['edicion_curso'])){
 
     if(isset($_FILES['imageUniformes']['name']) && $_FILES['imageUniformes']['name'] != ''){
         if(!$_FILES['imageUniformes']['error']){
+            $ext = getExtension($_FILES['imageUniformes']['name']);
+            $ruta_uniformes = '../images/uniformes/'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
+            $new_file_name = "uniforme.".$ext;
+            
             if(file_exists($datos_curso['img_uniforme'])){
                unlink($datos_curso['img_uniforme']); 
             }
 
-            if(!is_dir('images/img-uniforme/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/')){
-                mkdir('images/img-uniforme/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/');
+            if(!is_dir($ruta_uniformes)){
+                mkdir($ruta_uniformes);
             }
-
-            $ext = getExtension($_FILES['imageUniformes']['name']);
-            $ruta_uniformes = 'images/img-uniforme/curso-'.$_POST['id_curso'].'/'.$_POST['idioma'].'/';
-            $new_file_name = "img_uniforme.".$ext;
 
             $exito = move_uploaded_file($_FILES['imageUniformes']['tmp_name'], $ruta_uniformes.$new_file_name);
 
             if($exito){
-                $query = "UPDATE curso_idioma SET img_uniforme='".$ruta_uniformes.$new_file_name."' WHERE id_curso=".$_POST['id_curso']." AND idioma='".$_POST['idioma']."'";
+                $query = "UPDATE curso_datos as cd INNER JOIN curso_idioma as ci ON ci.id=cd.id_curso_idioma SET cd.img_uniforme='".$ruta_uniformes.$new_file_name."' WHERE ci.id_curso=".$_POST['id_curso']." AND ci.idioma='".$_POST['idioma']."'";
                 $result = $mysqli->query($query);
                 if($result){
                         $message = "<br/>Imagen de uniforme agregada correctamente.<br/>";
