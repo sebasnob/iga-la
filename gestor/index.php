@@ -34,8 +34,8 @@ if($logged == 'out'){
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-
     <link href="assets/css/table-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">  
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -56,11 +56,132 @@ if($logged == 'out'){
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Responsive Table Examples</h3>
+
+                <div class="row mtbox">
+                      <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                        <div class="box1">
+                  <span class="li_user"></span>
+                  <h3>933</h3>
+                        </div>
+                  <p>Alumnos Activos que realizán nuestros cursos. Whoohoo!</p>
+                      </div>
+                      <div class="col-md-2 col-sm-2 box0">
+                        <div class="box1">
+                  <span class="li_world"></span>
+                  <h3>+48</h3>
+                        </div>
+                  <p>Filiales Activas que se encuentran en toda América.</p>
+                      </div>
+                      <div class="col-md-2 col-sm-2 box0">
+                        <div class="box1">
+                  <span class="li_study"></span>
+                  <h3>23</h3>
+                        </div>
+                  <p>Cursos Disponibles que contamos actualmente. Vamos por más!</p>
+                      </div>
+                      <div class="col-md-2 col-sm-2 box0">
+                        <div class="box1">
+                  <span class="li_search"></span>
+                  <h3>+100</h3>
+                        </div>
+                  <p>Consultas díarias realizadas por nuestros alumnos.</p>
+                      </div>
+                      <div class="col-md-2 col-sm-2 box0">
+                        <div class="box1">
+                  <span class="li_data"></span>
+                  <h3>OK!</h3>
+                        </div>
+                  <p>Su servidor está funcionando perfectamente. Relájese y disfrute.</p>
+                      </div>
+                    
+                    </div><!-- /row mt -->  
+
+              <div class="row mt">
+                      <!-- PANEL 1 -->
+                        <div class="col-md-4 col-sm-4 mb">
+                           <div class="panel-1 pn">
+                            <div class="panel-1-header">
+                    <h5>EDITAR TITULOS DE PRESENTACIÓN</h5>
+                            </div>
+                            <div class="centered">
+                   
+                            </div>
+                          </div><! --/grey-panel -->
+                        </div><!-- /col-md-4-->
+                        
+
+                        <div class="col-md-4 col-sm-4 mb">
+                           <div class="panel-2 pn">
+                            <div class="panel-2-header">
+                    <h5>LISTADO DE CURSOS</h5>
+                            </div>
+                            <div class="centered">
+                   
+                            </div>
+                          </div>
+                        </div><!-- /col-md-4 -->
+                        
+            <div class="col-md-4 mb">
+              <!-- WHITE PANEL - TOP USER -->
+              <div class="panel-3 pn">
+                            <div class="panel-3-header">
+                    <h5>EDITAR SLIDER Y CONTENIDO DEL HOME</h5>
+                            </div>
+                            <div class="centered">
+                   
+                            </div>
+                          </div>
+            </div><!-- /col-md-4 -->
+                        
+
+                    </div><!-- /row -->
+
+                <div class="row">
+            <!--PANEL 4 -->
+            <div class="col-md-4 mb">
+                          <div class="panel-4 pn">
+                            <div class="panel-4-header">
+                    <h5>EDITAR COLORES HOME</h5>
+                            </div>
+                            <div class="centered">
+                   
+                            </div>
+                          </div><! -- /darkblue panel -->
+            </div><!-- /col-md-4 -->
+            
+            
+            <div class="col-md-4 mb">
+              <!-- PANEL 5 -->
+             <div class="panel-5 pn">
+                            <div class="panel-5-header">
+                    <h5>SUBIR VIDEO PRESENTACION</h5>
+                            </div>
+                            <div class="centered">
+                   
+                            </div>
+                          </div>
+            </div><!-- /col-md-4 -->
+            
+            <div class="col-md-4 col-sm-4 mb">
+              <!-- PANEL 6 -->
+              <div class="panel-6 pn">
+                <div class="panel-6-header">
+                  <h5>GOOGLE ANALYTICS</h5>
+                </div>
+               <div class="centered">
+                   
+                </div>
+                <p class="mt"><b>$ 17,980</b><br/>Month Income</p>
+              </div>
+            </div><!-- /col-md-4 -->
+            
+          </div><!-- /row -->      
+
+          	<h3><i class="fa fa-angle-right"></i> Listado TOP de cursos</h3>
 		  		<div class="row mt">
 			  		<div class="col-lg-12">
                       <div class="content-panel">
-                      <h4><i class="fa fa-angle-right"></i> Responsive Table</h4>
+                      <h4><i class="fa fa-angle-right"></i> 10 más consultados</h4>
                           <section id="unseen">
                             <table class="table table-bordered table-striped table-condensed">
                               <thead>
@@ -205,153 +326,54 @@ if($logged == 'out'){
                </div><!-- /col-lg-4 -->			
 		  	</div><!-- /row -->
 		  	
-		  	<div class="row mt">
-              <div class="col-lg-12">
-                      <div class="content-panel">
-						  <h4><i class="fa fa-angle-right"></i> No More Table</h4>
-                          <section id="no-more-tables">
-                              <table class="table table-bordered table-striped table-condensed cf">
-                                  <thead class="cf">
-                                  <tr>
-                                      <th>Code</th>
-                                      <th>Company</th>
-                                      <th class="numeric">Price</th>
-                                      <th class="numeric">Change</th>
-                                      <th class="numeric">Change %</th>
-                                      <th class="numeric">Open</th>
-                                      <th class="numeric">High</th>
-                                      <th class="numeric">Low</th>
-                                      <th class="numeric">Volume</th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  <tr>
-                                      <td data-title="Code">AAC</td>
-                                      <td data-title="Company">AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
-                                      <td class="numeric" data-title="Price">$1.38</td>
-                                      <td class="numeric" data-title="Change">-0.01</td>
-                                      <td class="numeric" data-title="Change %">-0.36%</td>
-                                      <td class="numeric" data-title="Open">$1.39</td>
-                                      <td class="numeric" data-title="High">$1.39</td>
-                                      <td class="numeric" data-title="Low">$1.38</td>
-                                      <td class="numeric" data-title="Volume">9,395</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">AAD</td>
-                                      <td data-title="Company">ARDENT LEISURE GROUP</td>
-                                      <td class="numeric" data-title="Price">$1.15</td>
-                                      <td class="numeric" data-title="Change">  +0.02</td>
-                                      <td class="numeric" data-title="Change %">1.32%</td>
-                                      <td class="numeric" data-title="Open">$1.14</td>
-                                      <td class="numeric" data-title="High">$1.15</td>
-                                      <td class="numeric" data-title="Low">$1.13</td>
-                                      <td class="numeric" data-title="Volume">56,431</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">AAX</td>
-                                      <td data-title="Company">AUSENCO LIMITED</td>
-                                      <td class="numeric" data-title="Price">$4.00</td>
-                                      <td class="numeric" data-title="Change">-0.04</td>
-                                      <td class="numeric" data-title="Change %">-0.99%</td>
-                                      <td class="numeric" data-title="Open">$4.01</td>
-                                      <td class="numeric" data-title="High">$4.05</td>
-                                      <td class="numeric" data-title="Low">$4.00</td>
-                                      <td class="numeric" data-title="Volume">90,641</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">ABC</td>
-                                      <td data-title="Company">ADELAIDE BRIGHTON LIMITED</td>
-                                      <td class="numeric" data-title="Price">$3.00</td>
-                                      <td class="numeric" data-title="Change">  +0.06</td>
-                                      <td class="numeric" data-title="Change %">2.04%</td>
-                                      <td class="numeric" data-title="Open">$2.98</td>
-                                      <td class="numeric" data-title="High">$3.00</td>
-                                      <td class="numeric" data-title="Low">$2.96</td>
-                                      <td class="numeric" data-title="Volume">862,518</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">ABP</td>
-                                      <td data-title="Company">ABACUS PROPERTY GROUP</td>
-                                      <td class="numeric" data-title="Price">$1.91</td>
-                                      <td class="numeric" data-title="Change">0.00</td>
-                                      <td class="numeric" data-title="Change %">0.00%</td>
-                                      <td class="numeric" data-title="Open">$1.92</td>
-                                      <td class="numeric" data-title="High">$1.93</td>
-                                      <td class="numeric" data-title="Low">$1.90</td>
-                                      <td class="numeric" data-title="Volume">595,701</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">ABY</td>
-                                      <td data-title="Company">ADITYA BIRLA MINERALS LIMITED</td>
-                                      <td class="numeric" data-title="Price">$0.77</td>
-                                      <td class="numeric" data-title="Change">  +0.02</td>
-                                      <td class="numeric" data-title="Change %">2.00%</td>
-                                      <td class="numeric" data-title="Open">$0.76</td>
-                                      <td class="numeric" data-title="High">$0.77</td>
-                                      <td class="numeric" data-title="Low">$0.76</td>
-                                      <td class="numeric" data-title="Volume">54,567</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">ACR</td>
-                                      <td data-title="Company">ACRUX LIMITED</td>
-                                      <td class="numeric" data-title="Price">$3.71</td>
-                                      <td class="numeric" data-title="Change">  +0.01</td>
-                                      <td class="numeric" data-title="Change %">0.14%</td>
-                                      <td class="numeric" data-title="Open">$3.70</td>
-                                      <td class="numeric" data-title="High">$3.72</td>
-                                      <td class="numeric" data-title="Low">$3.68</td>
-                                      <td class="numeric" data-title="Volume">191,373</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">ADU</td>
-                                      <td data-title="Company">ADAMUS RESOURCES LIMITED</td>
-                                      <td class="numeric" data-title="Price">$0.72</td>
-                                      <td class="numeric" data-title="Change">0.00</td>
-                                      <td class="numeric" data-title="Change %">0.00%</td>
-                                      <td class="numeric" data-title="Open">$0.73</td>
-                                      <td class="numeric" data-title="High">$0.74</td>
-                                      <td class="numeric" data-title="Low">$0.72</td>
-                                      <td class="numeric" data-title="Volume">8,602,291</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">AGG</td>
-                                      <td data-title="Company">ANGLOGOLD ASHANTI LIMITED</td>
-                                      <td class="numeric" data-title="Price">$7.81</td>
-                                      <td class="numeric" data-title="Change">-0.22</td>
-                                      <td class="numeric" data-title="Change %">-2.74%</td>
-                                      <td class="numeric" data-title="Open">$7.82</td>
-                                      <td class="numeric" data-title="High">$7.82</td>
-                                      <td class="numeric" data-title="Low">$7.81</td>
-                                      <td class="numeric" data-title="Volume">148</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">AGK</td>
-                                      <td data-title="Company">AGL ENERGY LIMITED</td>
-                                      <td class="numeric" data-title="Price">$13.82</td>
-                                      <td class="numeric" data-title="Change">  +0.02</td>
-                                      <td class="numeric" data-title="Change %">0.14%</td>
-                                      <td class="numeric" data-title="Open">$13.83</td>
-                                      <td class="numeric" data-title="High">$13.83</td>
-                                      <td class="numeric" data-title="Low">$13.67</td>
-                                      <td class="numeric" data-title="Volume">846,403</td>
-                                  </tr>
-                                  <tr>
-                                      <td data-title="Code">AGO</td>
-                                      <td data-title="Company">ATLAS IRON LIMITED</td>
-                                      <td class="numeric" data-title="Price">$3.17</td>
-                                      <td class="numeric" data-title="Change">-0.02</td>
-                                      <td class="numeric" data-title="Change %">-0.47%</td>
-                                      <td class="numeric" data-title="Open">$3.11</td>
-                                      <td class="numeric" data-title="High">$3.22</td>
-                                      <td class="numeric" data-title="Low">$3.10</td>
-                                      <td class="numeric" data-title="Volume">5,416,303</td>
-                                  </tr>
-                                  </tbody>
-                              </table>
-                          </section>
-                      </div><!-- /content-panel -->
-                  </div><!-- /col-lg-12 -->
-              </div><!-- /row -->
+		  	
+
+<div class="row mt">
+                      <!--CUSTOM CHART START -->
+                      <div class="border-head">
+                          <h3>VISITAS</h3>
+                      </div>
+                      <div class="custom-bar-chart">
+                          <ul class="y-axis">
+                              <li><span>10.000</span></li>
+                              <li><span>8.000</span></li>
+                              <li><span>6.000</span></li>
+                              <li><span>4.000</span></li>
+                              <li><span>2.000</span></li>
+                              <li><span>0</span></li>
+                          </ul>
+                          <div class="bar">
+                              <div class="title">JAN</div>
+                              <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">FEB</div>
+                              <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">MAR</div>
+                              <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">APR</div>
+                              <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">MAY</div>
+                              <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">JUN</div>
+                              <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">JUL</div>
+                              <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
+                          </div>
+                      </div>
+                      <!--custom chart end-->
+          </div><!-- /row --> 
+
 
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
@@ -360,7 +382,7 @@ if($logged == 'out'){
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2014 - Alvarez.is
+              2015 - Iga - Administrador Back-End
               <a href="responsive_table.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
@@ -380,8 +402,7 @@ if($logged == 'out'){
     <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
 
-    <!--script for this page-->
-    
+
 
   </body>
 </html>

@@ -43,27 +43,38 @@ if (login_check($mysqli) == true) {
     </head>
     
     <body>
+          <div id="login-page">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-4 col-md-offset-4">
-                    <div class="account-wall">
-                        <form class="form-signin" method="POST" action="includes/process_login.php">
-                            <?php
+        
+              <form class="form-login" method="POST" action="includes/process_login.php">
+                   <?php
                                 if (isset($_GET['error'])) 
                                 {
                                     echo '<p class="error">email o password incorrecto</p>';
                                 }
-                                ?>
-                            <input type="text" name="email" class="form-control" placeholder="email" required autofocus>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="contraseña" required>
-                            <button class="btn btn-lg btn-primary btn-block" 
-                                    type="button" 
-                                    onclick="formhash(this.form, this.form.password);">
-                                Ingresar
-                            </button>
-                    </div>
-                </div>
-            </div>
+                    ?>
+                <h2 class="form-login-heading">Administrador IGA </h2>
+                <div class="login-wrap">
+                    <input type="text" name="email" class="form-control" placeholder="Email" autofocus>
+                    <br>
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                     <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="formhash(this.form, this.form.password);" ><i class="fa fa-lock"></i> Ingresar</button>
+                    <br>
+               </div>
+        
+       
+        
+              </form>       
+        
+        </div>
+      </div>
+   <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+    <script>
+        $.backstretch("assets/img/login-bg.jpg", {speed: 500});
+    </script>
+
+
     </body>
 </html>
 
