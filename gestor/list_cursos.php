@@ -54,7 +54,7 @@ if($logged == 'out'){
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Listado de Cursos</h3>
+            <h1 class="text-center">Listado de Cursos</h1>
             <div class="row mt">
                 <div class="col-lg-12">
                     <div class="content-panel">

@@ -69,9 +69,7 @@ $datos_home = getDatosHome($mysqli);
                 <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
                 <section id="main-content">
                     <section class="wrapper">
-                        <div class="text-center" >
-                            <h2>Edicion de Home</h2>
-                        </div>
+                        <h1 class="text-center">Edicion de Home</h1>
                         <div class="row">
                             <div id="videoPreview" class="text-center">
                                 <!-- <iframe width="854" height="480" src="https://www.youtube.com/embed/JApGTCxZztg?rel=0&controls=0&showinfo=0&autoplay=1&autoplay=1&loop=0&playlist=Rk6_hdRtJOE&enablejsapi=1&version=3" frameborder="0"></iframe>-->

@@ -59,7 +59,7 @@ $gridArray = getImagenesGrilla($mysqli);
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i> Edici&oacute;n de Grilla</h3>
+                    <h1 class="text-center">Edicion de Grilla</h1>
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="content-panel">
@@ -212,16 +212,7 @@ $gridArray = getImagenesGrilla($mysqli);
             </section><!-- /MAIN CONTENT -->
             
             <!--main content end-->
-            <!--footer start-->
-            <footer class="site-footer">
-                <div class="text-center">
-                    2014 - Alvarez.is
-                    <a href="grilla_edit.php#" class="go-top">
-                        <i class="fa fa-angle-up"></i>
-                    </a>
-                </div>
-            </footer>
-            <!--footer end-->
+            <?php include_once 'footer.php';?>
         </section>
         
         <!-- js placed at the end of the document so the pages load faster -->
