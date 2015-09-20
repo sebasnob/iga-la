@@ -2,6 +2,8 @@
     
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
+include_once 'includes/resizeImage.php';
+
 
 if(isset($_POST['edicion_curso'])){
 
@@ -151,16 +153,23 @@ if(isset($_POST['edicion_grilla']))
                     $newThumb = new resize($ruta);
                     $newThumb->resizeImage(150,632,"landscape");
                     $exito = $newThumb->saveImage($ruta_thumb);
-                            
-                    $stmt = $mysqli->prepare("INSERT INTO grilla (rows, cols, img_url, thumb_url, prioridad, id_curso, habilitado) VALUES (?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param('rows', $_POST['rows']);
-                    $stmt->bind_param('cols', $_POST['cols']);
-                    $stmt->bind_param('img_url', $ruta);
-                    $stmt->bind_param('thumb_url', $ruta_thumb);
-                    $stmt->bind_param('prioridad', $_POST['prioridad']);
-                    $stmt->bind_param('id_curso', $_POST['id_curso']);
-                    $stmt->bind_param('habilitado', $_POST['habilitado']);
-                    $stmt->execute();
+                    
+                    $ruta = substr($ruta, 3);
+                    $ruta_thumb = substr($ruta_thumb, 3);
+                    
+                    $query = "INSERT INTO grilla (rows, cols, img_url, thumb_url, prioridad, id_curso, habilitado, idioma) VALUES ({$_POST['rows']},{$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}')";
+                    $mysqli->query($query);
+                    
+//                    $stmt = $mysqli->prepare("INSERT INTO grilla (rows, cols, img_url, thumb_url, prioridad, id_curso, habilitado) VALUES (?, ?, ?, ?, ?, ?, ?)");
+//                    if($stmt)
+//                    {
+//                        $stmt->bind_param('ddssdds', $_POST['rows'],$_POST['cols'],$ruta,$ruta_thumb,$_POST['prioridad'],$_POST['id_curso'],$_POST['habilitado']);
+//                        $stmt->execute();
+//                    }
+//                    else 
+//                    {
+//                        die($mysqli->error);
+//                    }
                             
                 }
             }
@@ -172,7 +181,7 @@ if(isset($_POST['edicion_grilla']))
             }
         }
         
-        header('Location: admin.php');
+        header('Location: grilla_edit.php');
         exit;
     }
     

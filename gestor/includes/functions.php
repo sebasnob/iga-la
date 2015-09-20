@@ -260,15 +260,21 @@ function detectCountry($mysqli){
     curl_close($ch);
 }
 
-function getImagenesGrilla()
+function getImagenesGrilla($mysqli, $idioma = 'es')
 {
     //TODO crear select por prioridad
-    $retorno[] = array("id"=>"1","rows"=>"1", "cols"=>"6", "img_url"=>"images/portfolio/7.jpg", "id_curso"=>"1");
-    $retorno[] = array("id"=>"2","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/2.jpg", "id_curso"=>"2");
-    $retorno[] = array("id"=>"3","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/5.jpg", "id_curso"=>"3");
-    $retorno[] = array("id"=>"4","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/3.jpg", "id_curso"=>"4");
-    $retorno[] = array("id"=>"4","rows"=>"1", "cols"=>"6", "img_url"=>"images/portfolio/7.jpg", "id_curso"=>"4");
-    $retorno[] = array("id"=>"4","rows"=>"1", "cols"=>"3", "img_url"=>"images/portfolio/3.jpg", "id_curso"=>"4");
+    $result = $mysqli->query("SELECT * FROM grilla WHERE grilla.habilitado = 1 AND grilla.idioma = '{$idioma}' order by grilla.prioridad");
+    while($grilla = $result->fetch_assoc())
+    {
+	$retorno[] = array( 'id'=>$grilla['id'],
+                            'rows'=>$grilla['rows'],
+                            'cols'=>$grilla['cols'],
+                            'img_url'=>$grilla['img_url'],
+                            'thumb_url'=>$grilla['thumb_url'],
+                            'id_curso'=>$grilla['id_curso'],);
+    }
+//           die(var_dump($retorno)); 
+//    $retorno[] = array("id"=>"1","rows"=>"1", "cols"=>"6", "img_url"=>"images/grilla/7.jpg", "id_curso"=>"1");
     return $retorno;
 }
 

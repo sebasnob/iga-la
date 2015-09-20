@@ -23,16 +23,7 @@ MAIN SIDEBAR MENU
                     <i class="fa fa-th"></i>
                     <span>Listado de Cursos</span>
                 </a>
-<!--                <ul class="sub">
-                    <?php 
-                    $cursos = getCursos($mysqli);
-                    foreach($cursos as $i=>$j){
-                    ?>
-                    <li><a href="cursos.php?id_curso=<?=$j['id']?>"><?=$j['nombre']?></a></li>
-                    <?php
-                    }
-                    ?>
-                </ul>-->
+
             </li>
             <li class="sub-menu">
                 <a href="grilla_edit.php" >

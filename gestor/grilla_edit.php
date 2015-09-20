@@ -14,6 +14,9 @@ if($logged == 'out'){
     header("Location: login.php");
     exit();
 }
+
+$cursos = getCursos($mysqli);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,14 +74,14 @@ if($logged == 'out'){
                                         </div>
                                         <div class="form-group">
                                             <label >Columnas: </label>
-                                            <select name="columnas">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                            <select name="cols">
+                                                <option value="3">1</option>
+                                                <option value="6">2</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label >Filas: </label>
-                                            <select name="filas">
+                                            <select name="rows">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                             </select>
@@ -98,9 +101,25 @@ if($logged == 'out'){
                                         </div>
                                         <div class="form-group">
                                             <label >Curso: </label>
-                                            <select name="curso">
-                                                <option value="1">Gastronomia</option>
-                                                <option value="2">Chef</option>
+                                            <select name="id_curso">
+                                                <?php foreach($cursos as $i=>$j){?>
+                                                    <option value="<?=$j['id']?>"><?=$j['titulo']?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label >Habilitado: </label>
+                                            <select name="habilitado">
+                                                <option value="1">Si</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label >Idioma: </label>
+                                            <select name="idioma">
+                                                <option value="es">Espa&ntilde;ol</option>
+                                                <option value="in">Ingles</option>
+                                                <option value="pt">Portugues</option>
                                             </select>
                                         </div>
                                         <button type="submit" class="btn btn-success">Agregar</button>
