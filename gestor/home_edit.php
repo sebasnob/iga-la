@@ -21,6 +21,8 @@ if(isset($_GET['idioma'])){
 	$idioma = 'ES';
 }
 
+$datos_home = getDatosHome($mysqli);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,53 +64,102 @@ if(isset($_GET['idioma'])){
              *********************************************************************************************************************************************************** -->
             <!--main content start-->
             
-            <form name="edicion_home" id="edicion_home" action="#" method="POST">
-            <section id="main-content">
-                <section class="wrapper">
-                    <div class="row">
-                        <div class="col-md-6 text-left" >
-                            Editar Video
+            <form name="formEditHome" id="formEditHome" action="upload.php" method="POST">
+                <input type="hidden" name="edicion_home" id="edicion_home" value="true" />
+                <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
+                <section id="main-content">
+                    <section class="wrapper">
+                        <div class="text-center" >
+                            <h2>Edicion de Home</h2>
                         </div>
-                    </div>
-                    <div class="row mt">
-                        <div class="col-lg-12">
-                            <div class="content-panel">
-                                <section id="editor_home">
-                                    <input type="text" name="texto" id="texto" />
-                                </section>
-                            </div><!-- /content-panel -->
-                        </div><!-- /col-lg-4 -->			
-                    </div><!-- /row -->
-                    <hr/>
-                    <div class="row">
-                        <div class="col-md-6 text-left" >
-                            Editar Texto
+                        <div class="row">
+                            <div id="videoPreview" class="text-center">
+                                <!-- <iframe width="854" height="480" src="https://www.youtube.com/embed/JApGTCxZztg?rel=0&controls=0&showinfo=0&autoplay=1&autoplay=1&loop=0&playlist=Rk6_hdRtJOE&enablejsapi=1&version=3" frameborder="0"></iframe>-->
+                                <p><b>URL Actual:</b>&nbsp;&nbsp; <?=$datos_home['url_video']?></p>
+                            </div>
                         </div>
-                        <div class="col-md-6 text-right" >
-                                <?php
-                                    $idiomas = getIdiomas($mysqli);
-                                    foreach($idiomas as $i=>$j){
-                                        if($j['cod_idioma']==$idioma){
-                                            echo $j['cod_idioma']."&nbsp;/&nbsp;";
-                                        }else{
-                                            echo "<a href='home_edit.php?idioma=".$j['cod_idioma']."'>".$j['cod_idioma']."</a>&nbsp;/&nbsp;";
+                        <div class="row mt">
+                            <div class="col-lg-12">
+                                <div class="content-panel">
+                                    <section id="editor_home">
+                                        <p>Cambiar video</p>
+                                        <span>URL</span>
+                                        <input type="text" name="url_video" id="url_video" style="width:350px" />
+                                    </section>
+                                </div><!-- /content-panel -->
+                            </div><!-- /col-lg-4 -->			
+                        </div><!-- /row -->
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-6 text-left" >
+                                Editar Texto
+                            </div>
+                            <div class="col-md-6 text-right" >
+                                    <?php
+                                        $idiomas = getIdiomas($mysqli);
+                                        foreach($idiomas as $i=>$j){
+                                            if($j['cod_idioma']==$idioma){
+                                                echo $j['cod_idioma']."&nbsp;/&nbsp;";
+                                            }else{
+                                                echo "<a href='home_edit.php?idioma=".$j['cod_idioma']."'>".$j['cod_idioma']."</a>&nbsp;/&nbsp;";
+                                            }
                                         }
-                                    }
-                                ?>
+                                    ?>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="row mt">
-                        <div class="col-lg-12">
-                            <div class="content-panel">
-                                <section id="editor_home">
-                                    <textarea name="texto" id="texto"></textarea>
-                                </section>
-                            </div><!-- /content-panel -->
-                        </div><!-- /col-lg-4 -->			
-                    </div><!-- /row -->
-                </section><! --/wrapper -->
-            </section><!-- /MAIN CONTENT -->
+
+                        <div class="row mt">
+                            <div class="col-lg-12">
+                                <div class="content-panel">
+                                    <section id="editor_home">
+                                        <label>Titulo</label>
+                                        <textarea name="titulo" id="titulo" cols="150" rows="7">
+                                            <?php
+                                            switch($idioma){
+                                                case 'IN':
+                                                        echo $datos_home['titulo_in'];
+                                                    break;
+                                                case 'POR':
+                                                        echo $datos_home['titulo_por'];
+                                                    break;
+                                                default: 
+                                                        echo $datos_home['titulo_es'];
+                                                    break;
+                                            }
+                                            ?>
+                                            </h1>
+                                        </textarea>
+                                        <br/>
+                                        <label>Sub-Titulo</label>
+                                        <textarea name="subtitulo" id="subtitulo" class="textos" cols="150" rows="5">
+                                            <?php
+                                            switch($idioma){
+                                                case 'IN':
+                                                        echo $datos_home['subtitulo_in'];
+                                                    break;
+                                                case 'POR':
+                                                        echo $datos_home['subtitulo_por'];
+                                                    break;
+                                                default: 
+                                                        echo $datos_home['subtitulo_es'];
+                                                    break;
+                                            }
+                                            ?>
+                                        </textarea>
+                                    </section>
+                                </div><!-- /content-panel -->
+                            </div><!-- /col-lg-4 -->			
+                        </div><!-- /row -->
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button id="confirm" class="btn btn-success">Aceptar</button>
+                                <a id="preview" class="btn btn-default" href="preview_home.php" target="_blank">Vista Previa</a>
+                                <button id="publicar" class="btn btn-primary">Publicar</button>
+                            </div>
+                        </div>
+                    </section><! --/wrapper -->
+                </section><!-- /MAIN CONTENT -->
             </form>
             
             <!--main content end-->
@@ -127,8 +178,28 @@ if(isset($_GET['idioma'])){
         <!--common script for all pages-->
         <script src="assets/js/common-scripts.js"></script>
         
+        <script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
         <!--script for this page-->
-        
+        <script>
+                // Replace the <textarea id="editor"> with an CKEditor
+                // instance, using default configurations.
+                CKEDITOR.replace( 'titulo', {
+                        //uiColor: '#010F2C',
+                        toolbar: [
+                                [ 'Bold', 'Italic', '-' ],
+                                [ 'TextColor']
+                        ]
+                });
+                
+                CKEDITOR.replace( 'subtitulo', {
+                        //uiColor: '#010F2C',
+                        toolbar: [
+                                [ 'Bold', 'Italic', '-' ],
+                                [ 'TextColor']
+                        ]
+                });
+
+        </script>
         
     </body>
 </html>

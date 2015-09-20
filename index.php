@@ -3,12 +3,12 @@ session_start();
 include_once 'gestor/includes/db_connect.php';
 include_once 'gestor/includes/functions.php';
 
-if(!$_SESSION['pais']['cod_pais']){
+if(!$_SESSION){
     detectCountry($mysqli);
 }
 
 $paises = json_decode(getPaises($mysqli),true);
-
+$datos_home = getDatosHome($mysqli);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,13 +48,44 @@ $paises = json_decode(getPaises($mysqli),true);
         <header id="home">
             <div id="home-slider" class="container-fluid">
                 <div class="caption">
-                    <h1 class="animated fadeInLeftBig">Bienvenidos a <span>IGA</span></h1>
-                    <p class="animated fadeInRightBig">INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS </p>
+                    <h1 class="animated fadeInLeftBig">
+                    <?php
+                    switch($_SESSION['pais']['idioma']){
+                        case 'IN':
+                                echo $datos_home['titulo_in'];
+                            break;
+                        case 'POR':
+                                echo $datos_home['titulo_por'];
+                            break;
+                        default: 
+                                echo $datos_home['titulo_es'];
+                            break;
+                    }
+                    ?>
+                    </h1>
+                    <p class="animated fadeInRightBig">
+                    <?php
+                    switch($_SESSION['pais']['idioma']){
+                        case 'IN':
+                                echo $datos_home['subtitulo_in'];
+                            break;
+                        case 'POR':
+                                echo $datos_home['subtitulo_por'];
+                            break;
+                        default: 
+                                echo $datos_home['subtitulo_es'];
+                            break;
+                    }
+                    ?>
+                    </p>
+                    <!--<h1 class="animated fadeInLeftBig">Bienvenidos a <span>IGA</span></h1>
+                    <p class="animated fadeInRightBig">INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS </p>-->
                     <a data-scroll class="btn btn-start animated fadeInUpBig" href="#portfolio">Que Deseas aprender hoy?</a>
                 </div>
                 <div class="embed-responsive embed-responsive-16by9">
                     <div id="background">
-               <!--  <iframe id='player' width="100%" height="100%" src="https://www.youtube.com/embed/JApGTCxZztg?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1&amp;autoplay=1&amp;loop=0&amp;playlist=Rk6_hdRtJOE&amp;enablejsapi=1&version=3" frameborder="0" volumen="0"></iframe>-->
+                        <!-- https://www.youtube.com/embed/JApGTCxZztg?rel=0&controls=0&showinfo=0&autoplay=1&autoplay=1&loop=0&playlist=Rk6_hdRtJOE&enablejsapi=1&version=3-->
+                        <!--<iframe id='player' width="100%" height="100%" src="<?=$datos_home['url_video']?>" frameborder="0" volumen="0"></iframe>-->
                     </div>
                 </div>          
             </div>

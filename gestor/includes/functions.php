@@ -50,6 +50,15 @@ function getPaises($mysqli){
     return json_encode($paises);
 }
 
+function getDatosHome($mysqli){
+    $query = "SELECT id, url_video, titulo_es, titulo_in, titulo_por, subtitulo_es, subtitulo_por, subtitulo_in FROM home";
+    $resultado = $mysqli->query($query);
+    $datos_home = $resultado->fetch_assoc();
+    $resultado->free();
+	
+    return $datos_home;
+}
+
 /*function setChanges($mysqli, $id_curso, $color){
     $resultado = $mysqli->query("UPDATE cursos SET color='".$color."' WHERE id = ".$id_curso);
     if($resultado){
@@ -249,13 +258,13 @@ function detectCountry($mysqli){
     if(curl_exec($ch)){
         $resp = json_decode(curl_exec($ch));
         
-        $result = $mysqli->query("SELECT flag FROM paises WHERE cod_pais='".$resp->{'country_code'}."'");
-        $flag = $result->fetch_assoc();
+        $result = $mysqli->query("SELECT flag,idioma FROM paises WHERE cod_pais='".$resp->{'country_code'}."'");
+        $datos_pais = $result->fetch_assoc();
         
-        $_SESSION['pais'] = array('cod_pais'=>$resp->{'country_code'}, 'flag'=>$flag['flag']);
+        $_SESSION['pais'] = array('cod_pais'=>$resp->{'country_code'}, 'flag'=>$datos_pais['flag'], 'idioma'=>$datos_pais['idioma']);
         //$_SESSION['ciudad'] = $resp->{'city'};
     }else{
-        $_SESSION['pais'] = array('cod_pais'=>"AR", 'flag'=>"images/flags/ar.png");
+        $_SESSION['pais'] = array('cod_pais'=>"AR", 'flag'=>"images/flags/ar.png", 'idioma'=>'ES');
     }
     curl_close($ch);
 }

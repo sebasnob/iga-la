@@ -177,6 +177,54 @@ if(isset($_POST['edicion_grilla']))
     }
     
 }
+
+if(isset($_POST['edicion_home'])){
+    if(isset($_POST['url_video']) && $_POST['url_video'] != ''){
+        $query = "UPDATE home SET url_video='".$_POST['url_video']."'";
+        $result = $mysqli->query($query);
+        if($result){
+                $message = "<br/>El video se modifico correctamente.<br/>";
+        }
+    }
+    
+    if(isset($_POST['titulo']) && $_POST['titulo'] != ''){
+        switch($_POST['idioma']){
+            case 'IN':
+                    $query = "UPDATE home SET titulo_in='".$_POST['titulo']."'";
+                break;
+            case 'POR':
+                    $query = "UPDATE home SET titulo_por='".$_POST['titulo']."'";
+                break;
+            default: 
+                   $query = "UPDATE home SET titulo_es='".$_POST['titulo']."'"; 
+                break;
+        }
+        $result = $mysqli->query($query);
+        if($result){
+                $message = "<br/>El texto se modifico correctamente.<br/>";
+        }
+    }
+    
+    if(isset($_POST['subtitulo']) && $_POST['subtitulo'] != ''){
+        switch($_POST['idioma']){
+            case 'IN':
+                    $query = "UPDATE home SET subtitulo_in='".$_POST['subtitulo']."'";
+                break;
+            case 'POR':
+                    $query = "UPDATE home SET subtitulo_por='".$_POST['subtitulo']."'";
+                break;
+            default: 
+                   $query = "UPDATE home SET subtitulo_es='".$_POST['subtitulo']."'"; 
+                break;
+        }
+        $result = $mysqli->query($query);
+        if($result){
+                $message = "<br/>El texto se modifico correctamente.<br/>";
+        }
+    }
+    
+    header("Location: home_edit.php?idioma=".$_POST['idioma']);
+}
     
 //Funcion auxiliar para determinar la extension de un archivo
 function getExtension($str)
