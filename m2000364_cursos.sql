@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-09-2015 a las 02:17:28
+-- Tiempo de generación: 19-09-2015 a las 22:06:59
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -38,7 +38,31 @@ CREATE TABLE IF NOT EXISTS `cursos` (
 --
 
 INSERT INTO `cursos` (`id`, `nombre`, `color`, `fuente`) VALUES
-(1, 'Gastronomia & Alta Cocina', '#00b900', '"Open Sans",sans-serif');
+(1, 'Gastronomia & Alta Cocina', '#0000ff', '"Open Sans",sans-serif');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `curso_datos`
+--
+
+CREATE TABLE IF NOT EXISTS `curso_datos` (
+`id` int(11) NOT NULL,
+  `titulo` text NOT NULL,
+  `img_cabecera` text NOT NULL,
+  `descripcion` text NOT NULL,
+  `img_materiales` text NOT NULL,
+  `img_uniforme` text NOT NULL,
+  `id_curso_idioma` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `curso_datos`
+--
+
+INSERT INTO `curso_datos` (`id`, `titulo`, `img_cabecera`, `descripcion`, `img_materiales`, `img_uniforme`, `id_curso_idioma`) VALUES
+(1, 'Gastronomia y Alta cocina', '../images/slider/1/ES/slider-1.jpg', 'gastronomiaaa', '../images/materiales/1/ES/materiales.jpg', '../images/uniformes/1/ES/uniforme.jpg', 1),
+(2, 'Gastronomia e Alta Cozinha', '../images/slider/1/POR/slider-1.jpg', 'gastronomiaaa', '../images/materiales/1/POR/materiales.png', '../images/uniformes/1/POR/uniforme.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -62,21 +86,17 @@ CREATE TABLE IF NOT EXISTS `curso_filial` (
 CREATE TABLE IF NOT EXISTS `curso_idioma` (
 `id` int(11) NOT NULL,
   `id_curso` int(11) NOT NULL,
-  `idioma` varchar(6) NOT NULL,
-  `titulo` text NOT NULL,
-  `img_cabecera` text NOT NULL,
-  `descripcion` text NOT NULL,
-  `img_materiales` text NOT NULL,
-  `img_uniforme` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `idioma` varchar(6) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `curso_idioma`
 --
 
-INSERT INTO `curso_idioma` (`id`, `id_curso`, `idioma`, `titulo`, `img_cabecera`, `descripcion`, `img_materiales`, `img_uniforme`) VALUES
-(1, 1, 'ES', 'Gastronomia y Alta cocina', 'images/slider/curso-1/ES/slider-curso-1.jpg', 'aaaaa', 'images/img-materiales/curso-1/ES/img_materiales.png', 'images/img-uniforme/curso-1/ES/img_uniforme.png'),
-(2, 1, 'POR', 'Gastronomia y Alta cocina', 'images/slider/curso-1/POR/slider-curso-1.jpg', 'aaaaa', 'images/img-materiales/curso-1/POR/img_materiales.jpg', 'images/img-uniforme/curso-1/POR/img_uniforme.jpg');
+INSERT INTO `curso_idioma` (`id`, `id_curso`, `idioma`) VALUES
+(1, 1, 'ES'),
+(2, 1, 'POR'),
+(3, 1, 'IN');
 
 -- --------------------------------------------------------
 
@@ -112,6 +132,23 @@ INSERT INTO `filiales` (`id`, `filial`, `id_provincia`) VALUES
 (5, 'Bahia Blanca', 1),
 (7, 'Rosario', 31),
 (9, 'Funes', 31);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grilla`
+--
+
+CREATE TABLE IF NOT EXISTS `grilla` (
+`id` int(11) NOT NULL,
+  `rows` int(11) NOT NULL,
+  `cols` int(11) NOT NULL,
+  `img_url` text NOT NULL,
+  `thumb_url` text NOT NULL,
+  `prioridad` int(11) NOT NULL,
+  `id_curso` int(11) NOT NULL COMMENT 'deberia ser clave foranea de cursos',
+  `habilitado` enum('no','si') NOT NULL DEFAULT 'no'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -175,21 +212,22 @@ INSERT INTO `members` (`id`, `username`, `email`, `password`, `salt`) VALUES
 CREATE TABLE IF NOT EXISTS `paises` (
 `id` int(11) NOT NULL,
   `pais` varchar(64) NOT NULL,
-  `cod_pais` varchar(3) NOT NULL
+  `cod_pais` varchar(3) NOT NULL,
+  `flag` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `paises`
 --
 
-INSERT INTO `paises` (`id`, `pais`, `cod_pais`) VALUES
-(1, 'Argentina', 'AR'),
-(3, 'Brasil', 'BR'),
-(5, 'Uruguay', 'UR'),
-(7, 'Paraguay', 'PAR'),
-(9, 'Bolivia', 'BOL'),
-(11, 'Panama', 'PAN'),
-(13, 'USA', 'US');
+INSERT INTO `paises` (`id`, `pais`, `cod_pais`, `flag`) VALUES
+(1, 'Argentina', 'AR', 'images/flags/ar.png'),
+(3, 'Brasil', 'BR', 'images/flags/br.png'),
+(5, 'Uruguay', 'UR', 'images/flags/ur.png'),
+(7, 'Paraguay', 'PAR', 'images/flags/par.png'),
+(9, 'Bolivia', 'BOL', 'images/flags/bo.png'),
+(11, 'Panama', 'PAN', 'images/flags/pan.png'),
+(13, 'USA', 'US', 'images/flags/us.png');
 
 -- --------------------------------------------------------
 
@@ -247,6 +285,12 @@ ALTER TABLE `cursos`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `curso_datos`
+--
+ALTER TABLE `curso_datos`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `curso_filial`
 --
 ALTER TABLE `curso_filial`
@@ -268,6 +312,12 @@ ALTER TABLE `curso_pais`
 -- Indices de la tabla `filiales`
 --
 ALTER TABLE `filiales`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `grilla`
+--
+ALTER TABLE `grilla`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -310,6 +360,11 @@ ALTER TABLE `provincias`
 ALTER TABLE `cursos`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT de la tabla `curso_datos`
+--
+ALTER TABLE `curso_datos`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT de la tabla `curso_filial`
 --
 ALTER TABLE `curso_filial`
@@ -318,7 +373,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `curso_idioma`
 --
 ALTER TABLE `curso_idioma`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `curso_pais`
 --
@@ -329,6 +384,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 ALTER TABLE `filiales`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT de la tabla `grilla`
+--
+ALTER TABLE `grilla`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `idiomas`
 --
