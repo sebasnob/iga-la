@@ -2,6 +2,7 @@
     
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
+include_once 'includes/resizeImage.php';
 
 if(isset($_POST['edicion_curso'])){
 
@@ -151,16 +152,12 @@ if(isset($_POST['edicion_grilla']))
                     $newThumb = new resize($ruta);
                     $newThumb->resizeImage(150,632,"landscape");
                     $exito = $newThumb->saveImage($ruta_thumb);
-                            
-                    $stmt = $mysqli->prepare("INSERT INTO grilla (rows, cols, img_url, thumb_url, prioridad, id_curso, habilitado) VALUES (?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param('rows', $_POST['rows']);
-                    $stmt->bind_param('cols', $_POST['cols']);
-                    $stmt->bind_param('img_url', $ruta);
-                    $stmt->bind_param('thumb_url', $ruta_thumb);
-                    $stmt->bind_param('prioridad', $_POST['prioridad']);
-                    $stmt->bind_param('id_curso', $_POST['id_curso']);
-                    $stmt->bind_param('habilitado', $_POST['habilitado']);
-                    $stmt->execute();
+                    
+                    $ruta = substr($ruta, 3);
+                    $ruta_thumb = substr($ruta_thumb, 3);
+                    
+                    $query = "INSERT INTO grilla (rows, cols, img_url, thumb_url, prioridad, id_curso, habilitado, idioma) VALUES ({$_POST['rows']},{$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}')";
+                    $mysqli->query($query);
                             
                 }
             }
@@ -172,7 +169,7 @@ if(isset($_POST['edicion_grilla']))
             }
         }
         
-        header('Location: admin.php');
+        header('Location: grilla_edit.php');
         exit;
     }
     
@@ -224,6 +221,83 @@ if(isset($_POST['edicion_home'])){
     }
     
     header("Location: home_edit.php?idioma=".$_POST['idioma']);
+}
+
+if(isset($_POST['edicion_grilla_editar']))
+{
+    $id_img_grilla = $_POST['id_img_grilla'];
+    if(isset($_GET['borrar']))
+    {
+        $result = $mysqli->query("SELECT grilla.img_url, grilla.thumb_url FROM grilla WHERE grilla.id = {$id_img_grilla}");
+
+        $retorno = $result->fetch_assoc();
+
+        if(file_exists("../".$retorno['img_url']))
+        {
+            unlink("../".$retorno['img_url']);
+        }
+        if(file_exists("../".$retorno['thumb_url']))
+        {
+            unlink("../".$retorno['thumb_url']);
+        }
+
+        $mysqli->query("DELETE FROM grilla WHERE grilla.id = " . $id_img_grilla);
+        header('Location: grilla_edit.php');
+        exit;
+    }
+    else
+    {
+        if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
+        {
+            //if no errors...
+            if(!$_FILES['photo']['error'])
+            {
+                $valid_file = true;
+                //now is the time to modify the future file name and validate the file
+                $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+                if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
+                {
+                    $valid_file = false;
+                    $message = 'Oops!  Your file\'s size is to large.';
+                }
+
+                $pos = strpos($_FILES['photo']['type'], "image");
+                if ($pos === FALSE)
+                {
+                    $valid_file = false;
+                    $message = 'Oops!  El archivo no es una imagen.';
+                }
+                //if the file has passed the test
+                if($valid_file)
+                {
+                    //move it to where we want it to be
+                    $ruta = '../images/grilla/'.$new_file_name;
+                    //ruta de los thumbs
+                    $ruta_thumb = '../images/grilla/thumb/'.$new_file_name;
+
+                    move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
+
+                    //creo el thumb
+                    $newThumb = new resize($ruta);
+                    $newThumb->resizeImage(150,632,"landscape");
+                    $exito = $newThumb->saveImage($ruta_thumb);
+
+                    $ruta = substr($ruta, 3);
+                    $ruta_thumb = substr($ruta_thumb, 3);
+
+                    $query = "UPDATE grilla SET rows = {$_POST['rows']}, cols = {$_POST['cols']}, img_url = '{$ruta}', thumb_url = '{$ruta_thumb}', prioridad = {$_POST['prioridad']}, id_curso = '{$_POST['id_curso']}', habilitado = {$_POST['habilitado']}, idioma = '{$_POST['idioma']}' WHERE grilla.id = {$id_img_grilla}";
+                }
+            }
+        }
+        else
+        {
+            $query = "UPDATE grilla SET rows = {$_POST['rows']}, cols = {$_POST['cols']}, prioridad = {$_POST['prioridad']}, id_curso = '{$_POST['id_curso']}', habilitado = {$_POST['habilitado']}, idioma = '{$_POST['idioma']}' WHERE grilla.id = {$id_img_grilla}";
+        }
+
+        $mysqli->query($query);
+        header('Location: grilla_edit.php');
+        exit;
+    }
 }
     
 //Funcion auxiliar para determinar la extension de un archivo
