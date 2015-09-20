@@ -271,7 +271,10 @@ function getImagenesGrilla($mysqli, $idioma = 'es')
                             'cols'=>$grilla['cols'],
                             'img_url'=>$grilla['img_url'],
                             'thumb_url'=>$grilla['thumb_url'],
-                            'id_curso'=>$grilla['id_curso'],);
+                            'id_curso'=>$grilla['id_curso'],
+                            'prioridad'=>$grilla['prioridad'],
+                            'idioma'=>$grilla['idioma'],
+                            'habilitado'=>$grilla['habilitado']);
     }
 //           die(var_dump($retorno)); 
 //    $retorno[] = array("id"=>"1","rows"=>"1", "cols"=>"6", "img_url"=>"images/grilla/7.jpg", "id_curso"=>"1");

@@ -1,5 +1,5 @@
 function borrar(form){
-    form.action = form.action + "&borrar=true";
+    form.action = form.action + "?borrar=true";
     form.submit();
 }
 

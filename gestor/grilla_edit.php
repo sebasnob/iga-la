@@ -16,7 +16,7 @@ if($logged == 'out'){
 }
 
 $cursos = getCursos($mysqli);
-
+$gridArray = getImagenesGrilla($mysqli);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +64,7 @@ $cursos = getCursos($mysqli);
                         <div class="col-lg-12">
                             <div class="content-panel">
                                 <h4><i class="fa fa-angle-right"></i> Nueva Imagen</h4>
-                                <section id="editor_grilla">
+                                <section id="editor_grilla_nueva">
                                     <form class="form" enctype="multipart/form-data" method="POST" action="upload.php">
                                         <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
                                         <input type="hidden" name="edicion_grilla_nueva" id="edicion_grilla_nueva" value="true" />
@@ -87,7 +87,7 @@ $cursos = getCursos($mysqli);
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label >Prioridad: </label>
+                                            <label >Posici&oacute;n: </label>
                                             <select name="prioridad">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -118,7 +118,7 @@ $cursos = getCursos($mysqli);
                                             <label >Idioma: </label>
                                             <select name="idioma">
                                                 <option value="es">Espa&ntilde;ol</option>
-                                                <option value="in">Ingles</option>
+                                                <option value="en">Ingles</option>
                                                 <option value="pt">Portugues</option>
                                             </select>
                                         </div>
@@ -126,7 +126,84 @@ $cursos = getCursos($mysqli);
                                     </form>
                                 </section>
                             </div><!-- /content-panel -->
-                        </div><!-- /col-lg-4 -->			
+                        </div>
+                    </div>
+                    <div class="row mt">
+                        <div class="col-md-12">
+                            <div class="content-panel">
+                                <section id="editor_grilla_editar" style="display: inline-block;">
+                                <h4><i class="fa fa-angle-right"></i> Editar Grilla</h4>
+                                
+                                <?php foreach ($gridArray as $imgGrid){?>
+                                    <div class="col-md-4">
+                                        <form class="form" enctype="multipart/form-data" method="POST" action="upload.php">
+                                            <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
+                                            <input type="hidden" name="edicion_grilla_editar" id="edicion_grilla_editar" value="true" />
+                                            <input type="hidden" name="id_img_grilla" id="id_img_grilla" value="<?php echo $imgGrid['id']?>" />
+                                            <div class="form-group">
+                                                <div>
+                                                <img src="../<?php echo $imgGrid['thumb_url']?>">
+                                                </div>
+                                                <input type="file" accept="file_extension|image" class="form-control" name="photo" autofocus>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Columnas: </label>
+                                                <select name="cols">
+                                                    <option value="3" <?php if($imgGrid['cols'] == 3){echo 'selected';}?>>1</option>
+                                                    <option value="6" <?php if($imgGrid['cols'] == 6){echo 'selected';}?>>2</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Filas: </label>
+                                                <select name="rows">
+                                                    <option value="1" <?php if($imgGrid['rows'] == 1){echo 'selected';}?>>1</option>
+                                                    <option value="2" <?php if($imgGrid['rows'] == 2){echo 'selected';}?>>2</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Posici&oacute;n: </label>
+                                                <select name="prioridad">
+                                                    <option value="1" <?php if($imgGrid['prioridad'] == 1){echo 'selected';}?>>1</option>
+                                                    <option value="2" <?php if($imgGrid['prioridad'] == 2){echo 'selected';}?>>2</option>
+                                                    <option value="3" <?php if($imgGrid['prioridad'] == 3){echo 'selected';}?>>3</option>
+                                                    <option value="4" <?php if($imgGrid['prioridad'] == 4){echo 'selected';}?>>4</option>
+                                                    <option value="5" <?php if($imgGrid['prioridad'] == 5){echo 'selected';}?>>5</option>
+                                                    <option value="6" <?php if($imgGrid['prioridad'] == 6){echo 'selected';}?>>6</option>
+                                                    <option value="7" <?php if($imgGrid['prioridad'] == 7){echo 'selected';}?>>7</option>
+                                                    <option value="8" <?php if($imgGrid['prioridad'] == 8){echo 'selected';}?>>8</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Curso: </label>
+                                                <select name="id_curso">
+                                                    <?php foreach($cursos as $i=>$j){?>
+                                                        <option value="<?=$j['id']?>"  <?php if($imgGrid['id_curso'] == $j['id']){echo 'selected';}?>><?=$j['titulo']?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Habilitado: </label>
+                                                <select name="habilitado">
+                                                    <option value="1" <?php if($imgGrid['habilitado'] == 1){echo 'selected';}?>>Si</option>
+                                                    <option value="0" <?php if($imgGrid['habilitado'] == 0){echo 'selected';}?>>No</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Idioma: </label>
+                                                <select name="idioma">
+                                                    <option value="es" <?php if($imgGrid['idioma'] == 'es'){echo 'selected';}?>>Espa&ntilde;ol</option>
+                                                    <option value="in" <?php if($imgGrid['idioma'] == 'en'){echo 'selected';}?>>Ingles</option>
+                                                    <option value="pt" <?php if($imgGrid['idioma'] == 'pt'){echo 'selected';}?>>Portugues</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Editar</button>
+                                            <button type="button" onclick="borrar(this.form)" class="btn btn-danger">Borrar</button>
+                                        </form>
+                                    </div>
+                                <?php } ?>
+                                </section>        
+                            </div>
+                        </div>    
                     </div><!-- /row -->
                     
                     
@@ -149,6 +226,7 @@ $cursos = getCursos($mysqli);
         
         <!-- js placed at the end of the document so the pages load faster -->
         <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/forms.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
