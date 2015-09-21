@@ -94,21 +94,22 @@ if($logged == 'out'){
 
                     <div class="row mt">
                       <!-- PANEL 1 -->
-                        <div class="col-md-4 col-sm-4 mb">
-                           <div class="panel-1 pn">
-                            <div class="panel-1-header">
-                                <h5>EDITAR TITULOS DE PRESENTACIÓN</h5>
-                            </div>
-                            <div class="centered">
-                   
-                            </div>
-                          </div><! --/grey-panel -->
-                        </div><!-- /col-md-4-->
+                        <div class="col-md-4 mb">
+                            <!-- WHITE PANEL - TOP USER -->
+                            <div class="panel-3 pn">
+                                <div class="panel-3-header">
+                                    <h5><a href="home_edit.php" style="color:white">EDITAR SLIDER Y CONTENIDO DEL HOME</a></h5>
+                                </div>
+                                <div class="centered">
 
+                                </div>
+                            </div>
+                        </div><!-- /col-md-4 -->
+                        
                         <div class="col-md-4 col-sm-4 mb">
                            <div class="panel-2 pn">
                             <div class="panel-2-header">
-                                <h5>LISTADO DE CURSOS</h5>
+                                <h5><a href="list_cursos.php" style="color:white">LISTADO DE CURSOS</a></h5>
                             </div>
                             <div class="centered">
                    
@@ -117,20 +118,30 @@ if($logged == 'out'){
                         </div><!-- /col-md-4 -->
                         
                         <div class="col-md-4 mb">
-                            <!-- WHITE PANEL - TOP USER -->
-                            <div class="panel-3 pn">
-                                <div class="panel-3-header">
-                                    <h5>EDITAR SLIDER Y CONTENIDO DEL HOME</h5>
-                                </div>
-                                <div class="centered">
+                            <div class="panel-4 pn">
+                              <div class="panel-4-header">
+                                  <h5><a href="grilla_edit.php" style="color:white">EDITAR GRILLA DE CURSOS</a></h5>
+                              </div>
+                              <div class="centered">
 
-                                </div>
-                            </div>
+                              </div>
+                            </div><! -- /darkblue panel -->
                         </div><!-- /col-md-4 -->
+                        
+                        <!--<div class="col-md-4 col-sm-4 mb">
+                           <div class="panel-1 pn">
+                            <div class="panel-1-header">
+                                <h5>EDITAR TITULOS DE PRESENTACIÓN</h5>
+                            </div>
+                            <div class="centered">
+                   
+                            </div>
+                          </div><! --/grey-panel
+                        </div><!-- /col-md-4-->
                     </div><!-- /row -->
-
+                    <!--
                     <div class="row">
-                        <!--PANEL 4 -->
+                        <!--PANEL 4 
                         <div class="col-md-4 mb">
                             <div class="panel-4 pn">
                               <div class="panel-4-header">
@@ -139,12 +150,12 @@ if($logged == 'out'){
                               <div class="centered">
 
                               </div>
-                            </div><! -- /darkblue panel -->
+                            </div><! -- /darkblue panel 
                         </div><!-- /col-md-4 -->
             
             
-                        <div class="col-md-4 mb">
-                          <!-- PANEL 5 -->
+                        <!-- <div class="col-md-4 mb">
+                          <!-- PANEL 5
                          <div class="panel-5 pn">
                                         <div class="panel-5-header">
                                 <h5>SUBIR VIDEO PRESENTACION</h5>
@@ -155,8 +166,8 @@ if($logged == 'out'){
                                       </div>
                         </div><!-- /col-md-4 -->
             
-                        <div class="col-md-4 col-sm-4 mb">
-                          <!-- PANEL 6 -->
+                        <!-- <div class="col-md-4 col-sm-4 mb">
+                          <!-- PANEL 6
                           <div class="panel-6 pn">
                             <div class="panel-6-header">
                               <h5>GOOGLE ANALYTICS</h5>
@@ -323,9 +334,8 @@ if($logged == 'out'){
       
 		
 		  	
-
+            <!--
                 <div class="row mt">
-                      <!--CUSTOM CHART START -->
                       <div class="border-head">
                           <h3>VISITAS</h3>
                       </div>
@@ -367,7 +377,7 @@ if($logged == 'out'){
                               <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
                           </div>
                       </div>
-                      <!--custom chart end-->
+                      <!--custom chart end
                 </div><!-- /row --> 
 
 
