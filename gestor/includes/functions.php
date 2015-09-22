@@ -51,7 +51,7 @@ function getPaises($mysqli){
 }
 
 function getDatosHome($mysqli){
-    $query = "SELECT id, url_video, titulo_es, titulo_in, titulo_por, subtitulo_es, subtitulo_por, subtitulo_in FROM home";
+    $query = "SELECT id, url_video, titulo_es, titulo_in, titulo_por, subtitulo_es, subtitulo_por, subtitulo_in, menu_color, fuente_color FROM home";
     $resultado = $mysqli->query($query);
     $datos_home = $resultado->fetch_assoc();
     $resultado->free();

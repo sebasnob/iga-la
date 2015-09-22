@@ -25,7 +25,8 @@ $datos_home = getDatosHome($mysqli);
         <link href="css/main.css" rel="stylesheet">
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
-      
+        
+        <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
@@ -100,14 +101,14 @@ $datos_home = getDatosHome($mysqli);
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="index.html">
-                        <h1><img class="img-responsive" src="images/logo-iga.jpg" alt="logo"></h1>
+                        <h1><img class="img-responsive" src="images/logo-iga_transparent.png" alt="logo"></h1>
                     </a>                    
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">     
                         <li class="scroll active"><a href="#home">Inicio</a></li>
                         <li class="scroll"><a href="#portfolio">Cursos</a></li>
-                        <li class="scroll"><a href="#about-us">Institucional</a></li>                     
+                        <li class="scroll"><a href="#team">Institucional</a></li>                     
                         <li class="scroll"><a href="#blog">Novedades</a></li> 
                         <li class="scroll"><a href="#contact">Contacto</a></li>
                         <li class="scroll"><a href="#contact">Campus</a></li> 
@@ -498,7 +499,7 @@ $datos_home = getDatosHome($mysqli);
                                 <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                                     <div class="container text-center">
                                         <div class="footer-logo">
-                                            <a href="index.html"><img class="img-responsive" src="images/logo-iga.jpg" alt=""></a>
+                                            <a href="index.html"><img class="img-responsive" src="images/logo-iga_transparent.png" alt=""></a>
                                         </div>
                                         <div class="social-icons">
                                             <ul>

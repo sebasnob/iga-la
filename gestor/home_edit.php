@@ -76,13 +76,26 @@ $datos_home = getDatosHome($mysqli);
                                 <p><b>URL Actual:</b>&nbsp;&nbsp; <?=$datos_home['url_video']?></p>
                             </div>
                         </div>
-                        <div class="row mt">
+                        <div class="row">
                             <div class="col-lg-12">
                                 <div class="content-panel">
                                     <section id="editor_home">
                                         <p>Cambiar video</p>
                                         <span>URL</span>
                                         <input type="text" name="url_video" id="url_video" style="width:350px" />
+                                    </section>
+                                </div>
+                                <hr/>
+                                <div class="content-panel">
+                                    <section id="editor_menu">
+                                        <p>Editar Menu</p>
+                                        &nbsp;&nbsp;<span class="fa fa-angle-right"></span> Color de Fondo: <input type="color" id="select_color_fondo" value="<?=$datos_home['menu_color']?>" />
+                                            <input type="text" readonly="" id="chose_color_fondo" name="chose_color_fondo" value="<?=$datos_home['menu_color']?>" />
+                                            <br/>
+                                        &nbsp;&nbsp;<span class="fa fa-angle-right"></span> Color de Fuente: <input type="color" id="select_color_fuente" value="<?=$datos_home['fuente_color']?>" />
+                                            <input type="text" readonly="" id="chose_color_fuente" name="chose_color_fuente" value="<?=$datos_home['fuente_color']?>" />
+                                            <br/>
+                                        &nbsp;&nbsp;<span class="fa fa-angle-right"></span> Tipo de Fuente: 
                                     </section>
                                 </div><!-- /content-panel -->
                             </div><!-- /col-lg-4 -->			
@@ -184,17 +197,23 @@ $datos_home = getDatosHome($mysqli);
                 CKEDITOR.replace( 'titulo', {
                         //uiColor: '#010F2C',
                         toolbar: [
-                                [ 'Bold', 'Italic', '-' ],
-                                [ 'TextColor']
+                                [ 'Bold', 'Italic', 'Font', 'FontSize', 'TextColor' ]
                         ]
                 });
                 
                 CKEDITOR.replace( 'subtitulo', {
                         //uiColor: '#010F2C',
                         toolbar: [
-                                [ 'Bold', 'Italic', '-' ],
-                                [ 'TextColor']
+                                [ 'Bold', 'Italic', 'Font', 'FontSize', 'TextColor' ]
                         ]
+                });
+                
+                $("#select_color_fondo").change(function(){
+                    $("#chose_color_fondo").val($("#select_color_fondo").val());
+                });
+                
+                $("#select_color_fuente").change(function(){
+                    $("#chose_color_fuente").val($("#select_color_fuente").val());
                 });
 
         </script>

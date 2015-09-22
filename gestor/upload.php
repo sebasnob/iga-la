@@ -220,6 +220,16 @@ if(isset($_POST['edicion_home'])){
         }
     }
     
+    if(isset($_POST['chose_color_fondo']) && $_POST['chose_color_fondo'] != ''){
+        $query = "UPDATE home SET menu_color='".$_POST['chose_color_fondo']."'";
+        $result = $mysqli->query($query);
+    }
+    
+    if(isset($_POST['chose_color_fuente']) && $_POST['chose_color_fuente'] != ''){
+        $query = "UPDATE home SET fuente_color='".$_POST['chose_color_fuente']."'";
+        $result = $mysqli->query($query);
+    }
+    
     header("Location: home_edit.php?idioma=".$_POST['idioma']);
 }
 

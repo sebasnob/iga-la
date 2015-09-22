@@ -102,7 +102,8 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
                         
                         <div id="materialesPreview">
                             <h3>Materiales</h3>
-                            <img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="">
+                            <img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="" />
+                            <textarea name="materiales_txt" id="materiales_txt" cols="100" rows="10"></textarea>
                         </div>
                         <input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
                         <hr/>
@@ -110,6 +111,7 @@ $datos_curso = getDatos($mysqli, $_GET['id_curso'], $idioma);
                         <div id="uniformesPreview">
                             <h3>Uniforme</h3>
                             <img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
+                            <textarea name="uniformes_txt" id="uniformes_txt" cols="100" rows="10"></textarea>
                         </div>
                         <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
                         <hr/>
