@@ -12,7 +12,7 @@
 
     <div class="top-menu">
         <ul class="nav pull-right top-menu">
-            <li><a class="logout" id="logout" href="#">Logout</a></li>
+            <li><a class="logout" id="logout" href="#">LOGOUT</a></li>
         </ul>
     </div>
 </header>

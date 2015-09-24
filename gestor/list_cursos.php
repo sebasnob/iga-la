@@ -54,34 +54,49 @@ if($logged == 'out'){
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <h1 class="text-center">Listado de Cursos</h1>
-            <div class="row mt">
-                <div class="col-lg-12">
-                    <div class="content-panel">
-                        <table class="table table-bordered table-striped table-condensed">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Titulo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+          <div class="row mt">
+                  <div class="col-md-12">
+                      <section class="task-panel tasks-widget">
+                        <div class="panel-heading">
+                            <div class="pull-left"><h5><i class="fa fa-tasks"></i> Listado de Cursos</h5></div>
+                            <br>
+                        </div>
+                          <div class="panel-body">
+                              <div class="task-content">
                             <?php
-                                $cursos = getCursos($mysqli);
+                               $cursos = getCursos($mysqli);
                                 foreach($cursos as $i=>$j){
-                            ?>
-                                <tr>
-                                    <td data-title="ID"><a href="cursos.php?id_curso=<?=$j['id']?>"><?=$j['id']?></a></td>
-                                    <td data-title="Titulo"><a href="cursos.php?id_curso=<?=$j['id']?>"><?=$j['titulo']?></a></td>
-                                </tr>
-                            <?php
-                                }
-                            ?>
-                                
-                            </tbody>
-                        </table>
-                    </div><!-- /content-panel -->
-		</section><! --/wrapper -->
+                                ?>
+                                 <ul class="task-list">
+                                      <li>
+                                           
+                                          <div class="task-title">
+                                              <span class="task-title-sp"><a href="cursos.php?id_curso=<?=$j['id']?>"><?=$j['id']?></a> <a href="cursos.php?id_curso=<?=$j['id']?>"><?=$j['titulo']?></span>
+                                              <span class="badge bg-theme">Nuevo</span>
+                                              <div class="pull-right hidden-phone">
+                                                  <button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button>
+                                                  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                                  <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                              </div>
+                                          </div>
+                                          
+                                      </li>
+                                                   
+                                  </ul>
+                                  <?php
+                                    }
+                                   ?>
+                              </div>
+
+                              <div class=" add-task-row">
+                                  <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Agregar Nuevo Curso</a>
+                                  <a class="btn btn-default btn-sm pull-right" href="todo_list.html#">Buscar Curso</a>
+                              </div>
+                          </div>
+                      </section>
+                   </div><!-- /col-md-12-->
+              </div><!-- /row -->
+       </section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
       <!--main content end-->
       <?php include_once './footer.php';?>

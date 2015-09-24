@@ -19,37 +19,36 @@ $cursos = getCursos($mysqli);
 $gridArray = getImagenesGrilla($mysqli);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+
+ <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="Dashboard">
-        <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <title>Listado de Cursos - IGA</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
         
-        <title>Grilla - IGA</title>
-        
-        <!-- Bootstrap core CSS -->
-        <link href="assets/css/bootstrap.css" rel="stylesheet">
-        <!--external css-->
-        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        
-        <!-- Custom styles for this template -->
-        <link href="assets/css/style.css" rel="stylesheet">
-        <link href="assets/css/style-responsive.css" rel="stylesheet">
-        
-        <link href="assets/css/table-responsive.css" rel="stylesheet">
-        
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link href="assets/css/table-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">  
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
     
     <body>
         
-        <section id="container" >
+<section id="container" >
     <?php include_once 'header.php'; ?>
             
     <?php include_once 'sidebar.php'; ?>
@@ -59,11 +58,11 @@ $gridArray = getImagenesGrilla($mysqli);
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h1 class="text-center">Edicion de Grilla</h1>
-                    <div class="row mt">
+                    <h3><i class="fa fa-angle-right"></i>Edicion de Grilla Cursos </h3>
+                   <div class="row mt">
                         <div class="col-lg-12">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> Nueva Imagen</h4>
+                            <div class="form-panel">
+                                <h4><i class="fa fa-angle-right"></i> Nueva Imagen de Curso</h4>
                                 <section id="editor_grilla_nueva">
                                     <form class="form" enctype="multipart/form-data" method="POST" action="upload.php">
                                         <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
