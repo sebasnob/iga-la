@@ -68,26 +68,26 @@ $gridArray = getImagenesGrilla($mysqli);
                                         <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
                                         <input type="hidden" name="edicion_grilla_nueva" id="edicion_grilla_nueva" value="true" />
                                         <div class="form-group">
-                                            <label>Imagen: </label>
+                                            
                                             <input type="file" accept="file_extension|image" class="form-control" name="photo" required autofocus>
                                         </div>
                                         <div class="form-group">
-                                            <label >Columnas: </label>
-                                            <select name="cols">
+                                            <label class="col-sm-2 col-sm-2 control-label">Columnas:</label>
+                                            <select class="form-control" name="cols">
                                                 <option value="3">1</option>
                                                 <option value="6">2</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label >Filas: </label>
-                                            <select name="rows">
+                                            <label class="col-sm-2 col-sm-2 control-label">Filas: </label>
+                                            <select class="form-control" name="rows">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label >Posici&oacute;n: </label>
-                                            <select name="prioridad">
+                                            <label class="col-sm-2 col-sm-2 control-label">Posici&oacute;n: </label>
+                                            <select class="form-control" name="prioridad">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -99,29 +99,29 @@ $gridArray = getImagenesGrilla($mysqli);
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label >Curso: </label>
-                                            <select name="id_curso">
+                                            <label class="col-sm-2 col-sm-2 control-label">Curso: </label>
+                                            <select class="form-control" name="id_curso">
                                                 <?php foreach($cursos as $i=>$j){?>
                                                     <option value="<?=$j['id']?>"><?=$j['titulo']?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label >Habilitado: </label>
-                                            <select name="habilitado">
+                                            <label class="col-sm-2 col-sm-2 control-label">Habilitado: </label>
+                                            <select class="form-control" name="habilitado">
                                                 <option value="1">Si</option>
                                                 <option value="0">No</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label >Idioma: </label>
-                                            <select name="idioma">
+                                            <label class="col-sm-2 col-sm-2 control-label">Idioma: </label>
+                                            <select class="form-control" name="idioma">
                                                 <option value="es">Espa&ntilde;ol</option>
                                                 <option value="en">Ingles</option>
                                                 <option value="pt">Portugues</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-success">Agregar</button>
+                                        <button type="submit" class="btn btn-success">Agregar Imagen</button>
                                     </form>
                                 </section>
                             </div><!-- /content-panel -->
