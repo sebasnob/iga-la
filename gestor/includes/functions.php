@@ -1,17 +1,47 @@
 <?php
 include_once 'psl-config.php';
  
-function getDatos($mysqli, $id_curso, $idioma='ES'){
-    $query = "SELECT c.color,cd.titulo,cd.img_cabecera,cd.img_materiales,cd.img_uniforme,ci.id FROM cursos as c INNER JOIN curso_idioma as ci ON ci.id_curso=c.id INNER JOIN curso_datos as cd ON cd.id_curso_idioma=ci.id WHERE ci.idioma='".$idioma."' AND ci.id_curso=".$id_curso;
+function getDatosCurso($mysqli, $cod_curso, $id_pais='', $id_idioma='', $id_filial=''){
+    $query1 = "SELECT cpif.id FROM `curso_pais_idioma_filial` as cpif 
+                INNER JOIN pais_idioma as pi on pi.id=cpif.id_pais_idioma 
+            WHERE 
+                cpif.cod_curso=".$cod_curso." 
+            AND 
+                cpif.id_filial=".$id_filial." 
+            AND 
+                pi.id_pais=".$id_pais." 
+            AND 
+                pi.id_idioma=".$id_idioma;
+    $qry_cpi = $mysqli->query($query1);
+    $res_cpif = $qry_cpi->fetch_assoc();
+    
+    if($qry_cpi->num_rows > 0){
+        $query2 = "select * from curso_datos WHERE id_cpif=".$res_cpif['id'];
+        $qry_datos = $mysqli->query($query2);
+        $datos_curso = $qry_datos->fetch_assoc();
+        $qry_datos->free();
+        
+        return $datos_curso;
+    }else{
+        return "No existen datos para la filial e idiomas seleccionados.";
+    }
+    $qry_cpi->free();
+    
+    /*$cabecera = getCabecera($mysqli, $id_curso, $id_pais, $id_idioma);
+    
+    $query = "SELECT url_uniforme, url_material, desc_uniforme, desc_material, duracion, plan_estudio FROM curso_datos WHERE id_curso_pais_idioma=".$cabecera['id']." AND id_filial=".$id_filial;
     $resultado = $mysqli->query($query);
     $respuesta = $resultado->fetch_assoc();
-    $resultado->free();
     
-    return $respuesta;
+    return $respuesta;*/
 }
 
-function getIdiomas($mysqli){
-    $resultado = $mysqli->query("SELECT * FROM idiomas");
+function getIdiomas($mysqli, $id_idioma=''){
+    $cond='';
+    if(isset($id_idioma) && $id_idioma != ''){
+        $cond=' WHERE id_idioma='.$id_idioma;
+    }
+    $resultado = $mysqli->query("SELECT id, idioma, cod_idioma FROM idiomas $cond");
     $idiomas = array();
     while($respuesta = $resultado->fetch_assoc()){
         $idiomas[] = $respuesta;
@@ -21,8 +51,29 @@ function getIdiomas($mysqli){
     return $idiomas;
 }
 
-function getCursos($mysqli, $idioma='ES'){
-    $resultado = $mysqli->query("SELECT ci.id,cd.titulo FROM curso_idioma as ci INNER JOIN curso_datos as cd ON cd.id_curso_idioma=ci.id WHERE ci.idioma='ES'");
+/*function getPaisIdioma($mysqli, $id_pais, $id_idioma){
+    $qry = $mysqli->query("SELECT id FROM pais_idioma WHERE id_pais=".$id_pais." AND id_idioma=".$id_idioma);
+    $pais_idioma = $qry->fetch_assoc();
+    $qry->free();
+    
+    return $pais_idioma;
+}
+
+function getCurso($mysqli, $id_curso){
+    $query = "SELECT nombre, color FROM cursos WHERE id=".$id_curso;
+    $resultado = $mysqli->query($query);
+    $respuesta = $resultado->fetch_assoc();
+    $resultado->free();
+    
+    return $respuesta;
+}*/
+
+function getCursos($mysqli, $cod_curso=''){
+    $cond='';
+    if(isset($cod_curso) && $cod_curso != ''){
+        $cond = ' WHERE id='.$cod_curso;
+    }
+    $resultado = $mysqli->query("SELECT cod_curso, nombre_es, color FROM cursos $cond");
     $cursos = array();
     while($respuesta = $resultado->fetch_assoc()){
         $cursos[] = $respuesta;
@@ -31,6 +82,46 @@ function getCursos($mysqli, $idioma='ES'){
     
     return $cursos;
 }
+
+function getFilialesCurso($mysqli, $cod_curso, $id_pais='', $id_provincia=''){
+    $cond='';
+    $inner='';
+    if(isset($id_pais) && $id_pais != ''){
+        $inner .= ' INNER JOIN pais_idioma as pi ON pi.id=cpif.id_pais_idioma '
+                . ' INNER JOIN paises as p ON p.id=pi.id_pais';
+        $cond .= ' AND p.id='.$id_pais;
+    }
+    
+    if(isset($id_provincia) && $id_provincia != ''){
+        $cond .= ' AND f.id_provincia='.$id_provincia;
+    }
+    
+    $query = "SELECT f.id, f.nombre FROM curso_pais_idioma_filial as cpif INNER JOIN filiales as f ON f.id=cpif.id_filial ".$inner." WHERE cpif.cod_curso=".$cod_curso. " ".$cond;
+    $resultado = $mysqli->query($query);
+    $filiales = array();
+    while($respuesta = $resultado->fetch_assoc()){
+        $filiales[] = $respuesta;
+    }
+    $resultado->free();
+    
+    return $filiales;
+}
+
+function getCursoPais($mysqli, $cod_curso=''){
+    $cond = '';
+    if(isset($cod_curso) && $cod_curso != ''){
+	$cond = ' WHERE cp.cod_curso='.$cod_curso;
+    }
+    $cursos_paises = array();
+    $result = $mysqli->query("SELECT p.id, p.pais FROM curso_pais as cp INNER JOIN paises as p ON p.id=cp.id_pais ".$cond);
+    while($c_p = $result->fetch_assoc()){
+	$cursos_paises[] = array('id'=>$c_p['id'], 'pais'=>$c_p['pais']);
+    }
+    $result->free();
+    
+    return $cursos_paises;
+}
+
 
 function getPais($mysqli, $cod_pais){
     $query = "SELECT id, pais, cod_pais, flag FROM paises WHERE cod_pais='".$cod_pais."'";
@@ -47,7 +138,39 @@ function getPaises($mysqli){
     while($pais = $result->fetch_assoc()){
 	$paises[] = array('id'=>$pais['id'],'pais'=>$pais['pais'],'cod_pais'=>$pais['cod_pais'],'flag'=>$pais['flag']);
     }
-    return json_encode($paises);
+    return $paises;
+}
+
+function getIdiomasPais($mysqli, $id_pais){
+    $idiomas_pais = array();
+    $result = $mysqli->query("SELECT i.id, i.idioma FROM pais_idioma as pi INNER JOIN idiomas as i ON i.id=pi.id_idioma WHERE id_pais=".$id_pais);
+    while($idioma = $result->fetch_assoc()){
+	$idiomas_pais[] = array('id'=>$idioma['id'],'idioma'=>$idioma['idioma']);
+    }
+    return $idiomas_pais;
+}
+
+function getProvincias($mysqli, $id_pais=''){
+    $cond = '';
+    if(isset($id_pais) && $id_pais != ''){
+        $cond .= ' WHERE id_pais='.$id_pais;
+    }
+    
+    $provincias = array();
+    $result = $mysqli->query("SELECT id, provincia FROM provincias ".$cond);
+    while($prov = $result->fetch_assoc()){
+	$provincias[] = array('id'=>$prov['id'],'provincia'=>$prov['provincia']);
+    }
+    return $provincias;
+}
+
+function getFiliales($mysqli,$id_pais='1'){
+    $filiales = array();
+    $result = $mysqli->query("SELECT id, filial, id_provincia FROM filiales");
+    while($filial = $result->fetch_assoc()){
+	$filiales[] = array('id'=>$filial['id'],'filial'=>$filial['filial'],'id_provincia'=>$filial['id_provincia']);
+    }
+    return $filiales;
 }
 
 function getDatosHome($mysqli){
@@ -280,7 +403,7 @@ function getImagenesGrilla($mysqli, $idioma = 'es')
                             'cols'=>$grilla['cols'],
                             'img_url'=>$grilla['img_url'],
                             'thumb_url'=>$grilla['thumb_url'],
-                            'id_curso'=>$grilla['id_curso'],
+                            'cod_curso'=>$grilla['cod_curso'],
                             'prioridad'=>$grilla['prioridad'],
                             'idioma'=>$grilla['idioma'],
                             'habilitado'=>$grilla['habilitado']);

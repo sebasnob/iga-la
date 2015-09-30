@@ -50,20 +50,13 @@ if(isset($_GET['pais'])){
         
         <link rel="stylesheet" type="text/css" media="screen" href="styles.php?id_curso=<?=$_GET['cod_curso']?>">
         
+        
+        
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <style>
-            #datos_curso{
-                display: none;
-            }
-            
-            #error_datos_curso{
-                display: none;
-            }
-        </style>
     </head>
     
     <body>
@@ -77,11 +70,11 @@ if(isset($_GET['pais'])){
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper site-min-height">
-                    <h3><i class="fa fa-angle-right"></i>Edicion del curso </h3>
-                    <p>Formulario para la edicion del curso. Las modifiaciones solo afectaran al curso, en la filial e idioma seleccionados.</p>
+                    <h3><i class="fa fa-angle-right"></i>Edición del curso para un grupo de filiales </h3>
+                    <p>Formulario para modificar los datos de un curso en un grupo de filiales. Las modificaciones afectaran a todas las filiales en el idioma seleccionado. Si desea editar un curso en particular, seleccionelo desde el <a href="list_cursos.php">listado de cursos</a></p>
                     <br/>
                     <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
-                        <input type="hidden" name="id_curso" id="id_curso" value="<?=$_GET['cod_curso']?>" />
+                        <input type="hidden" name="cod_curso" id="cod_curso" value="<?=$_GET['cod_curso']?>" />
                         <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
                         <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
 
@@ -99,15 +92,11 @@ if(isset($_GET['pais'])){
                                 ?>
                             </select>
                             &nbsp;
-                            <label>Provincia</label>
-                            <select name="provincias_curso" id="provincias_curso">
-                                <option value="0">- Seleccione -</option>
-                            </select>
-                            &nbsp;
-                            <label>Filial</label>
-                            <select name="filiales_curso" id="filiales_curso">
-                                <option value="0">- Seleccione -</option>
-                            </select>
+                            <label>Filiales</label>
+                            <div class="filiales">
+                                <ul class="filial_items">
+                                </ul>
+                            </div>
                             &nbsp;
                             <label>Idioma</label>
                             <select name="idioma_curso" id="idioma_curso">
@@ -123,19 +112,11 @@ if(isset($_GET['pais'])){
                             </select>
                         </div>
                         <br/>
-                        <div id="error_datos_curso"></div>
                         <div id="datos_curso">
-                            <!--<div class="row">
-                                <div id="selector_color" class="col-md-6 text-left" >
-                                    <input type="color" id="select_color" value="<? //$curso['color']?>" />
-                                    <input type="text" readonly="" id="chose_color" name="chose_color" value="<? //$curso['color']?>" />
-                                    <span id="muestra_color"><b>Color de los titulos</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                </div>
-                                <div id="selector_color" class="col-md-6 text-right" > </div>
-                            </div>-->
-                            <hr/>
+                           <hr/>
                             <div>
                                 <div id="sliderPreview">
+                                    <h3>Seleccione la nueva imagen de cabecera</h3>
                                     <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="" alt="">
                                 </div>
                             </div>
@@ -159,7 +140,7 @@ if(isset($_GET['pais'])){
                                 <hr/>
                                 <div id="materialesPreview">
                                     <h3>Materiales</h3>
-                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="" />
+                                    <img class="avatar img-thumbnail" src="" alt="" />
                                 </div>
                                 <textarea name="materiales_txt" id="materiales_txt" cols="100" rows="10"></textarea>
                                 <input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
@@ -167,20 +148,19 @@ if(isset($_GET['pais'])){
 
                                 <div id="uniformesPreview">
                                     <h3>Uniforme</h3>
-                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
+                                    <img class="avatar img-thumbnail" src="" alt="">
                                 </div>
                                 <textarea name="uniformes_txt" id="uniformes_txt" cols="100" rows="10"></textarea>
                                 <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
                             </div>    
                             <hr/>
                             <button id="confirm" class="btn btn-success">Cambiar</button>
-                            <a id="preview" class="btn btn-default" href="preview.php?id_curso=<?=$_GET['id_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
+                            <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
                             <button id="publicar" class="btn btn-primary">Publicar</button>
                         </div>
                     </form>
                 </section>
             </section><!-- /MAIN CONTENT -->
-            
             <!--main content end-->
             <?php include_once 'footer.php'; ?>
         </section>
@@ -194,17 +174,11 @@ if(isset($_GET['pais'])){
         <script src="assets/js/jquery.scrollTo.min.js"></script>
         <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
         
-        
         <!--common script for all pages-->
         <script src="assets/js/common-scripts.js"></script>
-        
         <!--script for this page-->
-        
+
         <script type="text/javascript">
-            /*$(function(){
-                $('select.styled').customSelect();
-            });*/
-            
             function changeSelectOptions(select_id, array_index, texto, value){
                 var options, index, select, option;
 
@@ -215,7 +189,7 @@ if(isset($_GET['pais'])){
                 select.options.length = 0;
 
                 // Load the new options
-                options = array_index; // Or whatever source information you're working with
+                options = array_index;
                 select.options.add(new Option('- Seleccione -', '0'));
                 for (index = 0; index < options.length; ++index) {
                     option = options[index];
@@ -223,12 +197,6 @@ if(isset($_GET['pais'])){
                 }
             }
             
-            /*$("#select_color").change(function(){
-                $("#chose_color").val($("#select_color").val());
-                $("h1, h2, h3, h4").css("color", $("#select_color").val());
-                $("#muestra_color").css("color", $("#select_color").val());
-            });*/
-	
             $("#confirm").click(function(){
                 //$(".overlay").show();
                 $("#form_change").submit();
@@ -277,85 +245,39 @@ if(isset($_GET['pais'])){
             });
             
             $("#paises_curso").change(function(){
-                //Reincio el select de provincias
-                $('#provincias_curso').html("<option value='0'>- Seleccione -</option>");
-                //Reincio el select de filiales
-                $('#filiales_curso').html("<option value='0'>- Seleccione -</option>");
-                //Oculto los datos del curso y de los errores
-                $('#error_datos_curso').hide();
-                $('#datos_curso').hide();
-                
-                //Cargo el select de provincias
-                $.ajax({
-        	    url: "controller_ajax.php",
-        	    method: "POST",
-        	    data: { option : 'select_provincias', id_pais : $(this).val()  },
-                    dataType: "json",
-        	    success: function(data){
-                        changeSelectOptions("provincias_curso", data.options, 'provincia', 'id');
-        	    }
-        	});
-            });
-            
-            $("#provincias_curso").change(function(){
-                $('#filiales_curso').html("<option value='0'>- Seleccione -</option>");
-                //Oculto los datos del curso y de los errores
-                $('#error_datos_curso').hide();
-                $('#datos_curso').hide();
-                
-                $.ajax({
-        	    url: "controller_ajax.php",
-        	    method: "POST",
-        	    data: { 
-                        option : 'select_filiales', 
-                        cod_curso : <?=$_GET['cod_curso']?>, 
-                        id_pais : $("#paises_curso").val(),
-                        id_provincia : $(this).val()
-                    },
-                    dataType: "json",
-        	    success: function(data){
-                        changeSelectOptions("filiales_curso", data.options, 'nombre', 'id');
-        	    }
-        	});
-            });
-            
-            $('#filiales_curso').change(function(){
-                //Oculto los datos del curso y de los errores
-                $('#error_datos_curso').hide();
-                $('#datos_curso').hide();
-                
-                //Reincio el select de idiomas
+                //Reinicio el select de filiales
+                $('.filial_items').html("&nbsp;");
+                //Reinicio el select de idiomas
                 $("#idioma_curso").find('option:selected').removeAttr("selected");
                 $('#idioma_curso option:nth-child(0)').attr('selected','selected');
-            });
-            
-            $("#idioma_curso").change(function(){
+                
                 $.ajax({
         	    url: "controller_ajax.php",
         	    method: "POST",
-        	    data: {
-                        option : 'get_datos_curso',
-                        cod_curso : <?=$_GET['cod_curso']?>,
-                        id_pais : $("#paises_curso").val(),
-                        id_idioma : $(this).val(),
-                        id_filial : $('#filiales_curso').val()
-                    },
+        	    data: {option : 'select_filiales_grupo', id_pais : $(this).val(), cod_curso : <?=$_GET['cod_curso']?>},
                     dataType: "json",
         	    success: function(data){
-                        if(data.id){
-                            $('#error_datos_curso').hide();
-                            $('#imagePreview').attr("src", data.url_cabecera);
-                            $('#datos_curso').show();
-                        }else{
-                            $('#datos_curso').hide();
-                            $('#error_datos_curso').html(data);
-                            $('#error_datos_curso').show();
-                        }
+                        $.each(data, function(id, value){
+                            var id_n = id.replace(/\s+/g, '');
+                            $('.filial_items').append("<li id='id-"+id_n+"'><input type='checkbox' name='prov' id='"+id_n+"' /> "+id+"</li>");
+                            $.each(value, function(id_v, value_v){
+                                $('#id-'+id_n).append("<ul><li><input type='checkbox' id='"+value_v.id+"' name='filial[]' class='"+id_n+"'/> "+value_v.nombre+"</li></ul>");
+                            });
+                            
+                            $('#'+id_n).click(function(){
+                                if($('#'+id_n).prop('checked')){
+                                    $('.'+id_n).prop( "checked", true );
+                                }else{
+                                    $('.'+id_n).prop( "checked", false );
+                                }
+                            });
+                            
+                        });
+                        
         	    }
         	});
             });
             
         </script>
-        
     </body>
 </html>

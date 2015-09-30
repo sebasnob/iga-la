@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-09-2015 a las 22:06:59
+-- Tiempo de generación: 21-09-2015 a las 00:12:16
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `cursos` (
 --
 
 INSERT INTO `cursos` (`id`, `nombre`, `color`, `fuente`) VALUES
-(1, 'Gastronomia & Alta Cocina', '#0000ff', '"Open Sans",sans-serif');
+(1, 'Gastronomia & Alta Cocina', '#00b300', '"Open Sans",sans-serif');
 
 -- --------------------------------------------------------
 
@@ -140,15 +140,52 @@ INSERT INTO `filiales` (`id`, `filial`, `id_provincia`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `grilla` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `rows` int(11) NOT NULL,
   `cols` int(11) NOT NULL,
   `img_url` text NOT NULL,
   `thumb_url` text NOT NULL,
   `prioridad` int(11) NOT NULL,
   `id_curso` int(11) NOT NULL COMMENT 'deberia ser clave foranea de cursos',
-  `habilitado` enum('no','si') NOT NULL DEFAULT 'no'
+  `habilitado` int(11) NOT NULL DEFAULT '1',
+  `idioma` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `grilla`
+--
+
+INSERT INTO `grilla` (`id`, `rows`, `cols`, `img_url`, `thumb_url`, `prioridad`, `id_curso`, `habilitado`, `idioma`) VALUES
+(9, 1, 6, 'images/grilla/7.jpg', 'images/grilla/thumb/7.jpg', 1, 1, 1, 'es'),
+(10, 1, 3, 'images/grilla/5.jpg', 'images/grilla/thumb/5.jpg', 2, 1, 1, 'es'),
+(0, 1, 3, 'images/grilla/2.jpg', 'images/grilla/thumb/2.jpg', 3, 1, 1, 'es'),
+(0, 1, 3, 'images/grilla/6.jpg', 'images/grilla/thumb/6.jpg', 4, 1, 1, 'es'),
+(0, 1, 6, 'images/grilla/7 - copia.jpg', 'images/grilla/thumb/7 - copia.jpg', 5, 1, 1, 'es'),
+(0, 1, 3, 'images/grilla/2 - copia.jpg', 'images/grilla/thumb/2 - copia.jpg', 6, 1, 1, 'es');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `home`
+--
+
+CREATE TABLE IF NOT EXISTS `home` (
+`id` int(11) NOT NULL,
+  `url_video` text NOT NULL,
+  `titulo_es` text NOT NULL,
+  `titulo_in` text NOT NULL,
+  `titulo_por` text NOT NULL,
+  `subtitulo_es` text NOT NULL,
+  `subtitulo_por` text NOT NULL,
+  `subtitulo_in` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `home`
+--
+
+INSERT INTO `home` (`id`, `url_video`, `titulo_es`, `titulo_in`, `titulo_por`, `subtitulo_es`, `subtitulo_por`, `subtitulo_in`) VALUES
+(1, 'https://www.youtube.com/embed/JApGTCxZztg?rel=0&controls=0&showinfo=0&autoplay=1&autoplay=1&loop=0&playlist=Rk6_hdRtJOE&enablejsapi=1&version=3', '<p>Bienvenidos a <span style="color:#0033cc">IGA</span></p>\r\n', 'Welcome to IGA', '<p>Bem-vindo ao IGA</p>\r\n', '<p><em>INSTITUTO </em>GASTRONOMICO DE LAS AMERICAS</p>\r\n', '<p>INSTITUTO GASTRONOMICO DAS AMERICAS</p>\r\n', 'THE MOST IMPOARTANT GASTRONOMIC TRAINING NETWORK');
 
 -- --------------------------------------------------------
 
@@ -213,21 +250,22 @@ CREATE TABLE IF NOT EXISTS `paises` (
 `id` int(11) NOT NULL,
   `pais` varchar(64) NOT NULL,
   `cod_pais` varchar(3) NOT NULL,
-  `flag` text NOT NULL
+  `flag` text NOT NULL,
+  `idioma` varchar(3) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `paises`
 --
 
-INSERT INTO `paises` (`id`, `pais`, `cod_pais`, `flag`) VALUES
-(1, 'Argentina', 'AR', 'images/flags/ar.png'),
-(3, 'Brasil', 'BR', 'images/flags/br.png'),
-(5, 'Uruguay', 'UR', 'images/flags/ur.png'),
-(7, 'Paraguay', 'PAR', 'images/flags/par.png'),
-(9, 'Bolivia', 'BOL', 'images/flags/bo.png'),
-(11, 'Panama', 'PAN', 'images/flags/pan.png'),
-(13, 'USA', 'US', 'images/flags/us.png');
+INSERT INTO `paises` (`id`, `pais`, `cod_pais`, `flag`, `idioma`) VALUES
+(1, 'Argentina', 'AR', 'images/flags/ar.png', 'ES'),
+(3, 'Brasil', 'BR', 'images/flags/br.png', 'POR'),
+(5, 'Uruguay', 'UR', 'images/flags/ur.png', 'ES'),
+(7, 'Paraguay', 'PAR', 'images/flags/par.png', 'ES'),
+(9, 'Bolivia', 'BOL', 'images/flags/bo.png', 'ES'),
+(11, 'Panama', 'PAN', 'images/flags/pan.png', 'ES'),
+(13, 'USA', 'US', 'images/flags/us.png', 'IN');
 
 -- --------------------------------------------------------
 
@@ -315,9 +353,9 @@ ALTER TABLE `filiales`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `grilla`
+-- Indices de la tabla `home`
 --
-ALTER TABLE `grilla`
+ALTER TABLE `home`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -385,10 +423,10 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `filiales`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT de la tabla `grilla`
+-- AUTO_INCREMENT de la tabla `home`
 --
-ALTER TABLE `grilla`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `home`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `idiomas`
 --

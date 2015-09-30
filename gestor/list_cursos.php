@@ -71,12 +71,13 @@ if($logged == 'out'){
                                       <li>
                                            
                                           <div class="task-title">
-                                              <span class="task-title-sp"><a href="cursos.php?id_curso=<?=$j['id']?>"><?=$j['id']?></a> <a href="cursos.php?id_curso=<?=$j['id']?>"><?=$j['titulo']?></span>
-                                              <span class="badge bg-theme">Nuevo</span>
+                                              <span class="task-title-sp"><a href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><?=$j['cod_curso']?></a>&nbsp;&nbsp;<a href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><?=$j['nombre_es']?></a></span>
+                                              <!--<span class="badge bg-theme">Nuevo</span>-->
                                               <div class="pull-right hidden-phone">
-                                                  <button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button>
-                                                  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                  <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                  <a class="btn btn-success btn-xs"><i class=" fa fa-check"></i></a>
+                                                  <a class="btn btn-primary btn-xs" href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-pencil"></i></a>
+                                                  <a class="btn btn-default btn-xs" href="cursos_grupo.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-th-list"></i></a>
+                                                  <a class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
                                               </div>
                                           </div>
                                           
@@ -89,7 +90,7 @@ if($logged == 'out'){
                               </div>
 
                               <div class=" add-task-row">
-                                  <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Agregar Nuevo Curso</a>
+                                  <!--<a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Agregar Nuevo Curso</a>-->
                                   <a class="btn btn-default btn-sm pull-right" href="todo_list.html#">Buscar Curso</a>
                               </div>
                           </div>
