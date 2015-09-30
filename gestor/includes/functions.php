@@ -413,4 +413,54 @@ function getImagenesGrilla($mysqli, $idioma = 'es')
     return $retorno;
 }
 
+function ws_insertPaises($mysqli){
+    $message = '';
+    $fp = fopen("../ws/paises.json","r");
+    $linea= fgets($fp);
+
+    $array_paises = json_decode($linea);
+
+    foreach ($array_paises as $id=>$value){
+        $query_sel = "SELECT id, pais FROM paises WHERE id={$value->id} AND pais='{$value->pais}'";
+        $result_sel = $mysqli->query($query_sel);
+        if($result_sel->num_rows == 0){
+            $query_ins = "INSERT INTO paises SET id={$value->id}, pais='{$value->pais}'";
+            $result_ins = $mysqli->query($query_ins);
+            if(!$result_ins){
+                $message.= "<br/>Error - al insertar el pais {$value->pais}<br/>";
+            }else{
+                $message.= "<br/>Correcto - Se inserto el pais {$value->pais}<br/>";
+            }
+        }else{
+            $message.= "<br/>Error - Ya existe el pais {$value->pais} con id {$value->id}<br/>";
+        }
+    }
+    return $message;
+}
+
+function ws_insertProvincias($mysqli){
+    $message = '';
+    $fp_prov = fopen("../ws/provincias.json","r");
+    $linea_prov = fgets($fp_prov);
+
+    $array_prov = json_decode($linea_prov);
+
+    foreach ($array_prov as $id=>$value){
+        $query_sel = "SELECT id, nombre FROM provincias WHERE id={$value->id} AND nombre='{$value->nombre}'";
+        $result_sel = $mysqli->query($query_sel);
+        if($result_sel->num_rows == 0){
+            $query_ins = "INSERT INTO provincias SET id={$value->id}, nombre='{$value->nombre}', id_pais={$value->pais}, codigo_estado='{$value->codigo_estado}', identificador_estado='{$value->identificador_estado}'";
+            $result_ins = $mysqli->query($query_ins);
+            if(!$result_ins){
+                $message.= "<br/>Error - al insertar la provincia {$value->nombre}<br/>";
+            }else{
+                $message.= "<br/>Correcto - Se inserto la provincia {$value->nombre}, pais: {$value->pais}<br/>";
+            }
+        }else{
+            $message.= "<br/>Error - Ya existe la pronvincia {$value->nombre} con id {$value->id}<br/>";
+        }
+    }
+    return $message;
+}
+
 ?>
