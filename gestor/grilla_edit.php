@@ -17,6 +17,8 @@ if($logged == 'out'){
 
 $cursos = getCursos($mysqli);
 $gridArray = getImagenesGrilla($mysqli);
+$paises = getPaises($mysqli);
+
 ?>
 <!DOCTYPE html>
 
@@ -79,13 +81,6 @@ $gridArray = getImagenesGrilla($mysqli);
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">Filas: </label>
-                                            <select class="form-control" name="rows">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Posici&oacute;n: </label>
                                             <select class="form-control" name="prioridad">
                                                 <option value="1">1</option>
@@ -102,7 +97,7 @@ $gridArray = getImagenesGrilla($mysqli);
                                             <label class="col-sm-2 col-sm-2 control-label">Curso: </label>
                                             <select class="form-control" name="id_curso">
                                                 <?php foreach($cursos as $i=>$j){?>
-                                                    <option value="<?=$j['id']?>"><?=$j['titulo']?></option>
+                                                    <option value="<?=$j['cod_curso']?>"><?=$j['nombre_es']?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
@@ -111,6 +106,14 @@ $gridArray = getImagenesGrilla($mysqli);
                                             <select class="form-control" name="habilitado">
                                                 <option value="1">Si</option>
                                                 <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
+                                            <select class="form-control" name="pais">
+                                                <?php foreach($paises as $pais){?>
+                                                    <option value="<?=$pais['id']?>"><?=$pais['pais']?></option>
+                                                <?php }?>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -153,13 +156,6 @@ $gridArray = getImagenesGrilla($mysqli);
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label >Filas: </label>
-                                                <select name="rows">
-                                                    <option value="1" <?php if($imgGrid['rows'] == 1){echo 'selected';}?>>1</option>
-                                                    <option value="2" <?php if($imgGrid['rows'] == 2){echo 'selected';}?>>2</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
                                                 <label >Posici&oacute;n: </label>
                                                 <select name="prioridad">
                                                     <option value="1" <?php if($imgGrid['prioridad'] == 1){echo 'selected';}?>>1</option>
@@ -176,7 +172,8 @@ $gridArray = getImagenesGrilla($mysqli);
                                                 <label >Curso: </label>
                                                 <select name="id_curso">
                                                     <?php foreach($cursos as $i=>$j){?>
-                                                        <option value="<?=$j['id']?>"  <?php if($imgGrid['id_curso'] == $j['id']){echo 'selected';}?>><?=$j['titulo']?></option>
+                                                        
+                                                        <option value="<?=$j['cod_curso']?>"  <?php if($imgGrid['id_curso'] == $j['cod_curso']){echo 'selected';}?>><?=$j['nombre_es']?></option>
                                                     <?php }?>
                                                 </select>
                                             </div>
@@ -185,6 +182,14 @@ $gridArray = getImagenesGrilla($mysqli);
                                                 <select name="habilitado">
                                                     <option value="1" <?php if($imgGrid['habilitado'] == 1){echo 'selected';}?>>Si</option>
                                                     <option value="0" <?php if($imgGrid['habilitado'] == 0){echo 'selected';}?>>No</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
+                                                <select class="form-control" name="pais">
+                                                    <?php foreach($paises as $pais){?>
+                                                        <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgGrid['id_pais']){ echo 'selected';}?>><?=$pais['pais']?></option>
+                                                    <?php }?>
                                                 </select>
                                             </div>
                                             <div class="form-group">

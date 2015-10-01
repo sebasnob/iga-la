@@ -156,7 +156,7 @@ if(isset($_POST['edicion_grilla']))
                     $ruta = substr($ruta, 3);
                     $ruta_thumb = substr($ruta_thumb, 3);
                     
-                    $query = "INSERT INTO grilla (rows, cols, img_url, thumb_url, prioridad, id_curso, habilitado, idioma) VALUES ({$_POST['rows']},{$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}')";
+                    $query = "INSERT INTO grilla (cols, img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, pais) VALUES ({$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', {$_POST['pais']})";
                     $mysqli->query($query);
                             
                 }

@@ -68,14 +68,20 @@ function getCurso($mysqli, $id_curso){
     return $respuesta;
 }*/
 
-function getCursos($mysqli, $cod_curso=''){
-    $cond='';
-    if(isset($cod_curso) && $cod_curso != ''){
-        $cond = ' WHERE id='.$cod_curso;
+function getCursos($mysqli, $cod_curso = false)
+{
+    $cond = '';
+    
+    if($cod_curso)
+    {
+        $cond = ' WHERE id = ' . $cod_curso;
     }
-    $resultado = $mysqli->query("SELECT cod_curso, nombre_es, color FROM cursos $cond");
+    
+    $resultado = $mysqli->query("SELECT * FROM cursos $cond");
     $cursos = array();
-    while($respuesta = $resultado->fetch_assoc()){
+    
+    while($respuesta = $resultado->fetch_assoc())
+    {
         $cursos[] = $respuesta;
     }
     $resultado->free();
@@ -405,7 +411,6 @@ function getImagenesGrilla($mysqli, $idioma = 'es')
     while($grilla = $result->fetch_assoc())
     {
 	$retorno[] = array( 'id'=>$grilla['id'],
-                            'rows'=>$grilla['rows'],
                             'cols'=>$grilla['cols'],
                             'img_url'=>$grilla['img_url'],
                             'thumb_url'=>$grilla['thumb_url'],
@@ -414,8 +419,6 @@ function getImagenesGrilla($mysqli, $idioma = 'es')
                             'idioma'=>$grilla['idioma'],
                             'habilitado'=>$grilla['habilitado']);
     }
-//           die(var_dump($retorno)); 
-//    $retorno[] = array("id"=>"1","rows"=>"1", "cols"=>"6", "img_url"=>"images/grilla/7.jpg", "id_curso"=>"1");
     return $retorno;
 }
 
