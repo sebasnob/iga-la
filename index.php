@@ -4,10 +4,11 @@ include_once 'gestor/includes/db_connect.php';
 include_once 'gestor/includes/functions.php';
 
 if(!$_SESSION){
-    detectCountry($mysqli);
+    //detectCountry($mysqli);
+    $_SESSION['pais'] = array('cod_pais'=>"AR", 'idioma'=>'ES');
 }
 
-$paises = json_decode(getPaises($mysqli),true);
+$paises = getPaises($mysqli);
 $datos_home = getDatosHome($mysqli);
 ?>
 <!DOCTYPE html>
@@ -122,7 +123,7 @@ $datos_home = getDatosHome($mysqli);
                 foreach($paises as $i=>$d){
                     if($_SESSION['pais']['cod_pais'] != $d['cod_pais']){
                 ?>
-                        <li><a href="#"><img src="<?=$d['flag']?>" /></a></li>
+                        <li><a href="#"><img src="" /></a></li>
                 <?php
                     }
                 }

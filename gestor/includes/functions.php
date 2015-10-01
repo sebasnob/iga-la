@@ -83,7 +83,7 @@ function getCursos($mysqli, $cod_curso=''){
     return $cursos;
 }
 
-function getFilialesCurso($mysqli, $cod_curso, $id_pais='', $id_provincia=''){
+/*function getFilialesCurso($mysqli, $cod_curso, $id_pais='', $id_provincia=''){
     $cond='';
     $inner='';
     if(isset($id_pais) && $id_pais != ''){
@@ -105,7 +105,7 @@ function getFilialesCurso($mysqli, $cod_curso, $id_pais='', $id_provincia=''){
     $resultado->free();
     
     return $filiales;
-}
+}*/
 
 function getCursoPais($mysqli, $cod_curso=''){
     $cond = '';
@@ -134,9 +134,9 @@ function getPais($mysqli, $cod_pais){
 
 function getPaises($mysqli){
     $paises = array();
-    $result = $mysqli->query("SELECT id, pais, cod_pais, flag FROM paises");
+    $result = $mysqli->query("SELECT id, pais, cod_pais FROM paises");
     while($pais = $result->fetch_assoc()){
-	$paises[] = array('id'=>$pais['id'],'pais'=>$pais['pais'],'cod_pais'=>$pais['cod_pais'],'flag'=>$pais['flag']);
+	$paises[] = array('id'=>$pais['id'],'pais'=>$pais['pais'],'cod_pais'=>$pais['cod_pais']);
     }
     return $paises;
 }
@@ -157,18 +157,24 @@ function getProvincias($mysqli, $id_pais=''){
     }
     
     $provincias = array();
-    $result = $mysqli->query("SELECT id, provincia FROM provincias ".$cond);
+    $query = "SELECT id, nombre FROM provincias ".$cond;
+    $result = $mysqli->query($query);
     while($prov = $result->fetch_assoc()){
-	$provincias[] = array('id'=>$prov['id'],'provincia'=>$prov['provincia']);
+	$provincias[] = array('id'=>$prov['id'],'nombre'=>$prov['nombre']);
     }
     return $provincias;
 }
 
-function getFiliales($mysqli,$id_pais='1'){
+function getFiliales($mysqli, $id_provincia='', $id_pais=''){
+    $cond = '';
+    if(isset($id_provincia) && $id_provincia != ''){
+        $cond .= ' WHERE id_provincia='.$id_provincia;
+    }
+    
     $filiales = array();
-    $result = $mysqli->query("SELECT id, filial, id_provincia FROM filiales");
+    $result = $mysqli->query("SELECT id, nombre, id_localidad FROM filiales {$cond}");
     while($filial = $result->fetch_assoc()){
-	$filiales[] = array('id'=>$filial['id'],'filial'=>$filial['filial'],'id_provincia'=>$filial['id_provincia']);
+	$filiales[] = array('id'=>$filial['id'],'nombre'=>$filial['nombre'],'id_localidad'=>$filial['id_localidad']);
     }
     return $filiales;
 }
@@ -381,13 +387,13 @@ function detectCountry($mysqli){
     if(curl_exec($ch)){
         $resp = json_decode(curl_exec($ch));
         
-        $result = $mysqli->query("SELECT flag,idioma FROM paises WHERE cod_pais='".$resp->{'country_code'}."'");
+        $result = $mysqli->query("SELECT idioma FROM paises WHERE cod_pais='".$resp->{'country_code'}."'");
         $datos_pais = $result->fetch_assoc();
         
-        $_SESSION['pais'] = array('cod_pais'=>$resp->{'country_code'}, 'flag'=>$datos_pais['flag'], 'idioma'=>$datos_pais['idioma']);
+        $_SESSION['pais'] = array('cod_pais'=>$resp->{'country_code'}, 'idioma'=>$datos_pais['idioma']);
         //$_SESSION['ciudad'] = $resp->{'city'};
     }else{
-        $_SESSION['pais'] = array('cod_pais'=>"AR", 'flag'=>"images/flags/ar.png", 'idioma'=>'ES');
+        $_SESSION['pais'] = array('cod_pais'=>"AR", 'idioma'=>'ES');
     }
     curl_close($ch);
 }
@@ -403,7 +409,7 @@ function getImagenesGrilla($mysqli, $idioma = 'es')
                             'cols'=>$grilla['cols'],
                             'img_url'=>$grilla['img_url'],
                             'thumb_url'=>$grilla['thumb_url'],
-                            'cod_curso'=>$grilla['cod_curso'],
+                            'id_curso'=>$grilla['cod_curso'],
                             'prioridad'=>$grilla['prioridad'],
                             'idioma'=>$grilla['idioma'],
                             'habilitado'=>$grilla['habilitado']);
@@ -458,6 +464,104 @@ function ws_insertProvincias($mysqli){
             }
         }else{
             $message.= "<br/>Error - Ya existe la pronvincia {$value->nombre} con id {$value->id}<br/>";
+        }
+    }
+    return $message;
+}
+
+function ws_insertLocalidades($mysqli){
+    $message = '';
+    $fp_loc = fopen("../ws/localidades.json","r");
+    $linea_loc = fgets($fp_loc);
+
+    $array_loc = json_decode($linea_loc);
+
+    foreach ($array_loc as $id=>$value){
+        $query_sel = "SELECT id, nombre FROM localidades WHERE id={$value->id} AND nombre='{$value->nombre}'";
+        $result_sel = $mysqli->query($query_sel);
+        if($result_sel->num_rows == 0){
+            $query_ins = "INSERT INTO localidades SET id={$value->id}, departamento_id='{$value->departamento_id}', nombre='{$value->nombre}', id_provincia='{$value->provincia_id}', id_pais='{$value->pais}', codigo_municipio='{$value->codigo_municipio}', codigo_siafi='{$value->codigo_siafi}'";
+            $result_ins = $mysqli->query($query_ins);
+            if(!$result_ins){
+                $message.= "<br/>Error - al insertar la localidad {$value->nombre}<br/>";
+            }else{
+                $message.= "<br/>Correcto - Se inserto la localidad {$value->nombre}, prov: {$value->provincia_id}<br/>";
+            }
+        }else{
+            $message.= "<br/>Error - Ya existe la localidad {$value->nombre} con id {$value->id}<br/>";
+        }
+    }
+    return $message;
+}
+
+function ws_insertFiliales($mysqli){
+    $message = '';
+    $fp_filiales = fopen("../ws/filiales.json","r");
+    $linea_filiales = fgets($fp_filiales);
+
+    $array_filiales = json_decode($linea_filiales);
+
+    foreach ($array_filiales as $id=>$value){
+        $res_prov = $mysqli->query("SELECT id_provincia FROM localidades WHERE id=".$value->id_localidad);
+        if($res_prov){
+            $prov = $res_prov->fetch_assoc();
+        }else{
+            $prov['id_provincia'] = 1111;
+        }
+        
+        $query_sel = "SELECT id, nombre FROM filiales WHERE id={$value->codigo} AND nombre='{$value->nombre}'";
+        $result_sel = $mysqli->query($query_sel);
+        if($result_sel->num_rows == 0){
+            $query_ins = "INSERT INTO filiales SET id={$value->codigo}, nombre='{$value->nombre}', id_localidad='{$value->id_localidad}', id_provincia='{$prov['id_provincia']}', domicilio='{$value->domicilio}', telefono='{$value->telefono}', telefono2='{$value->telefono2}', codigopostal='{$value->codigopostal}', email='{$value->email}', latitud='{$value->latitud}', longitud='{$value->longitud}', idioma='{$value->idioma}'";
+            $result_ins = $mysqli->query($query_ins);
+            if(!$result_ins){
+                $message.= "<br/>Error - al insertar la filial {$value->nombre}<br/>";
+            }else{
+                $message.= "<br/>Correcto - Se inserto la filial {$value->nombre}, prov: {$prov['id_provincia']}<br/>";
+            }
+        }else{
+            $message.= "<br/>Error - Ya existe la filial {$value->nombre} con id {$value->id}<br/>";
+        }
+    }
+    return $message;
+}
+
+function ws_insertCursos($mysqli){
+    $message = '';
+    $fp_cursos = fopen("../ws/cursos.json","r");
+    $linea_cursos = fgets($fp_cursos);
+
+    $array_cursos = json_decode($linea_cursos);
+
+    foreach ($array_cursos as $id=>$value){
+        $query_sel = "SELECT cod_curso, nombre_es FROM cursos WHERE cod_curso={$value->codigo} AND nombre_es='{$value->nombre_es}'";
+        $result_sel = $mysqli->query($query_sel);
+        if($result_sel->num_rows == 0){
+            $nombre_es = addslashes(trim($value->nombre_es));
+            $nombre_portugues = addslashes(trim($value->nombre_portugues));
+            $nombre_ingles = addslashes(trim($value->nombre_ingles));
+            $descripcion = addslashes(trim($value->descripcion));
+            $descripcion_por = addslashes(trim($value->descripcion_por));
+            $descripcion_ing = addslashes(trim($value->descripcion_ing));
+            $descripcion_corta_esp = addslashes(trim($value->descripcion_corta_esp));
+            $descripcion_corta_por = addslashes(trim($value->descripcion_corta_por));
+            $descripcion_corta_ing = addslashes(trim($value->descripcion_corta_ing));
+            $descripcion_venta_esp = addslashes(trim($value->descripcion_venta_esp));
+            $descripcion_venta_por = addslashes(trim($value->descripcion_venta_por));
+            $descripcion_venta_ing = addslashes(trim($value->descripcion_venta_ing));
+            $titulo_secundario_esp = addslashes(trim($value->titulo_secundario_esp));
+            $titulo_secundario_por = addslashes(trim($value->titulo_secundario_por));
+            $titulo_secundario_ing = addslashes(trim($value->titulo_secundario_ing));
+            $query_ins = "INSERT INTO cursos (cod_curso, nombre_es, nombre_portugues, nombre_ingles, horas, meses, anios, color, logo, descripcion, descripcion_por, descripcion_ing, descripcion_corta_esp, descripcion_corta_por, descripcion_corta_ing, aniopertenece, activo, descripcion_venta_esp, descripcion_venta_por, descripcion_venta_ing, titulo_secundario_esp, titulo_secundario_por, titulo_secundario_ing, codfranquicia, id_subcategoria, id_categoria, tags) VALUES ('{$value->codigo}', '{$nombre_es}','{$nombre_portugues}','{$nombre_ingles}','{$value->canthoras}','{$value->cantmeses}','{$value->cantanios}','{$value->color}','{$value->logo}','{$descripcion}','{$descripcion_por}','{$descripcion_ing}','{$descripcion_corta_esp}','{$descripcion_corta_por}','{$descripcion_corta_ing}','{$value->aniopertenece}','{$value->activo}','{$descripcion_venta_esp}','{$descripcion_venta_por}','{$descripcion_venta_ing}','{$titulo_secundario_esp}','{$titulo_secundario_por}','{$titulo_secundario_ing}','{$value->codfranquicia}','{$value->id_subcategoria}','{$value->id_categoria}','{$value->tags}')";
+            //echo $query_ins;
+            $result_ins = $mysqli->query($query_ins);
+            if(!$result_ins){
+                $message.= "<br/>Error - al insertar el curso {$value->nombre_es}<br/>";
+            }else{
+                $message.= "<br/>Correcto - Se inserto el curso {$value->nombre_es}";
+            }
+        }else{
+            $message.= "<br/>Error - Ya existe el curso {$value->nombre_es} con id {$value->codigo}<br/>";
         }
     }
     return $message;

@@ -292,7 +292,7 @@ if(isset($_GET['pais'])){
         	    data: { option : 'select_provincias', id_pais : $(this).val()  },
                     dataType: "json",
         	    success: function(data){
-                        changeSelectOptions("provincias_curso", data.options, 'provincia', 'id');
+                        changeSelectOptions("provincias_curso", data.options, 'nombre', 'id');
         	    }
         	});
             });

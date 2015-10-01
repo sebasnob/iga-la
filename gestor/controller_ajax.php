@@ -20,28 +20,28 @@ switch($_POST['option']){
     break;
     
     case "select_filiales":
-        if(isset($_POST['cod_curso']) && !empty($_POST["cod_curso"])){
-            $filiales = getFilialesCurso($mysqli, $_POST['cod_curso'], $_POST['id_pais'], $_POST['id_provincia']);
+        //if(isset($_POST['cod_curso']) && !empty($_POST["cod_curso"])){
+            $filiales = getFiliales($mysqli, $_POST['id_provincia']);
             foreach($filiales as $id=>$row){
                 //utf8_encode para que json_encode pueda trabajar con ñ o acentos
                 $filiales_2['options'][]=array_map('utf8_encode', $row);
             } 
             print(json_encode($filiales_2));
-        }
+        //}
     break;
     
     case "select_filiales_grupo":
-        if(isset($_POST['cod_curso']) && !empty($_POST["cod_curso"])){
+        //if(isset($_POST['cod_curso']) && !empty($_POST["cod_curso"])){
             $provincias = getProvincias($mysqli, $_POST['id_pais']);
             foreach ($provincias as $id_p=>$data_p){
-                $filiales = getFilialesCurso($mysqli, $_POST['cod_curso'], $_POST['id_pais'], $data_p['id']);
+                $filiales = getFiliales($mysqli, $data_p['id']);
                 foreach($filiales as $id=>$row){
                     //utf8_encode para que json_encode pueda trabajar con ñ o acentos
-                    $filiales_2[$data_p['provincia']][]=array_map('utf8_encode', $row);
+                    $filiales_2[$data_p['nombre']][]=array_map('utf8_encode', $row);
                 } 
             }
             print(json_encode($filiales_2));
-        }
+        //}
     break;
     
     case "get_datos_curso":
