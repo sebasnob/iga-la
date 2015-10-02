@@ -39,14 +39,16 @@ if(isset($_GET['pais'])){
         
         <title>Listado de Cursos - IGA</title>
         
-        <!-- Bootstrap core CSS -->
-        <link href="assets/css/bootstrap.css" rel="stylesheet">
-        <!--external css-->
-        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+ <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
         
-        <!-- Custom styles for this template -->
-        <link href="assets/css/style.css" rel="stylesheet">
-        <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link href="assets/css/table-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css"> 
         
         <link rel="stylesheet" type="text/css" media="screen" href="styles.php?id_curso=<?=$_GET['cod_curso']?>">
         
@@ -77,14 +79,18 @@ if(isset($_GET['pais'])){
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper site-min-height">
-                    <h3><i class="fa fa-angle-right"></i>Edicion del curso </h3>
-                    <p>Formulario para la edicion del curso. Las modifiaciones solo afectaran al curso, en la filial e idioma seleccionados.</p>
+                     <h3><i class="fa fa-angle-right"></i>Edición del curso</h3>
+                     <p>Formulario para la edicion del curso. Las modifiaciones solo afectaran al curso, en la filial e idioma seleccionados.</p>
                     <br/>
                     <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
                         <input type="hidden" name="id_curso" id="id_curso" value="<?=$_GET['cod_curso']?>" />
                         <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
                         <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
 
+
+                <div class="row mt">
+                   <div class="col-lg-12">
+                     <div class="form-panel">
                         <div class="form-group">
                             <label>Seleccione un Pais</label>
                             <select name="paises_curso" id="paises_curso" class="form-control">
@@ -122,9 +128,17 @@ if(isset($_GET['pais'])){
                                 ?>
                             </select>
                         </div>
-                        <br/>
-                        <div id="error_datos_curso"></div>
-                        <div id="datos_curso">
+                     </div><!-- /form-panel -->
+                   </div><!-- /col-lg-12 -->
+                </div><!-- /row -->   
+                       
+                        <p id="error_datos_curso" class="bg-danger"></p>
+              <div class="datos_curso">
+                <div class="row mt">
+                   <div class="col-lg-12">
+                     <div class="form-panel">
+                        
+                          <div id="datos_curso">
                             <!--<div class="row">
                                 <div id="selector_color" class="col-md-6 text-left" >
                                     <input type="color" id="select_color" value="<? //$curso['color']?>" />
@@ -133,50 +147,61 @@ if(isset($_GET['pais'])){
                                 </div>
                                 <div id="selector_color" class="col-md-6 text-right" > </div>
                             </div>-->
-                            <hr/>
-                            <div>
+                          
+                            <div class="form-group">
                                 <div id="sliderPreview">
                                     <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="" alt="">
                                 </div>
                             </div>
                             <input id="uploadSlider" type="file" name="imageSlider" class="img" />
-                            <hr/>
-                            <div>
-                                <div>
-                                    <h3>Duracion</h3>
-                                    <input type="text" id="titulo" name="titulo" style="width:350px" />
+                                <div class="form-group">
+                                   <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Duración:</b></h4>
+                                   <input type="text" id="titulo" name="titulo" style="width:350px" />
                                 </div>
-                                <hr/>
-                                <div>
-                                    <h3>Descripcion</h3>
-                                    <textarea name="descripcion" id="descripcion" cols="100" rows="10"></textarea>
+                               
+                                <div class="form-group">
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Descripción:</b></h4>
+                                   <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
                                 </div>
-                                <hr/>
-                                <div>
-                                    <h3>Plan de Estudio</h3>
-                                    <textarea name="plan_estudio" id="plan_estudio" cols="100" rows="10"></textarea>
+                                
+                               <div class="form-group">
+                                   <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Plan de Estudio:</b></h4>
+                                    <textarea name="plan_estudio" id="plan_estudio" class="form-control" rows="5"></textarea>
                                 </div>
-                                <hr/>
-                                <div id="materialesPreview">
-                                    <h3>Materiales</h3>
+                                
+                                <div id="materialesPreview" class="form-group">
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4>
                                     <img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="" />
                                 </div>
-                                <textarea name="materiales_txt" id="materiales_txt" cols="100" rows="10"></textarea>
+                                <textarea name="materiales_txt" id="materiales_txt" class="form-control" rows="5"></textarea>
                                 <input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
-                                <hr/>
+                               
 
-                                <div id="uniformesPreview">
-                                    <h3>Uniforme</h3>
-                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
+                                <div id="uniformesPreview" class="form-group">
+                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Uniforme:</b></h4>
+                                     <img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
                                 </div>
-                                <textarea name="uniformes_txt" id="uniformes_txt" cols="100" rows="10"></textarea>
+                                <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
                                 <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
-                            </div>    
-                            <hr/>
-                            <button id="confirm" class="btn btn-success">Cambiar</button>
+                           
+                           
+                           
+                         </div>
+                        
+                      </div><!-- /form-panel -->
+                   </div><!-- /col-lg-12 -->
+                  </div><!-- /row -->  
+                  </div>
+                  <div class="acciones">   
+                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
+                        <div class="row mt">
+                            <div class="col-lg-12">  
+                              <button id="confirm" class="btn btn-success">Guardar cambios</button>
                             <a id="preview" class="btn btn-default" href="preview.php?id_curso=<?=$_GET['id_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
-                            <button id="publicar" class="btn btn-primary">Publicar</button>
-                        </div>
+                           </div><!-- /form-panel -->
+                         </div><!-- /col-lg-12 -->
+                       </div><!-- /row -->     
+                    </div>
                     </form>
                 </section>
             </section><!-- /MAIN CONTENT -->
@@ -295,6 +320,7 @@ if(isset($_GET['pais'])){
                         changeSelectOptions("provincias_curso", data.options, 'nombre', 'id');
         	    }
         	});
+
             });
             
             $("#provincias_curso").change(function(){
@@ -346,13 +372,15 @@ if(isset($_GET['pais'])){
                             $('#error_datos_curso').hide();
                             $('#imagePreview').attr("src", data.url_cabecera);
                             $('#datos_curso').show();
+                            $('.datos_curso').css('display','block');
+                            $('.acciones').css('display','block');
                         }else{
                             $('#datos_curso').hide();
                             $('#error_datos_curso').html(data);
                             $('#error_datos_curso').show();
                         }
         	    }
-        	});
+        	  });
             });
             
         </script>
