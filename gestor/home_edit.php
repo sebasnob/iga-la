@@ -187,7 +187,7 @@ $datos_home = getDatosHome($mysqli);
                                 
                                 <button id="confirm" class="btn btn-success">Guardar cambios </button>
                                 <a id="preview" class="btn btn-default" href="preview_home.php" target="_blank">Vista previa</a>
-                                <button id="publicar" class="btn btn-primary">Publicar contenido</button>
+                                
                             
                         </div>
                       </div>

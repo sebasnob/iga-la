@@ -97,15 +97,15 @@ if(isset($_GET['pais'])){
                                         ?>
                                     </select>
                                  </div>
-                                 <div class="panel-body">
-                                    <div class="task-content">
+                                
+                                  <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Filiales:</label>
                                         <div class="filiales">
-                                            <ul class="filial_items task-list">
+                                            <ul class="filial_items">
                                             </ul>
                                         </div>
                                    </div>      
-                                 </div>
+                                 
                                  <br><br>
                                  <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">Seleccione un idioma:</label>
@@ -176,9 +176,9 @@ if(isset($_GET['pais'])){
                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
                         <div class="row mt">
                             <div class="col-lg-12">
-                      <button id="confirm" class="btn btn-success">Cambiar</button>
+                      <button id="confirm" class="btn btn-success">Guardar cambios</button>
                        <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
-                     <button id="publicar" class="btn btn-primary">Publicar</button>
+                    
                           </div><!-- /col-lg-12 -->
                  </div><!-- /row --> 
                     </form>
@@ -282,9 +282,9 @@ if(isset($_GET['pais'])){
         	    success: function(data){
                         $.each(data, function(id, value){
                             var id_n = id.replace(/\s+/g, '');
-                            $('.filial_items').append("<li id='id-"+id_n+"'><div class='task-checkbox'><input type='checkbox' name='prov' id='"+id_n+"' /> "+id+"</div></li>");
+                            $('.filial_items').append("<li id='id-"+id_n+"'><input type='checkbox' name='prov' id='"+id_n+"' /> "+id+"</li>");
                             $.each(value, function(id_v, value_v){
-                                $('#id-'+id_n).append("<ul class='task-list'><li><div class='task-title'><input type='checkbox' id='"+value_v.id+"' name='filial[]' class='"+id_n+"'/><span class='task-title-sp'>"+value_v.nombre+"</span></div></li></ul>");
+                                $('#id-'+id_n).append("<ul><li><input type='checkbox' id='"+value_v.id+"' name='filial[]' class='"+id_n+"'/> "+value_v.nombre+"</li></ul>");
                             });
                             
                             $('#'+id_n).click(function(){
@@ -296,7 +296,7 @@ if(isset($_GET['pais'])){
                             });
                             
                         });
-                        
+                        $('.filial_items').css('display','block');
         	    }
         	});
             });
