@@ -171,7 +171,7 @@ if(isset($_GET['pais'])){
                                 
                                 <div id="materialesPreview" class="form-group">
                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4>
-                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['img_materiales']?>" alt="" />
+                                    <img class="avatar img-thumbnail" src="" alt="" />
                                 </div>
                                 <textarea name="materiales_txt" id="materiales_txt" class="form-control" rows="5"></textarea>
                                 <input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
@@ -179,7 +179,7 @@ if(isset($_GET['pais'])){
 
                                 <div id="uniformesPreview" class="form-group">
                                      <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Uniforme:</b></h4>
-                                     <img class="avatar img-thumbnail" src="<?=$datos_curso['img_uniforme']?>" alt="">
+                                     <img class="avatar img-thumbnail" src="" alt="">
                                 </div>
                                 <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
                                 <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
