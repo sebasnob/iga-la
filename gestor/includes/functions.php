@@ -147,9 +147,13 @@ function getPaises($mysqli){
     return $paises;
 }
 
-function getIdiomasPais($mysqli, $id_pais){
+function getIdiomasPais($mysqli, $id_pais=''){
+    $cond='';
+    if(isset($id_pais) && $id_pais != ''){
+        $cond = ' WHERE id_pais='.$id_pais;
+    }
     $idiomas_pais = array();
-    $result = $mysqli->query("SELECT i.id, i.idioma FROM pais_idioma as pi INNER JOIN idiomas as i ON i.id=pi.id_idioma WHERE id_pais=".$id_pais);
+    $result = $mysqli->query("SELECT i.id, i.idioma FROM pais_idioma as pi INNER JOIN idiomas as i ON i.id=pi.id_idioma {$cond}");
     while($idioma = $result->fetch_assoc()){
 	$idiomas_pais[] = array('id'=>$idioma['id'],'idioma'=>$idioma['idioma']);
     }
@@ -555,6 +559,35 @@ function ws_insertCursos($mysqli){
             $titulo_secundario_esp = addslashes(trim($value->titulo_secundario_esp));
             $titulo_secundario_por = addslashes(trim($value->titulo_secundario_por));
             $titulo_secundario_ing = addslashes(trim($value->titulo_secundario_ing));
+            $query_ins = "INSERT INTO cursos (cod_curso, nombre_es, nombre_portugues, nombre_ingles, horas, meses, anios, color, logo, descripcion, descripcion_por, descripcion_ing, descripcion_corta_esp, descripcion_corta_por, descripcion_corta_ing, aniopertenece, activo, descripcion_venta_esp, descripcion_venta_por, descripcion_venta_ing, titulo_secundario_esp, titulo_secundario_por, titulo_secundario_ing, codfranquicia, id_subcategoria, id_categoria, tags) VALUES ('{$value->codigo}', '{$nombre_es}','{$nombre_portugues}','{$nombre_ingles}','{$value->canthoras}','{$value->cantmeses}','{$value->cantanios}','{$value->color}','{$value->logo}','{$descripcion}','{$descripcion_por}','{$descripcion_ing}','{$descripcion_corta_esp}','{$descripcion_corta_por}','{$descripcion_corta_ing}','{$value->aniopertenece}','{$value->activo}','{$descripcion_venta_esp}','{$descripcion_venta_por}','{$descripcion_venta_ing}','{$titulo_secundario_esp}','{$titulo_secundario_por}','{$titulo_secundario_ing}','{$value->codfranquicia}','{$value->id_subcategoria}','{$value->id_categoria}','{$value->tags}')";
+            //echo $query_ins;
+            $result_ins = $mysqli->query($query_ins);
+            if(!$result_ins){
+                $message.= "<br/>Error - al insertar el curso {$value->nombre_es}<br/>";
+            }else{
+                $message.= "<br/>Correcto - Se inserto el curso {$value->nombre_es}";
+            }
+        }else{
+            $message.= "<br/>Error - Ya existe el curso {$value->nombre_es} con id {$value->codigo}<br/>";
+        }
+    }
+    return $message;
+}
+
+function ws_insertDatosCursos($mysqli){
+    $message = '';
+    
+    $array_cursos = getCursos($mysqli);
+
+    foreach ($array_cursos as $id_cursos=>$value_cursos){
+        
+        $array_paises_idiomas = getIdiomasPais($mysqli);
+        
+        foreach($array_paises_idiomas as $id_paises=>$value_paises){
+            
+            
+        }
+        if($result_sel->num_rows == 0){
             $query_ins = "INSERT INTO cursos (cod_curso, nombre_es, nombre_portugues, nombre_ingles, horas, meses, anios, color, logo, descripcion, descripcion_por, descripcion_ing, descripcion_corta_esp, descripcion_corta_por, descripcion_corta_ing, aniopertenece, activo, descripcion_venta_esp, descripcion_venta_por, descripcion_venta_ing, titulo_secundario_esp, titulo_secundario_por, titulo_secundario_ing, codfranquicia, id_subcategoria, id_categoria, tags) VALUES ('{$value->codigo}', '{$nombre_es}','{$nombre_portugues}','{$nombre_ingles}','{$value->canthoras}','{$value->cantmeses}','{$value->cantanios}','{$value->color}','{$value->logo}','{$descripcion}','{$descripcion_por}','{$descripcion_ing}','{$descripcion_corta_esp}','{$descripcion_corta_por}','{$descripcion_corta_ing}','{$value->aniopertenece}','{$value->activo}','{$descripcion_venta_esp}','{$descripcion_venta_por}','{$descripcion_venta_ing}','{$titulo_secundario_esp}','{$titulo_secundario_por}','{$titulo_secundario_ing}','{$value->codfranquicia}','{$value->id_subcategoria}','{$value->id_categoria}','{$value->tags}')";
             //echo $query_ins;
             $result_ins = $mysqli->query($query_ins);
