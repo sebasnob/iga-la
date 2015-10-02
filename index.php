@@ -153,7 +153,7 @@ $datos_home = getDatosHome($mysqli);
                                         </div>
                                     </div> 
                                 </div>
-                                <div class="container-fluid">
+                                <div class="container-fluid" id="grilla">
                                     <div class="row">
                                         <?php foreach ($gridArray as $imgGrid){?>
                                         <div class="col-md-<?php echo $imgGrid['cols']?>">
@@ -181,7 +181,8 @@ $datos_home = getDatosHome($mysqli);
                                 </div> <!--/#container-fluid-porfolios-->
           
                                 <div id="portfolio-single-wrap">
-                                    <div id="single-portfolio" class="container collapse">
+                                    <?php foreach ($gridArray as $imgGrid){?>
+                                    <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <img class="img-responsive animated fadeInDown" src="images/slider/4.jpg" alt="">
@@ -212,10 +213,11 @@ $datos_home = getDatosHome($mysqli);
                                                 </div>
                               
                                             </div>
-                                            <a class="close-folio-item" href="#single-portfolio" data-toggle="collapse"><i class="fa fa-times"></i></a>
+                                            <a id="cerrarCurso" class="close-folio-item" ><i class="fa fa-times"></i></a>
                    
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
            
                             </section><!--/#portfolio-->

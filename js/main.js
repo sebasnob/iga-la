@@ -163,6 +163,16 @@ jQuery(function($) {
 
 function descripcionCurso(id_curso)
 {
-    alert(id_curso);
+    $('.curso').hide();
+    $('.curso' + id_curso).show();
+    
+    var body = $("html, body");
+    body.stop().animate({scrollTop:$('.curso' + id_curso).position().top - 35}, 'slow');
 }
 
+$('#cerrarCurso').click(function()
+{
+    event.preventDefault();
+    var body = $("html, body");
+    body.stop().animate({scrollTop:$('#grilla').position().top}, '500', 'swing', function() {$('.curso').hide();});
+});
