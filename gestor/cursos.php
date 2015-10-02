@@ -85,9 +85,9 @@ if(isset($_GET['pais'])){
                         <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
                         <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
 
-                        <div>
+                        <div class="form-group">
                             <label>Seleccione un Pais</label>
-                            <select name="paises_curso" id="paises_curso">
+                            <select name="paises_curso" id="paises_curso" class="form-control">
                                 <option value="0">- Seleccione -</option>
                                 <?php
                                     $paises_curso = getCursoPais($mysqli, $_GET['cod_curso']);
@@ -100,17 +100,17 @@ if(isset($_GET['pais'])){
                             </select>
                             &nbsp;
                             <label>Provincia</label>
-                            <select name="provincias_curso" id="provincias_curso">
+                            <select name="provincias_curso" id="provincias_curso" class="form-control">
                                 <option value="0">- Seleccione -</option>
                             </select>
                             &nbsp;
                             <label>Filial</label>
-                            <select name="filiales_curso" id="filiales_curso">
+                            <select name="filiales_curso" id="filiales_curso" class="form-control">
                                 <option value="0">- Seleccione -</option>
                             </select>
                             &nbsp;
                             <label>Idioma</label>
-                            <select name="idioma_curso" id="idioma_curso">
+                            <select name="idioma_curso" id="idioma_curso" class="form-control">
                                 <option value="0">- Seleccione -</option>
                                 <?php
                                     $idiomas = getIdiomas($mysqli);

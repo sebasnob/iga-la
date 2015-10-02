@@ -39,14 +39,16 @@ if(isset($_GET['pais'])){
         
         <title>Listado de Cursos - IGA</title>
         
-        <!-- Bootstrap core CSS -->
-        <link href="assets/css/bootstrap.css" rel="stylesheet">
-        <!--external css-->
-        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+   <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
         
-        <!-- Custom styles for this template -->
-        <link href="assets/css/style.css" rel="stylesheet">
-        <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link href="assets/css/table-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">  
         
         <link rel="stylesheet" type="text/css" media="screen" href="styles.php?id_curso=<?=$_GET['cod_curso']?>">
         
@@ -78,86 +80,107 @@ if(isset($_GET['pais'])){
                         <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
                         <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
 
-                        <div>
-                            <label>Seleccione un Pais</label>
-                            <select name="paises_curso" id="paises_curso">
-                                <option value="0">- Seleccione -</option>
-                                <?php
-                                    $paises_curso = getCursoPais($mysqli, $_GET['cod_curso']);
-                                    foreach($paises_curso as $i=>$d){
-                                ?>
-                                <option value="<?=$d['id']?>"><?=$d['pais']?></option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
-                            &nbsp;
-                            <label>Filiales</label>
-                            <div class="filiales">
-                                <ul class="filial_items">
-                                </ul>
-                            </div>
-                            &nbsp;
-                            <label>Idioma</label>
-                            <select name="idioma_curso" id="idioma_curso">
-                                <option value="0">- Seleccione -</option>
-                                <?php
-                                    $idiomas = getIdiomas($mysqli);
-                                    foreach($idiomas as $i=>$d){
-                                ?>
-                                <option value="<?=$d['id']?>"><?=$d['idioma']?></option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <br/>
-                        <div id="datos_curso">
-                           <hr/>
-                            <div>
+                        <div class="row mt">
+                            <div class="col-lg-12">
+                             <div class="form-panel">
+                                  <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">Seleccione un País:</label>
+                                     <select name="paises_curso" id="paises_curso" class="form-control input-sm">
+                                        <option value="0">- Seleccione -</option>
+                                        <?php
+                                            $paises_curso = getCursoPais($mysqli, $_GET['cod_curso']);
+                                            foreach($paises_curso as $i=>$d){
+                                        ?>
+                                        <option value="<?=$d['id']?>"><?=$d['pais']?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                                 </div>
+                                 <div class="panel-body">
+                                    <div class="task-content">
+                                        <label class="col-sm-2 col-sm-2 control-label">Filiales:</label>
+                                        <div class="filiales">
+                                            <ul class="filial_items task-list">
+                                            </ul>
+                                        </div>
+                                   </div>      
+                                 </div>
+                                 <br><br>
+                                 <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">Seleccione un idioma:</label>
+                                    <select name="idioma_curso" id="idioma_curso" class="form-control input-sm ">
+                                        <option value="0">- Seleccione -</option>
+                                        <?php
+                                            $idiomas = getIdiomas($mysqli);
+                                            foreach($idiomas as $i=>$d){
+                                        ?>
+                                        <option value="<?=$d['id']?>"><?=$d['idioma']?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                               </div>
+                           </div><!-- /form-panel -->
+                         </div><!-- /col-lg-12 -->
+                     </div><!-- /row --> 
+                        
+                      <div class="row mt">
+                            <div class="col-lg-12">
+                             <div class="form-panel">
+                           <div id="datos_curso">
+                           
+                             <div class="form-group">
                                 <div id="sliderPreview">
-                                    <h3>Seleccione la nueva imagen de cabecera</h3>
-                                    <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="" alt="">
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Seleccione la nueva imagen de cabecera:</b></h4> 
+                                   <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="" alt="">
                                 </div>
+                                <input id="uploadSlider" type="file" name="imageSlider" class="img"/>
                             </div>
-                            <input id="uploadSlider" type="file" name="imageSlider" class="img" />
-                            <hr/>
-                            <div>
-                                <div>
-                                    <h3>Duracion</h3>
-                                    <input type="text" id="titulo" name="titulo" style="width:350px" />
+                           
+                                <div class="form-group">
+                                   <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Duración:</b></h4> 
+                                    <input type="text" id="titulo" name="titulo" class="form-control" />
                                 </div>
-                                <hr/>
-                                <div>
-                                    <h3>Descripcion</h3>
-                                    <textarea name="descripcion" id="descripcion" cols="100" rows="10"></textarea>
+                                
+                                <div class="form-group">
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Descripción:</b></h4> 
+                                    <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
                                 </div>
-                                <hr/>
-                                <div>
-                                    <h3>Plan de Estudio</h3>
-                                    <textarea name="plan_estudio" id="plan_estudio" cols="100" rows="10"></textarea>
+                               
+                                 <div class="form-group">
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Plan de Estudio:</b></h4> 
+                                   
+                                    <textarea name="plan_estudio" id="plan_estudio" class="form-control" rows="5"></textarea>
                                 </div>
-                                <hr/>
-                                <div id="materialesPreview">
-                                    <h3>Materiales</h3>
+                               
+                                <div id="materialesPreview" class="form-group">
+                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4> 
                                     <img class="avatar img-thumbnail" src="" alt="" />
                                 </div>
-                                <textarea name="materiales_txt" id="materiales_txt" cols="100" rows="10"></textarea>
+                                <textarea name="materiales_txt" id="materiales_txt" class="form-control" rows="5"></textarea>
                                 <input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
-                                <hr/>
+                               
 
-                                <div id="uniformesPreview">
-                                    <h3>Uniforme</h3>
+                                <div id="uniformesPreview" class="form-group">
+                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Uniforme:</b></h4> 
                                     <img class="avatar img-thumbnail" src="" alt="">
                                 </div>
-                                <textarea name="uniformes_txt" id="uniformes_txt" cols="100" rows="10"></textarea>
+                                <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
                                 <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
                             </div>    
-                            <hr/>
-                            <button id="confirm" class="btn btn-success">Cambiar</button>
-                            <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
-                            <button id="publicar" class="btn btn-primary">Publicar</button>
-                        </div>
+                             
+                        </div><!-- /form-panel -->
+                     </div><!-- /col-lg-12 -->
+                 </div><!-- /row --> 
+                   <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
+                        <div class="row mt">
+                            <div class="col-lg-12">
+                      <button id="confirm" class="btn btn-success">Cambiar</button>
+                       <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
+                     <button id="publicar" class="btn btn-primary">Publicar</button>
+                          </div><!-- /col-lg-12 -->
+                 </div><!-- /row --> 
                     </form>
                 </section>
             </section><!-- /MAIN CONTENT -->
@@ -259,9 +282,9 @@ if(isset($_GET['pais'])){
         	    success: function(data){
                         $.each(data, function(id, value){
                             var id_n = id.replace(/\s+/g, '');
-                            $('.filial_items').append("<li id='id-"+id_n+"'><input type='checkbox' name='prov' id='"+id_n+"' /> "+id+"</li>");
+                            $('.filial_items').append("<li id='id-"+id_n+"'><div class='task-checkbox'><input type='checkbox' name='prov' id='"+id_n+"' /> "+id+"</div></li>");
                             $.each(value, function(id_v, value_v){
-                                $('#id-'+id_n).append("<ul><li><input type='checkbox' id='"+value_v.id+"' name='filial[]' class='"+id_n+"'/> "+value_v.nombre+"</li></ul>");
+                                $('#id-'+id_n).append("<ul class='task-list'><li><div class='task-title'><input type='checkbox' id='"+value_v.id+"' name='filial[]' class='"+id_n+"'/><span class='task-title-sp'>"+value_v.nombre+"</span></div></li></ul>");
                             });
                             
                             $('#'+id_n).click(function(){

@@ -504,12 +504,12 @@ $datos_home = getDatosHome($mysqli);
                                         </div>
                                         <div class="social-icons">
                                             <ul>
-                                                <li><a class="envelope" href="#"><i class="fa fa-envelope"></i></a></li>
-                                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li> 
-                                                <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                                                <li><a class="tumblr" href="#"><i class="fa fa-tumblr-square"></i></a></li>
+                                               <!-- <li><a class="envelope" href="#"><i class="fa fa-envelope"></i></a></li>-->
+                                                <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li> 
+                                               <!-- <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>-->
+                                                <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                               <!-- <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>-->
+                                               <!-- <li><a class="tumblr" href="#"><i class="fa fa-tumblr-square"></i></a></li>-->
                                             </ul>
                                         </div>
                                     </div>
