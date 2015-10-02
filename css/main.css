@@ -269,6 +269,7 @@ section {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
+
   /*padding-top: 35px;
   padding-bottom: 35px;*/
 }
@@ -294,8 +295,14 @@ section {
   margin-top: -33px;
 }
 
+.navbar-left{
+  
+  margin-top: 10px;
+}
+
 .navbar-right{
   margin-right: 15px;
+ 
 }
 
 .dropdown-menu{

@@ -71,13 +71,13 @@ if($logged == 'out'){
                                       <li>
                                            
                                           <div class="task-title">
-                                              <span class="task-title-sp"><a href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><?=$j['cod_curso']?></a>&nbsp;&nbsp;<a href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><?=$j['nombre_es']?></a></span>
+                                              <span class="task-title-sp"><?=$j['cod_curso']?>&nbsp;&nbsp;<?=$j['nombre_es']?></span>
                                               <!--<span class="badge bg-theme">Nuevo</span>-->
                                               <div class="pull-right">
-                                                  <a class="btn btn-success btn-xs"><i class=" fa fa-check"></i></a>
+                                                  
                                                   <a class="btn btn-primary btn-xs" href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-pencil"></i></a>
                                                   <a class="btn btn-default btn-xs" href="cursos_grupo.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-th-list"></i></a>
-                                                  <a class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+                                                 
                                               </div>
                                           </div>
                                           
