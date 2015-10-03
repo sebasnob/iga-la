@@ -75,12 +75,12 @@ function getCursos($mysqli, $cod_curso = false)
     
     if($cod_curso)
     {
-        $cond = ' WHERE id = ' . $cod_curso;
+        $cond = ' WHERE cod_curso = ' . $cod_curso;
     }
     
     $resultado = $mysqli->query("SELECT * FROM cursos $cond");
     $cursos = array();
-    
+
     while($respuesta = $resultado->fetch_assoc())
     {
         $cursos[] = $respuesta;

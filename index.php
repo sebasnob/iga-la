@@ -197,9 +197,7 @@ $datos_home = getDatosHome($mysqli);
             
             <div id="portfolio-single-wrap">
                 <?php foreach ($gridArray as $imgGrid){
-                    
-                    $curso = getCursos($mysqli, $imgGrid['cod_curso']);
-                 
+                    $curso = getCursos($mysqli, $imgGrid['id_curso']);
                 ?>
                 
                 <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
