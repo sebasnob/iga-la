@@ -1,24 +1,22 @@
 <?php
 include_once 'psl-config.php';
  
-function getDatosCurso($mysqli, $cod_curso, $id_pais='', $id_idioma='', $id_filial=''){
-    $query1 = "SELECT cpif.id FROM `curso_pais_idioma_filial` as cpif 
-                INNER JOIN pais_idioma as pi on pi.id=cpif.id_pais_idioma 
+function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
+    $query1 = "SELECT cfi.id, cfi.estado FROM curso_filial_idioma as cfi 
             WHERE 
-                cpif.cod_curso=".$cod_curso." 
+                cfi.cod_curso=".$cod_curso." 
             AND 
-                cpif.id_filial=".$id_filial." 
+                cfi.id_filial=".$id_filial." 
             AND 
-                pi.id_pais=".$id_pais." 
-            AND 
-                pi.id_idioma=".$id_idioma;
+                cfi.id_idioma=".$id_idioma;
     $qry_cpi = $mysqli->query($query1);
     $res_cpif = $qry_cpi->fetch_assoc();
     
     if($qry_cpi->num_rows > 0){
-        $query2 = "select * from curso_datos WHERE id_cpif=".$res_cpif['id'];
+        $query2 = "select * from curso_datos WHERE id_cfi=".$res_cpif['id'];
         $qry_datos = $mysqli->query($query2);
         $datos_curso = $qry_datos->fetch_assoc();
+        $datos_curso['estado'] = $res_cpif['estado'];
         $qry_datos->free();
         
         return $datos_curso;
@@ -39,9 +37,9 @@ function getDatosCurso($mysqli, $cod_curso, $id_pais='', $id_idioma='', $id_fili
 function getIdiomas($mysqli, $id_idioma=''){
     $cond='';
     if(isset($id_idioma) && $id_idioma != ''){
-        $cond=' WHERE id_idioma='.$id_idioma;
+        $cond=' WHERE id='.$id_idioma;
     }
-    $resultado = $mysqli->query("SELECT id, idioma, cod_idioma FROM idiomas $cond");
+    $resultado = $mysqli->query("SELECT id, idioma, cod_idioma FROM idiomas {$cond}");
     $idiomas = array();
     while($respuesta = $resultado->fetch_assoc()){
         $idiomas[] = $respuesta;
@@ -68,16 +66,15 @@ function getCurso($mysqli, $id_curso){
     return $respuesta;
 }*/
 
-function getCursos($mysqli, $cod_curso = false)
+function getCursos($mysqli, $cod_curso = '')
 {
     $cond = '';
     
-    if($cod_curso)
-    {
-        $cond = ' WHERE id = ' . $cod_curso;
+    if(isset($cod_curso) && $cod_curso != ''){
+        $cond = ' WHERE cod_curso = '.$cod_curso;
     }
     
-    $resultado = $mysqli->query("SELECT * FROM cursos $cond");
+    $resultado = $mysqli->query("SELECT * FROM cursos {$cond}");
     $cursos = array();
     
     while($respuesta = $resultado->fetch_assoc())
@@ -574,30 +571,71 @@ function ws_insertCursos($mysqli){
     return $message;
 }
 
+
+function ws_insertFilialIdioma($mysqli){
+    $message = '';
+    $array_cursos = getCursos($mysqli);
+    foreach ($array_cursos as $id_cursos=>$value_cursos){
+	$array_fiales = getFiliales($mysqli);
+	foreach($array_fiales as $id_filial=>$value_filial){
+	    $array_idiomas = getIdiomas($mysqli);
+	    foreach($array_idiomas as $id_idioma=>$value_idioma){
+		$query_sel = "SELECT id  FROM curso_filial_idioma WHERE cod_curso='{$value_cursos['cod_curso']}' AND id_filial='{$value_filial['id']}' AND id_idioma='{$value_idioma['id']}'";
+		$result_sel = $mysqli->query($query_sel);
+		if($result_sel->num_rows == 0){
+		    $query_ins = "INSERT INTO curso_filial_idioma SET cod_curso='{$value_cursos['cod_curso']}',id_filial='{$value_filial['id']}',id_idioma='{$value_idioma['id']}',estado=1";
+		    $result_ins = $mysqli->query($query_ins);
+		    if(!$result_ins){
+			$message.= "<br/>Error - al insertar el registro Curso {$value_cursos['nombre_es']} | {$value_filial['nombre']} | {$value_idioma['idioma']}<br/>";
+		    }else{
+			$message.= "<br/>Correcto - Se inserto el curso {$value_cursos['nombre_es']} <br/>";
+		    }
+		}else{
+		    $message .= "Ya existe el curso {$value_cursos['nombre_es']} en la filial {$value_filial['nombre']} para el idioma {$value_idioma['idioma']} <br/>";
+		}
+	    }
+	}
+    }
+    return $message;
+}
+
+
 function ws_insertDatosCursos($mysqli){
     $message = '';
-    
-    $array_cursos = getCursos($mysqli);
-
-    foreach ($array_cursos as $id_cursos=>$value_cursos){
-        
-        $array_paises_idiomas = getIdiomasPais($mysqli);
-        
-        foreach($array_paises_idiomas as $id_paises=>$value_paises){
-            
-            
-        }
-        if($result_sel->num_rows == 0){
-            $query_ins = "INSERT INTO cursos (cod_curso, nombre_es, nombre_portugues, nombre_ingles, horas, meses, anios, color, logo, descripcion, descripcion_por, descripcion_ing, descripcion_corta_esp, descripcion_corta_por, descripcion_corta_ing, aniopertenece, activo, descripcion_venta_esp, descripcion_venta_por, descripcion_venta_ing, titulo_secundario_esp, titulo_secundario_por, titulo_secundario_ing, codfranquicia, id_subcategoria, id_categoria, tags) VALUES ('{$value->codigo}', '{$nombre_es}','{$nombre_portugues}','{$nombre_ingles}','{$value->canthoras}','{$value->cantmeses}','{$value->cantanios}','{$value->color}','{$value->logo}','{$descripcion}','{$descripcion_por}','{$descripcion_ing}','{$descripcion_corta_esp}','{$descripcion_corta_por}','{$descripcion_corta_ing}','{$value->aniopertenece}','{$value->activo}','{$descripcion_venta_esp}','{$descripcion_venta_por}','{$descripcion_venta_ing}','{$titulo_secundario_esp}','{$titulo_secundario_por}','{$titulo_secundario_ing}','{$value->codfranquicia}','{$value->id_subcategoria}','{$value->id_categoria}','{$value->tags}')";
-            //echo $query_ins;
+    $query = 'SELECT id, cod_curso, id_filial, id_idioma, estado FROM curso_filial_idioma';
+    $result_sel = $mysqli->query($query);
+    while($cfi = $result_sel->fetch_assoc()){
+        $curso = getCursos($mysqli, $cfi['cod_curso']);
+        $result = $mysqli->query("SELECT id FROM curso_datos WHERE id_cfi=".$cfi['id']);
+        if($result->num_rows == 0){
+    	    switch($cfi['id_idioma']){
+    		//Ingles
+    		case "2":
+    		    $nombre = addslashes(trim($curso[0]['nombre_ingles']));
+    		    $descripcion = addslashes(trim($curso[0]['descripcion_ing']));
+    		break;
+    		
+    		//Portuges
+    		case "3":
+    		    $nombre = addslashes(trim($curso[0]['nombre_portugues']));
+    		    $descripcion = addslashes(trim($curso[0]['descripcion_por']));
+    		break;
+    		
+    		//Español
+    		default:
+    		     $nombre = addslashes(trim($curso[0]['nombre_es']));
+    		     $descripcion = addslashes(trim($curso[0]['descripcion']));
+    		break;
+    	    }
+            $query_ins = "INSERT INTO curso_datos SET id_cfi='{$cfi['id']}', nombre='{$nombre}', descripcion='{$descripcion}', horas='{$curso[0]['horas']}', meses='{$curso[0]['meses']}', anios='{$curso[0]['anios']}'";
             $result_ins = $mysqli->query($query_ins);
             if(!$result_ins){
-                $message.= "<br/>Error - al insertar el curso {$value->nombre_es}<br/>";
+                $message.= "<br/>Error - al insertar {$cfi['id']}<br/>";
             }else{
-                $message.= "<br/>Correcto - Se inserto el curso {$value->nombre_es}";
+                $message.= "<br/>Correcto - Se inserto {$cfi['id']}";
             }
         }else{
-            $message.= "<br/>Error - Ya existe el curso {$value->nombre_es} con id {$value->codigo}<br/>";
+            $message.= "<br/>Error - Ya existe {$cfi['id']}<br/>";
         }
     }
     return $message;

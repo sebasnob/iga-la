@@ -4,6 +4,113 @@ include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 include_once 'includes/resizeImage.php';
 
+if(isset($_POST['edicion_curso_grupo'])){
+    //##### MODIFICACION DE SLIDER #####//
+    if(isset($_FILES['imageSlider']['name']) && $_FILES['imageSlider']['name'] != ''){
+        if(!$_FILES['imageSlider']['error']){
+            $filiales = $_POST['filial'];
+            foreach($filiales as $id=>$value){
+
+                if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/')){
+                    mkdir('../images/slider/'.$_POST['cod_curso'].'/');
+                }
+                
+                if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/')){
+                    mkdir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/');
+                }
+                
+                $idioma = getIdiomas($mysqli, $_POST['idioma_curso']);
+                if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/')){
+                    mkdir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/');
+                }
+                
+                $ruta_slider = '../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/';
+                
+                $ext = getExtension($_FILES['imageSlider']['name']);
+
+                $new_file_name = "slider-".$_POST['cod_curso'].".".$ext;
+                
+                if(file_exists($ruta_slider.$new_file_name)){
+                    unlink($ruta_slider.$new_file_name);
+                }
+
+                $exito = move_uploaded_file($_FILES['imageSlider']['tmp_name'], $ruta_slider.$new_file_name);
+
+                if($exito){
+                        $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['paises_curso']}'";
+                        $result_sel = $mysqli->query($query_sel);
+                        $cfi = $result_sel->fetch_assoc();
+                        
+                        $query = "UPDATE curso_datos SET url_cabecera='".$ruta_slider.$new_file_name."' WHERE id_cfi='{$cfi['id']}'";
+echo $cfi['id'];                        
+                        $result = $mysqli->query($query);
+                        if($result){
+                                $message = "<br/>Imagen modificada correctamente.<br/>";
+                        }
+                }else{
+                        $message = "Hubo un error al subir la imagen";
+                }
+            }
+        }
+    }
+    //##### FIN MODIFICACION DE SLIDER #####//
+    
+    
+    //##### INICIO MODIFICACION DE IMAGEN DE MATERIALES #####//
+    if(isset($_FILES['imageMateriales']['name']) && $_FILES['imageMateriales']['name'] != ''){
+        if(!$_FILES['imageMateriales']['error']){
+            $filiales = $_POST['filial'];
+            foreach($filiales as $id=>$value){
+
+                if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/')){
+                    mkdir('../images/materiales/'.$_POST['cod_curso'].'/');
+                }
+                
+                if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/')){
+                    mkdir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/');
+                }
+                
+                $idioma = getIdiomas($mysqli, $_POST['idioma_curso']);
+                if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/')){
+                    mkdir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/');
+                }
+                
+                $ruta_materiales = '../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/';
+                
+                $ext = getExtension($_FILES['imageMateriales']['name']);
+
+                $new_file_name = "materiales.".$ext;
+                
+                if(file_exists($ruta_materiales.$new_file_name)){
+                    unlink($ruta_materiales.$new_file_name);
+                }
+
+                $exito = move_uploaded_file($_FILES['imageMateriales']['tmp_name'], $ruta_materiales.$new_file_name);
+
+                if($exito){
+                        $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['paises_curso']}'";
+                        $result_sel = $mysqli->query($query_sel);
+                        $cfi = $result_sel->fetch_assoc();
+                        
+                        $query = "UPDATE curso_datos SET url_material='".$ruta_materiales.$new_file_name."' WHERE id_cfi='{$cfi['id']}'";
+echo $cfi['id'];                        
+                        $result = $mysqli->query($query);
+                        if($result){
+                                $message = "<br/>Imagen modificada correctamente.<br/>";
+                        }
+                }else{
+                        $message = "Hubo un error al subir la imagen";
+                }
+            }
+        }
+    }
+    //###### FIN MODIFICACION DE IMAGEN DE MATERIALES #####//
+    
+    
+    
+    
+}
+
 if(isset($_POST['edicion_curso'])){
 
     $datos_curso = getDatos($mysqli, $_POST['id_curso'],$_POST['idioma']);

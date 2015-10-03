@@ -45,7 +45,7 @@ switch($_POST['option']){
     break;
     
     case "get_datos_curso":
-        $datos_curso = getDatosCurso($mysqli, $_POST['cod_curso'], $_POST['id_pais'], $_POST['id_idioma'], $_POST['id_filial']);
+        $datos_curso = getDatosCurso($mysqli, $_POST['cod_curso'], $_POST['id_idioma'], $_POST['id_filial']);
         if(is_array($datos_curso)){
             $datos_curso = array_map('utf8_encode', $datos_curso);
         }
@@ -56,4 +56,3 @@ switch($_POST['option']){
 }
 
 ?>
-

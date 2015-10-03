@@ -82,10 +82,7 @@ if(isset($_GET['pais'])){
                      <h3><i class="fa fa-angle-right"></i>Edición del curso</h3>
                      <p>Formulario para la edicion del curso. Las modifiaciones solo afectaran al curso, en la filial e idioma seleccionados.</p>
                     <br/>
-                    <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
-                        <input type="hidden" name="id_curso" id="id_curso" value="<?=$_GET['cod_curso']?>" />
-                        <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
-                        <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
+                    
 
 
                 <div class="row mt">
@@ -96,7 +93,7 @@ if(isset($_GET['pais'])){
                             <select name="paises_curso" id="paises_curso" class="form-control">
                                 <option value="0">- Seleccione -</option>
                                 <?php
-                                    $paises_curso = getCursoPais($mysqli, $_GET['cod_curso']);
+                                    $paises_curso = getPaises($mysqli);
                                     foreach($paises_curso as $i=>$d){
                                 ?>
                                 <option value="<?=$d['id']?>"><?=$d['pais']?></option>
@@ -132,76 +129,78 @@ if(isset($_GET['pais'])){
                    </div><!-- /col-lg-12 -->
                 </div><!-- /row -->   
                        
+                <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
+                        <input type="hidden" name="id_curso" id="id_curso" value="<?=$_GET['cod_curso']?>" />
+                        <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
+                        <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
                         <p id="error_datos_curso" class="bg-danger"></p>
-              <div class="datos_curso">
-                <div class="row mt">
-                   <div class="col-lg-12">
-                     <div class="form-panel">
-                        
-                          <div id="datos_curso">
-                            <!--<div class="row">
-                                <div id="selector_color" class="col-md-6 text-left" >
-                                    <input type="color" id="select_color" value="<? //$curso['color']?>" />
-                                    <input type="text" readonly="" id="chose_color" name="chose_color" value="<? //$curso['color']?>" />
-                                    <span id="muestra_color"><b>Color de los titulos</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                </div>
-                                <div id="selector_color" class="col-md-6 text-right" > </div>
-                            </div>-->
-                          
-                            <div class="form-group">
-                                <div id="sliderPreview">
-                                    <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="" alt="">
-                                </div>
-                            </div>
-                            <input id="uploadSlider" type="file" name="imageSlider" class="img" />
-                                <div class="form-group">
-                                   <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Duración:</b></h4>
-                                   <input type="text" id="titulo" name="titulo" style="width:350px" />
-                                </div>
-                               
-                                <div class="form-group">
-                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Descripción:</b></h4>
-                                   <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
-                                </div>
-                                
-                               <div class="form-group">
-                                   <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Plan de Estudio:</b></h4>
-                                    <textarea name="plan_estudio" id="plan_estudio" class="form-control" rows="5"></textarea>
-                                </div>
-                                
-                                <div id="materialesPreview" class="form-group">
-                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4>
-                                    <img class="avatar img-thumbnail" src="" alt="" />
-                                </div>
-                                <textarea name="materiales_txt" id="materiales_txt" class="form-control" rows="5"></textarea>
-                                <input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
-                               
+                        <div class="datos_curso">
+                          <div class="row mt">
+                             <div class="col-lg-12">
+                               <div class="form-panel">
 
-                                <div id="uniformesPreview" class="form-group">
-                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Uniforme:</b></h4>
-                                     <img class="avatar img-thumbnail" src="" alt="">
-                                </div>
-                                <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
-                                <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
-                           
-                           
-                           
-                         </div>
-                        
-                      </div><!-- /form-panel -->
-                   </div><!-- /col-lg-12 -->
-                  </div><!-- /row -->  
-                  </div>
-                  <div class="acciones">   
-                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
-                        <div class="row mt">
-                            <div class="col-lg-12">  
-                              <button id="confirm" class="btn btn-success">Guardar cambios</button>
-                            <a id="preview" class="btn btn-default" href="preview.php?id_curso=<?=$_GET['id_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
-                           </div><!-- /form-panel -->
-                         </div><!-- /col-lg-12 -->
-                       </div><!-- /row -->     
-                    </div>
+                                    <div id="datos_curso">
+                                      <!--<div class="row">
+                                          <div id="selector_color" class="col-md-6 text-left" >
+                                              <input type="color" id="select_color" value="<? //$curso['color']?>" />
+                                              <input type="text" readonly="" id="chose_color" name="chose_color" value="<? //$curso['color']?>" />
+                                              <span id="muestra_color"><b>Color de los titulos</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                          </div>
+                                          <div id="selector_color" class="col-md-6 text-right" > </div>
+                                      </div>-->
+
+                                      <div class="form-group">
+                                          <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Seleccione la nueva imagen de cabecera:</b></h4>
+                                          <div id="sliderPreview">
+                                              <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="" alt="">
+                                          </div>
+                                      </div>
+                                      <input id="uploadSlider" type="file" name="imageSlider" class="img" />
+                                          <div class="form-group">
+                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Duración:</b></h4>
+                                             Horas: <input type="text" id="horas" name="horas" style="width:350px" /><br/>
+                                             Meses: <input type="text" id="meses" name="meses" style="width:350px" /><br/>
+                                             Años: <input type="text" id="anios" name="anios" style="width:350px" /><br/>
+                                          </div>
+
+                                          <div class="form-group">
+                                              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Descripción:</b></h4>
+                                             <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
+                                          </div>
+
+                                         <div class="form-group">
+                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Plan de Estudio:</b></h4>
+                                              <textarea name="plan_estudio" id="plan_estudio" class="form-control" rows="5"></textarea>
+                                          </div>
+
+                                          <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4>
+                                          <div id="materialesPreview" class="form-group">
+                                              <img class="avatar img-thumbnail" id="imgMaterialesPreview" src="" alt="" />
+                                          </div>
+                                          <textarea name="materiales_txt" id="materiales_txt" class="form-control" rows="5"></textarea>
+                                          <input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
+
+                                          <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Uniforme:</b></h4>
+                                          <div id="uniformesPreview" class="form-group">
+                                               <img class="avatar img-thumbnail" id="imgUniformesPreview" src="" alt="">
+                                          </div>
+                                          <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
+                                          <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
+                                   </div>
+
+                                </div><!-- /form-panel -->
+                             </div><!-- /col-lg-12 -->
+                            </div><!-- /row -->  
+                        </div>
+                        <div class="acciones">   
+                            <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
+                            <div class="row mt">
+                                <div class="col-lg-12">  
+                                    <button id="confirm" class="btn btn-success">Guardar cambios</button>
+                                    <a id="preview" class="btn btn-default" href="preview.php?id_curso=<?=$_GET['id_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
+                                </div><!-- /form-panel -->
+                            </div><!-- /col-lg-12 -->
+                        </div><!-- /row -->     
                     </form>
                 </section>
             </section><!-- /MAIN CONTENT -->
@@ -223,13 +222,13 @@ if(isset($_GET['pais'])){
         <!--common script for all pages-->
         <script src="assets/js/common-scripts.js"></script>
         
-        <!--script for this page-->
+        <script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
         
         <script type="text/javascript">
             /*$(function(){
                 $('select.styled').customSelect();
             });*/
-            
+    
             function changeSelectOptions(select_id, array_index, texto, value){
                 var options, index, select, option;
 
@@ -370,10 +369,44 @@ if(isset($_GET['pais'])){
         	    success: function(data){
                         if(data.id){
                             $('#error_datos_curso').hide();
+                            
                             $('#imagePreview').attr("src", data.url_cabecera);
+                            $('#imgMaterialesPreview').attr("src", data.url_material);
+                            $('#imgUniformesPreview').attr("src", data.url_uniforme);
+                            
+                            $('#descripcion').val(data.descripcion);
+                            $('#uniformes_txt').val(data.desc_uniforme);
+                            $('#materiales_txt').val(data.desc_material);
+                            
+                            $('#horas').val(data.horas);
+                            $('#meses').val(data.meses);
+                            $('#anios').val(data.anios);
+                            
                             $('#datos_curso').show();
                             $('.datos_curso').css('display','block');
                             $('.acciones').css('display','block');
+                            
+                            CKEDITOR.replace( 'uniformes_txt', {
+                                //uiColor: '#010F2C',
+                                customConfig: 'config.js',
+                                toolbar: [
+                                        [ 'Bold', 'Italic', 'FontSize']
+                                ]
+                            });
+                            CKEDITOR.replace( 'materiales_txt', {
+                                //uiColor: '#010F2C',
+                                customConfig: 'config.js',
+                                toolbar: [
+                                        [ 'Bold', 'Italic', 'FontSize']
+                                ]
+                            });
+                            CKEDITOR.replace( 'descripcion', {
+                                //uiColor: '#010F2C',
+                                customConfig: 'config.js',
+                                toolbar: [
+                                        [ 'Bold', 'Italic', 'FontSize']
+                                ]
+                            });
                         }else{
                             $('#datos_curso').hide();
                             $('#error_datos_curso').html(data);

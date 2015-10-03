@@ -15,18 +15,6 @@ if($logged == 'out'){
     exit();
 }
 
-if(isset($_GET['idioma'])){
-	$idioma = $_GET['idioma'];
-}else{
-	$idioma = '1';
-}
-
-if(isset($_GET['pais'])){
-    $pais = $_GET['pais'];
-}else{
-    $pais = '1';
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,8 +65,7 @@ if(isset($_GET['pais'])){
                     <br/>
                     <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
                         <input type="hidden" name="cod_curso" id="cod_curso" value="<?=$_GET['cod_curso']?>" />
-                        <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
-                        <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
+                        <input type="hidden" name="edicion_curso_grupo" id="edicion_curso_grupo" value="true" />
 
                         <div class="row mt">
                             <div class="col-lg-12">
@@ -88,7 +75,7 @@ if(isset($_GET['pais'])){
                                      <select name="paises_curso" id="paises_curso" class="form-control input-sm">
                                         <option value="0">- Seleccione -</option>
                                         <?php
-                                            $paises_curso = getCursoPais($mysqli, $_GET['cod_curso']);
+                                            $paises_curso = getPaises($mysqli);
                                             foreach($paises_curso as $i=>$d){
                                         ?>
                                         <option value="<?=$d['id']?>"><?=$d['pais']?></option>
@@ -140,7 +127,9 @@ if(isset($_GET['pais'])){
                            
                                 <div class="form-group">
                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Duración:</b></h4> 
-                                    <input type="text" id="titulo" name="titulo" class="form-control" />
+                                   Horas: <input type="text" id="horas" name="horas" style="width:350px" /><br/>
+                                   Meses: <input type="text" id="meses" name="meses" style="width:350px" /><br/>
+                                   Años: <input type="text" id="anios" name="anios" style="width:350px" /><br/>
                                 </div>
                                 
                                 <div class="form-group">
@@ -173,14 +162,13 @@ if(isset($_GET['pais'])){
                         </div><!-- /form-panel -->
                      </div><!-- /col-lg-12 -->
                  </div><!-- /row --> 
-                   <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
+                        <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
                         <div class="row mt">
                             <div class="col-lg-12">
-                      <button id="confirm" class="btn btn-success">Guardar cambios</button>
-                       <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
-                    
-                          </div><!-- /col-lg-12 -->
-                 </div><!-- /row --> 
+                                <button id="confirm" class="btn btn-success">Guardar cambios</button>
+                                <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
+                            </div><!-- /col-lg-12 -->
+                        </div><!-- /row --> 
                     </form>
                 </section>
             </section><!-- /MAIN CONTENT -->
@@ -200,7 +188,8 @@ if(isset($_GET['pais'])){
         <!--common script for all pages-->
         <script src="assets/js/common-scripts.js"></script>
         <!--script for this page-->
-
+        <script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
+        
         <script type="text/javascript">
             function changeSelectOptions(select_id, array_index, texto, value){
                 var options, index, select, option;
@@ -284,7 +273,7 @@ if(isset($_GET['pais'])){
                             var id_n = id.replace(/\s+/g, '');
                             $('.filial_items').append("<li id='id-"+id_n+"'><input type='checkbox' name='prov' id='"+id_n+"' /> "+id+"</li>");
                             $.each(value, function(id_v, value_v){
-                                $('#id-'+id_n).append("<ul><li><input type='checkbox' id='"+value_v.id+"' name='filial[]' class='"+id_n+"'/> "+value_v.nombre+"</li></ul>");
+                                $('#id-'+id_n).append("<ul><li><input type='checkbox' id='"+value_v.id+"' name='filial[]' value='"+value_v.id+"' class='"+id_n+"'/> "+value_v.nombre+"</li></ul>");
                             });
                             
                             $('#'+id_n).click(function(){
@@ -299,6 +288,28 @@ if(isset($_GET['pais'])){
                         $('.filial_items').css('display','block');
         	    }
         	});
+            });
+            
+            CKEDITOR.replace( 'uniformes_txt', {
+                //uiColor: '#010F2C',
+                customConfig: 'config.js',
+                toolbar: [
+                        [ 'Bold', 'Italic', 'FontSize']
+                ]
+            });
+            CKEDITOR.replace( 'materiales_txt', {
+                //uiColor: '#010F2C',
+                customConfig: 'config.js',
+                toolbar: [
+                        [ 'Bold', 'Italic', 'FontSize']
+                ]
+            });
+            CKEDITOR.replace( 'descripcion', {
+                //uiColor: '#010F2C',
+                customConfig: 'config.js',
+                toolbar: [
+                        [ 'Bold', 'Italic', 'FontSize']
+                ]
             });
             
         </script>
