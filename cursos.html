@@ -24,6 +24,8 @@
 </head><!--/head-->
 
 <body>
+
+    <div id="fb-root"></div>
 <header id="home">
   <div class="main-nav">
       <div class="container-fluid">
@@ -45,12 +47,12 @@
             <li class="scroll"><a href="index.html#about-us">Institucional</a></li>                     
             <li class="scroll"><a href="index.html#blog">Novedades</a></li> 
            <li class="scroll"><a href="index.html#contact">Contacto</a></li>
-            <li class="scroll"><a href="#contact">Campus</a></li> 
+           <li><a href="http://campus.igacloud.net/" target="_blank">Campus</a></li> 
           </ul>
 
 
            <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Login</a></li>
+        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true">Español <span class="caret"></span></a>
            <ul class="dropdown-menu">
@@ -74,27 +76,17 @@
  <section id="single_curso" class="container">
    
         <div class="row">
-            <aside class="col-sm-4 col-sm-push-8">
+            <aside class="col-sm-4 col-sm-push-8 ">
               <div class="widget ads">
                     <div class="row">
-                        <div class="col-xs-6">
-                            <a href="#"><img class="img-responsive img-rounded" src="images/ads/ad1.png" alt=""></a>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <a href="#"><img class="img-responsive img-rounded" src="images/ads/ad2.png" alt=""></a>
-                        </div>
-                    </div>
-                    <p> </p>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <a href="#"><img class="img-responsive img-rounded" src="images/ads/ad3.png" alt=""></a>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <a href="#"><img class="img-responsive img-rounded" src="images/ads/ad4.png" alt=""></a>
+                        <div class="col-sm-12 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                                                           <div class="fb-page" data-href="https://www.facebook.com/IGA.GASTRONOMIA" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true">
+                                                            <div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/IGA.GASTRONOMIA"><a href="https://www.facebook.com/IGA.GASTRONOMIA">IGA</a></blockquote>
+                                                          </div>
+                                                          </div>
                         </div>
                     </div>
+                
                 </div><!--/.ads-->     
 
                 <div class="widget categories">
@@ -306,22 +298,22 @@ El alumno que cursa “Gastronomía y Alta Cocina” dispone de libros de excele
 
 
 <footer id="footer">
-  <div class="footer-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-3">
-            <p><a href="http://www.lifeweb.com.ar/">Quiero trabajar en IGA</a></p>
-          </div>
-         
-          <div class="col-sm-3">
-            <p><a href="http://www.lifeweb.com.ar/">Quiero una Franquisia de IGA</a></p>
-          </div>
-           <div class="col-sm-6">
-            <p class="pull-right">&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
+       <div class="footer-bottom">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p><a href="http://www.iga-la.com/empleos/" target="_blank">Quiero trabajar en IGA</a></p>
+                                            </div>
+              
+                                            <div class="col-sm-3">
+                                                <p><a href="http://igafranchising.com/" target="_blank">Quiero una Franquisia de IGA</a></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="pull-right">&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
   </footer>
 
   <script type="text/javascript" src="js/jquery.js"></script>
@@ -334,6 +326,14 @@ El alumno que cursa “Gastronomía y Alta Cocina” dispone de libros de excele
   <script type="text/javascript" src="js/jquery.countTo.js"></script>
   <script type="text/javascript" src="js/lightbox.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
- 
+      <!-- Plugins Facebook -->
+                             <script>(function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = "https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.4";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));
+                            </script>
 </body>
 </html>
