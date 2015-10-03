@@ -82,7 +82,9 @@ if(isset($_GET['pais'])){
                      <h3><i class="fa fa-angle-right"></i>Edición del curso</h3>
                      <p>Formulario para la edicion del curso. Las modifiaciones solo afectaran al curso, en la filial e idioma seleccionados.</p>
                     <br/>
-                    
+                    <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
+                        <input type="hidden" name="cod_curso" id="cod_curso" value="<?=$_GET['cod_curso']?>" />
+                        <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
 
 
                 <div class="row mt">
@@ -129,10 +131,8 @@ if(isset($_GET['pais'])){
                    </div><!-- /col-lg-12 -->
                 </div><!-- /row -->   
                        
-                <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
-                        <input type="hidden" name="id_curso" id="id_curso" value="<?=$_GET['cod_curso']?>" />
-                        <input type="hidden" name="idioma" id="idioma" value="<?=$idioma?>" />
-                        <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
+                
+
                         <p id="error_datos_curso" class="bg-danger"></p>
                         <div class="datos_curso">
                           <div class="row mt">
