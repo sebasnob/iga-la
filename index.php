@@ -84,10 +84,10 @@ $datos_home = getDatosHome($mysqli);
                     <p class="animated fadeInRightBig">INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS </p>-->
                     <a data-scroll class="btn btn-start animated fadeInUpBig" href="#portfolio">Que Deseas aprender hoy?</a>
                 </div>
-                <div class="embed-responsive embed-responsive-16by9">
+                <div class="embed-responsive embed-responsive-16by9 ">
                     <div id="background">
-                        <!-- https://www.youtube.com/embed/JApGTCxZztg?rel=0&controls=0&showinfo=0&autoplay=1&autoplay=1&loop=0&playlist=Rk6_hdRtJOE&enablejsapi=1&version=3-->
-                        <!--<iframe id='player' width="100%" height="100%" src="<?=$datos_home['url_video']?>" frameborder="0" volumen="0"></iframe>-->
+                       
+                        <iframe id='player' width="100%" height="100%" src="<?=$datos_home['url_video']?>" frameborder="0" volumen="0" class="hidden-sm hidden-xs"></iframe>
                     </div>
                 </div>          
             </div>
