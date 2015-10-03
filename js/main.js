@@ -28,10 +28,10 @@ jQuery(function($) {
 		Scroll();
 	});
 
-	$('.navbar-collapse ul li a').on('click', function() {  
-		$('html, body').animate({scrollTop: $(this.hash).offset().top - 5}, 1000);
-		return false;
-	});
+//	$('.navbar-collapse ul li a').on('click', function() {  
+//		$('html, body').animate({scrollTop: $(this.hash).offset().top - 5}, 1000);
+//		return false;
+//	});
 
 	// User define function
 	function Scroll() {
@@ -176,3 +176,23 @@ $('#cerrarCurso').click(function()
     var body = $("html, body");
     body.stop().animate({scrollTop:$('#grilla').position().top}, '500', 'swing', function() {$('.curso').hide();});
 });
+
+function cambiarPais(cod_pais){
+    console.log('cambiando pais');
+    $.ajax({
+      type: "POST",
+      url: "gestor/includes/functions.php",
+      data: { "cod_pais" :  cod_pais,
+              "cambiarPais" : "true" },
+      success: function(data)
+      {
+            console.log(data);
+            location.reload(true);
+            return false;
+      },
+      error: function(data){
+            console.log(data);
+      }
+    });
+    
+}

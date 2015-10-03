@@ -1,6 +1,7 @@
 <?php
 include_once 'psl-config.php';
- 
+include_once 'db_connect.php';
+
 function getDatosCurso($mysqli, $cod_curso, $id_pais='', $id_idioma='', $id_filial=''){
     $query1 = "SELECT cpif.id FROM `curso_pais_idioma_filial` as cpif 
                 INNER JOIN pais_idioma as pi on pi.id=cpif.id_pais_idioma 
@@ -140,9 +141,9 @@ function getPais($mysqli, $cod_pais){
 
 function getPaises($mysqli){
     $paises = array();
-    $result = $mysqli->query("SELECT id, pais, cod_pais FROM paises");
+    $result = $mysqli->query("SELECT id, pais, cod_pais, flag FROM paises");
     while($pais = $result->fetch_assoc()){
-	$paises[] = array('id'=>$pais['id'],'pais'=>$pais['pais'],'cod_pais'=>$pais['cod_pais']);
+	$paises[] = array('id'=>$pais['id'],'pais'=>$pais['pais'],'cod_pais'=>$pais['cod_pais'], 'flag'=>$pais['flag']);
     }
     return $paises;
 }
@@ -223,7 +224,9 @@ function sec_session_start() {
     session_set_cookie_params($cookieParams["lifetime"],$cookieParams["path"], $cookieParams["domain"], $secure, $httponly);
     // Sets the session name to the one set above.
     session_name($session_name);
-    session_start(); // Start the PHP session 
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     session_regenerate_id(true);    // regenerated the session, delete the old one. 
 }
 
@@ -383,9 +386,11 @@ function esc_url($url) {
 }
 
 function detectCountry($mysqli){
-    //$myIp = $_SERVER['REMOTE_ADDR'];
+//    $myIp = $_SERVER['REMOTE_ADDR'];
     $myIp = "190.2.100.6";
 
+//    die(var_dump($myIp));
+    
     $url = "http://www.telize.com/geoip/".$myIp;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -394,16 +399,35 @@ function detectCountry($mysqli){
     //Con esta opcion almaceno el resultado en una variable
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    if(curl_exec($ch)){
+    if(curl_exec($ch))
+    {
         $resp = json_decode(curl_exec($ch));
+        $cod_pais = $resp->{'country_code'};
+
+        $query = "SELECT id, pais, flag FROM paises WHERE cod_pais='{$cod_pais}'";
+
+        $result = $mysqli->query($query);
+        $tablaPaisdatos = $result->fetch_assoc();
         
-        $result = $mysqli->query("SELECT idioma FROM paises WHERE cod_pais='".$resp->{'country_code'}."'");
-        $datos_pais = $result->fetch_assoc();
+        $tablaPais = array('cod_pais'=>$resp->{'country_code'}, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
-        $_SESSION['pais'] = array('cod_pais'=>$resp->{'country_code'}, 'idioma'=>$datos_pais['idioma']);
-        //$_SESSION['ciudad'] = $resp->{'city'};
-    }else{
-        $_SESSION['pais'] = array('cod_pais'=>"AR", 'idioma'=>'ES');
+        $query2 = "SELECT idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
+        
+        $result2 = $mysqli->query($query2);
+        $idioma = $result2->fetch_assoc();
+        
+        $_SESSION['pais'] = array('cod_pais'=>$tablaPais['cod_pais'], 
+                                  'pais'=>$tablaPais['pais'],
+                                  'flag'=>$tablaPais['flag'],
+                                  'idioma'=>$idioma['idioma'],
+                                  'cod_idioma'=>$idioma['cod_idioma']);
+        
+//        $_SESSION['ciudad'] = $resp->{'city'};
+    }
+    else
+    {
+        $_SESSION['pais'] = array('pais'=>'Argentina','cod_pais'=>"AR", 'idioma'=>'ES', 'flag'=>'images/flags/ar.png');
+        $_SESSION['ciudad'] = 'Rosario';
     }
     curl_close($ch);
 }
@@ -602,5 +626,41 @@ function ws_insertDatosCursos($mysqli){
     }
     return $message;
 }
+
+function getCursosDatos($id_curso, $id_pais, $id_idioma)
+{
+    
+    
+    
+}
+
+function cambiarPais($cod_pais, $mysqli){
+    $query = "SELECT id, cod_pais, pais, flag FROM paises WHERE cod_pais='{$cod_pais}'";
+
+    $result = $mysqli->query($query);
+    $tablaPaisdatos = $result->fetch_assoc();
+        
+    $tablaPais = array('cod_pais'=>$tablaPaisdatos['cod_pais'], 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
+        
+    $query2 = "SELECT idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
+        
+    $result2 = $mysqli->query($query2);
+    $idioma = $result2->fetch_assoc();
+
+    session_start();
+    $_SESSION['pais'] = array('cod_pais'=>$tablaPais['cod_pais'], 
+                                  'pais'=>$tablaPais['pais'],
+                                  'flag'=>$tablaPais['flag'],
+                                  'idioma'=>$idioma['idioma'],
+                                  'cod_idioma'=>$idioma['cod_idioma']);
+    echo 'ok';
+}
+
+//controlador para cambiar idioma - lo pongo aca a falta de un lugar mejor
+if(isset($_POST['cambiarPais']))
+{
+    cambiarPais($_POST['cod_pais'], $mysqli);
+}
+
 
 ?>
