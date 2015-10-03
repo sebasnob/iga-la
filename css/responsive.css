@@ -30,6 +30,10 @@
 	.btn-signup {
 		padding: 10px 20px;
 	}
+
+		header #background {
+		background: url(../images/slider/1.jpg);
+	}
 }
 
 /* xs */
@@ -37,6 +41,10 @@
 	body {
 		font-size: 14px;
 	}
+
+    header #background {
+	background: url(../images/slider/1.jpg);
+	} 
 	#home-slider .caption h1 {
 		font-size: 40px;
 	}
@@ -75,7 +83,7 @@
 		padding-bottom: 8px;
 		padding-top: 10px;
 	}
-
+    
 	/*services*/
 	section {
 		padding: 45px 0;
@@ -225,5 +233,8 @@
 		width:100%;
 		float: none;
 	}
+	  header #background {
+	background: url(../images/slider/1.jpg);
+	} 
 }
 

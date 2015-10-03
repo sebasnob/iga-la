@@ -139,7 +139,7 @@ $paises = getPaises($mysqli);
                                 <h4><i class="fa fa-angle-right"></i> Editar Grilla</h4>
                                 
                                 <?php foreach ($gridArray as $imgGrid){?>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <form  enctype="multipart/form-data" method="POST" action="upload.php">
                                             <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
                                             <input type="hidden" name="edicion_grilla_editar" id="edicion_grilla_editar" value="true" />
