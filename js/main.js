@@ -178,7 +178,6 @@ $('#cerrarCurso').click(function()
 });
 
 function cambiarPais(cod_pais){
-    console.log('cambiando pais');
     $.ajax({
       type: "POST",
       url: "gestor/includes/functions.php",
@@ -190,9 +189,54 @@ function cambiarPais(cod_pais){
             location.reload(true);
             return false;
       },
-      error: function(data){
+      error: function(data)
+      {
             console.log(data);
       }
     });
+}
+
+function cambiarIdioma(cod_idioma){
+    $.ajax({
+      type: "POST",
+      url: "gestor/includes/functions.php",
+      data: { "cod_idioma" :  cod_idioma,
+              "cambiarIdioma" : "true" },
+      success: function(data)
+      {
+            console.log(data);
+            location.reload(true);
+            return false;
+      },
+      error: function(data)
+      {
+            console.log(data);
+      }
+    });
+}
+
+function cambiarProvincia(){
     
+    cod_provincia = $('#provincias').val();
+    $.ajax({
+      type: "POST",
+      url: "gestor/includes/functions.php",
+      data: { "cod_provincia" :  cod_provincia,
+              "cambiarProvincia" : "true" },
+          dataType:'json',
+      success: function(data)
+      {
+        $('#filiales').html("");
+        
+        $.each(data, function(clave, valor)
+        {
+            $('#filiales').append("<option value='"+ valor.id + "'>"+ valor.nombre +"</option>");
+        });
+            
+      },
+      error: function(data)
+      {
+            console.log(data);
+      }
+    });
 }

@@ -1,15 +1,23 @@
 <?php
 session_start();
 include_once 'gestor/includes/functions.php';
-
+include_once 'gestor/includes/lenguaje.php';
+    
 if(!isset($_SESSION['pais']))
 {
     detectCountry($mysqli);
-//    $_SESSION['pais'] = array('pais'=>'Argentina','cod_pais'=>"AR", 'idioma'=>'ES', 'flag'=>'images/flags/ar.png');
+}
+
+if(!isset($_SESSION['idioma_seleccionado']))
+{
+    $_SESSION['idioma_seleccionado']['cod_idioma'] = $_SESSION['pais']['cod_idioma'];
+    $_SESSION['idioma_seleccionado']['idioma'] = $_SESSION['pais']['idioma'];
 }
 
 $paises = getPaises($mysqli);
 $datos_home = getDatosHome($mysqli);
+$idiomas = getIdiomas($mysqli);
+$provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +26,7 @@ $datos_home = getDatosHome($mysqli);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="lifeWEB.com">
-        <title>IGA - INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS </title>
+        <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/animate.min.css" rel="stylesheet"> 
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -121,12 +129,12 @@ $datos_home = getDatosHome($mysqli);
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">     
-                            <li class="scroll active"><a href="#home">Inicio</a></li>
-                            <li class="scroll"><a href="#portfolio">Cursos</a></li>
-                            <li class="scroll"><a href="#team">Institucional</a></li>                     
-                            <li class="scroll"><a href="#blog">Novedades</a></li> 
-                            <li class="scroll"><a href="#contact">Contacto</a></li>
-                            <li><a href="http://campus.igacloud.net/" target="_blank">Campus</a></li> 
+                            <li class="scroll active"><a href="#home"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="#portfolio"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>                     
+                            <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li> 
+                            <li class="scroll"><a href="#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
                         </ul>
                         
                         <ul class="nav navbar-nav navbar-right">
@@ -146,10 +154,25 @@ $datos_home = getDatosHome($mysqli);
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Español <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <?=$_SESSION['idioma_seleccionado']['idioma']?> 
+                                    <span class="caret"></span>
+                                </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Portugues</a></li>
-                                    <li><a href="#">Ingles</a></li>
+                                <?php
+                                    foreach($idiomas as $i=>$d){
+                                        if($_SESSION['idioma_seleccionado']['cod_idioma'] != $d['cod_idioma']){
+                                    ?>
+                                        <li>
+                                            <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
+                                                <?=$d['idioma']?> 
+                                                <span class="caret"></span>
+                                            </a>
+                                        </li>
+                                    <?php
+                                    }
+                                }
+                                ?>
                                 </ul>
                             </li>
                             
@@ -170,7 +193,7 @@ $datos_home = getDatosHome($mysqli);
             </div>
             <div class="container-fluid" id="grilla">
                 <div class="row">
-                                        <?php foreach ($gridArray as $imgGrid){?>
+                    <?php foreach ($gridArray as $imgGrid){?>
                     <div class="col-md-<?php echo $imgGrid['cols']?>">
                         <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
                             <div class="folio-image">
@@ -382,19 +405,23 @@ $datos_home = getDatosHome($mysqli);
                                 <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
                                     <div class="form-group">
                                         <label for="option">Provincia</label>
-                                        <select class="form-control">
-                                            <option>Rosario</option>
-                                            <option>opcion 2</option>
-                                        </select>
+                                        <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia()">
+                                        <?php foreach ($provincias as $provincia){?>
+                                        
+                                            <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
+                                        
+                                        <?php }?>
+                                        </select>    
+                                            
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="option">Filial</label>
-                                        <select class="form-control">
-                                            <option>filial 1</option>
-                                            <option>opcion 2</option>
+                                        <label for="option">Filiales</label>
+                                        <select id="filiales">
+                                            <option>Seleccione Provincia</option>
                                         </select>
-                                    </div> 
+                                           
+                                    </div>
                                     
                                     <button type="submit" class="btn-btn-default">Seleccionar</button>
                                 </form>

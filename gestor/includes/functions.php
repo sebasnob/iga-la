@@ -416,7 +416,8 @@ function detectCountry($mysqli){
         $result2 = $mysqli->query($query2);
         $idioma = $result2->fetch_assoc();
         
-        $_SESSION['pais'] = array('cod_pais'=>$tablaPais['cod_pais'], 
+        $_SESSION['pais'] = array('id'=>$tablaPais['id'],
+                                  'cod_pais'=>$tablaPais['cod_pais'], 
                                   'pais'=>$tablaPais['pais'],
                                   'flag'=>$tablaPais['flag'],
                                   'idioma'=>$idioma['idioma'],
@@ -656,10 +657,45 @@ function cambiarPais($cod_pais, $mysqli){
     echo 'ok';
 }
 
+
+function cambiarProvincia($cod_provincia, $mysqli){
+    $query = "SELECT id, nombre FROM filiales WHERE id_provincia='{$cod_provincia}'";
+    $result = $mysqli->query($query);
+    
+    while($tablaFiliales = $result->fetch_assoc())
+    {
+        $filiales[] = array('id'=>$tablaFiliales['id'], 'nombre'=>$tablaFiliales['nombre']);
+    }
+    echo json_encode($filiales);
+}
+
+function cambiarIdioma($cod_idioma, $mysqli)
+{
+    $query = "SELECT * FROM idiomas WHERE cod_idioma='{$cod_idioma}'";
+
+    $result = $mysqli->query($query);
+    $tablaIdiomas = $result->fetch_assoc();
+        
+    session_start();
+    $_SESSION['idioma_seleccionado']['cod_idioma'] = $cod_idioma;
+    $_SESSION['idioma_seleccionado']['idioma'] = $tablaIdiomas['idioma'];
+    echo 'ok';
+}
+
 //controlador para cambiar idioma - lo pongo aca a falta de un lugar mejor
 if(isset($_POST['cambiarPais']))
 {
     cambiarPais($_POST['cod_pais'], $mysqli);
+}
+
+if(isset($_POST['cambiarIdioma']))
+{
+    cambiarIdioma($_POST['cod_idioma'], $mysqli);
+}
+
+if(isset($_POST['cambiarProvincia']))
+{
+    cambiarProvincia($_POST['cod_provincia'], $mysqli);
 }
 
 
