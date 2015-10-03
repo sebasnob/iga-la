@@ -446,6 +446,7 @@ function getImagenesGrilla($mysqli, $idioma = 'es')
                             'id_curso'=>$grilla['cod_curso'],
                             'prioridad'=>$grilla['prioridad'],
                             'idioma'=>$grilla['idioma'],
+                            'id_pais'=>$grilla['id_pais'],
                             'habilitado'=>$grilla['habilitado']);
     }
     return $retorno;
