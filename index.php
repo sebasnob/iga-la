@@ -42,7 +42,7 @@ $datos_home = getDatosHome($mysqli);
     </head><!--/head-->
     
     <body>
-    
+    <div id="fb-root"></div>
         <!--.preloader-->
         <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
         <!--/.preloader-->
@@ -112,7 +112,7 @@ $datos_home = getDatosHome($mysqli);
                         <li class="scroll"><a href="#team">Institucional</a></li>                     
                         <li class="scroll"><a href="#blog">Novedades</a></li> 
                         <li class="scroll"><a href="#contact">Contacto</a></li>
-                        <li class="scroll"><a href="#contact">Campus</a></li> 
+                        <li><a href="http://campus.igacloud.net/" target="_blank">Campus</a></li> 
                     </ul>
               
                     <ul class="nav navbar-nav navbar-right">
@@ -240,7 +240,7 @@ $datos_home = getDatosHome($mysqli);
                                                     <div class="member-info">
                                                         <h3>La Red</h3>
                     
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
+                                                        <p>Nuestra red de capacitación, la más importante de Latinoamérica en su tipo, gracias a su sistema de gestión ofrece la misma calidad en la enseñanza otorgada en todos los establecimientos, brindando así a los alumnos la posibilidad de obtenter la mejor enseñanza en gastronomía, cualquiera sea su localidad de residencia.</p>
                                                     </div>
                   
                                                 </div>
@@ -252,7 +252,7 @@ $datos_home = getDatosHome($mysqli);
                                                     </div>
                                                     <div class="member-info">
                                                         <h3>Misión</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
+                                                        <p>Nos orientamos a empleadores interesados en forjar un negocio seguro y sustentable, que les permita lograr una independencia económica, manteniendo el compromiso social de formar profesionales íntegros.</p>
                                                     </div>
                   
                                                 </div>
@@ -264,7 +264,7 @@ $datos_home = getDatosHome($mysqli);
                                                     </div>
                                                     <div class="member-info">
                                                         <h3>Visión</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
+                                                        <p>Potenciar el liderazgo en Latinoamérica y posicionar nuestra marca en puntos estratégicos a nivel internacional, expandiéndonos a través de la apertura de nuevas unidades de negocios e incorporando tecnologías de vanguardia aplicadas a la educación.</p>
                                                     </div>
                   
                                                 </div>
@@ -276,7 +276,11 @@ $datos_home = getDatosHome($mysqli);
                                                     </div>
                                                     <div class="member-info">
                                                         <h3>Valores</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
+                                                        <p>Responsabilidad</p>
+                                                        <p>Liderazgo</p>
+                                                        <p>Compromiso</p>
+                                                        <p>Innovación</p>
+                                                        <p>Eficiencia</p>
                                                     </div>
                   
                                                 </div>
@@ -321,97 +325,31 @@ $datos_home = getDatosHome($mysqli);
                                 <div class="container">
                                     <div class="row">
                                         <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
-                                            <h2>Novedades - Blog Posts</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
+                                            <h2>Novedades - Redes sociales</h2>
+                                            <p>Encontranos y seguinos en nuestras redes sociales </p>
                                         </div>
                                     </div>
-                                    <div class="blog-posts">
-                                        <div class="row">
-                                            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
-                                                <div class="post-thumb">
-                                                    <a href="#"><img class="img-responsive" src="images/blog/1.jpg" alt=""></a> 
-                                                    <div class="post-meta">
-                                                        <span><i class="fa fa-comments-o"></i> 3 Comments</span>
-                                                        <span><i class="fa fa-heart"></i> 0 Likes</span> 
+                                            <div class="blog-posts">
+                                                <div class="row">
+                                                    <div class="col-sm-6 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                                                           <div class="fb-page" data-href="https://www.facebook.com/IGA.GASTRONOMIA" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true">
+                                                            <div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/IGA.GASTRONOMIA"><a href="https://www.facebook.com/IGA.GASTRONOMIA">IGA</a></blockquote>
+                                                          </div>
+                                                          </div>
                                                     </div>
-                                                    <div class="post-icon">
-                                                        <i class="fa fa-pencil"></i>
+                                                   
+                                                    <div class="col-sm-6 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                                        <a class="twitter-timeline" href="https://twitter.com/IGA_LA" data-widget-id="650168451454119936">Tweets por el @IGA_LA.</a>
+
+
                                                     </div>
+                                                       
                                                 </div>
-                                                <div class="entry-header">
-                                                    <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
-                                                    <span class="date">June 26, 2014</span>
-                                                    <span class="cetagory">in <strong>Photography</strong></span>
-                                                </div>
-                                                <div class="entry-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                                </div>
+                                                             
                                             </div>
-                                            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
-                                                <div class="post-thumb">
-                                                    <div id="post-carousel"  class="carousel slide" data-ride="carousel">
-                                                        <ol class="carousel-indicators">
-                                                            <li data-target="#post-carousel" data-slide-to="0" class="active"></li>
-                                                            <li data-target="#post-carousel" data-slide-to="1"></li>
-                                                            <li data-target="#post-carousel" data-slide-to="2"></li>
-                                                        </ol>
-                                                        <div class="carousel-inner">
-                                                            <div class="item active">
-                                                                <a href="#"><img class="img-responsive" src="images/blog/2.jpg" alt=""></a>
-                                                            </div>
-                                                            <div class="item">
-                                                                <a href="#"><img class="img-responsive" src="images/blog/1.jpg" alt=""></a>
-                                                            </div>
-                                                            <div class="item">
-                                                                <a href="#"><img class="img-responsive" src="images/blog/3.jpg" alt=""></a>
-                                                            </div>
-                                                        </div>                               
-                                                        <a class="blog-left-control" href="#post-carousel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                                                        <a class="blog-right-control" href="#post-carousel" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
-                                                    </div>                            
-                                                    <div class="post-meta">
-                                                        <span><i class="fa fa-comments-o"></i> 3 Comments</span>
-                                                        <span><i class="fa fa-heart"></i> 0 Likes</span> 
-                                                    </div>
-                                                    <div class="post-icon">
-                                                        <i class="fa fa-picture-o"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="entry-header">
-                                                    <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
-                                                    <span class="date">June 26, 2014</span>
-                                                    <span class="cetagory">in <strong>Photography</strong></span>
-                                                </div>
-                                                <div class="entry-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="800ms">
-                                                <div class="post-thumb">
-                                                    <a href="#"><img class="img-responsive" src="images/blog/3.jpg" alt=""></a>
-                                                    <div class="post-meta">
-                                                        <span><i class="fa fa-comments-o"></i> 3 Comments</span>
-                                                        <span><i class="fa fa-heart"></i> 0 Likes</span> 
-                                                    </div>
-                                                    <div class="post-icon">
-                                                        <i class="fa fa-video-camera"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="entry-header">
-                                                    <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
-                                                    <span class="date">June 26, 2014</span>
-                                                    <span class="cetagory">in <strong>Photography</strong></span>
-                                                </div>
-                                                <div class="entry-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                                </div>
-                                            </div>                    
-                                        </div>
-                                        <div class="load-more wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-                                            <a href="#" class="btn-loadmore"><i class="fa fa-repeat"></i> Cargar más</a>
-                                        </div>                
-                                    </div>
+                                                              
                                 </div>
+                                
                             </section><!--/#blog-->
       
                                 <section id="contact">
@@ -520,11 +458,11 @@ $datos_home = getDatosHome($mysqli);
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <p><a href="http://www.lifeweb.com.ar/">Quiero trabajar en IGA</a></p>
+                                                <p><a href="http://www.iga-la.com/empleos/" target="_blank">Quiero trabajar en IGA</a></p>
                                             </div>
               
                                             <div class="col-sm-3">
-                                                <p><a href="http://www.lifeweb.com.ar/">Quiero una Franquisia de IGA</a></p>
+                                                <p><a href="http://igafranchising.com/" target="_blank">Quiero una Franquisia de IGA</a></p>
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="pull-right">&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
@@ -544,6 +482,16 @@ $datos_home = getDatosHome($mysqli);
                             <script type="text/javascript" src="js/jquery.countTo.js"></script>
                             <script type="text/javascript" src="js/lightbox.min.js"></script>
                             <script type="text/javascript" src="js/main.js"></script>
-      
+                             <!-- Plugins Facebook -->
+                             <script>(function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = "https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.4";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));
+                            </script>
+                            <!-- Plugins Twitter -->
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                             </body>
                             </html>
