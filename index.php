@@ -52,7 +52,7 @@ $datos_home = getDatosHome($mysqli);
                 <div class="caption">
                     <h1 class="animated fadeInLeftBig">
                     <?php
-                    switch($_SESSION['pais']['idioma']){
+                    switch($_SESSION['pais']['cod_idioma']){
                         case 'IN':
                                 echo $datos_home['titulo_in'];
                             break;
@@ -67,7 +67,7 @@ $datos_home = getDatosHome($mysqli);
                     </h1>
                     <p class="animated fadeInRightBig">
                     <?php
-                    switch($_SESSION['pais']['idioma']){
+                    switch($_SESSION['pais']['cod_idioma']){
                         case 'IN':
                                 echo $datos_home['subtitulo_in'];
                             break;
@@ -82,7 +82,21 @@ $datos_home = getDatosHome($mysqli);
                     </p>
                     <!--<h1 class="animated fadeInLeftBig">Bienvenidos a <span>IGA</span></h1>
                     <p class="animated fadeInRightBig">INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS </p>-->
-                    <a data-scroll class="btn btn-start animated fadeInUpBig" href="#portfolio">Que Deseas aprender hoy?</a>
+                    <a data-scroll class="btn btn-start animated fadeInUpBig" href="#portfolio">
+                        <?php switch($_SESSION['idioma_seleccionado']['cod_idioma'])
+                        {
+                            case 'IN':
+                                echo 'What do you want to learn today ?';
+                            break;
+                            case 'POR':
+                                echo 'Você quer aprender hoje?';
+                            break;
+                            default: 
+                                echo 'Que Deseas aprender hoy?';
+                            break;
+                        }
+                        ?>
+                    </a>
                 </div>
                 <div class="embed-responsive embed-responsive-16by9 ">
                     <div id="background">
