@@ -8,48 +8,50 @@ if(isset($_POST['edicion_curso_grupo'])){
     //##### MODIFICACION DE SLIDER #####//
     if(isset($_FILES['imageSlider']['name']) && $_FILES['imageSlider']['name'] != ''){
         if(!$_FILES['imageSlider']['error']){
-            $filiales = $_POST['filial'];
-            foreach($filiales as $id=>$value){
-
-                if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/')){
-                    mkdir('../images/slider/'.$_POST['cod_curso'].'/');
-                }
-                
-                if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/')){
-                    mkdir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/');
-                }
-                
+            if(move_uploaded_file($_FILES['imageSlider']['tmp_name'], '../images/slider/tmp/'.$_FILES['imageSlider']['name'])){
                 $idioma = getIdiomas($mysqli, $_POST['idioma_curso']);
-                if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/')){
-                    mkdir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/');
-                }
-                
-                $ruta_slider = '../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/';
-                
                 $ext = getExtension($_FILES['imageSlider']['name']);
+                $filiales = $_POST['filial'];
+                foreach($filiales as $id=>$value){
 
-                $new_file_name = "slider-".$_POST['cod_curso'].".".$ext;
-                
-                if(file_exists($ruta_slider.$new_file_name)){
-                    unlink($ruta_slider.$new_file_name);
+                    if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/')){
+                        mkdir('../images/slider/'.$_POST['cod_curso'].'/');
+                    }
+
+                    if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/')){
+                        mkdir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/');
+                    }
+
+                    if(!is_dir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/')){
+                        mkdir('../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/');
+                    }
+
+                    $ruta_slider = '../images/slider/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/';
+
+                    $new_file_name = "slider-".$_POST['cod_curso'].".".$ext;
+
+                    if(file_exists($ruta_slider.$new_file_name)){
+                        unlink($ruta_slider.$new_file_name);
+                    }
+                    
+                    if(copy('../images/slider/tmp/'.$_FILES['imageSlider']['name'], $ruta_slider.$new_file_name)){
+                            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+                            $result_sel = $mysqli->query($query_sel);
+                            $cfi = $result_sel->fetch_assoc();
+
+                            $query = "UPDATE curso_datos SET url_cabecera='".$ruta_slider.$new_file_name."' WHERE id_cfi='{$cfi['id']}'";
+    echo $cfi['id']."<br/>";                        
+                            $result = $mysqli->query($query);
+                            if($result){
+                                    $message = "<br/>Imagen modificada correctamente.<br/>";
+                            }
+                    }else{
+                            $message = "Hubo un error al subir la imagen";
+                    }
                 }
-
-                $exito = move_uploaded_file($_FILES['imageSlider']['tmp_name'], $ruta_slider.$new_file_name);
-
-                if($exito){
-                        $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['paises_curso']}'";
-                        $result_sel = $mysqli->query($query_sel);
-                        $cfi = $result_sel->fetch_assoc();
-                        
-                        $query = "UPDATE curso_datos SET url_cabecera='".$ruta_slider.$new_file_name."' WHERE id_cfi='{$cfi['id']}'";
-echo $cfi['id'];                        
-                        $result = $mysqli->query($query);
-                        if($result){
-                                $message = "<br/>Imagen modificada correctamente.<br/>";
-                        }
-                }else{
-                        $message = "Hubo un error al subir la imagen";
-                }
+                unlink('../images/slider/tmp/'.$_FILES['imageSlider']['name']);
+            }else{
+                $message = "Hubo un problema al generar la imagen temporal";
             }
         }
     }
@@ -59,55 +61,212 @@ echo $cfi['id'];
     //##### INICIO MODIFICACION DE IMAGEN DE MATERIALES #####//
     if(isset($_FILES['imageMateriales']['name']) && $_FILES['imageMateriales']['name'] != ''){
         if(!$_FILES['imageMateriales']['error']){
-            $filiales = $_POST['filial'];
-            foreach($filiales as $id=>$value){
-
-                if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/')){
-                    mkdir('../images/materiales/'.$_POST['cod_curso'].'/');
-                }
-                
-                if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/')){
-                    mkdir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/');
-                }
-                
+            if(move_uploaded_file($_FILES['imageMateriales']['tmp_name'], '../images/materiales/tmp/'.$_FILES['imageMateriales']['name'])){
                 $idioma = getIdiomas($mysqli, $_POST['idioma_curso']);
-                if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/')){
-                    mkdir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/');
-                }
-                
-                $ruta_materiales = '../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/';
-                
                 $ext = getExtension($_FILES['imageMateriales']['name']);
+                $filiales = $_POST['filial'];
+                foreach($filiales as $id=>$value){
 
-                $new_file_name = "materiales.".$ext;
-                
-                if(file_exists($ruta_materiales.$new_file_name)){
-                    unlink($ruta_materiales.$new_file_name);
+                    if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/')){
+                        mkdir('../images/materiales/'.$_POST['cod_curso'].'/');
+                    }
+
+                    if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/')){
+                        mkdir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/');
+                    }
+
+                    if(!is_dir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/')){
+                        mkdir('../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/');
+                    }
+
+                    $ruta_materiales = '../images/materiales/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/';
+
+                    $new_file_name = "materiales.".$ext;
+
+                    if(file_exists($ruta_materiales.$new_file_name)){
+                        unlink($ruta_materiales.$new_file_name);
+                    }
+                    
+                    if(copy('../images/materiales/tmp/'.$_FILES['imageMateriales']['name'], $ruta_materiales.$new_file_name)){
+                            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+                            $result_sel = $mysqli->query($query_sel);
+                            $cfi = $result_sel->fetch_assoc();
+
+                            $query = "UPDATE curso_datos SET url_material='".$ruta_materiales.$new_file_name."' WHERE id_cfi='{$cfi['id']}'";
+    echo $cfi['id']."<br/>";                        
+                            $result = $mysqli->query($query);
+                            if($result){
+                                    $message = "<br/>Imagen modificada correctamente.<br/>";
+                            }
+                    }else{
+                            $message = "Hubo un error al subir la imagen";
+                    }
                 }
-
-                $exito = move_uploaded_file($_FILES['imageMateriales']['tmp_name'], $ruta_materiales.$new_file_name);
-
-                if($exito){
-                        $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['paises_curso']}'";
-                        $result_sel = $mysqli->query($query_sel);
-                        $cfi = $result_sel->fetch_assoc();
-                        
-                        $query = "UPDATE curso_datos SET url_material='".$ruta_materiales.$new_file_name."' WHERE id_cfi='{$cfi['id']}'";
-echo $cfi['id'];                        
-                        $result = $mysqli->query($query);
-                        if($result){
-                                $message = "<br/>Imagen modificada correctamente.<br/>";
-                        }
-                }else{
-                        $message = "Hubo un error al subir la imagen";
-                }
+                unlink('../images/materiales/tmp/'.$_FILES['imageMateriales']['name']);
+            }else{
+                $message = "Hubo un problema al generar la imagen temporal";
             }
         }
     }
     //###### FIN MODIFICACION DE IMAGEN DE MATERIALES #####//
     
     
+    //##### INICIO MODIFICACION DE IMAGEN DE UNIFORMES #####//
+    if(isset($_FILES['imageUniformes']['name']) && $_FILES['imageUniformes']['name'] != ''){
+        if(!$_FILES['imageUniformes']['error']){
+            if(move_uploaded_file($_FILES['imageUniformes']['tmp_name'], '../images/uniformes/tmp/'.$_FILES['imageUniformes']['name'])){
+                $idioma = getIdiomas($mysqli, $_POST['idioma_curso']);
+                $ext = getExtension($_FILES['imageUniformes']['name']);
+                $filiales = $_POST['filial'];
+                foreach($filiales as $id=>$value){
+
+                    if(!is_dir('../images/uniformes/'.$_POST['cod_curso'].'/')){
+                        mkdir('../images/uniformes/'.$_POST['cod_curso'].'/');
+                    }
+
+                    if(!is_dir('../images/uniformes/'.$_POST['cod_curso'].'/'.$value.'/')){
+                        mkdir('../images/uniformes/'.$_POST['cod_curso'].'/'.$value.'/');
+                    }
+
+                    if(!is_dir('../images/uniformes/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/')){
+                        mkdir('../images/uniformes/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/');
+                    }
+
+                    $ruta_uniforme = '../images/uniformes/'.$_POST['cod_curso'].'/'.$value.'/'.$idioma[0]['cod_idioma'].'/';
+
+                    $new_file_name = "uniforme.".$ext;
+
+                    if(file_exists($ruta_uniforme.$new_file_name)){
+                        unlink($ruta_uniforme.$new_file_name);
+                    }
+                    
+                    if(copy('../images/uniformes/tmp/'.$_FILES['imageUniformes']['name'], $ruta_uniforme.$new_file_name)){
+                            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+                            $result_sel = $mysqli->query($query_sel);
+                            $cfi = $result_sel->fetch_assoc();
+
+                            $query = "UPDATE curso_datos SET url_uniforme='".$ruta_uniforme.$new_file_name."' WHERE id_cfi='{$cfi['id']}'";
+    echo $cfi['id']."<br/>";                        
+                            $result = $mysqli->query($query);
+                            if($result){
+                                    $message = "<br/>Imagen modificada correctamente.<br/>";
+                            }
+                    }else{
+                            $message = "Hubo un error al subir la imagen";
+                    }
+                }
+                unlink('../images/uniformes/tmp/'.$_FILES['imageUniformes']['name']);
+            }else{
+                $message = "Hubo un problema al generar la imagen temporal";
+            }
+        }
+    }
+    //###### FIN MODIFICACION DE IMAGEN DE UNIFORMES #####//
     
+    //### DURACION ###//
+    if(isset($_POST['horas']) && $_POST['horas'] != ''){
+        $filiales = $_POST['filial'];
+        foreach($filiales as $id=>$value){
+            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+            $result_sel = $mysqli->query($query_sel);
+            $cfi = $result_sel->fetch_assoc();
+
+            $query = "UPDATE curso_datos SET horas='{$_POST['horas']}' WHERE id_cfi='{$cfi['id']}'";
+echo "horas ".$cfi['id']."<br/>";                    
+            $result = $mysqli->query($query);
+            if($result){
+                    $message = "<br/>Horas modificadas correctamente.<br/>";
+            }
+        }
+    }
+    
+    if(isset($_POST['meses']) && $_POST['meses'] != ''){
+        $filiales = $_POST['filial'];
+        foreach($filiales as $id=>$value){
+            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+            $result_sel = $mysqli->query($query_sel);
+            $cfi = $result_sel->fetch_assoc();
+
+            $query = "UPDATE curso_datos SET meses='{$_POST['meses']}' WHERE id_cfi='{$cfi['id']}'";
+echo "meses ".$cfi['id']."<br/>";                    
+            $result = $mysqli->query($query);
+            if($result){
+                    $message = "<br/>Meses modificadas correctamente.<br/>";
+            }
+        }
+    }
+    
+    if(isset($_POST['anios']) && $_POST['anios'] != ''){
+        $filiales = $_POST['filial'];
+        foreach($filiales as $id=>$value){
+            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+            $result_sel = $mysqli->query($query_sel);
+            $cfi = $result_sel->fetch_assoc();
+
+            $query = "UPDATE curso_datos SET anios='{$_POST['anios']}' WHERE id_cfi='{$cfi['id']}'";
+echo "años ".$cfi['id']."<br/>";                    
+            $result = $mysqli->query($query);
+            if($result){
+                    $message = "<br/>Años modificados correctamente.<br/>";
+            }
+        }
+    }
+    //### FIN EDICION DURACION ###//
+    
+    //### DESCRIPCION ###//
+    if(isset($_POST['descripcion']) && $_POST['descripcion'] != ''){
+        $filiales = $_POST['filial'];
+        foreach($filiales as $id=>$value){
+            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+            $result_sel = $mysqli->query($query_sel);
+            $cfi = $result_sel->fetch_assoc();
+
+            $query = "UPDATE curso_datos SET descripcion='{$_POST['descripcion']}' WHERE id_cfi='{$cfi['id']}'";
+echo "descripcion ".$cfi['id']."<br/>";                    
+            $result = $mysqli->query($query);
+            if($result){
+                    $message = "<br/>Descripcion del curso modificada correctamente.<br/>";
+            }
+        }
+    }
+    //### FIN EDICION DESCRIPCION ##//
+    
+    //### EDICION DESCRIPCION DE MATERIALES ###//
+    if(isset($_POST['materiales_txt']) && $_POST['materiales_txt'] != ''){
+        $filiales = $_POST['filial'];
+        foreach($filiales as $id=>$value){
+            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+            $result_sel = $mysqli->query($query_sel);
+            $cfi = $result_sel->fetch_assoc();
+
+            $query = "UPDATE curso_datos SET desc_material='{$_POST['materiales_txt']}' WHERE id_cfi='{$cfi['id']}'";
+echo "desc materiales ".$cfi['id']."<br/>";                    
+            $result = $mysqli->query($query);
+            if($result){
+                    $message = "<br/>Descripcion de los materiales modificados correctamente.<br/>";
+            }
+        }
+    }
+    //### FINEDICION DESCRIPCION DE MATERIALES ###//
+    
+    
+    //### EDICION DESCRIPCION DEL UNIFORME ###//
+    if(isset($_POST['uniformes_txt']) && $_POST['uniformes_txt'] != ''){
+        $filiales = $_POST['filial'];
+        foreach($filiales as $id=>$value){
+            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+            $result_sel = $mysqli->query($query_sel);
+            $cfi = $result_sel->fetch_assoc();
+
+            $query = "UPDATE curso_datos SET desc_uniforme='{$_POST['uniformes_txt']}' WHERE id_cfi='{$cfi['id']}'";
+echo "desc uniforme ".$cfi['id']."<br/>";
+            $result = $mysqli->query($query);
+            if($result){
+                    $message = "<br/>Descripcion del unforme modificado correctamente.<br/>";
+            }
+        }
+    }
+    //### FINEDICION DESCRIPCION DEL UNIFORME ###//
     
 }
 
@@ -152,7 +311,7 @@ if(isset($_POST['edicion_curso'])){
                     $query = "UPDATE curso_datos as cd INNER JOIN curso_idioma as ci ON ci.id=cd.id_curso_idioma SET cd.img_cabecera='".$ruta_slider.$new_file_name."' WHERE ci.id_curso=".$_POST['id_curso']." AND ci.idioma='".$_POST['idioma']."'";
                     $result = $mysqli->query($query);
                     if($result){
-                            $message = "<br/>Imagen de los materiales agregada correctamente.<br/>";
+                            $message = "<br/>Imagen del Slider agregada correctamente.<br/>";
                     }
             }else{
                     $message = "Hubo error al modificar la imagen";

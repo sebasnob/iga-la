@@ -142,17 +142,16 @@ if($logged == 'out'){
                                    
                                     <textarea name="plan_estudio" id="plan_estudio" class="form-control" rows="5"></textarea>
                                 </div>
-                               
+                                
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4> 
                                 <div id="materialesPreview" class="form-group">
-                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4> 
                                     <img class="avatar img-thumbnail" src="" alt="" />
                                 </div>
                                 <textarea name="materiales_txt" id="materiales_txt" class="form-control" rows="5"></textarea>
                                 <input id="uploadMateriales" type="file" name="imageMateriales" class="img" />
                                
-
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Uniforme:</b></h4> 
                                 <div id="uniformesPreview" class="form-group">
-                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Uniforme:</b></h4> 
                                     <img class="avatar img-thumbnail" src="" alt="">
                                 </div>
                                 <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
