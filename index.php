@@ -60,7 +60,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                 <div class="caption">
                     <h1 class="animated fadeInLeftBig">
                     <?php
-                    switch($_SESSION['pais']['cod_idioma']){
+                    switch($_SESSION['idioma_seleccionado']['cod_idioma']){
                         case 'IN':
                                 echo $datos_home['titulo_in'];
                             break;
@@ -75,7 +75,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                     </h1>
                     <p class="animated fadeInRightBig">
                     <?php
-                    switch($_SESSION['pais']['cod_idioma']){
+                    switch($_SESSION['idioma_seleccionado']['cod_idioma']){
                         case 'IN':
                                 echo $datos_home['subtitulo_in'];
                             break;
@@ -109,7 +109,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                 <div class="embed-responsive embed-responsive-16by9 ">
                     <div id="background">
                        
-                        <iframe id='player' width="100%" height="100%" src="<?=$datos_home['url_video']?>" frameborder="0" volumen="0" class="hidden-sm hidden-xs"></iframe>
+                        <!--<iframe id='player' width="100%" height="100%" src="<?=$datos_home['url_video']?>" frameborder="0" volumen="0" class="hidden-sm hidden-xs"></iframe>-->
                     </div>
                 </div>          
             </div>
@@ -139,7 +139,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?=$_SESSION['pais']['flag']?>" /><span class="caret"><?=$_SESSION['pais']['pais']?></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?=$_SESSION['pais']['flag']?>" /><span style="margin-left: 5px;"><?=$_SESSION['pais']['pais']?></span><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                 <?php
                                 
@@ -153,7 +153,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                 ?>
                                 </ul>
                             </li>
-                            <li>
+                            <li style="padding: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <?=$_SESSION['idioma_seleccionado']['idioma']?> 
                                     <span class="caret"></span>
@@ -186,8 +186,8 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
             <div class="container-fluid">
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2>Suscríbete a todos nuestros cursos</h2>
-                        <p>Ingresa tus datos en el formulario de consultas y envíanos tu consulta</p>
+                        <h2><?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+                        <p><?=$lenguaje['cursos_destacados_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div>
                 </div> 
             </div>
@@ -220,41 +220,36 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
             
             <div id="portfolio-single-wrap">
                 <?php foreach ($gridArray as $imgGrid){
-                    $curso = getCursos($mysqli, $imgGrid['id_curso']);
+                    $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma']);
                 ?>
                 
                 <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
                     <div class="row">
                         <div class="col-sm-12">
-                            <img class="img-responsive animated fadeInDown" src="images/slider/4.jpg" alt="">
+                            <img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_cabecera']?>" alt="">
                             <div class="col-sm-9">
                                 <div class="project-info">
-                                    <h2>Gastronomía y Alta Cocina</h2>
+                                    <h2><?= $cursos_datos['nombre']?></h2>
                                     <div class="entry-meta">
                                         
-                                        <span><i class="fa fa-calendar"></i> 2 años de duración</span>
+                                        <span><i class="fa fa-calendar"></i> <?= $cursos_datos['duracion']?></span>
                                         
                                     </div>
-                                    <p class="lead">“Gastronomía y Alta Cocina” brinda los conocimientos necesarios para alcanzar la excelencia como profesional de la gastronomía. Además obtendrás las herramientas para emprender un negocio culinario y alcanzar así la cima del éxito, haciendo de la cocina tu profesión.</p>
-                                    
-                                    <p>Convertite en un profesional de la alta cocina y del arte culinario! Encabezá un equipo de cocineros en un negocio culinario de altísimo nivel!</p>
-                                    
-                                    <p>Cursado el 1º año recibís el certificado de COCINERO PROFESIONAL
-                                        <br>Cursado el 2º año recibís el certificado de GASTRONOMÍA & ALTA COCINA</p>
+                                    <p class="lead"><?= $cursos_datos['descripcion']?></p>
                                 </div>
                             </div>
                             
                             <div class="col-sm-3">
                                 <div class="project-details">
-                                    <h3>Project Details</h3>
-                                    <p><span>Client: </span>WrapBootstrap</p>
-                                    <p><span>Date:</span> 15 Oct 2014</p>
-                                    <p><span>Tag:</span> Graphic, Design, Creative</p>
+                                    <h3><?=$lenguaje['uniformes_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_uniforme']?>" alt=""></p>
+                                    <h3><?=$lenguaje['materiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_material']?>" alt=""></p>
                                 </div>  
                             </div>
                             
                         </div>
-                        <a id="cerrarCurso" class="close-folio-item" ><i class="fa fa-times"></i></a>
+                        <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
                         
                     </div>
                 </div>

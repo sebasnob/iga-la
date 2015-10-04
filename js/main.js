@@ -170,12 +170,12 @@ function descripcionCurso(id_curso)
     body.stop().animate({scrollTop:$('.curso' + id_curso).position().top - 35}, 'slow');
 }
 
-$('#cerrarCurso').click(function()
+function cerrarCurso()
 {
-    event.preventDefault();
+    console.log('asdasdasd');
     var body = $("html, body");
-    body.stop().animate({scrollTop:$('#grilla').position().top}, '500', 'swing', function() {$('.curso').hide();});
-});
+    body.stop().animate({scrollTop:$('#portfolio').position().top}, '500', 'swing', function() {$('.curso').hide();});
+};
 
 function cambiarPais(cod_pais){
     $.ajax({

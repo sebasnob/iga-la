@@ -409,7 +409,7 @@ function detectCountry($mysqli){
         $result = $mysqli->query($query);
         $tablaPaisdatos = $result->fetch_assoc();
         
-        $tablaPais = array('cod_pais'=>$resp->{'country_code'}, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
+        $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$resp->{'country_code'}, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
         $query2 = "SELECT idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
         
@@ -629,11 +629,28 @@ function ws_insertDatosCursos($mysqli){
     return $message;
 }
 
-function getCursosDatos($id_curso, $id_pais, $id_idioma)
+function getCursosDatos($mysqli, $id_curso, $id_pais, $cod_idioma)
 {
+    $query = "SELECT id FROM idiomas WHERE cod_idioma = '{$cod_idioma}'";
     
+    $result = $mysqli->query($query);
+    $id_idioma = $result->fetch_assoc();
     
+    $query2 = "SELECT id FROM pais_idioma WHERE id_pais = '{$id_pais}' AND id_idioma = '{$id_idioma['id']}'";
     
+    $result = $mysqli->query($query2);
+    $id_pais_idioma = $result->fetch_assoc();
+    
+    $query3 = "SELECT * FROM curso_pais_idioma_filial WHERE cod_curso = '{$id_curso}' AND id_pais_idioma = {$id_pais_idioma['id']} AND estado = 1";
+    
+    $result = $mysqli->query($query3);
+    $id_curso_pais_idioma_filial = $result->fetch_assoc();
+    
+    $query4 = "SELECT * FROM curso_datos WHERE id_cpif = '{$id_curso_pais_idioma_filial['id']}'";
+    $result = $mysqli->query($query4);
+    $curso_datos = $result->fetch_assoc();
+    
+    return $curso_datos;
 }
 
 function cambiarPais($cod_pais, $mysqli){
@@ -642,7 +659,7 @@ function cambiarPais($cod_pais, $mysqli){
     $result = $mysqli->query($query);
     $tablaPaisdatos = $result->fetch_assoc();
         
-    $tablaPais = array('cod_pais'=>$tablaPaisdatos['cod_pais'], 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
+    $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$tablaPaisdatos['cod_pais'], 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
     $query2 = "SELECT idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
         
@@ -650,11 +667,16 @@ function cambiarPais($cod_pais, $mysqli){
     $idioma = $result2->fetch_assoc();
 
     session_start();
-    $_SESSION['pais'] = array('cod_pais'=>$tablaPais['cod_pais'], 
+    $_SESSION['pais'] = array('id'=>$tablaPais['id'], 
+                                'cod_pais'=>$tablaPais['cod_pais'], 
                                   'pais'=>$tablaPais['pais'],
                                   'flag'=>$tablaPais['flag'],
                                   'idioma'=>$idioma['idioma'],
                                   'cod_idioma'=>$idioma['cod_idioma']);
+    
+    $_SESSION['idioma_seleccionado']['cod_idioma'] = $idioma['cod_idioma'];
+    $_SESSION['idioma_seleccionado']['idioma'] = $idioma['idioma'];
+    
     echo 'ok';
 }
 
