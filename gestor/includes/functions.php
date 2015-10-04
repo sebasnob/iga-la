@@ -1,5 +1,6 @@
 <?php
 include_once 'psl-config.php';
+include_once 'db_connect.php';
  
 function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
     $query1 = "SELECT cfi.id, cfi.estado FROM curso_filial_idioma as cfi 
