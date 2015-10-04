@@ -170,9 +170,73 @@ function descripcionCurso(id_curso)
     body.stop().animate({scrollTop:$('.curso' + id_curso).position().top - 35}, 'slow');
 }
 
-$('#cerrarCurso').click(function()
+function cerrarCurso()
 {
-    event.preventDefault();
+    console.log('asdasdasd');
     var body = $("html, body");
-    body.stop().animate({scrollTop:$('#grilla').position().top}, '500', 'swing', function() {$('.curso').hide();});
-});
+    body.stop().animate({scrollTop:$('#portfolio').position().top}, '500', 'swing', function() {$('.curso').hide();});
+};
+
+function cambiarPais(cod_pais){
+    $.ajax({
+      type: "POST",
+      url: "gestor/includes/functions.php",
+      data: { "cod_pais" :  cod_pais,
+              "cambiarPais" : "true" },
+      success: function(data)
+      {
+            console.log(data);
+            location.reload(true);
+            return false;
+      },
+      error: function(data)
+      {
+            console.log(data);
+      }
+    });
+}
+
+function cambiarIdioma(cod_idioma){
+    $.ajax({
+      type: "POST",
+      url: "gestor/includes/functions.php",
+      data: { "cod_idioma" :  cod_idioma,
+              "cambiarIdioma" : "true" },
+      success: function(data)
+      {
+            console.log(data);
+            location.reload(true);
+            return false;
+      },
+      error: function(data)
+      {
+            console.log(data);
+      }
+    });
+}
+
+function cambiarProvincia(){
+    
+    cod_provincia = $('#provincias').val();
+    $.ajax({
+      type: "POST",
+      url: "gestor/includes/functions.php",
+      data: { "cod_provincia" :  cod_provincia,
+              "cambiarProvincia" : "true" },
+          dataType:'json',
+      success: function(data)
+      {
+        $('#filiales').html("");
+        
+        $.each(data, function(clave, valor)
+        {
+            $('#filiales').append("<option value='"+ valor.id + "'>"+ valor.nombre +"</option>");
+        });
+            
+      },
+      error: function(data)
+      {
+            console.log(data);
+      }
+    });
+}
