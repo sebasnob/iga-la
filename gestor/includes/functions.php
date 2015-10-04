@@ -665,7 +665,7 @@ function ws_insertDatosCursos($mysqli){
     return $message;
 }
 
-function getCursosDatos($mysqli, $id_curso, $id_pais, $cod_idioma)
+function getCursosDatos($mysqli, $id_curso, $id_pais, $cod_idioma, $nombre_defecto, $duracion_defecto, $descripcion_defecto)
 {
     $query = "SELECT id FROM idiomas WHERE cod_idioma = '{$cod_idioma}'";
     $result = $mysqli->query($query);
@@ -673,15 +673,24 @@ function getCursosDatos($mysqli, $id_curso, $id_pais, $cod_idioma)
 
     $query2 = "SELECT min(id) FROM filiales WHERE id_provincia IN (select id from provincias where provincias.id_pais = {$id_pais})";
     $result = $mysqli->query($query2);
-    $id_filial = $result->fetch_assoc();
     
-    $query3 = "SELECT id FROM curso_filial_idioma WHERE cod_curso = '{$id_curso}' AND id_filial = {$id_filial['min(id)']} AND id_idioma = {$id_idioma['id']} AND estado = 1";
-    $result = $mysqli->query($query3);
-    $id_curso_filial_idioma = $result->fetch_assoc();
+    $curso_datos = array('url_cabecera'=>'images/cabecera_defecto.jpg', 'nombre'=>$nombre_defecto, 'duracion'=>$duracion_defecto, 'descripcion'=>$descripcion_defecto, 'url_uniforme'=>'', 'url_material'=>'');
+    if($result)
+    {
+        $id_filial = $result->fetch_assoc();
     
-    $query4 = "SELECT * FROM curso_datos WHERE id_cfi = '{$id_curso_filial_idioma['id']}'";
-    $result = $mysqli->query($query4);
-    $curso_datos = $result->fetch_assoc();
+        $query3 = "SELECT id FROM curso_filial_idioma WHERE cod_curso = '{$id_curso}' AND id_filial = {$id_filial['min(id)']} AND id_idioma = {$id_idioma['id']} AND estado = 1";
+        $result = $mysqli->query($query3);
+        
+        if($result)
+        {    
+            $id_curso_filial_idioma = $result->fetch_assoc();
+
+            $query4 = "SELECT * FROM curso_datos WHERE id_cfi = '{$id_curso_filial_idioma['id']}'";
+            $result = $mysqli->query($query4);
+            $curso_datos = $result->fetch_assoc();
+        }
+    } 
     
     return $curso_datos;
 }
@@ -698,7 +707,7 @@ function cambiarPais($cod_pais, $mysqli){
         
     $result2 = $mysqli->query($query2);
     $idioma = $result2->fetch_assoc();
-
+    
     session_start();
     $_SESSION['pais'] = array('id'=>$tablaPais['id'], 
                                 'cod_pais'=>$tablaPais['cod_pais'], 

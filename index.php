@@ -2,6 +2,8 @@
 session_start();
 include_once 'gestor/includes/functions.php';
 include_once 'gestor/includes/lenguaje.php';
+
+//unset($_SESSION);
 if(!isset($_SESSION['pais']))
 {
     detectCountry($mysqli);
@@ -215,7 +217,11 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
             </div> <!--/#container-fluid-porfolios-->
             <div id="portfolio-single-wrap">
                 <?php foreach ($gridArray as $imgGrid){
-                    $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma']);
+                    
+                    $nombre_defecto = $lenguaje['nombre_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $duracion_defecto = $lenguaje['duracion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $descripcion_defecto = $lenguaje['descripcion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
                 ?>
                 
                 <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
@@ -477,15 +483,15 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4 text-center">
                             <p><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
                         </div>
                         
-                        <div class="col-sm-3">
-                            <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquisia'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
+                        <div class="col-sm-4 text-center">
+                            <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquisia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
                         </div>
-                        <div class="col-sm-6">
-                            <p class="pull-right">&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
+                        <div class="col-sm-4 text-center">
+                            <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
                         </div>
                     </div>
                 </div>

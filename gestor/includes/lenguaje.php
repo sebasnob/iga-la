@@ -36,6 +36,11 @@ $lenguaje['direccion_ES'] = "Dirección";
 $lenguaje['telefono_ES'] = "Teléfono";
 $lenguaje['quiero_trabajar_ES'] = "Quiero trabajar en IGA";
 $lenguaje['quiero_una_franquisia_ES'] = "Quiero una Franquisia de IGA";
+$lenguaje['contacto_ES'] = "Contacto";
+$lenguaje['campus_ES'] = "Campus";
+$lenguaje['nombre_defecto_ES'] = "Curso no Disponible";
+$lenguaje['duracion_defecto_ES'] = "";
+$lenguaje['descripcion_defecto_ES'] = "Actualmente este Curso no se encuentra Disponible en este País";
 
 
 //ingles
@@ -75,6 +80,11 @@ $lenguaje['direccion_IN'] = "Address";
 $lenguaje['telefono_IN'] = "Phone";
 $lenguaje['quiero_trabajar_IN'] = "I want to work in IGA";
 $lenguaje['quiero_una_franquisia_IN'] = "I want a franchise of IGA";
+$lenguaje['contacto_IN'] = "Contact";
+$lenguaje['campus_IN'] = "Campus";
+$lenguaje['nombre_defecto_IN'] = "Course not Available";
+$lenguaje['duracion_defecto_IN'] = "";
+$lenguaje['descripcion_defecto_IN'] = "Currently this course is not available in this country";
 
 //portugues
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
@@ -112,3 +122,8 @@ $lenguaje['direccion_POR'] = "Endereço";
 $lenguaje['telefono_POR'] = "Telefone";
 $lenguaje['quiero_trabajar_POR'] = "Eu quero trabalhar em IGA";
 $lenguaje['quiero_una_franquisia_POR'] = "Eu quero uma franquia de IGA";
+$lenguaje['contacto_POR'] = "Contato";
+$lenguaje['campus_POR'] = "Campus";
+$lenguaje['nombre_defecto_POR'] = "Claro que não Disponível";
+$lenguaje['duracion_defecto_POR'] = "";
+$lenguaje['descripcion_defecto_IN'] = "Atualmente este curso não está disponível no país";

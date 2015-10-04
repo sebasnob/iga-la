@@ -256,7 +256,6 @@ function filialSeleccionada()
             $('#telefono').append(data.telefono);
             $('#mail').append(data.email);
             $('#correo').val(data.email);
-            
       },
       error: function(data)
       {
@@ -264,4 +263,6 @@ function filialSeleccionada()
       }
     });
     $('.contact-form').show('slow');
+    
+    
 }
