@@ -215,8 +215,7 @@ function cambiarIdioma(cod_idioma){
     });
 }
 
-function cambiarProvincia(){
-    
+function cambiarProvincia(option){
     cod_provincia = $('#provincias').val();
     $.ajax({
       type: "POST",
@@ -227,6 +226,7 @@ function cambiarProvincia(){
       success: function(data)
       {
         $('#filiales').html("");
+        $('#filiales').append(option);
         
         $.each(data, function(clave, valor)
         {
@@ -239,4 +239,30 @@ function cambiarProvincia(){
             console.log(data);
       }
     });
+}
+
+function filialSeleccionada()
+{
+    cod_filial = $('#filiales').val();
+    $.ajax({
+      type: "POST",
+      url: "gestor/includes/functions.php",
+      data: { "cod_filial" :  cod_filial,
+              "filialSeleccionada" : "true" },
+          dataType:'json',
+      success: function(data)
+      {
+            $('#direccion').append(data.domicilio);
+            $('#telefono').append(data.telefono);
+            $('#mail').append(data.email);
+            $('#correo').val(data.email);
+      },
+      error: function(data)
+      {
+            console.log(data);
+      }
+    });
+    $('.contact-form').show('slow');
+    
+    
 }

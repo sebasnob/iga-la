@@ -388,31 +388,28 @@ function detectCountry($mysqli){
 
 //    die(var_dump($myIp));
     
-    $url = "http://www.telize.com/geoip/".$myIp;
+    $url = "http://ipinfo.io/";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HEADER, 0);
 
     //Con esta opcion almaceno el resultado en una variable
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+    session_start();
     if(curl_exec($ch))
     {
         $resp = json_decode(curl_exec($ch));
-        $cod_pais = $resp->{'country_code'};
-
+        $cod_pais = $resp->country;
         $query = "SELECT id, pais, flag FROM paises WHERE cod_pais='{$cod_pais}'";
-
+        
         $result = $mysqli->query($query);
         $tablaPaisdatos = $result->fetch_assoc();
         
-        $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$resp->{'country_code'}, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
+        $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$cod_pais, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
         $query2 = "SELECT idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
-        
         $result2 = $mysqli->query($query2);
         $idioma = $result2->fetch_assoc();
-        
         $_SESSION['pais'] = array('id'=>$tablaPais['id'],
                                   'cod_pais'=>$tablaPais['cod_pais'], 
                                   'pais'=>$tablaPais['pais'],
@@ -430,7 +427,7 @@ function detectCountry($mysqli){
     curl_close($ch);
 }
 
-function getImagenesGrilla($mysqli, $idioma = 'es')
+function getImagenesGrilla($mysqli, $idioma = 'ES')
 {
     //TODO crear select por prioridad
     $result = $mysqli->query("SELECT * FROM grilla WHERE grilla.habilitado = 1 AND grilla.idioma = '{$idioma}' order by grilla.prioridad");
@@ -667,26 +664,32 @@ function ws_insertDatosCursos($mysqli){
     return $message;
 }
 
-function getCursosDatos($mysqli, $id_curso, $id_pais, $cod_idioma)
+function getCursosDatos($mysqli, $id_curso, $id_pais, $cod_idioma, $nombre_defecto, $duracion_defecto, $descripcion_defecto)
 {
     $query = "SELECT id FROM idiomas WHERE cod_idioma = '{$cod_idioma}'";
-    
     $result = $mysqli->query($query);
     $id_idioma = $result->fetch_assoc();
-    
-    $query2 = "SELECT id FROM pais_idioma WHERE id_pais = '{$id_pais}' AND id_idioma = '{$id_idioma['id']}'";
-    
+
+    $query2 = "SELECT min(id) FROM filiales WHERE id_provincia IN (select id from provincias where provincias.id_pais = {$id_pais})";
     $result = $mysqli->query($query2);
-    $id_pais_idioma = $result->fetch_assoc();
     
-    $query3 = "SELECT * FROM curso_pais_idioma_filial WHERE cod_curso = '{$id_curso}' AND id_pais_idioma = {$id_pais_idioma['id']} AND estado = 1";
+    $curso_datos = array('url_cabecera'=>'images/cabecera_defecto.jpg', 'nombre'=>$nombre_defecto, 'duracion'=>$duracion_defecto, 'descripcion'=>$descripcion_defecto, 'url_uniforme'=>'', 'url_material'=>'');
+    if($result)
+    {
+        $id_filial = $result->fetch_assoc();
     
-    $result = $mysqli->query($query3);
-    $id_curso_pais_idioma_filial = $result->fetch_assoc();
-    
-    $query4 = "SELECT * FROM curso_datos WHERE id_cpif = '{$id_curso_pais_idioma_filial['id']}'";
-    $result = $mysqli->query($query4);
-    $curso_datos = $result->fetch_assoc();
+        $query3 = "SELECT id FROM curso_filial_idioma WHERE cod_curso = '{$id_curso}' AND id_filial = {$id_filial['min(id)']} AND id_idioma = {$id_idioma['id']} AND estado = 1";
+        $result = $mysqli->query($query3);
+        
+        if($result)
+        {    
+            $id_curso_filial_idioma = $result->fetch_assoc();
+
+            $query4 = "SELECT * FROM curso_datos WHERE id_cfi = '{$id_curso_filial_idioma['id']}'";
+            $result = $mysqli->query($query4);
+            $curso_datos = $result->fetch_assoc();
+        }
+    } 
     
     return $curso_datos;
 }
@@ -703,7 +706,7 @@ function cambiarPais($cod_pais, $mysqli){
         
     $result2 = $mysqli->query($query2);
     $idioma = $result2->fetch_assoc();
-
+    
     session_start();
     $_SESSION['pais'] = array('id'=>$tablaPais['id'], 
                                 'cod_pais'=>$tablaPais['cod_pais'], 
@@ -743,6 +746,15 @@ function cambiarIdioma($cod_idioma, $mysqli)
     echo 'ok';
 }
 
+function getFilial($id_filial, $mysqli)
+{
+    $result = $mysqli->query("SELECT * FROM filiales WHERE filiales.id = {$id_filial}");
+ 
+    $filial = $result->fetch_assoc();
+            
+    return $filial;
+}
+
 //controlador para cambiar idioma - lo pongo aca a falta de un lugar mejor
 if(isset($_POST['cambiarPais']))
 {
@@ -759,5 +771,10 @@ if(isset($_POST['cambiarProvincia']))
     cambiarProvincia($_POST['cod_provincia'], $mysqli);
 }
 
+if(isset($_POST['filialSeleccionada']))
+{
+    $return = getFilial($_POST['cod_filial'], $mysqli);
+    echo json_encode($return);
+}
 
 ?>

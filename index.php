@@ -2,13 +2,13 @@
 session_start();
 include_once 'gestor/includes/functions.php';
 include_once 'gestor/includes/lenguaje.php';
-    
+
+//unset($_SESSION);
 if(!isset($_SESSION['pais']))
 {
     detectCountry($mysqli);
 }
-
-if(!isset($_SESSION['idioma_seleccionado']))
+if(!isset($_SESSION['idioma_seleccionado']['cod_idioma']))
 {
     $_SESSION['idioma_seleccionado']['cod_idioma'] = $_SESSION['pais']['cod_idioma'];
     $_SESSION['idioma_seleccionado']['idioma'] = $_SESSION['pais']['idioma'];
@@ -45,7 +45,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
         <link rel="shortcut icon" href="images/favicon.ico">
         
         <?php
-            $gridArray = getImagenesGrilla($mysqli);
+            $gridArray = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma']);
         ?>
     </head><!--/head-->
     
@@ -113,7 +113,6 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                     </div>
                 </div>          
             </div>
-            
             <div class="main-nav">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -142,7 +141,6 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?=$_SESSION['pais']['flag']?>" /><span style="margin-left: 5px;"><?=$_SESSION['pais']['pais']?></span><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                 <?php
-                                
                                 foreach($paises as $i=>$d){
                                     if($_SESSION['pais']['cod_pais'] != $d['cod_pais']){
                                 ?>
@@ -187,7 +185,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <h2><?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
-                        <p><?=$lenguaje['cursos_destacados_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        <p><?=$lenguaje['cursos_destacados_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></p>
                     </div>
                 </div> 
             </div>
@@ -217,10 +215,13 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                         <?php } ?>
                 </div>
             </div> <!--/#container-fluid-porfolios-->
-            
             <div id="portfolio-single-wrap">
                 <?php foreach ($gridArray as $imgGrid){
-                    $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma']);
+                    
+                    $nombre_defecto = $lenguaje['nombre_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $duracion_defecto = $lenguaje['duracion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $descripcion_defecto = $lenguaje['descripcion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
                 ?>
                 
                 <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
@@ -263,7 +264,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
                         <h2>IGA</h2>
-                        <p>Capacitamos a nuestros alumnos con una especialización en el arte culinario, desarrollando las actitudes y valores que requiere la formación de personas responsables, reflexivas, críticas, con conciencia ética y solidaria, para poder cubrir así la demanda laboral nacional e internacional.</p>
+                        <p><?=$lenguaje['capacitamos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div>
                 </div>
                 <div class="team-members">
@@ -274,9 +275,9 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                     <img class="img-responsive" src="images/team/1.jpg" alt="">
                                 </div>
                                 <div class="member-info">
-                                    <h3>La Red</h3>
+                                    <h3><?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                                     
-                                    <p>Nuestra red de capacitación, la más importante de Latinoamérica en su tipo, gracias a su sistema de gestión ofrece la misma calidad en la enseñanza otorgada en todos los establecimientos, brindando así a los alumnos la posibilidad de obtenter la mejor enseñanza en gastronomía, cualquiera sea su localidad de residencia.</p>
+                                    <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                                 </div>
                                 
                             </div>
@@ -287,8 +288,8 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                     <img class="img-responsive" src="images/team/2.jpg" alt="">
                                 </div>
                                 <div class="member-info">
-                                    <h3>Misión</h3>
-                                    <p>Nos orientamos a empleadores interesados en forjar un negocio seguro y sustentable, que les permita lograr una independencia económica, manteniendo el compromiso social de formar profesionales íntegros.</p>
+                                    <h3><?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                                 </div>
                                 
                             </div>
@@ -299,8 +300,8 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                     <img class="img-responsive" src="images/team/3.jpg" alt="">
                                 </div>
                                 <div class="member-info">
-                                    <h3>Visión</h3>
-                                    <p>Potenciar el liderazgo en Latinoamérica y posicionar nuestra marca en puntos estratégicos a nivel internacional, expandiéndonos a través de la apertura de nuevas unidades de negocios e incorporando tecnologías de vanguardia aplicadas a la educación.</p>
+                                    <h3><?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                                 </div>
                                 
                             </div>
@@ -311,14 +312,8 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                     <img class="img-responsive" src="images/team/4.jpg" alt="">
                                 </div>
                                 <div class="member-info">
-                                    <h3>Valores</h3>
-                                    <p>Responsabilidad</p>
-                                    <p>Liderazgo</p>
-                                    <p>Compromiso</p>
-                                    <p>Innovación</p>
-                                    <p>Eficiencia</p>
+                                    <?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -332,22 +327,22 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                     <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <i class="fa fa-user"></i>
                         <h3 class="timer">4000</h3>
-                        <p>Alumnos Felices :)</p>
+                        <p><?=$lenguaje['alumnos_felices_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div>
                     <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
                         <i class="fa fa-home"></i>
                         <h3 class="timer">200</h3>                    
-                        <p>Filiales</p>
+                        <p><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div> 
                     <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms">
                         <i class="fa fa-folder-o"></i>
                         <h3 class="timer">10</h3>                    
-                        <p>Cursos Disponibles</p>
+                        <p><?=$lenguaje['cursos_disponibles_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div> 
                     <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms">
                         <i class="fa fa-comment-o"></i>                    
                         <h3>24/7</h3>
-                        <p>Consultas</p>
+                        <p><?=$lenguaje['consultas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div>                 
                 </div>
             </div>
@@ -361,8 +356,8 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
             <div class="container">
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
-                        <h2>Novedades - Redes sociales</h2>
-                        <p>Encontranos y seguinos en nuestras redes sociales </p>
+                        <h2><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+                        <p><?=$lenguaje['encontranos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div>
                 </div>
                 <div class="blog-posts">
@@ -394,13 +389,14 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                 <div class="container">
                     <div class="row">
                         <div class="heading text-center wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <h2>Contactate con nosotros</h2>
-                            <p>Encontra tu IGA en Argentina</p>
+                            <h2><?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+                            <p><?=$lenguaje['encontra_tu_iga_en_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?><?=$_SESSION['pais']['pais']?></p>
                             <div class="col-sm-12 text-center wow fadeIn">
                                 <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
                                     <div class="form-group">
-                                        <label for="option">Provincia</label>
-                                        <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia()">
+                                        <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                        <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
+                                            <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
                                         <?php foreach ($provincias as $provincia){?>
                                         
                                             <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
@@ -411,59 +407,49 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="option">Filiales</label>
-                                        <select id="filiales">
-                                            <option>Seleccione Provincia</option>
+                                        <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                        <select id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
+                                            <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
                                         </select>
                                            
                                     </div>
-                                    
-                                    <button type="submit" class="btn-btn-default">Seleccionar</button>
                                 </form>
                             </div>
                         </div>
-                        <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
-                            
+                        <div class="contact-form" style="display:none">
                             <div class="row">
-                                
-                                
-                                
                                 <div class="col-sm-6">
-                                    
-                                    <form id="main-contact-form" name="contact-form" method="post" action="#">
-                                        
-                                        <div class="row  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                    <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                                        <input type="hidden" value="" id="correo" name="correo">
+                                        <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <input type="text" name="name" class="form-control" placeholder="Nombre" required="required">
+                                                    <input type="text" name="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <input type="email" name="email" class="form-control" placeholder="Dirección de Email" required="required">
+                                                    <input type="email" name="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="subject" class="form-control" placeholder="Asunto" required="required">
+                                            <input type="text" name="subject" class="form-control" placeholder="<?=$lenguaje['asunto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                         </div>
                                         <div class="form-group">
-                                            <textarea name="message" id="message" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
+                                            <textarea name="message" id="message" class="form-control" rows="4" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
                                         </div>                        
                                         <div class="form-group">
-                                            <button type="submit" class="btn-submit">Eviar ahora</button>
+                                            <button type="submit" class="btn-submit"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
                                         </div>
                                     </form>   
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="contact-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                                        
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                                    <div class="contact-info">
                                         <ul class="address">
-                                            <li><i class="fa fa-map-marker"></i> <span> Address:</span> 2400 South Avenue A </li>
-                                            <li><i class="fa fa-phone"></i> <span> Phone:</span> +928 336 2000  </li>
-                                            <li><i class="fa fa-envelope"></i> <span> Email:</span><a href="mailto:someone@yoursite.com"> support@oxygen.com</a></li>
-                                            <li><i class="fa fa-globe"></i> <span> Website:</span> <a href="#">www.sitename.com</a></li>
+                                            <li><i class="fa fa-map-marker"></i> <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="direccion"></span> </li>
+                                            <li><i class="fa fa-phone"></i> <span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="telefono"></span></li>
+                                            <li><i class="fa fa-envelope"></i> <span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="mail"></span></li>
                                         </ul>
                                     </div>                            
                                 </div>
@@ -497,15 +483,15 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-3">
-                            <p><a href="http://www.iga-la.com/empleos/" target="_blank">Quiero trabajar en IGA</a></p>
+                        <div class="col-sm-4 text-center">
+                            <p><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
                         </div>
                         
-                        <div class="col-sm-3">
-                            <p><a href="http://igafranchising.com/" target="_blank">Quiero una Franquisia de IGA</a></p>
+                        <div class="col-sm-4 text-center">
+                            <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquisia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
                         </div>
-                        <div class="col-sm-6">
-                            <p class="pull-right">&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
+                        <div class="col-sm-4 text-center">
+                            <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
                         </div>
                     </div>
                 </div>
