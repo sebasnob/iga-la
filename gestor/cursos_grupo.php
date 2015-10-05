@@ -156,6 +156,11 @@ if($logged == 'out'){
                                 </div>
                                 <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
                                 <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
+                                
+                                <div class="form-group">
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Objetivos:</b></h4>
+                                    <textarea name="objetivos" id="objetivos" class="form-control" rows="5"></textarea>
+                                </div>
                             </div>    
                              
                         </div><!-- /form-panel -->
@@ -304,6 +309,13 @@ if($logged == 'out'){
                 ]
             });
             CKEDITOR.replace( 'descripcion', {
+                //uiColor: '#010F2C',
+                customConfig: 'config.js',
+                toolbar: [
+                        [ 'Bold', 'Italic', 'FontSize']
+                ]
+            });
+            CKEDITOR.replace( 'objetivos', {
                 //uiColor: '#010F2C',
                 customConfig: 'config.js',
                 toolbar: [

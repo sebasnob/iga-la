@@ -15,18 +15,6 @@ if($logged == 'out'){
     exit();
 }
 
-if(isset($_GET['idioma'])){
-	$idioma = $_GET['idioma'];
-}else{
-	$idioma = '1';
-}
-
-if(isset($_GET['pais'])){
-    $pais = $_GET['pais'];
-}else{
-    $pais = '1';
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -186,6 +174,11 @@ if(isset($_GET['pais'])){
                                           </div>
                                           <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
                                           <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
+                                          
+                                          <div class="form-group">
+                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Objetivos:</b></h4>
+                                              <textarea name="objetivos" id="objetivos" class="form-control" rows="5"></textarea>
+                                          </div>
                                    </div>
 
                                 </div><!-- /form-panel -->
@@ -374,10 +367,6 @@ if(isset($_GET['pais'])){
                             $('#imgMaterialesPreview').attr("src", data.url_material);
                             $('#imgUniformesPreview').attr("src", data.url_uniforme);
                             
-                            $('#descripcion').val(data.descripcion);
-                            $('#uniformes_txt').val(data.desc_uniforme);
-                            $('#materiales_txt').val(data.desc_material);
-                            
                             $('#horas').val(data.horas);
                             $('#meses').val(data.meses);
                             $('#anios').val(data.anios);
@@ -386,27 +375,57 @@ if(isset($_GET['pais'])){
                             $('.datos_curso').css('display','block');
                             $('.acciones').css('display','block');
                             
-                            CKEDITOR.replace( 'uniformes_txt', {
-                                //uiColor: '#010F2C',
-                                customConfig: 'config.js',
-                                toolbar: [
-                                        [ 'Bold', 'Italic', 'FontSize']
-                                ]
-                            });
-                            CKEDITOR.replace( 'materiales_txt', {
-                                //uiColor: '#010F2C',
-                                customConfig: 'config.js',
-                                toolbar: [
-                                        [ 'Bold', 'Italic', 'FontSize']
-                                ]
-                            });
-                            CKEDITOR.replace( 'descripcion', {
-                                //uiColor: '#010F2C',
-                                customConfig: 'config.js',
-                                toolbar: [
-                                        [ 'Bold', 'Italic', 'FontSize']
-                                ]
-                            });
+                            if(!CKEDITOR.instances['uniformes_txt']){
+                                $('#uniformes_txt').val(data.desc_uniforme);
+                                CKEDITOR.replace( 'uniformes_txt', {
+                                    //uiColor: '#010F2C',
+                                    customConfig: 'config.js',
+                                    toolbar: [
+                                            [ 'Bold', 'Italic', 'FontSize']
+                                    ]
+                                });
+                            }else{
+                                CKEDITOR.instances['uniformes_txt'].setData(data.desc_uniforme);
+                            }
+                            
+                            if(!CKEDITOR.instances['materiales_txt']){
+                                $('#materiales_txt').val(data.desc_material);
+                                CKEDITOR.replace( 'materiales_txt', {
+                                    //uiColor: '#010F2C',
+                                    customConfig: 'config.js',
+                                    toolbar: [
+                                            [ 'Bold', 'Italic', 'FontSize']
+                                    ]
+                                });
+                            }else{
+                                CKEDITOR.instances['materiales_txt'].setData(data.desc_material);
+                            }
+                            
+                            if(!CKEDITOR.instances['descripcion']){
+                                $('#descripcion').val(data.descripcion);
+                                CKEDITOR.replace( 'descripcion', {
+                                    //uiColor: '#010F2C',
+                                    customConfig: 'config.js',
+                                    toolbar: [
+                                            [ 'Bold', 'Italic', 'FontSize']
+                                    ]
+                                });
+                            }else{
+                                CKEDITOR.instances['descripcion'].setData(data.descripcion);
+                            }
+                            
+                            if(!CKEDITOR.instances['objetivos']){
+                                $('#objetivos').val(data.objetivos);
+                                CKEDITOR.replace( 'objetivos', {
+                                    //uiColor: '#010F2C',
+                                    customConfig: 'config.js',
+                                    toolbar: [
+                                            [ 'Bold', 'Italic', 'FontSize']
+                                    ]
+                                });
+                            }else{
+                                CKEDITOR.instances['objetivos'].setData(data.objetivos);
+                            }
                         }else{
                             $('#datos_curso').hide();
                             $('#error_datos_curso').html(data);

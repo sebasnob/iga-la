@@ -230,10 +230,15 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                             <img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_cabecera']?>" alt="">
                             <div class="col-sm-9">
                                 <div class="project-info">
-                                    <h2><?= $cursos_datos['nombre']?></h2>
+                                    <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
                                     <div class="entry-meta">
                                         
-                                        <span><i class="fa fa-calendar"></i> <?= $cursos_datos['duracion']?></span>
+                                        <span>
+                                            <i class="fa fa-calendar"></i>&nbsp;Duración: 
+                                            <?php echo ($cursos_datos['horas'] != '' && $cursos_datos['horas'] != 0)? $cursos_datos['horas']." horas": ''; ?>
+                                            <?php echo ($cursos_datos['meses'] != '' && $cursos_datos['meses'] != 0)? ", ".$cursos_datos['meses']." meses": ''; ?>
+                                            <?php echo ($cursos_datos['anios'] != '' && $cursos_datos['anios'] != 0)? ", ".$cursos_datos['anios']." años": ''; ?>
+                                        </span>
                                         
                                     </div>
                                     <p class="lead"><?= $cursos_datos['descripcion']?></p>
@@ -242,13 +247,17 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                             
                             <div class="col-sm-3">
                                 <div class="project-details">
-                                    <h3><?=$lenguaje['uniformes_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_uniforme']?>" alt=""></p>
-                                    <h3><?=$lenguaje['materiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_material']?>" alt=""></p>
+                                    <img class="img-responsive" src="<?php echo $imgGrid['img_url']?>" alt="">
+                                    <!--
+                                    <h3><?php //$lenguaje['uniformes_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><img class="img-responsive animated fadeInDown" src="<?php //$cursos_datos['url_uniforme']?>" alt=""></p>
+                                    <h3><?php //$lenguaje['materiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><img class="img-responsive animated fadeInDown" src="<?php //$cursos_datos['url_material']?>" alt=""></p>
+                                    -->
                                 </div>  
                             </div>
                             
+                            <div class="col-sm-12"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
                         </div>
                         <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
                         
@@ -457,10 +466,11 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                         </div>
                     </div>
                 </div>   
-                <!-- <div id="google-map" class="wow fadeIn" data-latitude="52.365629" data-longitude="4.871331" data-wow-duration="1000ms" data-wow-delay="400ms"></div>     -->
-                <div id="google-map">
+                <!-- <div id="google-map" data-latitude="52.365629" data-longitude="4.871331" class="hidden"></div>-->
+                <!-- <div id="google-map">
                     <iframe style="pointer-events:none; width: 100%" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.1441195581438!2d-60.64096080000006!3d-32.94720419999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab0fef47530f%3A0xb7b9732d2220d371!2sIGA+Instituto+Gastron%C3%B3mico+de+las+Am%C3%A9ricas!5e0!3m2!1ses-419!2sar!4v1442353059311" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div>      
+                </div>-->
+                <div id="google-map" style="display: none"></div>
         </section><!--/#contact-->
         <footer id="footer">
             <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
@@ -500,7 +510,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
         
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript" src="js/jquery.inview.min.js"></script>
         <script type="text/javascript" src="js/wow.min.js"></script>
         <script type="text/javascript" src="js/mousescroll.js"></script>
@@ -519,5 +529,8 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
         </script>
         <!-- Plugins Twitter -->
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <script>
+            
+        </script>
     </body>
 </html>

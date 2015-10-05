@@ -265,6 +265,25 @@ echo "años ".$cfi['id']."<br/>";
     }
     //### FIN EDICION DESCRIPCION DEL UNIFORME ###//
     
+    //### EDICION OBJETIVOS ###//
+    if(isset($_POST['objetivos']) && $_POST['objetivos'] != ''){
+        $filiales = $_POST['filial'];
+        foreach($filiales as $id=>$value){
+            $query_sel = "SELECT id FROM curso_filial_idioma WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+            $result_sel = $mysqli->query($query_sel);
+            $cfi = $result_sel->fetch_assoc();
+            
+            $query = "UPDATE curso_datos SET objetivos='{$_POST['objetivos']}' WHERE id_cfi='{$cfi['id']}'";
+            $result = $mysqli->query($query);
+            if($result){
+                    $message = "<br/>Objetivos modificados correctamente.<br/>";
+            }
+        }
+    }
+    //### FIN EDICION DESCRIPCION DE OBJETIVOS ###//
+    
+    header("Location: result.php?cod_curso={$_POST['cod_curso']}");
+    exit;
 }
 
 if(isset($_POST['edicion_curso'])){
@@ -434,9 +453,18 @@ if(isset($_POST['edicion_curso'])){
         }
     }
     
+    if(isset($_POST['objetivos']) && $_POST['objetivos'] != ''){
+        $query = "UPDATE curso_datos SET objetivos='{$_POST['objetivos']}' WHERE id_cfi='{$cfi_sd['id']}'";
+        $result = $mysqli->query($query);
+        if($result){
+                $message = "<br/>Objetivos modificados correctamente.<br/>";
+        }
+    }
+    
     //#####  FIN EDICION DE TEXTOS  #####//
     
-    die($cfi_sd['id']);
+    header("Location: result.php?cod_curso={$_POST['cod_curso']}&id_idioma={$_POST['idioma_curso']}&id_filial={$filial}");
+    exit;
     
 }    
 
