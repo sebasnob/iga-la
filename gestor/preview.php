@@ -51,7 +51,7 @@ $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
     <section id="head_image_curso">
        <div class="container-fluid">
          <div class="row" align="center">
-           <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="">
+           <img class="img-responsive animated fadeInLeftBig" src="../<?=$datos_curso['url_cabecera']?>" alt="">
          </div>
        </div>
     </section> 
@@ -89,7 +89,7 @@ $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
                             <div class="well">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img class="avatar img-thumbnail" src="<?=$datos_curso['url_material']?>" alt="">
+                                        <img class="avatar img-thumbnail" src="../<?=$datos_curso['url_material']?>" alt="">
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">
@@ -106,7 +106,7 @@ $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
                              <div class="well">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img class="avatar img-thumbnail" src="<?=$datos_curso['url_uniforme']?>" alt="">
+                                        <img class="avatar img-thumbnail" src="../<?=$datos_curso['url_uniforme']?>" alt="">
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">

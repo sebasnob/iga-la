@@ -363,9 +363,9 @@ if($logged == 'out'){
                         if(data.id){
                             $('#error_datos_curso').hide();
                             
-                            $('#imagePreview').attr("src", data.url_cabecera);
-                            $('#imgMaterialesPreview').attr("src", data.url_material);
-                            $('#imgUniformesPreview').attr("src", data.url_uniforme);
+                            $('#imagePreview').attr("src", "../"+data.url_cabecera);
+                            $('#imgMaterialesPreview').attr("src", "../"+data.url_material);
+                            $('#imgUniformesPreview').attr("src", "../"+data.url_uniforme);
                             
                             $('#horas').val(data.horas);
                             $('#meses').val(data.meses);

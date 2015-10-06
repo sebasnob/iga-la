@@ -25,7 +25,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
-        <meta name="author" content="lifeWEB.com">
+        <meta name="author" content="lifeweb.com.ar">
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/animate.min.css" rel="stylesheet"> 

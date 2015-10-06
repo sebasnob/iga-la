@@ -91,7 +91,7 @@ if(isset($_GET['id_filial'])){
  <section id="head_image_curso">
     <div class="container-fluid">
       <div class="row">
-        <img class="img-responsive animated fadeInLeftBig" src="images/slider/4.jpg" alt="">
+        <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="">
       </div>
     </div>
  </section> 
@@ -114,16 +114,16 @@ if(isset($_GET['id_filial'])){
             </aside>        
             <div class="col-sm-8 col-sm-pull-4">
                 <section id="curso">
-                    <h2>Gastronomía y Alta Cocina</h2>
+                    <h2><?=$datos_curso['nombre']?></h2>
                     <div class="entry-meta">
-                        <span><i class="fa fa-calendar"></i> 2 años de duración</span>
+                        <span>
+                    	    <i class="fa fa-calendar"></i>&nbsp;Duración:
+                    	    <?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." horas": ''; ?>
+                    	    <?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." meses": ''; ?>
+                    	    <?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." años": ''; ?>
+                	</span>
                     </div>
-                    <p class="lead">“Gastronomía y Alta Cocina” brinda los conocimientos necesarios para alcanzar la excelencia como profesional de la gastronomía. Además obtendrás las herramientas para emprender un negocio culinario y alcanzar así la cima del éxito, haciendo de la cocina tu profesión.</p>
-
-                    <p>Convertite en un profesional de la alta cocina y del arte culinario! Encabezá un equipo de cocineros en un negocio culinario de altísimo nivel!</p>
-
-                    <p>Cursado el 1º año recibís el certificado de COCINERO PROFESIONAL
-                    <br>Cursado el 2º año recibís el certificado de GASTRONOMÍA & ALTA COCINA</p>
+                    <?=$datos_curso['descripcion']?>
                 </section>
                 <hr>
                 <section id="cursado_planes">
@@ -185,15 +185,13 @@ if(isset($_GET['id_filial'])){
                     <div class="well">
                         <div class="media">
                             <div class="pull-left">
-                                <img class="avatar img-thumbnail" src="images/blog/avatar.jpg" alt="">
+                                <img class="avatar img-thumbnail" src="<?=$datos_curso['url_material']?>" alt="">
                             </div>
                             <div class="media-body">
                                 <div class="media-heading">
                                     <strong>Cada curso de IGA</strong>
                                 </div>
-                                <p>está respaldado por un material de estudio de primerísimo nivel y calidad, elaborado por profesionales altamente capacitados en el área de la gastronomía y la educación.<br>
-
-El alumno que cursa “Gastronomía y Alta Cocina” dispone de libros de excelencia; un tomo por cuatrimestre, cuatro libros en total. Los mismos contienen cada una de las materias de la currícula, incluidas las denominadas prácticas en las cuales se desarrollan las principales recetas paso a paso acompañadas de fotos full color.</p>
+                                <?=$datos_curso['desc_material']?>
                             </div>
                         </div>
                     </div><!--/.author-->
@@ -204,15 +202,13 @@ El alumno que cursa “Gastronomía y Alta Cocina” dispone de libros de excele
                      <div class="well">
                         <div class="media">
                             <div class="pull-left">
-                                <img class="avatar img-thumbnail" src="images/blog/avatar2.jpg" alt="">
+                                <img class="avatar img-thumbnail" src="<?=$datos_curso['url_uniforme']?>" alt="">
                             </div>
                             <div class="media-body">
                                 <div class="media-heading">
                                     <strong>Con la inscripción al curso,</strong>
                                 </div>
-                                <p>IGA hace entrega de un uniforme completo de cocinero, compuesto por un delantal, un gorro y una chaqueta.<br>
-                                El alumno recibirá dos uniformes, uno para el primer año de cursado y otro para el segundo año.
-                                </p>
+                                <?=$datos_curso['desc_uniforme']?>
                             </div>
                         </div>
                     </div><!--/.author-->
@@ -222,14 +218,14 @@ El alumno que cursa “Gastronomía y Alta Cocina” dispone de libros de excele
                 <section id="objetivo">
                     <h2>Nuestro Objetivo</h2>
                     <div class="entry-meta">
-                      <span><i class="fa fa-calendar"></i> 2 años de duración</span>
+                    <span>
+                	<i class="fa fa-calendar"></i>&nbsp;Duración:
+                	<?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." horas": ''; ?>
+                	<?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." meses": ''; ?>
+                	<?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." años": ''; ?>
+                    </span>
                     </div>
-                    <p class="lead">Brindar una formación integral para desarrollar las destrezas necesarias de una profesión que posibilite insertarse rápidamente en el mercado laboral.<br>
-
-                        Difundir nuestra gastronomía alrededor del mundo, participando activamente en eventos nacionales e internacionales.<br>
-
-                        Preparar al alumno para ser excelente Chef y proveerlo de todos los conocimientos necesarios para ser un emprendedor exitoso.
-                    </p>
+                    <?=$datos_curso['objetivos']?>
                 </section>
             </div>
         </div><!--/.row-->

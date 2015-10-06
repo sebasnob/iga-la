@@ -53,7 +53,7 @@ if($logged == 'out'){
     *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
-        <section class="wrapper">
+        <section class="wrapper site-min-height">
                     <div class="row mtbox">
                       <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                         <div class="box1">
@@ -181,10 +181,10 @@ if($logged == 'out'){
             
                     </div><!-- /row -->      
 
-                        <h3><i class="fa fa-angle-right"></i> Listado TOP de cursos</h3>
+                    <!--<h3><i class="fa fa-angle-right"></i> Listado TOP de cursos</h3>
 		  		<div class="row mt">
-			  		<div class="col-lg-12">
-                      <div class="content-panel">
+			<div class="col-lg-12">
+                        <div class="content-panel">
                             <h4><i class="fa fa-angle-right"></i> 10 más consultados</h4>
                             <section id="unseen">
                               <table class="table table-bordered table-striped table-condensed">
@@ -326,11 +326,9 @@ if($logged == 'out'){
                                 </tbody>
                             </table>
                           </section>
-                  </div><!-- /content-panel -->
-                  
-                  
-               </div><!-- /col-lg-4 -->			
-            </div><!-- /row -->
+                  </div>
+               </div>
+            </div> /-->
       
 		
 		  	
