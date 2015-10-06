@@ -90,7 +90,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                     </p>
                     <!--<h1 class="animated fadeInLeftBig">Bienvenidos a <span>IGA</span></h1>
                     <p class="animated fadeInRightBig">INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS </p>-->
-                    <a data-scroll class="btn btn-start animated fadeInUpBig" href="#portfolio">
+                    <button class="btn btn-start" onclick="javascript:scroll('#portfolio')">
                         <?php switch($_SESSION['idioma_seleccionado']['cod_idioma'])
                         {
                             case 'IN':
@@ -104,7 +104,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                             break;
                         }
                         ?>
-                    </a>
+                    </button>
                 </div>
                 <div class="embed-responsive embed-responsive-16by9 ">
                     <div id="background">
@@ -227,28 +227,30 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                 <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
                     <div class="row">
                         <div class="col-sm-12">
-                            <img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_cabecera']?>" alt="">
+                            <img class="img-responsive animated fadeInDown" src="<?= (isset($cursos_datos['url_cabecera'])) ? $cursos_datos['url_cabecera'] : ''?>" alt="">
                             <div class="col-sm-9">
                                 <div class="project-info">
-                                    <h2><?= $cursos_datos['nombre']?></h2>
+                                    <h2><?= (isset($cursos_datos['nombre'])) ? $cursos_datos['nombre'] : ''?></h2>
                                     <div class="entry-meta">
                                         
-                                        <span><i class="fa fa-calendar"></i> <?= $cursos_datos['duracion']?></span>
+                                        <span><i class="fa fa-calendar"></i> <?= (isset($cursos_datos['duracion'])) ? $cursos_datos['duracion'] : ''?></span>
                                         
                                     </div>
-                                    <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                                    <p class="lead"><?= (isset($cursos_datos['descripcion'])) ? $cursos_datos['descripcion'] : ''?></p>
                                 </div>
                             </div>
                             
                             <div class="col-sm-3">
                                 <div class="project-details">
                                     <h3><?=$lenguaje['uniformes_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_uniforme']?>" alt=""></p>
+                                    <p><img class="img-responsive animated fadeInDown" src="<?= (isset($cursos_datos['url_uniforme'])) ? $cursos_datos['url_uniforme'] : ''?>" alt=""></p>
                                     <h3><?=$lenguaje['materiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_material']?>" alt=""></p>
+                                    <p><img class="img-responsive animated fadeInDown" src="<?= (isset($cursos_datos['url_material'])) ? $cursos_datos['url_material'] : ''?>" alt=""></p>
                                 </div>  
                             </div>
-                            
+                            <div class="col-sm-12">
+                                <a class="btn btn-start" onclick="javascript:abrirCurso('<?php echo $imgGrid['id_curso']?>')"><?=$lenguaje['mas_info_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a>
+                            </div>
                         </div>
                         <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
                         
