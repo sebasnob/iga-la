@@ -134,32 +134,34 @@ jQuery(function($) {
 		});
 	});
 
-	//Google Map
-	/*var latitude = $('#google-map').data('latitude')
-	var longitude = $('#google-map').data('longitude')
-	function initialize_map() {
-		var myLatlng = new google.maps.LatLng(latitude,longitude);
-		var mapOptions = {
-			zoom: 14,
-			scrollwheel: false,
-			center: myLatlng
-		};
-		var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
-		var contentString = '';
-		var infowindow = new google.maps.InfoWindow({
-			content: '<div class="map-content"><ul class="address">' + $('.address').html() + '</ul></div>'
-		});
-		var marker = new google.maps.Marker({
-			position: myLatlng,
-			map: map
-		});
-		google.maps.event.addListener(marker, 'click', function() {
-			infowindow.open(map,marker);
-		});
-	}
-	google.maps.event.addDomListener(window, 'load', initialize_map);*/
+	
+	
 	
 });
+
+//Google Map
+function initialize_map(latitude, longitude) {
+    var myLatlng = new google.maps.LatLng(latitude,longitude);
+    var mapOptions = {
+            zoom: 14,
+            scrollwheel: false,
+            center: myLatlng
+    };
+    var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+    var contentString = '';
+    var infowindow = new google.maps.InfoWindow({
+            content: '<div class="map-content"><ul class="address">' + $('.address').html() + '</ul></div>'
+    });
+    var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+    });
+
+    google.maps.event.addDomListener(window, 'load', initialize_map);
+}
 
 function descripcionCurso(id_curso)
 {
@@ -252,10 +254,13 @@ function filialSeleccionada()
           dataType:'json',
       success: function(data)
       {
-            $('#direccion').append(data.domicilio);
-            $('#telefono').append(data.telefono);
-            $('#mail').append(data.email);
+            $('#direccion').html(data.domicilio);
+            $('#telefono').html(data.telefono);
+            $('#mail').html(data.email);
             $('#correo').val(data.email);
+            
+            initialize_map(data.latitud, data.longitud);
+            $('#google-map').show();
       },
       error: function(data)
       {

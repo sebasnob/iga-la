@@ -1,7 +1,7 @@
 <?php
 include_once 'psl-config.php';
 include_once 'db_connect.php';
-
+ 
 function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
     $query1 = "SELECT cfi.id, cfi.estado FROM curso_filial_idioma as cfi 
             WHERE 
@@ -142,7 +142,6 @@ function getPaises($mysqli){
     while($pais = $result->fetch_assoc()){
 	$paises[] = array('id'=>$pais['id'],'pais'=>$pais['pais'],'cod_pais'=>$pais['cod_pais'], 'flag'=>$pais['flag']);
     }
-    
     return $paises;
 }
 
