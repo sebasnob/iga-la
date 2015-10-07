@@ -130,8 +130,9 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                         <ul class="nav navbar-nav navbar-left">     
                             <li class="scroll active"><a href="#home"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li class="scroll"><a href="#" onclick="javascript:scroll('#portfolio')"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>                     
-                            <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li> 
+                                               
+                            <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                             <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
                             <li class="scroll"><a href="#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
                         </ul>
@@ -179,7 +180,44 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                 </div>
             </div><!--/#main-nav-->
         </header><!--/#home-->
-        
+          <section id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 1</h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 2</h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 3</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </section>
         <section id="portfolio">
             <div class="container-fluid">
                 <div class="row">
@@ -268,6 +306,164 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
             
         </section><!--/#portfolio-->
         
+               <section id="blog">
+            <div class="container">
+                <div class="row">
+                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+                        <h2><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+                        <p><?=$lenguaje['encontranos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>
+                </div>
+                <div class="blog-posts">
+                    <div class="row">
+                        <div class="col-sm-6 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                            <div class="fb-page" data-href="https://www.facebook.com/IGA.GASTRONOMIA" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true">
+                                <div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/IGA.GASTRONOMIA"><a href="https://www.facebook.com/IGA.GASTRONOMIA">IGA</a></blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+                            <a class="twitter-timeline" href="https://twitter.com/IGA_LA" data-widget-id="650168451454119936">Tweets por el @IGA_LA.</a>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+
+   <div class="row">
+                                        <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+                                            <h2>Novedades</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
+                                        </div>
+                                    </div>
+                                    <div class="blog-posts">
+                                        <div class="row">
+                                            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                                                <div class="post-thumb">
+                                                    <a href="#"><img class="img-responsive" src="images/blog/1.jpg" alt=""></a> 
+                                                    <div class="post-meta">
+                                                        <span><i class="fa fa-comments-o"></i> 3 Comments</span>
+                                                        <span><i class="fa fa-heart"></i> 0 Likes</span> 
+                                                    </div>
+                                                    <div class="post-icon">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="entry-header">
+                                                    <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
+                                                    <span class="date">June 26, 2014</span>
+                                                    <span class="cetagory">in <strong>Photography</strong></span>
+                                                </div>
+                                                <div class="entry-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                                <div class="post-thumb">
+                                                    <div id="post-carousel"  class="carousel slide" data-ride="carousel">
+                                                        <ol class="carousel-indicators">
+                                                            <li data-target="#post-carousel" data-slide-to="0" class="active"></li>
+                                                            <li data-target="#post-carousel" data-slide-to="1"></li>
+                                                            <li data-target="#post-carousel" data-slide-to="2"></li>
+                                                        </ol>
+                                                        <div class="carousel-inner">
+                                                            <div class="item active">
+                                                                <a href="#"><img class="img-responsive" src="images/blog/2.jpg" alt=""></a>
+                                                            </div>
+                                                            <div class="item">
+                                                                <a href="#"><img class="img-responsive" src="images/blog/1.jpg" alt=""></a>
+                                                            </div>
+                                                            <div class="item">
+                                                                <a href="#"><img class="img-responsive" src="images/blog/3.jpg" alt=""></a>
+                                                            </div>
+                                                        </div>                               
+                                                        <a class="blog-left-control" href="#post-carousel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                                                        <a class="blog-right-control" href="#post-carousel" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                                                    </div>                            
+                                                    <div class="post-meta">
+                                                        <span><i class="fa fa-comments-o"></i> 3 Comments</span>
+                                                        <span><i class="fa fa-heart"></i> 0 Likes</span> 
+                                                    </div>
+                                                    <div class="post-icon">
+                                                        <i class="fa fa-picture-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="entry-header">
+                                                    <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
+                                                    <span class="date">June 26, 2014</span>
+                                                    <span class="cetagory">in <strong>Photography</strong></span>
+                                                </div>
+                                                <div class="entry-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="800ms">
+                                                <div class="post-thumb">
+                                                    <a href="#"><img class="img-responsive" src="images/blog/3.jpg" alt=""></a>
+                                                    <div class="post-meta">
+                                                        <span><i class="fa fa-comments-o"></i> 3 Comments</span>
+                                                        <span><i class="fa fa-heart"></i> 0 Likes</span> 
+                                                    </div>
+                                                    <div class="post-icon">
+                                                        <i class="fa fa-video-camera"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="entry-header">
+                                                    <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
+                                                    <span class="date">June 26, 2014</span>
+                                                    <span class="cetagory">in <strong>Photography</strong></span>
+                                                </div>
+                                                <div class="entry-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                                </div>
+                                            </div>                    
+                                        </div>
+                                                    
+                                    </div>
+                                </div>
+
+
+            </div>
+            
+        </section><!--/#blog-->
+        
+        <section id="features" class="parallax">
+            <div class="container">
+                <div class="row count">
+                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <i class="fa fa-user"></i>
+                        <h3 class="timer">4000</h3>
+                        <p><?=$lenguaje['alumnos_felices_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>
+                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+                        <i class="fa fa-home"></i>
+                        <h3 class="timer">200</h3>                    
+                        <p><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div> 
+                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms">
+                        <i class="fa fa-folder-o"></i>
+                        <h3 class="timer">10</h3>                    
+                        <p><?=$lenguaje['cursos_disponibles_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div> 
+                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms">
+                        <i class="fa fa-comment-o"></i>                    
+                        <h3>24/7</h3>
+                        <p><?=$lenguaje['consultas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>                 
+                </div>
+            </div>
+        </section><!--/#features-->
+        
+        
+        
+        
+        
+
+        
         <section id="team">
             <div class="container">
                 <div class="row">
@@ -329,69 +525,8 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                 </div>            
             </div>
         </section><!--/#team-->
-        
-        <section id="features" class="parallax">
-            <div class="container">
-                <div class="row count">
-                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <i class="fa fa-user"></i>
-                        <h3 class="timer">4000</h3>
-                        <p><?=$lenguaje['alumnos_felices_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div>
-                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
-                        <i class="fa fa-home"></i>
-                        <h3 class="timer">200</h3>                    
-                        <p><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div> 
-                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms">
-                        <i class="fa fa-folder-o"></i>
-                        <h3 class="timer">10</h3>                    
-                        <p><?=$lenguaje['cursos_disponibles_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div> 
-                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms">
-                        <i class="fa fa-comment-o"></i>                    
-                        <h3>24/7</h3>
-                        <p><?=$lenguaje['consultas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div>                 
-                </div>
-            </div>
-        </section><!--/#features-->
-        
-        
-        
-        
-        
-        <section id="blog">
-            <div class="container">
-                <div class="row">
-                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
-                        <h2><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
-                        <p><?=$lenguaje['encontranos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div>
-                </div>
-                <div class="blog-posts">
-                    <div class="row">
-                        <div class="col-sm-6 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
-                            <div class="fb-page" data-href="https://www.facebook.com/IGA.GASTRONOMIA" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true">
-                                <div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/IGA.GASTRONOMIA"><a href="https://www.facebook.com/IGA.GASTRONOMIA">IGA</a></blockquote>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-6 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
-                            <a class="twitter-timeline" href="https://twitter.com/IGA_LA" data-widget-id="650168451454119936">Tweets por el @IGA_LA.</a>
-                            
-                            
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                
-            </div>
-            
-        </section><!--/#blog-->
-        
+
+
         <section id="contact">
             
             <div id="contact-us" >
