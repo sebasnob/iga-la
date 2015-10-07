@@ -159,7 +159,7 @@ section {
   color: #355EB6;
 
 }
-#home-slider .caption .btn-start {
+ .caption .btn-start {
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -167,10 +167,13 @@ section {
   border: 1px solid #6e6d6c;
   border-radius: 4px;
   margin-top: 40px;
+  background-color: transparent;
 }
 
-#home-slider .caption .btn-start:hover {
-  color: #fff
+ .caption .btn-start:hover {
+  color: #fff;
+  /*background-color: #386BC7;*/
+  border: 1px solid #386BC7;
 }
 
 .carousel-fade .carousel-inner .item {

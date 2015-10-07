@@ -268,6 +268,11 @@ function filialSeleccionada()
       }
     });
     $('.contact-form').show('slow');
-    
-    
+}
+
+function scroll(to)
+{
+    event.preventDefault();
+    var body = $("html, body");
+    body.stop().animate({scrollTop:$(to).position().top - 70}, '500', 'swing');
 }

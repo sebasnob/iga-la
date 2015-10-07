@@ -22,7 +22,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="lifeweb.com.ar">
@@ -90,7 +90,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                     </p>
                     <!--<h1 class="animated fadeInLeftBig">Bienvenidos a <span>IGA</span></h1>
                     <p class="animated fadeInRightBig">INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS </p>-->
-                    <a data-scroll class="btn btn-start animated fadeInUpBig" href="#portfolio">
+                    <button class="btn btn-start" onclick="javascript:scroll('#portfolio')">
                         <?php switch($_SESSION['idioma_seleccionado']['cod_idioma'])
                         {
                             case 'IN':
@@ -104,7 +104,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                             break;
                         }
                         ?>
-                    </a>
+                    </button>
                 </div>
                 <div class="embed-responsive embed-responsive-16by9 ">
                     <div id="background">
@@ -129,7 +129,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">     
                             <li class="scroll active"><a href="#home"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="#portfolio"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="#" onclick="javascript:scroll('#portfolio')"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>                     
                             <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li> 
                             <li class="scroll"><a href="#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
