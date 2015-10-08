@@ -395,7 +395,7 @@ function detectCountry($mysqli){
 
     //Con esta opcion almaceno el resultado en una variable
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    session_start();
+    //session_start();
     if(curl_exec($ch))
     {
         $resp = json_decode(curl_exec($ch));

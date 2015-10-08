@@ -3,14 +3,25 @@ session_start();
 include_once 'gestor/includes/functions.php';
 include_once 'gestor/includes/lenguaje.php';
 
+//unset($_SESSION);
+if(!isset($_GET['cod_curso']) || $_GET['cod_curso'] == ''){
+    header("Location:index.php");
+    exit();
+}
+
+if(!isset($_SESSION['pais']))
+{
+    detectCountry($mysqli);
+}
 if(!isset($_SESSION['idioma_seleccionado']['cod_idioma']))
 {
     $_SESSION['idioma_seleccionado']['cod_idioma'] = $_SESSION['pais']['cod_idioma'];
     $_SESSION['idioma_seleccionado']['idioma'] = $_SESSION['pais']['idioma'];
 }
+if(isset($_GET['id_filial'])){
+    $_SESSION['id_filial'] = $_GET['id_filial'];
+}
 
-$res_idioma = $mysqli->query("SELECT id FROM idiomas WHERE cod_idioma='{$_SESSION['idioma_seleccionado']['cod_idioma']}'");
-$idioma = $res_idioma->fetch_assoc();
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 
 ?>
@@ -45,9 +56,12 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 {
     $id_filial = (isset($_GET['id_filial'])) ? $_GET['id_filial'] : $_SESSION['id_filial'];
     $cod_curso = $_GET['cod_curso'];
+    
+    $res_idioma = $mysqli->query("SELECT id FROM idiomas WHERE cod_idioma='{$_SESSION['idioma_seleccionado']['cod_idioma']}'");
+    $idioma = $res_idioma->fetch_assoc();
     $id_idioma = $idioma['id'];
     $showModal = 0;
-    $_SESSION['id_filial'] = $id_filial;
+    
     $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
 
 ?>
@@ -162,55 +176,61 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     <section id="cursado_planes">
                         <h3>Cursado y plan de pagos</h3>
                         <p>Para ver los inicios de clases, los horarios de cursado y las formas de pago, seleccione una provincia y un local.</p>
-                        <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
+                        <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
                             <div class="form-group">
-                                <label for="option">Provincia</label>
-                                <select class="form-control">
-                                    <option>Santa Fe</option>
-                                    <option>opcion 2</option>
-                                </select>
+                                <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
+                                    <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
+                                <?php foreach ($provincias as $provincia){?>
+
+                                    <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
+
+                                <?php }?>
+                                </select>    
+
                             </div>
-                            
+
                             <div class="form-group">
-                                <label for="option">Localidad</label>
-                                <select class="form-control">
-                                    <option>Rosario</option>
-                                    <option>opcion 2</option>
+                                <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                <select id="filiales_matricula" class="form-control">
+                                    <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
                                 </select>
-                            </div> 
-                            <button type="submit" class="btn-btn-default">Consultar</button>
+
+                            </div>
                         </form>
                         
-                        <ul class="list-group">
-                            <li class="list-group-item "><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes y Miércoles </strong> - de 18:30 a 20:30 y de 18:30 a 22:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                            <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Miércoles </strong> - de 15:30 a 17:30 <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                            <li class="list-group-item" ><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes</strong> - de 18:30 a 20:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                            <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..." > <strong>Sábado </strong> - de 12:00 a 14:00 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                        </ul>  
+                        <div class="hidden">
+                            <ul class="list-group">
+                                <li class="list-group-item "><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes y Miércoles </strong> - de 18:30 a 20:30 y de 18:30 a 22:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
+                                <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Miércoles </strong> - de 15:30 a 17:30 <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
+                                <li class="list-group-item" ><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes</strong> - de 18:30 a 20:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
+                                <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..." > <strong>Sábado </strong> - de 12:00 a 14:00 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
+                            </ul>  
                         
-                        <form id="main-contact-form" name="contact-form" method="post" action="#">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" name="name" class="form-control" placeholder="Nombre" required="required">
+                            <form id="main-contact-form" name="contact-form" method="post" action="#">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Nombre" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control" placeholder="Dirección de Email" required="required">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="email" name="email" class="form-control" placeholder="Dirección de Email" required="required">
-                                    </div>
+                                <div class="form-group">
+                                    <input type="text" name="telefono" class="form-control" placeholder="Teléfono" required="required">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="telefono" class="form-control" placeholder="Teléfono" required="required">
-                            </div>
-                            <div class="form-group">
-                                <textarea name="message" id="message" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
-                            </div>                        
-                            <div class="form-group">
-                                <button type="submit" class="btn-btn-default">Reservar Lugar</button>
-                            </div>
-                        </form>   
+                                <div class="form-group">
+                                    <textarea name="message" id="message" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
+                                </div>                        
+                                <div class="form-group">
+                                    <button type="submit" class="btn-btn-default">Reservar Lugar</button>
+                                </div>
+                            </form>
+                        </div>
                     </section>
                     <hr>
                     <section id="meterial_curso" >
@@ -362,7 +382,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         </script>
         <script>
         $(document).ready(function(){
-            var showModal = <?php echo $showModal; ?>;
+            var showModal = <?=$showModal?>;
             if(showModal === 1){
                 $('#selectFilialModal').modal('show');
             }
