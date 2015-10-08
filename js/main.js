@@ -14,6 +14,14 @@ jQuery(function($) {
 		$('#home-slider .item').css('height',slideHeight);
 	});
 	
+    //#main-slider
+	var slideHeight = $(window).height();
+	$('#slider .item').css('height',slideHeight);
+
+	$(window).resize(function(){'use strict',
+		$('#slider .item').css('height',slideHeight);
+	});
+
 	//Scroll Menu
 	$(window).on('scroll', function(){
 		if( $(window).scrollTop()>slideHeight ){

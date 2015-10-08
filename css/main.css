@@ -159,6 +159,14 @@ section {
   color: #355EB6;
 
 }
+
+#slider {
+  overflow: hidden;
+  position: relative;
+}
+
+
+
  .caption .btn-start {
   color: #fff;
   font-size: 14px;
@@ -266,6 +274,31 @@ section {
   -webkit-animation: bounce 3000ms infinite;
   animation: bounce 3000ms infinite;
 }
+
+#slider:hover .left-control {
+  left:30px
+} 
+
+#slider:hover .right-control {
+  right:30px
+}
+
+#slider .fa-angle-down {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  color: #fff;
+  display: inline-block;
+  width: 24px;
+  margin-left: -12px;
+  font-size: 24px;
+  line-height: 24px;
+  z-index: 999;
+  -webkit-animation: bounce 3000ms infinite;
+  animation: bounce 3000ms infinite;
+}
+
+
 
 .navbar-right li a {
   color: #fff;

@@ -134,7 +134,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             </div><!--/#main-nav-->
             
         </header><!--/#home-->
-        
+
         <section id="head_image_curso">
             <div class="container-fluid">
                 <div class="row">
@@ -155,8 +155,30 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </div>
                     </div><!--/.ads-->     
-                    <div class="widget categories">
-                        <div class="row"></div>
+                    <div class="widget ads">
+                        <div class="row">
+                             <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
+                               <div class="post-thumb">
+                                                    <a href="#"><img class="img-responsive" src="images/blog/3.jpg" alt=""></a>
+                                                    <div class="post-meta">
+                                                        <span><i class="fa fa-comments-o"></i> 3 Comments</span>
+                                                        <span><i class="fa fa-heart"></i> 0 Likes</span> 
+                                                    </div>
+                                                    <div class="post-icon">
+                                                        <i class="fa fa-video-camera"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="entry-header">
+                                                    <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
+                                                    <span class="date">June 26, 2014</span>
+                                                    <span class="cetagory">in <strong>Photography</strong></span>
+                                                </div>
+                                                <div class="entry-content">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                                </div>
+
+                        </div>
+                        </div>
                     </div><!--/.categories-->
                 </aside>        
                 <div class="col-sm-8 col-sm-pull-4">
