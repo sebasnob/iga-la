@@ -54,6 +54,7 @@ if($logged == 'out'){
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper site-min-height">
+                    <!--
                     <div class="row mtbox">
                       <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                         <div class="box1">
@@ -90,7 +91,7 @@ if($logged == 'out'){
                         </div>
                         <p>Su servidor está funcionando perfectamente. Relájese y disfrute.</p>
                       </div>
-                    </div><!-- /row mt -->  
+                    </div> -->  
 
                     <div class="row mt">
                       <!-- PANEL 1 -->

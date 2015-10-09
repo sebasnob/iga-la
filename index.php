@@ -324,7 +324,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                                     <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
                                                 </div>
                                                 <div class="entry-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
@@ -335,7 +335,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                                     <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
                                                 </div>
                                                 <div class="entry-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
@@ -346,7 +346,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                                                     <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
                                                 </div>
                                                 <div class="entry-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -462,69 +462,82 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                     <div class="row">
                         <div class="heading text-center wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                             <h2><?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
-                            <p><?=$lenguaje['encontra_tu_iga_en_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?><?=$_SESSION['pais']['pais']?></p>
-                            <div class="col-sm-12 text-center wow fadeIn">
+                            <br/>
+                            <div class="col-sm-12 text-center wow fadeIn" id="select_filial">
                                 <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
                                     <div class="form-group">
-                                        <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                        <b><?=$lenguaje['encontra_tu_iga_en_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?><?=$_SESSION['pais']['pais']?></b>&nbsp;
+                                        <!--<label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
                                         <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
                                             <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
                                         <?php foreach ($provincias as $provincia){?>
-                                        
                                             <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
-                                        
                                         <?php }?>
                                         </select>    
-                                            
                                     </div>
-                                    
                                     <div class="form-group">
-                                        <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                        <!--<label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
                                         <select id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
                                             <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
                                         </select>
-                                           
                                     </div>
                                 </form>
                             </div>
+                            <div class="col-sm-5" style="display: none" id="direccion_filial">
+                                <div class="contact-info">
+                                    <ul class="address">
+                                        <li><i class="fa fa-map-marker"></i> <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="direccion"></span> </li>
+                                        <li><i class="fa fa-phone"></i> <span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="telefono"></span></li>
+                                        <li><i class="fa fa-envelope"></i> <span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="mail"></span></li>
+                                    </ul>
+                                </div>                            
+                            </div>
                         </div>
+                        <br/>
                         <div class="contact-form" style="display:none">
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                                <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                                    <div class="col-sm-4">
                                         <input type="hidden" value="" id="correo" name="correo">
                                         <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="text" name="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
-                                                </div>
+                                            <div class="form-group">
+                                                <input type="text" name="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="email" name="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
-                                                </div>
+                                            <div class="form-group">
+                                                <input type="email" name="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="text" name="subject" class="form-control" placeholder="<?=$lenguaje['asunto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                    </div>
+                                    <div class="col-sm-1">&nbsp;</div>
+                                    <div class="col-sm-7">
+                                        <div class="row">
+                                            <div class="form-group form-inline">
+                                                <select class="form-control" name="subject">
+                                                    <option value="">Elegi una opción</option>
+                                                    <option value="3">Cursos</option>
+                                                    <option value="4">Atencion al alumno</option>
+                                                </select>
+                                                &nbsp;
+                                                <select class="form-control" name="cursos_contacto">
+                                                    <option value="">Elegi una opción</option>
+                                                    <option value="3">Gastronomia y Alta Cocina</option>
+                                                    <option value="4">Gastronomia y Alta Cocina 2</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <textarea name="message" id="message" class="form-control" rows="4" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
-                                        </div>                        
-                                        <div class="form-group">
-                                            <button type="submit" class="btn-submit"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
+                                            </div>                        
+                                            <div class="form-group">
+                                                <button type="submit" class="btn-submit"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
+                                            </div>
                                         </div>
-                                    </form>   
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="contact-info">
-                                        <ul class="address">
-                                            <li><i class="fa fa-map-marker"></i> <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="direccion"></span> </li>
-                                            <li><i class="fa fa-phone"></i> <span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="telefono"></span></li>
-                                            <li><i class="fa fa-envelope"></i> <span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="mail"></span></li>
-                                        </ul>
-                                    </div>                            
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -593,7 +606,11 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
         <!-- Plugins Twitter -->
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         <script>
-            
+            $('#filiales').change(function(){
+                $('#direccion_filial').fadeIn("slow");
+                $('#select_filial').removeClass("col-sm-12");
+                $('#select_filial').addClass("col-sm-7");
+            });
         </script>
     </body>
 </html>
