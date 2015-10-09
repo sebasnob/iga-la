@@ -221,14 +221,55 @@ if($logged == 'out'){
         <script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
         
         <script type="text/javascript">
-            $(document).ready(function(){
-               if(sessionStorage.getItem("pais")){
-                   
-               } 
-            });
-            /*$(function(){
-                $('select.styled').customSelect();
-            });*/
+            
+            function getProvincias(id_pais){
+                var id_pais = id_pais;
+                //Reincio el select de provincias
+                $('#provincias_curso').html("<option value='0'>- Seleccione -</option>");
+                //Reincio el select de filiales
+                $('#filiales_curso').html("<option value='0'>- Seleccione -</option>");
+                //Oculto los datos del curso y de los errores
+                $('#error_datos_curso').hide();
+                $('#datos_curso').hide();
+                
+                //Cargo el select de provincias
+                $.ajax({
+        	    url: "controller_ajax.php",
+        	    method: "POST",
+        	    data: { option : 'select_provincias', id_pais : id_pais  },
+                    dataType: "json",
+        	    success: function(data){
+                        changeSelectOptions("provincias_curso", data.options, 'nombre', 'id');
+                        $("select#provincias_curso option[value='"+sessionStorage.getItem("provincia")+"']").attr("selected", "selected");
+        	    }
+        	});
+            }
+            
+            function getFiliales(cod_curso, id_pais, id_provincia){
+                var cod_curso = cod_curso;
+                var id_pais = id_pais;
+                var id_provincia = id_provincia;
+                $('#filiales_curso').html("<option value='0'>- Seleccione -</option>");
+                //Oculto los datos del curso y de los errores
+                $('#error_datos_curso').hide();
+                $('#datos_curso').hide();
+                
+                $.ajax({
+        	    url: "controller_ajax.php",
+        	    method: "POST",
+        	    data: { 
+                        option : 'select_filiales', 
+                        cod_curso : cod_curso, 
+                        id_pais : id_pais,
+                        id_provincia : id_provincia
+                    },
+                    dataType: "json",
+        	    success: function(data){
+                        changeSelectOptions("filiales_curso", data.options, 'nombre', 'id');
+                        $("select#filiales_curso option[value='"+sessionStorage.getItem("filial")+"']").attr("selected", "selected");
+        	    }
+        	});
+            }
     
             function changeSelectOptions(select_id, array_index, texto, value){
                 var options, index, select, option;
@@ -303,6 +344,8 @@ if($logged == 'out'){
             
             $("#paises_curso").change(function(){
                 sessionStorage.setItem('pais', $(this).val());
+                getProvincias($(this).val());
+                /*
                 //Reincio el select de provincias
                 $('#provincias_curso').html("<option value='0'>- Seleccione -</option>");
                 //Reincio el select de filiales
@@ -321,10 +364,13 @@ if($logged == 'out'){
                         changeSelectOptions("provincias_curso", data.options, 'nombre', 'id');
         	    }
         	});
+                */
             });
             
             $("#provincias_curso").change(function(){
                 sessionStorage.setItem('provincia', $(this).val());
+                getFiliales(<?=$_GET['cod_curso']?>, $("#paises_curso").val(), $(this).val());
+                /*
                 $('#filiales_curso').html("<option value='0'>- Seleccione -</option>");
                 //Oculto los datos del curso y de los errores
                 $('#error_datos_curso').hide();
@@ -335,7 +381,7 @@ if($logged == 'out'){
         	    method: "POST",
         	    data: { 
                         option : 'select_filiales', 
-                        cod_curso : <?=$_GET['cod_curso']?>, 
+                        cod_curso : <? //echo $_GET['cod_curso']?>, 
                         id_pais : $("#paises_curso").val(),
                         id_provincia : $(this).val()
                     },
@@ -344,6 +390,7 @@ if($logged == 'out'){
                         changeSelectOptions("filiales_curso", data.options, 'nombre', 'id');
         	    }
         	});
+                */
             });
             
             $('#filiales_curso').change(function(){
@@ -446,6 +493,20 @@ if($logged == 'out'){
         	  });
             });
             
+            $(document).ready(function(){
+                if(sessionStorage.getItem("pais")){
+                   console.log(sessionStorage.getItem("pais"));
+                   $("select#paises_curso option[value='"+sessionStorage.getItem("pais")+"']").attr("selected", "selected");
+                   getProvincias($("#paises_curso").val());
+                }
+                if(sessionStorage.getItem("provincia")){
+                    console.log("Prov: "+sessionStorage.getItem("provincia"));
+                    getFiliales(<?=$_GET['cod_curso']?>, $("#paises_curso").val(), sessionStorage.getItem("provincia"));
+                }
+                if(sessionStorage.getItem("filial")){
+                    console.log("Filial: "+sessionStorage.getItem("filial"));
+                }
+            });
         </script>
         
     </body>
