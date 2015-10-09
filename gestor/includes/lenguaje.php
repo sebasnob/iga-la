@@ -2,7 +2,7 @@
 //español
 $lenguaje['titulo_ES'] = 'IGA - INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS';
 $lenguaje['inicio_ES'] = 'Inicio';
-$lenguaje['curso_ES'] = 'Curso';
+$lenguaje['curso_ES'] = 'Cursos';
 $lenguaje['institucional_ES'] = 'Institucional';
 $lenguaje['pasion_ES'] = 'Hace de Tu Pasión Tu Profesión';
 $lenguaje['cursos_destacados_ES'] = 'Estos son Nuestros cursos Destacados';
@@ -46,7 +46,7 @@ $lenguaje['descripcion_defecto_ES'] = "Actualmente este Curso no se encuentra Di
 //ingles
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
 $lenguaje['inicio_IN'] = 'Home';
-$lenguaje['curso_IN'] = 'Course';
+$lenguaje['curso_IN'] = 'Courses';
 $lenguaje['institucional_IN'] = 'Institutional';
 $lenguaje['pasion_IN'] = 'Make of Your Passion Your Profession';
 $lenguaje['cursos_destacados_IN'] = 'These are our distinguished courses';
@@ -89,7 +89,7 @@ $lenguaje['descripcion_defecto_IN'] = "Currently this course is not available in
 //portugues
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
 $lenguaje['inicio_POR'] = 'Iniciação';
-$lenguaje['curso_POR'] = 'Curso';
+$lenguaje['curso_POR'] = 'Cursos';
 $lenguaje['institucional_POR'] = 'Institucional';
 $lenguaje['pasion_POR'] = 'Faz sua paixão sua profissão';
 $lenguaje['cursos_destacados_POR'] = 'Estes são os nossos cursos caracterizados';
@@ -108,6 +108,7 @@ $lenguaje['filiales_POR'] = "Subsidiárias";
 $lenguaje['cursos_disponibles_POR'] = "Cursos Disponíveis";
 $lenguaje['consultas_POR'] = "Consultas";
 $lenguaje['novedades_POR'] = "Notícias - Redes Sociais";
+$lenguaje['encontranos_POR'] = "Encontre-nos e siga-nos em nossas redes sociais";
 $lenguaje['contactate_POR'] = "Entre em contato conosco";
 $lenguaje['encontra_tu_iga_en_POR'] = "Encontre seu IGA em ";
 $lenguaje['provincia_POR'] = "Província";

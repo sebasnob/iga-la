@@ -427,23 +427,27 @@ function detectCountry($mysqli){
     curl_close($ch);
 }
 
-function getImagenesGrilla($mysqli, $idioma = 'ES')
+function getImagenesGrilla($mysqli, $idioma = 'ES', $id_pais='1')
 {
     //TODO crear select por prioridad
-    $result = $mysqli->query("SELECT * FROM grilla WHERE grilla.habilitado = 1 AND grilla.idioma = '{$idioma}' order by grilla.prioridad");
-    while($grilla = $result->fetch_assoc())
-    {
-	$retorno[] = array( 'id'=>$grilla['id'],
-                            'cols'=>$grilla['cols'],
-                            'img_url'=>$grilla['img_url'],
-                            'thumb_url'=>$grilla['thumb_url'],
-                            'id_curso'=>$grilla['cod_curso'],
-                            'prioridad'=>$grilla['prioridad'],
-                            'idioma'=>$grilla['idioma'],
-                            'id_pais'=>$grilla['id_pais'],
-                            'habilitado'=>$grilla['habilitado']);
+    $result = $mysqli->query("SELECT * FROM grilla WHERE grilla.habilitado = 1 AND grilla.idioma = '{$idioma}' AND id_pais='{$id_pais}' order by grilla.prioridad");
+    if($result->num_rows > 0){
+        while($grilla = $result->fetch_assoc())
+        {
+            $retorno[] = array( 'id'=>$grilla['id'],
+                                'cols'=>$grilla['cols'],
+                                'img_url'=>$grilla['img_url'],
+                                'thumb_url'=>$grilla['thumb_url'],
+                                'id_curso'=>$grilla['cod_curso'],
+                                'prioridad'=>$grilla['prioridad'],
+                                'idioma'=>$grilla['idioma'],
+                                'id_pais'=>$grilla['id_pais'],
+                                'habilitado'=>$grilla['habilitado']);
+        }
+        return $retorno;
+    }else{
+        return false;
     }
-    return $retorno;
 }
 
 function ws_insertPaises($mysqli){
@@ -717,6 +721,7 @@ function cambiarPais($cod_pais, $mysqli){
     
     $_SESSION['idioma_seleccionado']['cod_idioma'] = $idioma['cod_idioma'];
     $_SESSION['idioma_seleccionado']['idioma'] = $idioma['idioma'];
+    if(isset($_SESSION['id_filial'])){ unset($_SESSION['id_filial']);}
     
     echo 'ok';
 }

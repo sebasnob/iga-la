@@ -196,7 +196,8 @@ function cambiarPais(cod_pais){
       success: function(data)
       {
             console.log(data);
-            location.reload(true);
+            //location.reload(true);
+            window.location.href='index.php';
             return false;
       },
       error: function(data)

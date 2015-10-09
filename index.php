@@ -45,7 +45,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
         <link rel="shortcut icon" href="images/favicon.ico">
         
         <?php
-            $gridArray = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma']);
+            $gridArray = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id']);
         ?>
     </head><!--/head-->
     
@@ -203,7 +203,12 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
             </div>
             <div class="container-fluid" id="grilla">
                 <div class="row">
-                    <?php foreach ($gridArray as $imgGrid){?>
+                    <?php 
+                    if(!$gridArray){
+                        echo "  No existen cursos disponibles para el pais seleccionado.";
+                    }else{
+                        foreach ($gridArray as $imgGrid){
+                    ?>
                     <div class="col-md-<?php echo $imgGrid['cols']?>">
                         <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
                             <div class="folio-image">
@@ -224,7 +229,10 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                             </div>
                         </div>
                     </div>
-                                        <?php } ?>
+                    <?php 
+                        }
+                     
+                    ?>
                 </div>
             </div> <!--/#container-fluid-porfolios-->
             <div id="portfolio-single-wrap">
@@ -275,7 +283,10 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
                         
                     </div>
                 </div>
-                <?php } ?>
+                <?php 
+                    } 
+                }
+                ?>
             </div>
             
         </section><!--/#portfolio-->
