@@ -22,8 +22,9 @@ if(isset($_GET['id_filial'])){
     $_SESSION['id_filial'] = $_GET['id_filial'];
 }
 
+$paises = getPaises($mysqli);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
-
+$idiomas = getIdiomas($mysqli);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,8 +85,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <ul class="nav navbar-nav navbar-left">     
                             <li class="scroll active"><a href="index.php"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li class="scroll"><a href="index.php#portfolio"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="index.php#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>                     
-                            <li class="scroll"><a href="index.php#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li> 
+                                            
+                            <li class="scroll"><a href="index.php#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                             <li class="scroll"><a href="index.php#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
                             <li class="scroll"><a href="index.php#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
                         </ul>
@@ -115,12 +117,12 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     foreach($idiomas as $i=>$d){
                                         if($_SESSION['idioma_seleccionado']['cod_idioma'] != $d['cod_idioma']){
                                     ?>
-                                    <li>
-                                        <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
-                                                <?=  utf8_decode($d['idioma'])?> 
-                                            <span class="caret"></span>
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
+                                                <?=$d['idioma']?> 
+                                                <span class="caret"></span>
+                                            </a>
+                                        </li>
                                     <?php
                                     }
                                 }
@@ -160,18 +162,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                              <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
                                <div class="post-thumb">
                                                     <a href="#"><img class="img-responsive" src="images/blog/3.jpg" alt=""></a>
-                                                    <div class="post-meta">
-                                                        <span><i class="fa fa-comments-o"></i> 3 Comments</span>
-                                                        <span><i class="fa fa-heart"></i> 0 Likes</span> 
-                                                    </div>
-                                                    <div class="post-icon">
-                                                        <i class="fa fa-video-camera"></i>
-                                                    </div>
                                                 </div>
                                                 <div class="entry-header">
                                                     <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
-                                                    <span class="date">June 26, 2014</span>
-                                                    <span class="cetagory">in <strong>Photography</strong></span>
                                                 </div>
                                                 <div class="entry-content">
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -201,7 +194,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
                             <div class="form-group">
                                 <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
-                                <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
+                                <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
                                     <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
                                 <?php foreach ($provincias as $provincia){?>
 
@@ -220,8 +213,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 
                             </div>
                         </form>
-                        
-                        <div class="hidden">
+                        <br/>
+                        <div id="matricula_curso" style="display: none">
                             <ul class="list-group">
                                 <li class="list-group-item "><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes y Miércoles </strong> - de 18:30 a 20:30 y de 18:30 a 22:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
                                 <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Miércoles </strong> - de 15:30 a 17:30 <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
@@ -395,11 +388,13 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             js.src = "https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.4";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-    
+        
         $('#filiales').change(function(){
-            var cod_curso = <?=$_GET['cod_curso']?>;
-            var filial = $(this).val();
-            window.location = "cursos.php?cod_curso="+cod_curso+"&id_filial="+filial;
+            filialModalSeleccionada($(this).val(), <?=$_GET['cod_curso']?>);
+        });
+        
+        $('#filiales_matricula').change(function(){
+            $('#matricula_curso').show();
         });
         </script>
         <script>

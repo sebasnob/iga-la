@@ -74,10 +74,10 @@ if($logged == 'out'){
                                               <span class="task-title-sp"><?=$j['cod_curso']?>&nbsp;&nbsp;<?=$j['nombre_es']?></span>
                                               <!--<span class="badge bg-theme">Nuevo</span>-->
                                               <div class="pull-right">
-                                                  
+                                                  <input class="btn btn-xs" type="color" id="select_color_fondo" value="#<?=$j['color']?>"/>
                                                   <a class="btn btn-primary btn-xs" href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-pencil"></i></a>
                                                   <a class="btn btn-default btn-xs" href="cursos_grupo.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-th-list"></i></a>
-                                                 
+                                                  
                                               </div>
                                           </div>
                                           

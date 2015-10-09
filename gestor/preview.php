@@ -75,9 +75,9 @@ $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
                       <div class="entry-meta">
                           <span>
                               <i class="fa fa-calendar">
-                                  <?php echo ($datos_curso['horas'] != '')? $datos_curso['horas']." horas": ''; ?>
-                                  <?php echo ($datos_curso['meses'] != '')? ", ".$datos_curso['meses']." meses": ''; ?>
-                                  <?php echo ($datos_curso['anios'] != '')? ", ".$datos_curso['anios']." años": ''; ?>
+                                  <?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." horas": ''; ?>
+                                  <?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." meses": ''; ?>
+                                  <?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." años": ''; ?>
                               </i>
                           </span>
                       </div>

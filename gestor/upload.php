@@ -456,6 +456,32 @@ if(isset($_POST['edicion_curso'])){
         }
     }
     
+    //### DURACION ###//
+    if(isset($_POST['horas']) && $_POST['horas'] != ''){
+        $query = "UPDATE curso_datos SET horas='{$_POST['horas']}' WHERE id_cfi='{$cfi_sd['id']}'";
+        $result = $mysqli->query($query);
+        if($result){
+            $message = "<br/>Horas modificadas correctamente.<br/>";
+        }
+    }
+    
+    if(isset($_POST['meses']) && $_POST['meses'] != ''){
+        $query = "UPDATE curso_datos SET meses='{$_POST['meses']}' WHERE id_cfi='{$cfi_sd['id']}'";
+        $result = $mysqli->query($query);
+        if($result){
+                $message = "<br/>Meses modificadas correctamente.<br/>";
+        }
+    }
+    
+    if(isset($_POST['anios']) && $_POST['anios'] != ''){
+        $query = "UPDATE curso_datos SET anios='{$_POST['anios']}' WHERE id_cfi='{$cfi_sd['id']}'";
+        $result = $mysqli->query($query);
+        if($result){
+            $message = "<br/>Años modificados correctamente.<br/>";
+        }
+    }
+    //### FIN EDICION DURACION ###//
+    
     //#####  FIN EDICION DE TEXTOS  #####//
     
     header("Location: result.php?cod_curso={$_POST['cod_curso']}&id_idioma={$_POST['idioma_curso']}&id_filial={$filial}");

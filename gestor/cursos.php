@@ -136,7 +136,10 @@ if($logged == 'out'){
                                           </div>
                                           <div id="selector_color" class="col-md-6 text-right" > </div>
                                       </div>-->
-
+                                      <div class="form-group">
+                                          <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Nombre del Curso:</b></h4>
+                                          <input type="text" id="nombre_curso" name="nombre_curso" class="form-control"/>
+                                      </div>
                                       <div class="form-group">
                                           <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Seleccione la nueva imagen de cabecera:</b></h4>
                                           <div id="sliderPreview">
@@ -146,9 +149,9 @@ if($logged == 'out'){
                                       <input id="uploadSlider" type="file" name="imageSlider" class="img" />
                                           <div class="form-group">
                                              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Duración:</b></h4>
-                                             Horas: <input type="text" id="horas" name="horas" style="width:350px" /><br/>
-                                             Meses: <input type="text" id="meses" name="meses" style="width:350px" /><br/>
-                                             Años: <input type="text" id="anios" name="anios" style="width:350px" /><br/>
+                                             Horas: <input type="text" id="horas" name="horas" style="width:250px" /><br/>
+                                             Meses: <input type="text" id="meses" name="meses" style="width:250px" /><br/>
+                                             Años: <input type="text" id="anios" name="anios" style="width:250px" /><br/>
                                           </div>
 
                                           <div class="form-group">
@@ -218,6 +221,11 @@ if($logged == 'out'){
         <script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
         
         <script type="text/javascript">
+            $(document).ready(function(){
+               if(sessionStorage.getItem("pais")){
+                   
+               } 
+            });
             /*$(function(){
                 $('select.styled').customSelect();
             });*/
@@ -294,6 +302,7 @@ if($logged == 'out'){
             });
             
             $("#paises_curso").change(function(){
+                sessionStorage.setItem('pais', $(this).val());
                 //Reincio el select de provincias
                 $('#provincias_curso').html("<option value='0'>- Seleccione -</option>");
                 //Reincio el select de filiales
@@ -312,10 +321,10 @@ if($logged == 'out'){
                         changeSelectOptions("provincias_curso", data.options, 'nombre', 'id');
         	    }
         	});
-
             });
             
             $("#provincias_curso").change(function(){
+                sessionStorage.setItem('provincia', $(this).val());
                 $('#filiales_curso').html("<option value='0'>- Seleccione -</option>");
                 //Oculto los datos del curso y de los errores
                 $('#error_datos_curso').hide();
@@ -338,6 +347,7 @@ if($logged == 'out'){
             });
             
             $('#filiales_curso').change(function(){
+                sessionStorage.setItem('filial', $(this).val());
                 //Oculto los datos del curso y de los errores
                 $('#error_datos_curso').hide();
                 $('#datos_curso').hide();
@@ -348,6 +358,7 @@ if($logged == 'out'){
             });
             
             $("#idioma_curso").change(function(){
+                sessionStorage.setItem('idioma', $(this).val());
                 $.ajax({
         	    url: "controller_ajax.php",
         	    method: "POST",

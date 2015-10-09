@@ -14,7 +14,7 @@ jQuery(function($) {
 		$('#home-slider .item').css('height',slideHeight);
 	});
 	
-    //#main-slider
+        //#main-slider
 	var slideHeight = $(window).height();
 	$('#slider .item').css('height',slideHeight);
 
@@ -251,6 +251,32 @@ function cambiarProvincia(option){
     });
 }
 
+function cambiarProvinciaMatricula(option){
+    cod_provincia = $('#provincias').val();
+    $.ajax({
+      type: "POST",
+      url: "gestor/includes/functions.php",
+      data: { "cod_provincia" :  cod_provincia,
+              "cambiarProvincia" : "true" },
+          dataType:'json',
+      success: function(data)
+      {
+        $('#filiales_matricula').html("");
+        $('#filiales_matricula').append(option);
+        
+        $.each(data, function(clave, valor)
+        {
+            $('#filiales_matricula').append("<option value='"+ valor.id + "'>"+ valor.nombre +"</option>");
+        });
+            
+      },
+      error: function(data)
+      {
+            console.log(data);
+      }
+    });
+}
+
 function filialSeleccionada()
 {
     cod_filial = $('#filiales').val();
@@ -276,6 +302,12 @@ function filialSeleccionada()
       }
     });
     $('.contact-form').show('slow');
+}
+
+function filialModalSeleccionada(filial, cod_curso){
+    var cod_curso = cod_curso;
+    var filial = filial;
+    window.location = "cursos.php?cod_curso="+cod_curso+"&id_filial="+filial;
 }
 
 function scroll(to)
