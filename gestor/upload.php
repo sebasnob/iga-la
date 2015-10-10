@@ -543,9 +543,6 @@ if(isset($_POST['edicion_grilla']))
                 $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['photo']['error'];
             }
         }
-        
-        header('Location: grilla_edit.php');
-        exit;
     }
     elseif(isset($_POST['edicion_grilla_editar']))
     {
@@ -690,88 +687,109 @@ if(isset($_POST['edicion_slider']))
                 $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['photo']['error'];
             }
         }
-        
-        header('Location: slider_edit.php');
-        exit;
     }
     elseif(isset($_POST['edicion_slider_editar']))
     {
-        if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
+        $id_img_slider = $_POST['id_img_slider'];
+        if(isset($_GET['borrar']))
         {
-            //if no errors...
-            if(!$_FILES['photo']['error'])
+            $result = $mysqli->query("SELECT slider.url, slider.url_thumb FROM slider WHERE slider.id = {$id_img_slider}");
+
+            $retorno = $result->fetch_assoc();
+
+            if(file_exists("../".$retorno['url']))
             {
-                $valid_file = true;
-                //now is the time to modify the future file name and validate the file
-                $new_file_name = strtolower($_FILES['photo']['name']); //rename file
-                if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
-                {
-                    $valid_file = false;
-                    $message = 'Oops!  Your file\'s size is to large.';
-                }
-                    
-                $pos = strpos($_FILES['photo']['type'], "image");
-                if ($pos === FALSE)
-                {
-                    $valid_file = false;
-                    $message = 'Oops!  El archivo no es una imagen.';
-                }
-                //if the file has passed the test
-                if($valid_file)
-                {
-                    //move it to where we want it to be
-                    $ruta = '../images/slider/'.$new_file_name;
-                    //ruta de los thumbs
-                    $ruta_thumb = '../images/slider/thumb/'.$new_file_name;
-
-                    move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
-                    
-                    //creo el thumb
-                    $newThumb = new resize($ruta);
-                    $newThumb->resizeImage(150,632,"landscape");
-                    $exito = $newThumb->saveImage($ruta_thumb);
-                    
-                    $ruta = substr($ruta, 3);
-                    $ruta_thumb = substr($ruta_thumb, 3);
-                    
-                    //borro imagen anterior antes de insertar la nueva
-                    $result = $mysqli->query("SELECT slider.url, slider.url_thumb FROM slider WHERE slider.id = {$_POST['id_img_slider']}");
-                    $imagenAnterior = $result->fetch_assoc();
-
-                    if(file_exists("../".$imagenAnterior['img_url']))
-                    {
-                        unlink("../".$imagenAnterior['img_url']);
-                    }
-                    if(file_exists("../".$imagenAnterior['thumb_url']))
-                    {
-                        unlink("../".$imagenAnterior['thumb_url']);
-                    }
-                    
-                    $query = "UPDATE slider "
-                            . "SET alt = {$_POST['alt']}, "
-                            . "url = '{$ruta}', "
-                            . "url_thumb = '{$ruta_thumb}', "
-                            . "link = {$_POST['link']}, "
-                            . "id_pais = {$_POST['id_pais']}, "
-                            . "cod_idioma = {$_POST['cod_idioma']}, "
-                            . "WHERE slider.id = {$_POST['id_img_slider']}";
-                    $mysqli->query($query);
-                }
+                unlink("../".$retorno['url']);
             }
+            if(file_exists("../".$retorno['url_thumb']))
+            {
+                unlink("../".$retorno['url_thumb']);
+            }
+
+            $mysqli->query("DELETE FROM slider WHERE slider.id = " . $id_img_slider);
         }
         else
         {
-            $query = "UPDATE slider "
-                            . "SET alt = {$_POST['alt']}, "
-                            . "url = '{$ruta}', "
-                            . "url_thumb = '{$ruta_thumb}', "
-                            . "link = {$_POST['link']}, "
-                            . "id_pais = {$_POST['id_pais']}, "
-                            . "cod_idioma = {$_POST['cod_idioma']}, "
-                            . "WHERE slider.id = {$_POST['id_img_slider']}";
-            $mysqli->query($query);
-        }
+            if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
+            {
+                //if no errors...
+                if(!$_FILES['photo']['error'])
+                {
+                    $valid_file = true;
+                    //now is the time to modify the future file name and validate the file
+                    $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+                    if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
+                    {
+                        $valid_file = false;
+                        $message = 'Oops!  Your file\'s size is to large.';
+                    }
+
+                    $pos = strpos($_FILES['photo']['type'], "image");
+                    if ($pos === FALSE)
+                    {
+                        $valid_file = false;
+                        $message = 'Oops!  El archivo no es una imagen.';
+                    }
+                    //if the file has passed the test
+                    if($valid_file)
+                    {
+                        //move it to where we want it to be
+                        $ruta = '../images/slider/'.$new_file_name;
+                        //ruta de los thumbs
+                        $ruta_thumb = '../images/slider/thumb/'.$new_file_name;
+
+                        move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
+
+                        //creo el thumb
+                        $newThumb = new resize($ruta);
+                        $newThumb->resizeImage(150,632,"landscape");
+                        $exito = $newThumb->saveImage($ruta_thumb);
+
+                        $ruta = substr($ruta, 3);
+                        $ruta_thumb = substr($ruta_thumb, 3);
+
+                        //borro imagen anterior antes de insertar la nueva
+                        $result = $mysqli->query("SELECT slider.url, slider.url_thumb FROM slider WHERE slider.id = {$_POST['id_img_slider']}");
+                        $imagenAnterior = $result->fetch_assoc();
+
+                        if(file_exists("../".$imagenAnterior['url']))
+                        {
+                            unlink("../".$imagenAnterior['url']);
+                        }
+                        if(file_exists("../".$imagenAnterior['url_thumb']))
+                        {
+                            unlink("../".$imagenAnterior['url_thumb']);
+                        }
+
+                        $query = "UPDATE slider "
+                                . "SET alt = '{$_POST['alt']}', "
+                                . "url = '{$ruta}', "
+                                . "url_thumb = '{$ruta_thumb}', "
+                                . "link = '{$_POST['link']}', "
+                                . "id_pais = {$_POST['id_pais']}, "
+                                . "cod_idioma = '{$_POST['cod_idioma']}' "
+                                . "WHERE slider.id = {$_POST['id_img_slider']}";
+                                    
+                        $mysqli->query($query);
+                    }
+                }
+            }
+            else
+            {
+                $query = "UPDATE slider "
+                                . "SET alt = '{$_POST['alt']}', "
+                                . "url = '{$ruta}', "
+                                . "url_thumb = '{$ruta_thumb}', "
+                                . "link = '{$_POST['link']}', "
+                                . "id_pais = {$_POST['id_pais']}, "
+                                . "cod_idioma = '{$_POST['cod_idioma']}', "
+                                . "WHERE slider.id = {$_POST['id_img_slider']}";
+                $mysqli->query($query);
+            }
+        }    
     }
+    header('Location: slider_edit.php');
+    exit;
 }
 
 
