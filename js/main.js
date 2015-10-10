@@ -317,3 +317,9 @@ function scroll(to)
     var body = $("html, body");
     body.stop().animate({scrollTop:$(to).position().top - 70}, '500', 'swing');
 }
+
+function iralink(url)
+{
+//    console.log(url);
+    window.open(url);
+}

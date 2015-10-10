@@ -1,6 +1,15 @@
-function borrar(form){
-    form.action = form.action + "?borrar=true";
-    form.submit();
+function borrar(form)
+{
+    var r = confirm("Esta seguro que desea borrar esto?");
+    if (r === true) 
+    {
+        form.action = form.action + "?borrar=true";
+        form.submit();
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 function formhash(form, password) {

@@ -30,7 +30,13 @@ MAIN SIDEBAR MENU
                     <i class="fa fa-image"></i>
                     <span>Editar Grilla</span>
                 </a>
-            </li>    
+            </li>
+            <li class="sub-menu">
+                <a href="slider_edit.php" >
+                    <i class="fa fa-cloud-upload"></i>
+                    <span>Editar Slider</span>
+                </a>
+            </li>
         </ul>
         <!-- sidebar menu end-->
     </div>
