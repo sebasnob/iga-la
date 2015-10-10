@@ -472,7 +472,12 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                 localStorage.setItem('horas', $("#horas").val());
                 localStorage.setItem('meses', $("#meses").val());
                 localStorage.setItem('anios', $("#anios").val());
-                localStorage.setItem('descripcion', $("#descripcion").val());
+                localStorage.setItem('descripcion', CKEDITOR.instances['descripcion'].getData());
+                localStorage.setItem('imageMat', $("#materialesPreview img").attr('src'));
+                localStorage.setItem('descMat', CKEDITOR.instances['materiales_txt'].getData());
+                localStorage.setItem('imageUnif', $("#uniformesPreview img").attr('src'));
+                localStorage.setItem('descUnif', CKEDITOR.instances['uniformes_txt'].getData());
+                localStorage.setItem('objetivos', CKEDITOR.instances['objetivos'].getData());
             });
             
             $(document).ready(function(){

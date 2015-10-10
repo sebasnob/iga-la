@@ -15,8 +15,6 @@ if($logged == 'out'){
     exit();
 }
 
-$cod_curso = $_GET['cod_curso'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,24 +24,22 @@ $cod_curso = $_GET['cod_curso'];
         <meta name="description" content="">
         <meta name="author" content="">
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
-        <!-- Bootstrap core CSS -->
-        <link href="assets/css/bootstrap.css" rel="stylesheet">
-        <!--external css-->
-        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
-        <!-- Custom styles for this template -->
-        <link href="assets/css/style.css" rel="stylesheet">
-        <link href="assets/css/style-responsive.css" rel="stylesheet">
-        <link href="assets/css/table-responsive.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css"> 
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/animate.min.css" rel="stylesheet"> 
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/lightbox.css" rel="stylesheet">
+        <link href="../css/main.css" rel="stylesheet">
+        <link id="css-preset" href="../css/presets/preset1.css" rel="stylesheet">
+        <link href="../css/responsive.css" rel="stylesheet">
         
-        <link rel="stylesheet" type="text/css" media="screen" href="styles.php?id_curso=<?=$_GET['cod_curso']?>">
-        
+        <link rel="stylesheet" type="text/css" media="screen" href="../styles_home.php" />
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
         <![endif]-->
         
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+        <link rel="shortcut icon" href="images/favicon.ico">
     </head><!--/head-->
     <body>
         <div id="fb-root"></div>
@@ -62,7 +58,16 @@ $cod_curso = $_GET['cod_curso'];
                         </a>                    
                     </div>
                     <div class="collapse navbar-collapse">
-                        
+                        <ul class="nav navbar-nav navbar-left">     
+                            <li class="scroll active"><a href="#">Inicio </a></li>
+                            <li class="scroll"><a href="#">Cursos </a></li>
+                                            
+                            <li class="scroll"><a href="#">Novedades </a></li>
+                             <li class="scroll"><a href="#">Institucional </a></li>  
+                            <li class="scroll"><a href="#">Contacto </a></li>
+                            <li><a href="#" target="_blank">Campus</a></li> 
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">&nbsp;</ul>
                     </div>
                 </div>
             </div><!--/#main-nav-->
@@ -72,7 +77,7 @@ $cod_curso = $_GET['cod_curso'];
         <section id="head_image_curso">
             <div class="container-fluid">
                 <div class="row">
-                    <img id="slider" class="img-responsive animated fadeInLeftBig" src="" alt="" style="width: 100%;">
+                    <img class="img-responsive animated fadeInLeftBig" src="" alt="" style="width: 100%;">
                 </div>
             </div>
         </section> 
@@ -91,7 +96,7 @@ $cod_curso = $_GET['cod_curso'];
                     </div><!--/.ads-->     
                     <div class="widget ads">
                         <div class="row">
-                            <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
+                             <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
                                <div class="post-thumb">
                                     <a href="#"><img class="img-responsive" src="images/blog/3.jpg" alt=""></a>
                                 </div>
@@ -107,7 +112,7 @@ $cod_curso = $_GET['cod_curso'];
                 </aside>        
                 <div class="col-sm-8 col-sm-pull-4">
                     <section id="curso">
-                        <h2><span id="nombre_curso"></span></h2>
+                        <h2></h2>
                         <div class="entry-meta">
                             <span>
                                 <i class="fa fa-calendar"></i>&nbsp;Duración:
@@ -124,22 +129,16 @@ $cod_curso = $_GET['cod_curso'];
                         <p>Para ver los inicios de clases, los horarios de cursado y las formas de pago, seleccione una provincia y un local.</p>
                         <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
                             <div class="form-group">
-                                <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
-                                <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
-                                    <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
-                                <?php foreach ($provincias as $provincia){?>
-
-                                    <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
-
-                                <?php }?>
+                                <label for="option">Provincia</label>
+                                <select id="provincias" class="form-control" >
+                                    <option value="0">- Seleccione -</option>  
                                 </select>    
-
                             </div>
 
                             <div class="form-group">
-                                <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                <label for="option">Filial</label>
                                 <select id="filiales_matricula" class="form-control">
-                                    <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
+                                    <option>- Seleccione -</option>
                                 </select>
 
                             </div>
@@ -184,7 +183,7 @@ $cod_curso = $_GET['cod_curso'];
                         <div class="well">
                             <div class="media">
                                 <div class="pull-left">
-                                    <img id="img_materiales" class="avatar img-thumbnail" src="" alt="">
+                                    <img class="avatar img-thumbnail" src="" alt="">
                                 </div>
                                 <div class="media-body">
                                     <div class="media-heading">
@@ -201,7 +200,7 @@ $cod_curso = $_GET['cod_curso'];
                         <div class="well">
                             <div class="media">
                                 <div class="pull-left">
-                                    <img id="img_uniformes" class="avatar img-thumbnail" src="" alt="">
+                                    <img class="avatar img-thumbnail" src="" alt="">
                                 </div>
                                 <div class="media-body">
                                     <div class="media-heading">
@@ -224,7 +223,7 @@ $cod_curso = $_GET['cod_curso'];
                                 <span class="anios"></span>
                             </span>
                         </div>
-                        <span id="objetivos"></span>
+                        <span id="objetivos_curso"></span>
                     </section>
                 </div>
             </div><!--/.row-->
@@ -248,38 +247,17 @@ $cod_curso = $_GET['cod_curso'];
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4 text-center">
-                            <p><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
-                        </div>
-                        
-                        <div class="col-sm-4 text-center">
-                            <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquisia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
-                        </div>
-                        <div class="col-sm-4 text-center">
-                            <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/" target="_blank">lifeWEB</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </footer>
-       
-        <!-- js placed at the end of the document so the pages load faster -->
-        <script src="assets/js/jquery.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-        <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-        <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-        <script src="assets/js/jquery.scrollTo.min.js"></script>
-        <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
         
-        
-        <!--common script for all pages-->
-        <script src="assets/js/common-scripts.js"></script>
-        
-        <script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.inview.min.js"></script>
+        <script type="text/javascript" src="../js/wow.min.js"></script>
+        <script type="text/javascript" src="../js/mousescroll.js"></script>
+        <script type="text/javascript" src="../js/smoothscroll.js"></script>
+        <script type="text/javascript" src="../js/jquery.countTo.js"></script>
+        <script type="text/javascript" src="../js/lightbox.min.js"></script>
+        <script type="text/javascript" src="../js/main.js"></script>
         <!-- Plugins Facebook -->
         <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -289,17 +267,24 @@ $cod_curso = $_GET['cod_curso'];
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
         
-        </script>
+       </script>
         <script>
-            $(document).ready(function(){
-                $('#slider').attr('src',localStorage.getItem("imagePreview"));
-                $('#nombre_curso').html(localStorage.getItem("nombre_curso"));
-                $('.horas').html(localStorage.getItem("horas"));
-                $('.meses').html(localStorage.getItem("meses"));
-                $('.anios').html(localStorage.getItem("anios"));
-                $('#descripcion').html(localStorage.getItem("descripcion"));
-            });
+        $(document).ready(function(){
+            $('#curso h2').append(localStorage.getItem('nombre_curso'));
+            $('#head_image_curso img').attr('src', localStorage.getItem('imagePreview'))
+            $('.horas').append(localStorage.getItem('horas')+" horas");
+            $('.meses').append(", "+localStorage.getItem('meses')+" meses");
+            $('.anios').append(", "+localStorage.getItem('anios')+" años");
+            $('#descripcion').append(localStorage.getItem('descripcion'));
+            $('#meterial_curso img').attr('src', localStorage.getItem('imageMat'));
+            $('#desc_materiales').append(localStorage.getItem('descMat'));
+            $('#uniformes img').attr('src', localStorage.getItem('imageUnif'));
+            $('#desc_uniformes').append(localStorage.getItem('descUnif'));
+            $('#objetivos_curso').append(localStorage.getItem('objetivos'));
+        });
         </script>
     </body>
 </html>
+
+
 
