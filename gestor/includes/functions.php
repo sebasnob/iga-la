@@ -782,4 +782,8 @@ if(isset($_POST['filialSeleccionada']))
     echo json_encode($return);
 }
 
+function getNovedades($mysqli, $id_pais, $id_idioma){
+    
+}
+
 ?>

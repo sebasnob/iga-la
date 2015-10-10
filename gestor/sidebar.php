@@ -17,7 +17,6 @@ MAIN SIDEBAR MENU
                     <span>Editar Home</span>
                 </a>
             </li>
-
             <li class="sub-menu">
                 <a href="list_cursos.php" >
                     <i class="fa fa-th"></i>
@@ -29,6 +28,12 @@ MAIN SIDEBAR MENU
                 <a href="grilla_edit.php" >
                     <i class="fa fa-image"></i>
                     <span>Editar Grilla</span>
+                </a>
+            </li>    
+            <li class="sub-menu">
+                <a href="news.php" >
+                    <i class="fa fa-image"></i>
+                    <span>Novedades</span>
                 </a>
             </li>    
         </ul>
