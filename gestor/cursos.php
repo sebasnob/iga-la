@@ -15,6 +15,11 @@ if($logged == 'out'){
     exit();
 }
 
+if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
+    $datos_curso = getCursos($mysqli, $_GET['cod_curso']);
+}else{
+    header("Location: list_cursos.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,16 +32,16 @@ if($logged == 'out'){
         
         <title>Listado de Cursos - IGA</title>
         
- <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-    <link href="assets/css/table-responsive.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css"> 
+        <!-- Bootstrap core CSS -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <!--external css-->
+        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+        <!-- Custom styles for this template -->
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/style-responsive.css" rel="stylesheet">
+        <link href="assets/css/table-responsive.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css"> 
         
         <link rel="stylesheet" type="text/css" media="screen" href="styles.php?id_curso=<?=$_GET['cod_curso']?>">
         
@@ -67,66 +72,62 @@ if($logged == 'out'){
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper site-min-height">
-                     <h3><i class="fa fa-angle-right"></i>Edición del curso</h3>
+                    <h3><i class="fa fa-angle-right"></i>Edición del curso <b><?=$datos_curso[0]['nombre_es']?></b></h3>
                      <p>Formulario para la edicion del curso. Las modifiaciones solo afectaran al curso, en la filial e idioma seleccionados.</p>
                     <br/>
                     <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
                         <input type="hidden" name="cod_curso" id="cod_curso" value="<?=$_GET['cod_curso']?>" />
                         <input type="hidden" name="edicion_curso" id="edicion_curso" value="true" />
 
-
-                <div class="row mt">
-                   <div class="col-lg-12">
-                     <div class="form-panel">
-                        <div class="form-group">
-                            <label>Seleccione un Pais</label>
-                            <select name="paises_curso" id="paises_curso" class="form-control">
-                                <option value="0">- Seleccione -</option>
-                                <?php
-                                    $paises_curso = getPaises($mysqli);
-                                    foreach($paises_curso as $i=>$d){
-                                ?>
-                                <option value="<?=$d['id']?>"><?=$d['pais']?></option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
-                            &nbsp;
-                            <label>Provincia</label>
-                            <select name="provincias_curso" id="provincias_curso" class="form-control">
-                                <option value="0">- Seleccione -</option>
-                            </select>
-                            &nbsp;
-                            <label>Filial</label>
-                            <select name="filiales_curso" id="filiales_curso" class="form-control">
-                                <option value="0">- Seleccione -</option>
-                            </select>
-                            &nbsp;
-                            <label>Idioma</label>
-                            <select name="idioma_curso" id="idioma_curso" class="form-control">
-                                <option value="0">- Seleccione -</option>
-                                <?php
-                                    $idiomas = getIdiomas($mysqli);
-                                    foreach($idiomas as $i=>$d){
-                                ?>
-                                <option value="<?=$d['id']?>"><?=$d['idioma']?></option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                     </div><!-- /form-panel -->
-                   </div><!-- /col-lg-12 -->
-                </div><!-- /row -->   
-                       
-                
+                        <div class="row mt">
+                           <div class="col-lg-12">
+                             <div class="form-panel">
+                                <div class="form-group">
+                                    <label>Seleccione un Pais</label>
+                                    <select name="paises_curso" id="paises_curso" class="form-control">
+                                        <option value="0">- Seleccione -</option>
+                                        <?php
+                                            $paises_curso = getPaises($mysqli);
+                                            foreach($paises_curso as $i=>$d){
+                                        ?>
+                                        <option value="<?=$d['id']?>"><?=$d['pais']?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                                    &nbsp;
+                                    <label>Provincia</label>
+                                    <select name="provincias_curso" id="provincias_curso" class="form-control">
+                                        <option value="0">- Seleccione -</option>
+                                    </select>
+                                    &nbsp;
+                                    <label>Filial</label>
+                                    <select name="filiales_curso" id="filiales_curso" class="form-control">
+                                        <option value="0">- Seleccione -</option>
+                                    </select>
+                                    &nbsp;
+                                    <label>Idioma</label>
+                                    <select name="idioma_curso" id="idioma_curso" class="form-control">
+                                        <option value="0">- Seleccione -</option>
+                                        <?php
+                                            $idiomas = getIdiomas($mysqli);
+                                            foreach($idiomas as $i=>$d){
+                                        ?>
+                                        <option value="<?=$d['id']?>"><?=$d['idioma']?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                             </div><!-- /form-panel -->
+                           </div><!-- /col-lg-12 -->
+                        </div><!-- /row -->   
 
                         <p id="error_datos_curso" class="bg-danger"></p>
                         <div class="datos_curso">
                           <div class="row mt">
                              <div class="col-lg-12">
                                <div class="form-panel">
-
                                     <div id="datos_curso">
                                       <!--<div class="row">
                                           <div id="selector_color" class="col-md-6 text-left" >
@@ -136,6 +137,13 @@ if($logged == 'out'){
                                           </div>
                                           <div id="selector_color" class="col-md-6 text-right" > </div>
                                       </div>-->
+                                      <div class="form-group">
+                                          <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Estado:</b></h4>
+                                          <select name="estado_curso" id="estado_curso">
+                                              <option value="0">Deshabilitado</option>
+                                              <option value="1">Habilitado</option>
+                                          </select>
+                                      </div>
                                       <div class="form-group">
                                           <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Nombre del Curso:</b></h4>
                                           <input type="text" id="nombre_curso" name="nombre_curso" class="form-control"/>
@@ -193,7 +201,7 @@ if($logged == 'out'){
                             <div class="row mt">
                                 <div class="col-lg-12">  
                                     <button id="confirm" class="btn btn-success">Guardar cambios</button>
-                                    <a id="preview" class="btn btn-default" href="preview.php?id_curso=<?=$_GET['id_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
+                                    <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
                                 </div><!-- /form-panel -->
                             </div><!-- /col-lg-12 -->
                         </div><!-- /row -->     
@@ -240,7 +248,7 @@ if($logged == 'out'){
                     dataType: "json",
         	    success: function(data){
                         changeSelectOptions("provincias_curso", data.options, 'nombre', 'id');
-                        $("select#provincias_curso option[value='"+sessionStorage.getItem("provincia")+"']").attr("selected", "selected");
+                        $("select#provincias_curso option[value='"+localStorage.getItem("provincia")+"']").attr("selected", "selected");
         	    }
         	});
             }
@@ -266,9 +274,99 @@ if($logged == 'out'){
                     dataType: "json",
         	    success: function(data){
                         changeSelectOptions("filiales_curso", data.options, 'nombre', 'id');
-                        $("select#filiales_curso option[value='"+sessionStorage.getItem("filial")+"']").attr("selected", "selected");
+                        $("select#filiales_curso option[value='"+localStorage.getItem("filial")+"']").attr("selected", "selected");
         	    }
         	});
+            }
+            
+            function getDatosCurso(cod_curso, id_pais, id_idioma, id_filial){
+                $.ajax({
+        	    url: "controller_ajax.php",
+        	    method: "POST",
+        	    data: {
+                        option : 'get_datos_curso',
+                        cod_curso : cod_curso,
+                        id_pais : id_pais,
+                        id_idioma : id_idioma,
+                        id_filial : id_filial
+                    },
+                    dataType: "json",
+        	    success: function(data){
+                        if(data.id){
+                            $('#error_datos_curso').hide();
+                            
+                            $('#imagePreview').attr("src", "../"+data.url_cabecera);
+                            $('#materialesPreview img').attr("src", "../"+data.url_material);
+                            $('#uniformesPreview img').attr("src", "../"+data.url_uniforme);
+                            
+                            $('#horas').val(data.horas);
+                            $('#meses').val(data.meses);
+                            $('#anios').val(data.anios);
+                            $('#nombre_curso').val(data.nombre);
+                            $("select#estado_curso option[value='"+data.estado+"']").attr("selected", "selected");
+                            
+                            $('#datos_curso').show();
+                            $('.datos_curso').css('display','block');
+                            $('.acciones').css('display','block');
+                            
+                            if(!CKEDITOR.instances['uniformes_txt']){
+                                $('#uniformes_txt').val(data.desc_uniforme);
+                                CKEDITOR.replace( 'uniformes_txt', {
+                                    //uiColor: '#010F2C',
+                                    customConfig: 'config.js',
+                                    toolbar: [
+                                            [ 'Bold', 'Italic', 'FontSize']
+                                    ]
+                                });
+                            }else{
+                                CKEDITOR.instances['uniformes_txt'].setData(data.desc_uniforme);
+                            }
+                            
+                            if(!CKEDITOR.instances['materiales_txt']){
+                                $('#materiales_txt').val(data.desc_material);
+                                CKEDITOR.replace( 'materiales_txt', {
+                                    //uiColor: '#010F2C',
+                                    customConfig: 'config.js',
+                                    toolbar: [
+                                            [ 'Bold', 'Italic', 'FontSize']
+                                    ]
+                                });
+                            }else{
+                                CKEDITOR.instances['materiales_txt'].setData(data.desc_material);
+                            }
+                            
+                            if(!CKEDITOR.instances['descripcion']){
+                                $('#descripcion').val(data.descripcion);
+                                CKEDITOR.replace( 'descripcion', {
+                                    //uiColor: '#010F2C',
+                                    customConfig: 'config.js',
+                                    toolbar: [
+                                            [ 'Bold', 'Italic', 'FontSize']
+                                    ]
+                                });
+                            }else{
+                                CKEDITOR.instances['descripcion'].setData(data.descripcion);
+                            }
+                            
+                            if(!CKEDITOR.instances['objetivos']){
+                                $('#objetivos').val(data.objetivos);
+                                CKEDITOR.replace( 'objetivos', {
+                                    //uiColor: '#010F2C',
+                                    customConfig: 'config.js',
+                                    toolbar: [
+                                            [ 'Bold', 'Italic', 'FontSize']
+                                    ]
+                                });
+                            }else{
+                                CKEDITOR.instances['objetivos'].setData(data.objetivos);
+                            }
+                        }else{
+                            $('#datos_curso').hide();
+                            $('#error_datos_curso').html(data);
+                            $('#error_datos_curso').show();
+                        }
+        	    }
+        	  });
             }
     
             function changeSelectOptions(select_id, array_index, texto, value){
@@ -343,58 +441,17 @@ if($logged == 'out'){
             });
             
             $("#paises_curso").change(function(){
-                sessionStorage.setItem('pais', $(this).val());
+                localStorage.setItem('pais', $(this).val());
                 getProvincias($(this).val());
-                /*
-                //Reincio el select de provincias
-                $('#provincias_curso').html("<option value='0'>- Seleccione -</option>");
-                //Reincio el select de filiales
-                $('#filiales_curso').html("<option value='0'>- Seleccione -</option>");
-                //Oculto los datos del curso y de los errores
-                $('#error_datos_curso').hide();
-                $('#datos_curso').hide();
-                
-                //Cargo el select de provincias
-                $.ajax({
-        	    url: "controller_ajax.php",
-        	    method: "POST",
-        	    data: { option : 'select_provincias', id_pais : $(this).val()  },
-                    dataType: "json",
-        	    success: function(data){
-                        changeSelectOptions("provincias_curso", data.options, 'nombre', 'id');
-        	    }
-        	});
-                */
             });
             
             $("#provincias_curso").change(function(){
-                sessionStorage.setItem('provincia', $(this).val());
+                localStorage.setItem('provincia', $(this).val());
                 getFiliales(<?=$_GET['cod_curso']?>, $("#paises_curso").val(), $(this).val());
-                /*
-                $('#filiales_curso').html("<option value='0'>- Seleccione -</option>");
-                //Oculto los datos del curso y de los errores
-                $('#error_datos_curso').hide();
-                $('#datos_curso').hide();
-                
-                $.ajax({
-        	    url: "controller_ajax.php",
-        	    method: "POST",
-        	    data: { 
-                        option : 'select_filiales', 
-                        cod_curso : <? //echo $_GET['cod_curso']?>, 
-                        id_pais : $("#paises_curso").val(),
-                        id_provincia : $(this).val()
-                    },
-                    dataType: "json",
-        	    success: function(data){
-                        changeSelectOptions("filiales_curso", data.options, 'nombre', 'id');
-        	    }
-        	});
-                */
             });
             
             $('#filiales_curso').change(function(){
-                sessionStorage.setItem('filial', $(this).val());
+                localStorage.setItem('filial', $(this).val());
                 //Oculto los datos del curso y de los errores
                 $('#error_datos_curso').hide();
                 $('#datos_curso').hide();
@@ -405,106 +462,35 @@ if($logged == 'out'){
             });
             
             $("#idioma_curso").change(function(){
-                sessionStorage.setItem('idioma', $(this).val());
-                $.ajax({
-        	    url: "controller_ajax.php",
-        	    method: "POST",
-        	    data: {
-                        option : 'get_datos_curso',
-                        cod_curso : <?=$_GET['cod_curso']?>,
-                        id_pais : $("#paises_curso").val(),
-                        id_idioma : $(this).val(),
-                        id_filial : $('#filiales_curso').val()
-                    },
-                    dataType: "json",
-        	    success: function(data){
-                        if(data.id){
-                            $('#error_datos_curso').hide();
-                            
-                            $('#imagePreview').attr("src", "../"+data.url_cabecera);
-                            $('#imgMaterialesPreview').attr("src", "../"+data.url_material);
-                            $('#imgUniformesPreview').attr("src", "../"+data.url_uniforme);
-                            
-                            $('#horas').val(data.horas);
-                            $('#meses').val(data.meses);
-                            $('#anios').val(data.anios);
-                            
-                            $('#datos_curso').show();
-                            $('.datos_curso').css('display','block');
-                            $('.acciones').css('display','block');
-                            
-                            if(!CKEDITOR.instances['uniformes_txt']){
-                                $('#uniformes_txt').val(data.desc_uniforme);
-                                CKEDITOR.replace( 'uniformes_txt', {
-                                    //uiColor: '#010F2C',
-                                    customConfig: 'config.js',
-                                    toolbar: [
-                                            [ 'Bold', 'Italic', 'FontSize']
-                                    ]
-                                });
-                            }else{
-                                CKEDITOR.instances['uniformes_txt'].setData(data.desc_uniforme);
-                            }
-                            
-                            if(!CKEDITOR.instances['materiales_txt']){
-                                $('#materiales_txt').val(data.desc_material);
-                                CKEDITOR.replace( 'materiales_txt', {
-                                    //uiColor: '#010F2C',
-                                    customConfig: 'config.js',
-                                    toolbar: [
-                                            [ 'Bold', 'Italic', 'FontSize']
-                                    ]
-                                });
-                            }else{
-                                CKEDITOR.instances['materiales_txt'].setData(data.desc_material);
-                            }
-                            
-                            if(!CKEDITOR.instances['descripcion']){
-                                $('#descripcion').val(data.descripcion);
-                                CKEDITOR.replace( 'descripcion', {
-                                    //uiColor: '#010F2C',
-                                    customConfig: 'config.js',
-                                    toolbar: [
-                                            [ 'Bold', 'Italic', 'FontSize']
-                                    ]
-                                });
-                            }else{
-                                CKEDITOR.instances['descripcion'].setData(data.descripcion);
-                            }
-                            
-                            if(!CKEDITOR.instances['objetivos']){
-                                $('#objetivos').val(data.objetivos);
-                                CKEDITOR.replace( 'objetivos', {
-                                    //uiColor: '#010F2C',
-                                    customConfig: 'config.js',
-                                    toolbar: [
-                                            [ 'Bold', 'Italic', 'FontSize']
-                                    ]
-                                });
-                            }else{
-                                CKEDITOR.instances['objetivos'].setData(data.objetivos);
-                            }
-                        }else{
-                            $('#datos_curso').hide();
-                            $('#error_datos_curso').html(data);
-                            $('#error_datos_curso').show();
-                        }
-        	    }
-        	  });
+                localStorage.setItem('idioma', $(this).val());
+                getDatosCurso(<?=$_GET['cod_curso']?>, $("#paises_curso").val(), $(this).val(), $('#filiales_curso').val());
+            });
+            
+            $("#preview").click(function(){
+                localStorage.setItem('nombre_curso', $("#nombre_curso").val());
+                localStorage.setItem('imagePreview', $("#sliderPreview img").attr('src'));
+                localStorage.setItem('horas', $("#horas").val());
+                localStorage.setItem('meses', $("#meses").val());
+                localStorage.setItem('anios', $("#anios").val());
+                localStorage.setItem('descripcion', $("#descripcion").val());
             });
             
             $(document).ready(function(){
-                if(sessionStorage.getItem("pais")){
-                   console.log(sessionStorage.getItem("pais"));
-                   $("select#paises_curso option[value='"+sessionStorage.getItem("pais")+"']").attr("selected", "selected");
+                if(localStorage.getItem("pais")){
+                   console.log(localStorage.getItem("pais"));
+                   $("select#paises_curso option[value='"+localStorage.getItem("pais")+"']").attr("selected", "selected");
                    getProvincias($("#paises_curso").val());
                 }
-                if(sessionStorage.getItem("provincia")){
-                    console.log("Prov: "+sessionStorage.getItem("provincia"));
-                    getFiliales(<?=$_GET['cod_curso']?>, $("#paises_curso").val(), sessionStorage.getItem("provincia"));
+                
+                if(localStorage.getItem("provincia")){
+                    console.log("Prov: "+localStorage.getItem("provincia"));
+                    getFiliales(<?=$_GET['cod_curso']?>, $("#paises_curso").val(), localStorage.getItem("provincia"));
                 }
-                if(sessionStorage.getItem("filial")){
-                    console.log("Filial: "+sessionStorage.getItem("filial"));
+                
+                if(localStorage.getItem("idioma")){
+                    console.log("Filial: "+localStorage.getItem("filial"));
+                    $("select#idioma_curso option[value='"+localStorage.getItem("idioma")+"']").attr("selected", "selected");
+                    getDatosCurso(<?=$_GET['cod_curso']?>, localStorage.getItem("pais"), localStorage.getItem('idioma'), localStorage.getItem("filial"));
                 }
             });
         </script>

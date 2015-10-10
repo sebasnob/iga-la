@@ -115,7 +115,9 @@ if($logged == 'out'){
     <script src="assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
-
+    <script>
+        localStorage.clear();
+    </script>
 
   </body>
 </html>
