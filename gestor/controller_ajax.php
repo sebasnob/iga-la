@@ -53,6 +53,29 @@ switch($_POST['option']){
         print(json_encode($datos_curso));
         
     break;
+    
+    case "cambiar_estado_noticia":
+        $retorno = array();
+        if(isset($_POST['id_noticia'])){
+            $res_sel = $mysqli->query("SELECT estado FROM novedades WHERE id={$_POST['id_noticia']}");
+            if($res_sel->num_rows > 0){
+                $estado = $res_sel->fetch_assoc();
+                if($estado['estado'] == 1){
+                    $nuevo_estado = 0;
+                }else{
+                    $nuevo_estado = 1;
+                }
+                $query = "UPDATE novedades SET estado={$nuevo_estado} WHERE id={$_POST['id_noticia']}";
+                $resultado = $mysqli->query($query);
+                $retorno['result'] = 'ok';
+            }else{
+                $retorno['result'] = 'fail';
+            }
+        }else{
+            $retorno['result'] = 'fail';
+        }
+        print(json_encode($retorno));
+    break;
 }
 
 ?>

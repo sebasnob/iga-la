@@ -59,39 +59,53 @@ if($logged == 'out'){
                       <section class="task-panel tasks-widget">
                         <div class="panel-heading">
                             <div class="pull-left"><h5><i class="fa fa-tasks"></i> Novedades</h5></div>
+                            <a class="btn btn-default btn-sm pull-right" href="news_admin.php">Nueva</a>
                             <br>
                         </div>
                           <div class="panel-body">
                               <div class="task-content">
+                                  <table class="table table-striped table-advance table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="fa fa-bullhorn"></i> Titulo</th>
+                                            <th>&nbsp;</th>
+                                            <th><i class="fa fa-bookmark"></i> Fecha</th>
+                                            <th><i class=" fa fa-edit"></i> Estado</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
                             <?php
-                               $cursos = getCursos($mysqli);
-                                foreach($cursos as $i=>$j){
+                               $novedades = getNovedades($mysqli);
+                                foreach($novedades as $i=>$j){
                                 ?>
-                                 <ul class="task-list">
-                                      <li>
-                                           
-                                          <div class="task-title">
-                                              <span class="task-title-sp"><?=$j['cod_curso']?>&nbsp;&nbsp;<?=$j['nombre_es']?></span>
-                                              <!--<span class="badge bg-theme">Nuevo</span>-->
-                                              <div class="pull-right">
-                                                  <input class="btn btn-xs" type="color" id="select_color_fondo" value="#<?=$j['color']?>"/>
-                                                  <a class="btn btn-primary btn-xs" href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-pencil"></i></a>
-                                                  <a class="btn btn-default btn-xs" href="cursos_grupo.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-th-list"></i></a>
-                                                  
-                                              </div>
-                                          </div>
-                                          
-                                      </li>
-                                                   
-                                  </ul>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="news_admin.php?id=<?=$j['id']?>"><?=$j['titulo']?></a></td>
+                                            <td>&nbsp;</td>
+                                            <td><?=$j['fecha']?></td>
+                                            <td>
+                                                <?php echo ($j['estado'] == 1)? "<span class='label label-info label-mini'>Publicada</span>":"<span class='label label-danger label-mini'>No Publicada</span>"; ?>
+                                            </td>
+                                            <td>
+                                                <button class='btn <?php echo ($j['estado'] == 1)? "btn-default change_status":"btn-success";?>  btn-xs' onclick="javascript:cambiarEstado(<?=$j['id']?>)"><i class='fa fa-check'></i></button>
+                                                <a href="news_admin.php?id=<?=$j['id']?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <!--<div class="task-title">
+                                        <span class="task-title-sp"><? //$j['cod_curso']?>&nbsp;&nbsp;<? //$j['nombre_es']?></span>
+                                        <!--<span class="badge bg-theme">Nuevo</span>
+                                        <div class="pull-right">
+                                            <input class="btn btn-xs" type="color" id="select_color_fondo" value="#<? //$j['color']?>"/>
+                                            <a class="btn btn-primary btn-xs" href="cursos.php?cod_curso=<? //$j['cod_curso']?>"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-default btn-xs" href="cursos_grupo.php?cod_curso=<? //$j['cod_curso']?>"><i class="fa fa-th-list"></i></a>
+                                        </div>
+                                    </div>-->
                                   <?php
                                     }
                                    ?>
-                              </div>
-
-                              <div class=" add-task-row">
-                                  <!--<a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Agregar Nuevo Curso</a>-->
-                                  <a class="btn btn-default btn-sm pull-right" href="todo_list.html#">Buscar Curso</a>
+                                </table>
                               </div>
                           </div>
                       </section>
@@ -115,8 +129,18 @@ if($logged == 'out'){
     <script src="assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
-    <script>
-        localStorage.clear();
+    <script type="text/javascript">
+        function cambiarEstado(id){
+            $.ajax({
+                url: "controller_ajax.php",
+                method: "POST",
+                data: {option : 'cambiar_estado_noticia', id_noticia : id},
+                dataType: "json",
+                success: function(data){
+                    
+                }
+            });
+        }
     </script>
 
   </body>

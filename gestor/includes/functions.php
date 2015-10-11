@@ -782,8 +782,35 @@ if(isset($_POST['filialSeleccionada']))
     echo json_encode($return);
 }
 
-function getNovedades($mysqli, $id_pais, $id_idioma){
+function getNovedades($mysqli, $id_pais='', $id_idioma=''){
+    $cond = '';
     
+    if(isset($id_pais) && $id_pais != '' && isset($id_idioma) && $id_idioma != ''){
+        $cond .= ' WHERE id_pais={$id_pais} AND id_idioma={$id_idioma}';
+    }
+    
+    $resultado = $mysqli->query("SELECT id, titulo, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades {$cond}");
+    $novedades = array();
+
+    while($respuesta = $resultado->fetch_assoc())
+    {
+        $novedades[] = $respuesta;
+    }
+    $resultado->free();
+    
+    return $novedades;
+}
+
+function getNovedad($mysqli, $id_novedad){
+    $resultado = $mysqli->query("SELECT id, titulo, imagen, descripcion, link, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades WHERE id={$id_novedad}");
+    if($resultado->num_rows > 0){
+        $novedad = $resultado->fetch_assoc();
+    }else{
+        $novedad = array();
+    }
+    $resultado->free();
+    
+    return $novedad;
 }
 
 ?>
