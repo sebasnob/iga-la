@@ -255,11 +255,11 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                     $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
                 ?>
                 
-                <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
+                     <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <img class="img-responsive animated fadeInDown" src="<?= $cursos_datos['url_cabecera']?>" alt="">
-                            <div class="col-sm-9">
+                        <div class="col-sm-9">
+                           
+                           
                                 <div class="project-info">
                                     <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
                                     <div class="entry-meta">
@@ -274,21 +274,10 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                                     </div>
                                     <p class="lead"><?= $cursos_datos['descripcion']?></p>
                                 </div>
-                            </div>
-                            
-                            <div class="col-sm-3">
-                                <div class="project-details">
-                                    <img class="img-responsive" src="<?php echo $imgGrid['img_url']?>" alt="">
-                                    <!--
-                                    <h3><?php //$lenguaje['uniformes_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><img class="img-responsive animated fadeInDown" src="<?php //$cursos_datos['url_uniforme']?>" alt=""></p>
-                                    <h3><?php //$lenguaje['materiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><img class="img-responsive animated fadeInDown" src="<?php //$cursos_datos['url_material']?>" alt=""></p>
-                                    -->
-                                </div>  
-                            </div>
-                            
-                            <div class="col-sm-12"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
+                           
+                        
+                           
+                            <div class="col-sm-9"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
                         </div>
                         <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
                         
