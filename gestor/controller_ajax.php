@@ -76,6 +76,22 @@ switch($_POST['option']){
         }
         print(json_encode($retorno));
     break;
+    
+    case "eliminar_noticia":
+        $retorno = array();
+        if(isset($_POST['id_noticia'])){
+            $res_sel = $mysqli->query("SELECT id FROM novedades WHERE id={$_POST['id_noticia']}");
+            if($res_sel->num_rows > 0){
+                $resultado = $mysqli->query("DELETE FROM novedades WHERE id={$_POST['id_noticia']}");
+                $retorno['result'] = 'ok';
+            }else{
+                $retorno['result'] = 'fail';
+            }
+        }else{
+            $retorno['result'] = 'fail';
+        }
+        print(json_encode($retorno));
+    break;
 }
 
 ?>

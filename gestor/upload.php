@@ -4,6 +4,19 @@ include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 include_once 'includes/resizeImage.php';
 
+sec_session_start();
+
+if (login_check($mysqli) == true) {
+    $logged = 'in';
+} else {
+    $logged = 'out';
+}
+
+if($logged == 'out'){
+    header("Location: login.php");
+    exit();
+}
+
 if(isset($_POST['edicion_curso_grupo'])){
     //##### MODIFICACION DE SLIDER #####//
     if(isset($_FILES['imageSlider']['name']) && $_FILES['imageSlider']['name'] != ''){
@@ -92,7 +105,6 @@ if(isset($_POST['edicion_curso_grupo'])){
                             $cfi = $result_sel->fetch_assoc();
 
                             $query = "UPDATE curso_datos SET url_material='".$ruta_materiales.$new_file_name."' WHERE id_cfi='{$cfi['id']}'";
-    echo $cfi['id']."<br/>";                        
                             $result = $mysqli->query($query);
                             if($result){
                                     $message = "<br/>Imagen modificada correctamente.<br/>";
@@ -747,6 +759,42 @@ if(isset($_POST['edicion_grilla_editar']))
         header('Location: grilla_edit.php');
         exit;
     }
+}
+
+if($_POST['edicion_noticia']){
+    if($_POST['accion'] == 'agregar'){
+        $id_pais = $_POST['pais'];
+        $id_idioma = $_POST['idioma'];
+        $titulo = $_POST['titulo'];
+        $descripcion = trim($_POST['descripcion']);
+        $link = $_POST['link'];
+        $fecha = date("Y-m-d");
+        $estado = 1;
+        $autor = $_SESSION['username'];
+        
+        $message = '';
+        if(isset($_FILES['imagen']['name']) && $_FILES['imagen']['name'] != ''){
+            if(!$_FILES['imagen']['error']){
+                $new_filename = str_replace(' ','',trim($_FILES['imagen']['name']));
+                $new_filename = str_replace(array('(','\'','´','{','}','+','*','¨','[',']','%','&','/','%','\$','#','"','!','?','¡',')'),'',$new_filename);
+                
+                if(!move_uploaded_file($_FILES['imagen']['tmp_name'], '../images/novedades/'.$new_filename)){
+                    $message .= "Hubo un error al subir la imagen";
+                }
+                
+                $query_ins = "INSERT INTO novedades SET imagen='{$new_filename}', titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais={$id_pais}, id_idioma={$id_idioma}";
+echo $query_ins;
+                $res_query = $mysqli->query($query_ins);
+                if($res_query){
+                    $message .= "La novedad se agrego correctamente";
+                }else{
+                    $message .= "Hubo un error al agregar la novedad";
+                }
+            }
+        }
+        echo $message;
+    }
+    
 }
     
 //Funcion auxiliar para determinar la extension de un archivo

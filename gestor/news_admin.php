@@ -17,8 +17,10 @@ if($logged == 'out'){
 
 if(isset($_GET['id'])){
     $accion = 'editar';
+    $id_novedad = $_GET['id'];
     $novedad = getNovedad($mysqli, $_GET['id']);
 }else{
+    $id_novedad = '';
     $accion = 'agregar';
 }
 
@@ -64,8 +66,9 @@ if(isset($_GET['id'])){
                 <section class="wrapper site-min-height">
                     <h3><i class="fa fa-angle-right"></i><?php echo ($accion == 'agregar')?"Nueva noticia":"Edicion de noticia"?></h3>
                     <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
-                        <input type="hidden" name="id_novedad" id="id_novedad" value="<?=$_GET['id']?>" />
-                        <input type="hidden" name="accion" id="accion" value="$accion" />
+                        <input type="hidden" name="id_novedad" id="id_novedad" value="<?=$id_novedad?>" />
+                        <input type="hidden" name="accion" id="accion" value="<?=$accion?>" />
+                        <input type="hidden" name="edicion_noticia" id="edicion_noticia" value="true" />
                         
                         <div class="row mt">
                             <div class="col-lg-12">
@@ -113,7 +116,7 @@ if(isset($_GET['id'])){
                                         <div class="form-group">
                                            <div id="sliderPreview">
                                               <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen:</b></h4> 
-                                              <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="../<?=$novedad['imagen']?>" alt="">
+                                              <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="../images/novedades/<?=$novedad['imagen']?>" alt="">
                                            </div>
                                            <input id="imagen" type="file" name="imagen" class="img"/>
                                         </div>
@@ -170,6 +173,10 @@ if(isset($_GET['id'])){
             
             var descripcion = '<?php echo (isset($novedad['descripcion']))?$novedad['descripcion']:''; ?>';
             CKEDITOR.instances['descripcion'].setData(descripcion);
+            
+            $('#confirm').click(function(){
+                $('#form_change').submit();
+            });
         </script>
     </body>
 </html>

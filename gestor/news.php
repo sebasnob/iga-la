@@ -74,25 +74,24 @@ if($logged == 'out'){
                                             <th></th>
                                         </tr>
                                     </thead>
-                            <?php
-                               $novedades = getNovedades($mysqli);
-                                foreach($novedades as $i=>$j){
-                                ?>
                                     <tbody>
+                                    <?php
+                                    $novedades = getNovedades($mysqli);
+                                    foreach($novedades as $i=>$j){
+                                    ?>
                                         <tr>
                                             <td><a href="news_admin.php?id=<?=$j['id']?>"><?=$j['titulo']?></a></td>
                                             <td>&nbsp;</td>
                                             <td><?=$j['fecha']?></td>
                                             <td>
-                                                <?php echo ($j['estado'] == 1)? "<span class='label label-info label-mini'>Publicada</span>":"<span class='label label-danger label-mini'>No Publicada</span>"; ?>
+                                                <?php echo ($j['estado'] == 1)? "<span id='span".$j['id']."' class='label label-success label-mini'>Publicada</span>":"<span id='span".$j['id']."' class='label label-danger label-mini'>No Publicada</span>"; ?>
                                             </td>
                                             <td>
-                                                <button class='btn <?php echo ($j['estado'] == 1)? "btn-default change_status":"btn-success";?>  btn-xs' onclick="javascript:cambiarEstado(<?=$j['id']?>)"><i class='fa fa-check'></i></button>
+                                                <button class='btn <?php echo ($j['estado'] == 1)? "btn-default":"btn-success";?>  btn-xs' onclick="javascript:cambiarEstadoNovedad(this, span<?=$j["id"]?>, <?=$j['id']?>)"><i class='fa fa-check'></i></button>
                                                 <a href="news_admin.php?id=<?=$j['id']?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                <button class="btn btn-danger btn-xs" onclick="javascript:eliminarNovedad(this, <?=$j['id']?>)"><i class="fa fa-trash-o "></i></button>
                                             </td>
                                         </tr>
-                                    </tbody>
                                     <!--<div class="task-title">
                                         <span class="task-title-sp"><? //$j['cod_curso']?>&nbsp;&nbsp;<? //$j['nombre_es']?></span>
                                         <!--<span class="badge bg-theme">Nuevo</span>
@@ -102,9 +101,10 @@ if($logged == 'out'){
                                             <a class="btn btn-default btn-xs" href="cursos_grupo.php?cod_curso=<? //$j['cod_curso']?>"><i class="fa fa-th-list"></i></a>
                                         </div>
                                     </div>-->
-                                  <?php
+                                    <?php
                                     }
                                    ?>
+                                    </tbody>
                                 </table>
                               </div>
                           </div>
@@ -130,14 +130,44 @@ if($logged == 'out'){
 
     <!--script for this page-->
     <script type="text/javascript">
-        function cambiarEstado(id){
+        function cambiarEstadoNovedad(boton, spanid, id_noticia){
             $.ajax({
                 url: "controller_ajax.php",
                 method: "POST",
-                data: {option : 'cambiar_estado_noticia', id_noticia : id},
+                data: {option : 'cambiar_estado_noticia', id_noticia : id_noticia},
                 dataType: "json",
                 success: function(data){
-                    
+                    if(data.result == 'ok'){
+                        if($(boton).hasClass("btn-default")){
+                            $(boton).removeClass("btn-default");
+                            $(boton).addClass("btn-success");
+                            
+                            $(spanid).removeClass("label-success");
+                            $(spanid).addClass("label-danger");
+                            $(spanid).html('No Publicada')
+                        }else{
+                            $(boton).removeClass("btn-success");
+                            $(boton).addClass("btn-default");
+                            
+                            $(spanid).removeClass("label-danger");
+                            $(spanid).addClass("label-success");
+                            $(spanid).html('Publicada')
+                        }
+                    }
+                }
+            });
+        }
+        
+        function eliminarNovedad(boton, id_noticia){
+            $.ajax({
+                url: "controller_ajax.php",
+                method: "POST",
+                data: {option : 'eliminar_noticia', id_noticia : id_noticia},
+                dataType: "json",
+                success: function(data){
+                    if(data.result == 'ok'){
+                        
+                    }
                 }
             });
         }
