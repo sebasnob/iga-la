@@ -854,4 +854,33 @@ function getTotalNovedades($mysqli){
     return $total_novedades['total'];
 }
 
+function getTiposCursos($mysqli, $id_padre=''){
+    $tipos_cursos = array();
+    if(isset($id_padre) && $id_padre != ''){
+        $resultado = $mysqli->query("SELECT id, nombre_es, nombre_in, nombre_pt, padre FROM tipos WHERE padre={$id_padre}");
+        if($resultado->num_rows > 0){
+            while($respuesta = $resultado->fetch_assoc())
+            {
+                $tipos_cursos[] = $respuesta;
+            }
+        }else{
+            $tipos_cursos = array();
+        }
+        $resultado->free();
+    }else{
+        $resultado = $mysqli->query("SELECT id, nombre_es, nombre_in, nombre_pt, padre FROM tipos WHERE padre=0");
+        if($resultado->num_rows > 0){
+            while($respuesta = $resultado->fetch_assoc())
+            {
+                $tipos_cursos[] = $respuesta;
+            }
+        }else{
+            $tipos_cursos = array();
+        }
+        $resultado->free();
+    }
+    
+    return $tipos_cursos;
+}
+
 ?>
