@@ -94,6 +94,22 @@ switch($_POST['option']){
         }
         print(json_encode($retorno));
     break;
+    
+    case "cambiar_estado_curso":
+        $retorno = array();
+        if(isset($_POST['cod_curso']) && isset($_POST['id_idioma']) && isset($_POST['id_filial']) && isset($_POST['estado'])){
+            $query = "UPDATE curso_filial_idioma SET estado={$_POST['estado']} WHERE cod_curso={$_POST['cod_curso']} AND id_filial={$_POST['id_filial']} AND id_idioma={$_POST['id_idioma']}";
+            $resultado = $mysqli->query($query);
+            if($resultado){
+                $retorno['result'] = 'ok';
+            }else{
+                $retorno['result'] = 'Ocurrio un error al modificar el estado';
+            }
+        }else{
+            $retorno['result'] = 'Faltan variables';
+        }
+        print(json_encode($retorno));
+    break;
 }
 
 ?>

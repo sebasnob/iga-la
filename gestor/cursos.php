@@ -143,6 +143,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                                               <option value="0">Deshabilitado</option>
                                               <option value="1">Habilitado</option>
                                           </select>
+                                          <button type="button" id="cambiar_estado" class="btn btn-success btn-sm" data-loading-text="Cambiando...">Cambiar</button>
                                       </div>
                                       <div class="form-group">
                                           <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Nombre del Curso:</b></h4>
@@ -157,6 +158,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                                       <input id="uploadSlider" type="file" name="imageSlider" class="img" />
                                           <div class="form-group">
                                              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Duración:</b></h4>
+                                             <p>(Asignar 0 en caso de no querer mostrar el valor)</p>
                                              Horas: <input type="text" id="horas" name="horas" style="width:250px" /><br/>
                                              Meses: <input type="text" id="meses" name="meses" style="width:250px" /><br/>
                                              Años: <input type="text" id="anios" name="anios" style="width:250px" /><br/>
@@ -215,9 +217,9 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
         
         <!-- js placed at the end of the document so the pages load faster -->
         <script src="assets/js/jquery.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
         <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
         <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
         <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
@@ -480,9 +482,27 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                 localStorage.setItem('objetivos', CKEDITOR.instances['objetivos'].getData());
             });
             
+            $('#cambiar_estado').on('click', function(){
+                var $btn = $(this).button('loading');
+                $.ajax({
+        	    url: "controller_ajax.php",
+        	    method: "POST",
+        	    data: {
+                        option : 'cambiar_estado_curso',
+                        cod_curso : $('#cod_curso').val(),
+                        id_idioma : $('#idioma_curso').val(),
+                        id_filial : $('#filiales_curso').val(),
+                        estado: $('#estado_curso').val()
+                    },
+                    dataType: "json",
+        	    success: function(data){
+                        $btn.button('reset');
+                    }
+                });
+            });
+            
             $(document).ready(function(){
                 if(localStorage.getItem("pais")){
-                   console.log(localStorage.getItem("pais"));
                    $("select#paises_curso option[value='"+localStorage.getItem("pais")+"']").attr("selected", "selected");
                    getProvincias($("#paises_curso").val());
                 }

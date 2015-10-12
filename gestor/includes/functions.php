@@ -75,7 +75,7 @@ function getCursos($mysqli, $cod_curso = '')
         $cond = ' WHERE cod_curso = '.$cod_curso;
     }
     
-    $resultado = $mysqli->query("SELECT * FROM cursos {$cond}");
+    $resultado = $mysqli->query("SELECT * FROM cursos {$cond} ORDER BY nombre_es");
     $cursos = array();
 
     while($respuesta = $resultado->fetch_assoc())

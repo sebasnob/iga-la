@@ -436,6 +436,14 @@ if(isset($_POST['edicion_curso'])){
     $result_sd = $mysqli->query($query_sd);
     $cfi_sd = $result_sd->fetch_assoc();
     
+    if(isset($_POST['nombre_curso']) && $_POST['nombre_curso'] != ''){
+        $query = "UPDATE curso_datos SET nombre='{$_POST['nombre_curso']}' WHERE id_cfi='{$cfi_sd['id']}'";
+        $result = $mysqli->query($query);
+        if($result){
+                $message = "<br/>Nombre del curso modificada correctamente.<br/>";
+        }
+    }
+    
     if(isset($_POST['descripcion']) && $_POST['descripcion'] != ''){
         $query = "UPDATE curso_datos SET descripcion='{$_POST['descripcion']}' WHERE id_cfi='{$cfi_sd['id']}'";
         $result = $mysqli->query($query);
