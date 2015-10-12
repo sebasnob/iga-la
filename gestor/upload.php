@@ -563,11 +563,100 @@ if(isset($_POST['edicion_grilla']))
                 $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['photo']['error'];
             }
         }
-        
-        header('Location: grilla_edit.php');
-        exit;
     }
     elseif(isset($_POST['edicion_grilla_editar']))
+    {
+        $id_img_grilla = $_POST['id_img_grilla'];
+        if(isset($_GET['borrar']))
+        {
+            $result = $mysqli->query("SELECT grilla.img_url, grilla.thumb_url FROM grilla WHERE grilla.id = {$id_img_grilla}");
+
+            $retorno = $result->fetch_assoc();
+
+            if(file_exists("../".$retorno['img_url']))
+            {
+                unlink("../".$retorno['img_url']);
+            }
+            if(file_exists("../".$retorno['thumb_url']))
+            {
+                unlink("../".$retorno['thumb_url']);
+            }
+
+            $mysqli->query("DELETE FROM grilla WHERE grilla.id = " . $id_img_grilla);
+        }
+        else
+        {
+            if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
+            {
+                //if no errors...
+                if(!$_FILES['photo']['error'])
+                {
+                    $valid_file = true;
+                    //now is the time to modify the future file name and validate the file
+                    $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+                    if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
+                    {
+                        $valid_file = false;
+                        $message = 'Oops!  Your file\'s size is to large.';
+                    }
+
+                    $pos = strpos($_FILES['photo']['type'], "image");
+                    if ($pos === FALSE)
+                    {
+                        $valid_file = false;
+                        $message = 'Oops!  El archivo no es una imagen.';
+                    }
+                    //if the file has passed the test
+                    if($valid_file)
+                    {
+                        //move it to where we want it to be
+                        $ruta = '../images/grilla/'.$new_file_name;
+                        //ruta de los thumbs
+                        $ruta_thumb = '../images/grilla/thumb/'.$new_file_name;
+
+                        move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
+
+                        //creo el thumb
+                        $newThumb = new resize($ruta);
+                        $newThumb->resizeImage(150,632,"landscape");
+                        $exito = $newThumb->saveImage($ruta_thumb);
+
+                        $ruta = substr($ruta, 3);
+                        $ruta_thumb = substr($ruta_thumb, 3);
+
+                        $query = "UPDATE grilla "
+                                . "SET cols = {$_POST['cols']}, "
+                                . "img_url = '{$ruta}', "
+                                . "thumb_url = '{$ruta_thumb}', "
+                                . "prioridad = {$_POST['prioridad']}, "
+                                . "cod_curso = {$_POST['id_curso']}, "
+                                . "habilitado = {$_POST['habilitado']}, "
+                                . "idioma = '{$_POST['idioma']}', "
+                                . "id_pais = {$_POST['pais']} WHERE grilla.id = {$_POST['id_img_grilla']}";
+                        $mysqli->query($query);
+                    }
+                }
+            }
+            else
+            {
+                $query = "UPDATE grilla "
+                                . "SET cols = {$_POST['cols']}, "
+                                . "prioridad = {$_POST['prioridad']}, "
+                                . "cod_curso = {$_POST['id_curso']}, "
+                                . "habilitado = {$_POST['habilitado']}, "
+                                . "idioma = '{$_POST['idioma']}', "
+                                . "id_pais = {$_POST['pais']} WHERE grilla.id = {$_POST['id_img_grilla']}";
+                $mysqli->query($query);
+            }
+        }
+    }
+    header('Location: grilla_edit.php');
+    exit;
+}
+
+if(isset($_POST['edicion_slider']))
+{
+    if(isset($_POST['edicion_slider_nueva']))
     {
         if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
         {
@@ -593,9 +682,9 @@ if(isset($_POST['edicion_grilla']))
                 if($valid_file)
                 {
                     //move it to where we want it to be
-                    $ruta = '../images/grilla/'.$new_file_name;
+                    $ruta = '../images/slider/'.$new_file_name;
                     //ruta de los thumbs
-                    $ruta_thumb = '../images/grilla/thumb/'.$new_file_name;
+                    $ruta_thumb = '../images/slider/thumb/'.$new_file_name;
 
                     move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
                     
@@ -607,32 +696,122 @@ if(isset($_POST['edicion_grilla']))
                     $ruta = substr($ruta, 3);
                     $ruta_thumb = substr($ruta_thumb, 3);
                     
-                    $query = "UPDATE grilla "
-                            . "SET cols = {$_POST['cols']}, "
-                            . "img_url = '{$ruta}', "
-                            . "thumb_url = '{$ruta_thumb}', "
-                            . "prioridad = {$_POST['prioridad']}, "
-                            . "cod_curso = {$_POST['id_curso']}, "
-                            . "habilitado = {$_POST['habilitado']}, "
-                            . "idioma = '{$_POST['idioma']}', "
-                            . "id_pais = {$_POST['pais']} WHERE grilla.id = {$_POST['id_img_grilla']}";
+                    $query = "INSERT INTO slider (alt, url, url_thumb, link, id_pais, cod_idioma) VALUES ('{$_POST['alt']}', '{$ruta}','{$ruta_thumb}', '{$_POST['link']}','{$_POST['id_pais']}','{$_POST['cod_idioma']}')";
                     $mysqli->query($query);
                 }
             }
+            //if there is an error...
+            else
+            {
+                //set that to be the returned message
+                $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['photo']['error'];
+            }
+        }
+    }
+    elseif(isset($_POST['edicion_slider_editar']))
+    {
+        $id_img_slider = $_POST['id_img_slider'];
+        if(isset($_GET['borrar']))
+        {
+            $result = $mysqli->query("SELECT slider.url, slider.url_thumb FROM slider WHERE slider.id = {$id_img_slider}");
+
+            $retorno = $result->fetch_assoc();
+
+            if(file_exists("../".$retorno['url']))
+            {
+                unlink("../".$retorno['url']);
+            }
+            if(file_exists("../".$retorno['url_thumb']))
+            {
+                unlink("../".$retorno['url_thumb']);
+            }
+
+            $mysqli->query("DELETE FROM slider WHERE slider.id = " . $id_img_slider);
         }
         else
         {
-            $query = "UPDATE grilla "
-                            . "SET cols = {$_POST['cols']}, "
-                            . "prioridad = {$_POST['prioridad']}, "
-                            . "cod_curso = {$_POST['id_curso']}, "
-                            . "habilitado = {$_POST['habilitado']}, "
-                            . "idioma = '{$_POST['idioma']}', "
-                            . "id_pais = {$_POST['pais']} WHERE grilla.id = {$_POST['id_img_grilla']}";
-            $mysqli->query($query);
-        }
+            if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
+            {
+                //if no errors...
+                if(!$_FILES['photo']['error'])
+                {
+                    $valid_file = true;
+                    //now is the time to modify the future file name and validate the file
+                    $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+                    if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
+                    {
+                        $valid_file = false;
+                        $message = 'Oops!  Your file\'s size is to large.';
+                    }
+
+                    $pos = strpos($_FILES['photo']['type'], "image");
+                    if ($pos === FALSE)
+                    {
+                        $valid_file = false;
+                        $message = 'Oops!  El archivo no es una imagen.';
+                    }
+                    //if the file has passed the test
+                    if($valid_file)
+                    {
+                        //move it to where we want it to be
+                        $ruta = '../images/slider/'.$new_file_name;
+                        //ruta de los thumbs
+                        $ruta_thumb = '../images/slider/thumb/'.$new_file_name;
+
+                        move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
+
+                        //creo el thumb
+                        $newThumb = new resize($ruta);
+                        $newThumb->resizeImage(150,632,"landscape");
+                        $exito = $newThumb->saveImage($ruta_thumb);
+
+                        $ruta = substr($ruta, 3);
+                        $ruta_thumb = substr($ruta_thumb, 3);
+
+                        //borro imagen anterior antes de insertar la nueva
+                        $result = $mysqli->query("SELECT slider.url, slider.url_thumb FROM slider WHERE slider.id = {$_POST['id_img_slider']}");
+                        $imagenAnterior = $result->fetch_assoc();
+
+                        if(file_exists("../".$imagenAnterior['url']))
+                        {
+                            unlink("../".$imagenAnterior['url']);
+                        }
+                        if(file_exists("../".$imagenAnterior['url_thumb']))
+                        {
+                            unlink("../".$imagenAnterior['url_thumb']);
+                        }
+
+                        $query = "UPDATE slider "
+                                . "SET alt = '{$_POST['alt']}', "
+                                . "url = '{$ruta}', "
+                                . "url_thumb = '{$ruta_thumb}', "
+                                . "link = '{$_POST['link']}', "
+                                . "id_pais = {$_POST['id_pais']}, "
+                                . "cod_idioma = '{$_POST['cod_idioma']}' "
+                                . "WHERE slider.id = {$_POST['id_img_slider']}";
+                                    
+                        $mysqli->query($query);
+                    }
+                }
+            }
+            else
+            {
+                $query = "UPDATE slider "
+                                . "SET alt = '{$_POST['alt']}', "
+                                . "url = '{$ruta}', "
+                                . "url_thumb = '{$ruta_thumb}', "
+                                . "link = '{$_POST['link']}', "
+                                . "id_pais = {$_POST['id_pais']}, "
+                                . "cod_idioma = '{$_POST['cod_idioma']}', "
+                                . "WHERE slider.id = {$_POST['id_img_slider']}";
+                $mysqli->query($query);
+            }
+        }    
     }
+    header('Location: slider_edit.php');
+    exit;
 }
+
 
 if(isset($_POST['edicion_home'])){
     if(isset($_POST['url_video']) && $_POST['url_video'] != ''){

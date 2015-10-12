@@ -22,35 +22,35 @@ $paises = getPaises($mysqli);
 ?>
 <!DOCTYPE html>
 
- <html lang="en">
+<html lang="en">
     <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    
-    <title>Listado de Cursos - IGA</title>
-
- <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
         
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-    <link href="assets/css/table-responsive.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css"> 
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+        <title>Editor de Grilla - IGA</title>
+        
+        <!-- Bootstrap core CSS -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <!--external css-->
+        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        
+        <!-- Custom styles for this template -->
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/style-responsive.css" rel="stylesheet">
+        <link href="assets/css/table-responsive.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css"> 
+        
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
     
     <body>
         
-<section id="container" >
+        <section id="container" >
     <?php include_once 'header.php'; ?>
             
     <?php include_once 'sidebar.php'; ?>
@@ -61,7 +61,7 @@ $paises = getPaises($mysqli);
             <section id="main-content">
                 <section class="wrapper">
                     <h3><i class="fa fa-angle-right"></i>Edicion de Grilla Cursos </h3>
-                   <div class="row mt">
+                    <div class="row mt">
                         <div class="col-lg-12">
                             <div class="form-panel">
                                 <h4><i class="fa fa-angle-right"></i> Nueva Imagen de Curso</h4>
@@ -97,7 +97,7 @@ $paises = getPaises($mysqli);
                                             <label class="col-sm-2 col-sm-2 control-label">Curso: </label>
                                             <select class="form-control" name="id_curso">
                                                 <?php foreach($cursos as $i=>$j){?>
-                                                    <option value="<?=$j['cod_curso']?>"><?=$j['nombre_es']?></option>
+                                                <option value="<?=$j['cod_curso']?>"><?=$j['nombre_es']?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
@@ -112,7 +112,7 @@ $paises = getPaises($mysqli);
                                             <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
                                             <select class="form-control" name="pais">
                                                 <?php foreach($paises as $pais){?>
-                                                    <option value="<?=$pais['id']?>"><?=$pais['pais']?></option>
+                                                <option value="<?=$pais['id']?>"><?=$pais['pais']?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
@@ -134,10 +134,10 @@ $paises = getPaises($mysqli);
                     <div class="row mt">
                         <div class="col-md-12">
                             <div class="form-panel">
-                            
-                                <section id="editor_grilla_editar" style="display: inline-block;">
-                                <h4><i class="fa fa-angle-right"></i> Editar Grilla</h4>
                                 
+                                <section id="editor_grilla_editar" style="display: inline-block;">
+                                    <h4><i class="fa fa-angle-right"></i> Editar Grilla</h4>
+                                    
                                 <?php foreach ($gridArray as $imgGrid){?>
                                     <div class="col-md-4">
                                         <form  enctype="multipart/form-data" method="POST" action="upload.php">
@@ -146,7 +146,7 @@ $paises = getPaises($mysqli);
                                             <input type="hidden" name="id_img_grilla" id="id_img_grilla" value="<?php echo $imgGrid['id']?>" />
                                             <div class="form-group">
                                                 <div class="form-img">
-                                                <img src="../<?php echo $imgGrid['thumb_url']?>">
+                                                    <img src="../<?php echo $imgGrid['thumb_url']?>">
                                                 </div>
                                                 <input type="file" accept="file_extension|image" name="photo" autofocus>
                                             </div>
@@ -174,8 +174,8 @@ $paises = getPaises($mysqli);
                                                 <label >Curso: </label>
                                                 <select class="form-control input-sm" name="id_curso">
                                                     <?php foreach($cursos as $i=>$j){?>
-                                                        
-                                                        <option value="<?=$j['cod_curso']?>"  <?php if($imgGrid['id_curso'] == $j['cod_curso']){echo 'selected';}?>><?=$j['nombre_es']?></option>
+                                                    
+                                                    <option value="<?=$j['cod_curso']?>"  <?php if($imgGrid['id_curso'] == $j['cod_curso']){echo 'selected';}?>><?=$j['nombre_es']?></option>
                                                     <?php }?>
                                                 </select>
                                             </div>
@@ -190,7 +190,7 @@ $paises = getPaises($mysqli);
                                                 <label >Pais: </label>
                                                 <select class="form-control input-sm" name="pais">
                                                     <?php foreach($paises as $pais){?>
-                                                        <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgGrid['id_pais']){ echo 'selected';}?>><?=$pais['pais']?></option>
+                                                    <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgGrid['id_pais']){ echo 'selected';}?>><?=$pais['pais']?></option>
                                                     <?php }?>
                                                 </select>
                                             </div>
@@ -203,14 +203,14 @@ $paises = getPaises($mysqli);
                                                 </select>
                                             </div>
                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
-                                              <div class="row mt">
-                                              <div class="col-lg-12">
-                                            <button type="submit" class="btn btn-success">Editar</button>
-                                            <button type="button" onclick="borrar(this.form)" class="btn btn-danger">Borrar</button>
-                                             </div>
-
-                                           </div>
-                                           <br>
+                                            <div class="row mt">
+                                                <div class="col-lg-12">
+                                                    <button type="submit" class="btn btn-success">Editar</button>
+                                                    <button type="button" onclick="borrar(this.form)" class="btn btn-danger">Borrar</button>
+                                                </div>
+                                                
+                                            </div>
+                                            <br>
                                         </form>
                                     </div>
                                 <?php } ?>

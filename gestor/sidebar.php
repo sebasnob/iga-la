@@ -36,6 +36,12 @@ MAIN SIDEBAR MENU
                     <span>Noticias</span>
                 </a>
             </li>    
+            <li class="sub-menu">
+                <a href="slider_edit.php" >
+                    <i class="fa fa-cloud-upload"></i>
+                    <span>Editar Slider</span>
+                </a>
+            </li>
         </ul>
         <!-- sidebar menu end-->
     </div>

@@ -599,19 +599,41 @@ color: white;
 }
 
 
-#single-portfolio {
-  padding: 90px 0;
-  background: #f5f5f5;
-  position: relative;
-  border:1px solid #ccc;
-  margin-top: 5px;
-}
 
 #single-portfolio img {
   width: 100%;
   margin-bottom: 5px;
   padding: 5px;
 }
+
+#single-portfolio {
+  padding: 60px ;
+  background: #f5f5f5;
+  position: relative;
+  width: 100%;
+  margin-top: 5px;
+  background: url(../images/bg_cursos_single.jpg) no-repeat center center;
+  background-size: cover;
+
+}
+
+
+
+.project-info{
+  padding: 10px;
+
+}
+
+
+.project-info h2 {
+    font-size: 55px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    letter-spacing: -5px;
+    font-family: sans-serif;
+  }
+
+
 
 #single-portfolio .close-folio-item {
   position: absolute;
