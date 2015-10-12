@@ -762,17 +762,17 @@ if(isset($_POST['edicion_grilla_editar']))
 }
 
 if($_POST['edicion_noticia']){
+    $id_pais = $_POST['pais'];
+    $id_idioma = $_POST['idioma'];
+    $titulo = $_POST['titulo'];
+    $descripcion = trim($_POST['descripcion']);
+    $link = $_POST['link'];
+    $fecha = date("Y-m-d");
+    $estado = 1;
+    $autor = $_SESSION['username'];
     if($_POST['accion'] == 'agregar'){
-        $id_pais = $_POST['pais'];
-        $id_idioma = $_POST['idioma'];
-        $titulo = $_POST['titulo'];
-        $descripcion = trim($_POST['descripcion']);
-        $link = $_POST['link'];
-        $fecha = date("Y-m-d");
-        $estado = 1;
-        $autor = $_SESSION['username'];
-        
         $message = '';
+        $result = 'ok';
         if(isset($_FILES['imagen']['name']) && $_FILES['imagen']['name'] != ''){
             if(!$_FILES['imagen']['error']){
                 $new_filename = str_replace(' ','',trim($_FILES['imagen']['name']));
@@ -780,21 +780,64 @@ if($_POST['edicion_noticia']){
                 
                 if(!move_uploaded_file($_FILES['imagen']['tmp_name'], '../images/novedades/'.$new_filename)){
                     $message .= "Hubo un error al subir la imagen";
+                    $result = 'error';
                 }
                 
                 $query_ins = "INSERT INTO novedades SET imagen='{$new_filename}', titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais={$id_pais}, id_idioma={$id_idioma}";
-echo $query_ins;
                 $res_query = $mysqli->query($query_ins);
                 if($res_query){
                     $message .= "La novedad se agrego correctamente";
                 }else{
                     $message .= "Hubo un error al agregar la novedad";
+                    $result = 'error';
+                }
+            }else{
+                $message .= "Hubo un error con la imagen";
+                $result = 'error';
+            }
+        }else{
+            $result = 'error';
+        }
+        header("Location: news_admin.php?result={$result}");
+        exit();
+    }else{
+        //EDITAR
+        $message = '';
+        $result = 'ok';
+        if(isset($_POST['id_novedad'])){
+            //Edicion de imagen
+            $edit_image = "";
+            if(isset($_FILES['imagen']['name']) && $_FILES['imagen']['name'] != ''){
+                if(!$_FILES['imagen']['error']){
+                    $new_filename = str_replace(' ','',trim($_FILES['imagen']['name']));
+                    $new_filename = str_replace(array('(','\'','´','{','}','+','*','¨','[',']','%','&','/','%','\$','#','"','!','?','¡',')'),'',$new_filename);
+                    
+                    if(is_file('../images/novedades/'.$new_filename)){
+                        unlink('../images/novedades/'.$new_filename);
+                    }
+                    if(!move_uploaded_file($_FILES['imagen']['tmp_name'], '../images/novedades/'.$new_filename)){
+                        $message .= "Hubo un error al subir la imagen";
+                    }
+                    $edit_image = " , imagen='{$new_filename}'";
                 }
             }
+
+            $query_ins = "UPDATE novedades SET titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais={$id_pais}, id_idioma={$id_idioma} {$edit_image} WHERE id={$_POST['id_novedad']}";
+            $res_query = $mysqli->query($query_ins);
+            if($res_query){
+                $message .= "La novedad se edito correctamente";
+            }else{
+                $message .= "Hubo un error al editar la novedad";
+                $result = 'error';
+            }
+        }else{
+            $message .= "No se encuentra la novedad seleccionada en la base de datos";
+            $result = 'error';
         }
-        echo $message;
+        header("Location: news_admin.php?result={$result}&id={$_POST['id_novedad']}");
+        exit();
     }
-    
+    echo $message;
 }
     
 //Funcion auxiliar para determinar la extension de un archivo

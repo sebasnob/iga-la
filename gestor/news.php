@@ -58,7 +58,7 @@ if($logged == 'out'){
                   <div class="col-md-12">
                       <section class="task-panel tasks-widget">
                         <div class="panel-heading">
-                            <div class="pull-left"><h5><i class="fa fa-tasks"></i> Novedades</h5></div>
+                            <div class="pull-left"><h5><i class="fa fa-tasks"></i> Noticias</h5></div>
                             <a class="btn btn-default btn-sm pull-right" href="news_admin.php">Nueva</a>
                             <br>
                         </div>
@@ -69,8 +69,8 @@ if($logged == 'out'){
                                         <tr>
                                             <th><i class="fa fa-bullhorn"></i> Titulo</th>
                                             <th>&nbsp;</th>
-                                            <th><i class="fa fa-bookmark"></i> Fecha</th>
-                                            <th><i class=" fa fa-edit"></i> Estado</th>
+                                            <th class="text-right"><i class="fa fa-bookmark"></i> Fecha</th>
+                                            <th class="text-right"><i class=" fa fa-edit"></i> Estado</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -82,11 +82,11 @@ if($logged == 'out'){
                                         <tr>
                                             <td><a href="news_admin.php?id=<?=$j['id']?>"><?=$j['titulo']?></a></td>
                                             <td>&nbsp;</td>
-                                            <td><?=$j['fecha']?></td>
-                                            <td>
+                                            <td class="text-right"><?=$j['fecha']?></td>
+                                            <td class="text-right">
                                                 <?php echo ($j['estado'] == 1)? "<span id='span".$j['id']."' class='label label-success label-mini'>Publicada</span>":"<span id='span".$j['id']."' class='label label-danger label-mini'>No Publicada</span>"; ?>
                                             </td>
-                                            <td>
+                                            <td class="text-right">
                                                 <button class='btn <?php echo ($j['estado'] == 1)? "btn-default":"btn-success";?>  btn-xs' onclick="javascript:cambiarEstadoNovedad(this, span<?=$j["id"]?>, <?=$j['id']?>)"><i class='fa fa-check'></i></button>
                                                 <a href="news_admin.php?id=<?=$j['id']?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                                                 <button class="btn btn-danger btn-xs" onclick="javascript:eliminarNovedad(this, <?=$j['id']?>)"><i class="fa fa-trash-o "></i></button>
@@ -166,7 +166,7 @@ if($logged == 'out'){
                 dataType: "json",
                 success: function(data){
                     if(data.result == 'ok'){
-                        
+                        $(boton).parents("tr").fadeOut("slow");
                     }
                 }
             });

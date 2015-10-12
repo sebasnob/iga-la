@@ -813,4 +813,12 @@ function getNovedad($mysqli, $id_novedad){
     return $novedad;
 }
 
+function getTotalNovedades($mysqli){
+    $resultado = $mysqli->query("SELECT count(*) AS total FROM novedades");
+    $total_novedades = $resultado->fetch_assoc();
+    $resultado->free();
+    
+    return $total_novedades['total'];
+}
+
 ?>

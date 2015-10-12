@@ -14,16 +14,6 @@ if($logged == 'out'){
     header("Location: login.php");
     exit();
 }
-
-if(isset($_GET['id'])){
-    $accion = 'editar';
-    $id_novedad = $_GET['id'];
-    $novedad = getNovedad($mysqli, $_GET['id']);
-}else{
-    $id_novedad = '';
-    $accion = 'agregar';
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,6 +54,45 @@ if(isset($_GET['id'])){
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper site-min-height">
+                    <?php
+                    if(isset($_GET['result'])){
+                    ?>
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                         <div class="form-panel">
+                             <div class="form-group">
+                                 <?php
+                                 if(isset($_GET['id'])){
+                                 ?>
+                                 <label>Edicion de Noticia finalizada</label>
+                                 <br/><br/>
+                                 <a id="preview" class="btn btn-success" href="news.php">Lista de Noticias</a>
+                                 <a id="preview" class="btn btn-primary" href="news_admin.php?id=<?=$_GET['id']?>">Volver al editor</a>   
+                                 <?php
+                                 }else{
+                                 ?>
+                                 <label>Noticia Agregada correctamente</label>
+                                 <br/><br/>
+                                 <a id="preview" class="btn btn-success" href="news.php">Lista de Noticias</a>
+                                 <a id="preview" class="btn btn-primary" href="news_admin.php">Volver al editor</a>
+                                 <?php
+                                 }
+                                 ?>
+                             </div>
+                         </div>
+                       </div>
+                    </div>
+                    <?php
+                    }else{
+                        if(isset($_GET['id'])){
+                            $accion = 'editar';
+                            $id_novedad = $_GET['id'];
+                            $novedad = getNovedad($mysqli, $_GET['id']);
+                        }else{
+                            $id_novedad = '';
+                            $accion = 'agregar';
+                        }
+                    ?>
                     <h3><i class="fa fa-angle-right"></i><?php echo ($accion == 'agregar')?"Nueva noticia":"Edicion de noticia"?></h3>
                     <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
                         <input type="hidden" name="id_novedad" id="id_novedad" value="<?=$id_novedad?>" />
@@ -114,16 +143,23 @@ if(isset($_GET['id'])){
                                             <input type="text" id="titulo" name="titulo" value="<?php echo (isset($novedad['titulo']))?$novedad['titulo']:''; ?>" class="form-control"/>
                                         </div>
                                         <div class="form-group">
-                                           <div id="sliderPreview">
-                                              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen:</b></h4> 
+                                            <div id="imagenPreview">
+                                              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen:</b></h4>
+                                              <?php
+                                                if($accion == 'editar'){
+                                              ?>
                                               <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="../images/novedades/<?=$novedad['imagen']?>" alt="">
-                                           </div>
+                                              <?php
+                                                }
+                                              ?>
+                                            </div>
+                                              
                                            <input id="imagen" type="file" name="imagen" class="img"/>
                                         </div>
 
                                         <div class="form-group">
                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Descripción:</b></h4> 
-                                            <textarea name="descripcion" id="descripcion" class="form-control" rows="5"><?=$novedad['descripcion']?></textarea>
+                                            <textarea name="descripcion" id="descripcion" class="form-control" rows="5"><?php echo (isset($novedad['descripcion']))?$novedad['descripcion']:''; ?></textarea>
                                         </div>
                                         
                                         <div class="form-group">
@@ -138,10 +174,13 @@ if(isset($_GET['id'])){
                         <br/>
                         <div class="row mt">
                             <div class="col-lg-12">
-                                <button id="confirm" class="btn btn-success">Guardar cambios</button>
+                                <button id="confirm" class="btn btn-success">Guardar</button>
                             </div><!-- /col-lg-12 -->
                         </div><!-- /row --> 
                     </form>
+                    <?php
+                    }
+                    ?>
                 </section>
             </section><!-- /MAIN CONTENT -->
             <!--main content end-->
@@ -176,6 +215,20 @@ if(isset($_GET['id'])){
             
             $('#confirm').click(function(){
                 $('#form_change').submit();
+            });
+            
+            //Cambiar la imagen previa de los uniformes
+            $("#imagen").on("change", function(){
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+                    reader.onloadend = function(){ // set image data as background of div
+                        //$("#imagePreview").css("background-image", "url("+this.result+")");
+                        $("#imagenPreview").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
+                    }
+                }
             });
         </script>
     </body>
