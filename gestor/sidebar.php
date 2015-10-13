@@ -35,7 +35,7 @@ MAIN SIDEBAR MENU
             </li>    
             <li class="sub-menu">
                 <a href="news.php" >
-                    <i class="fa fa-image"></i>
+                    <i class="fa fa-rss"></i>
                     <span>Noticias</span>
                 </a>
             </li>    
