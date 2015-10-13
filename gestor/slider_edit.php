@@ -66,19 +66,19 @@ $idiomas = getIdiomas($mysqli);
                             <div class="form-panel">
                                 <h4><i class="fa fa-angle-right"></i> Nueva Imagen</h4>
                                 <section id="editor_grilla_nueva">
-                                    <form class="form" enctype="multipart/form-data" method="POST" action="upload.php">
+                                    <form  enctype="multipart/form-data" method="POST" action="upload.php" class="form">
                                         <input type="hidden" name="edicion_slider" id="edicion_slider" value="true" />
                                         <input type="hidden" name="edicion_slider_nueva" id="edicion_slider_nueva" value="true" />
                                         <div class="form-group">
-                                            <input type="file" accept="file_extension|image"  name="photo" required autofocus>
+                                            <input type="file" accept="file_extension|image" class="form-control" name="photo" required autofocus>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Link: </label>
-                                            <input type="text" id="link" name="link">
+                                            <input type="text" id="link" name="link" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Alt: </label>
-                                            <input type="text" id="alt" name="alt">
+                                            <input type="text" id="alt" name="alt" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
@@ -123,24 +123,24 @@ $idiomas = getIdiomas($mysqli);
                                                 <input type="file" accept="file_extension|image" name="photo" autofocus>
                                             </div>
                                             <div class="form-group">
-                                                <label >Link: </label>
-                                                <input type="text" id="link" name="link" value="<?=$imgSlider['link']?>">
+                                                <label>Link:</label>
+                                                <input type="text" id="link" name="link" class="form-control" value="<?=$imgSlider['link']?>">
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 col-sm-2 control-label">Alt: </label>
-                                                <input type="text" id="alt" name="alt" value="<?=$imgSlider['alt']?>">
+                                                <label>Alt:</label>
+                                                <input type="text" id="alt" name="alt" class="form-control" value="<?=$imgSlider['alt']?>">
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
-                                                <select class="form-control" name="id_pais">
+                                                <label>Pais:</label>
+                                                <select class="form-control input-sm"  name="id_pais">
                                                 <?php foreach ($paises as $pais){ ?>
                                                     <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgSlider['id_pais']){echo 'selected';} ?> ><?=$pais['pais']?></option>
                                                 <?php }?>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 col-sm-2 control-label">Idioma: </label>
-                                                <select class="form-control" name="cod_idioma">
+                                                <label>Idioma: </label>
+                                                <select class="form-control input-sm"  name="cod_idioma">
                                                 <?php foreach ($idiomas as $idioma){ ?>
                                                     <option value="<?=$idioma['cod_idioma']?>" <?php if($idioma['cod_idioma'] == $imgSlider['cod_idioma']){echo 'selected';} ?> ><?=$pais['pais']?></option>
                                                 <?php }?>
