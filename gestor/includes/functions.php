@@ -883,4 +883,16 @@ function getTiposCursos($mysqli, $id_padre=''){
     return $tipos_cursos;
 }
 
+function getTipoCurso($mysqli, $id_tipo){
+    $resultado = $mysqli->query("SELECT nombre_es, nombre_in, nombre_pt, padre FROM tipos WHERE id={$id_tipo}");
+    if($resultado->num_rows > 0){
+        $tipo = $resultado->fetch_assoc();
+    }else{
+        $tipo = array();
+    }
+    $resultado->free();
+    
+    return $tipo;
+}
+
 ?>

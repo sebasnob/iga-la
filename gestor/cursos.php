@@ -204,6 +204,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                                 <div class="col-lg-12">  
                                     <button id="confirm" class="btn btn-success">Guardar cambios</button>
                                     <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
+                                    <a href="list_cursos.php" type="button" class="btn btn-info">Volver</a>
                                 </div><!-- /form-panel -->
                             </div><!-- /col-lg-12 -->
                         </div><!-- /row -->     
@@ -305,6 +306,8 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                             $('#meses').val(data.meses);
                             $('#anios').val(data.anios);
                             $('#nombre_curso').val(data.nombre);
+                            
+                            $("#estado_curso").find('option:selected').removeAttr("selected");
                             $("select#estado_curso option[value='"+data.estado+"']").attr("selected", "selected");
                             
                             $('#datos_curso').show();

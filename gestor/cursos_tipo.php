@@ -59,13 +59,65 @@ $tiposCurso = getTiposCursos($mysqli);
             <section id="main-content">
                 <section class="wrapper">
                     <h3><i class="fa fa-angle-right"></i>Tipos de Cursos </h3>
+                    
+                    <?php
+                    if(isset($_GET['id'])){
+                        $tipo_curso = getTipoCurso($mysqli, $_GET['id']);
+                    ?>
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel">
+                                <h4><i class="fa fa-angle-right"></i> Editar Tipo de Curso</h4>
+                                <section id="editor_grilla_nueva">
+                                    <form class="form" method="POST" action="upload.php">
+                                        <input type="hidden" name="editar_tipo_curso" id="agregar_tipo" value="true" />
+                                        <input type="hidden" name="id_tipo" id="id_tipo" value="<?=$_GET['id']?>" />
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Nombre Es: </label>
+                                            <input type="text" id="nombre_es" name="nombre_es" value="<?=$tipo_curso['nombre_es']?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Nombre IN: </label>
+                                            <input type="text" id="nombre_in" name="nombre_in" value="<?=$tipo_curso['nombre_in']?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Nombre POR: </label>
+                                            <input type="text" id="nombre_pt" name="nombre_pt" value="<?=$tipo_curso['nombre_pt']?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Superior: </label>
+                                            <select class="form-control" name="tipo_curso" id="tipo_curso">
+                                                <option value="0">Sin Superior</option>
+                                                <?php 
+                                                foreach($tiposCurso as $i=>$j){ 
+                                                    if($j['nombre_es'] != $tipo_curso['nombre_es']){
+                                                ?>
+                                                <option value="<?=$j['id']?>"><?=$j['nombre_es']?></option>
+                                                <?php 
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <button type="button" class="btn btn-success" id="btn_editar">Editar Tipo</button>
+                                        <a href="cursos_tipo.php" type="button" class="btn btn-info">Volver</a>
+                                    </form>
+                                </section>
+                            </div><!-- /content-panel -->
+                        </div>
+                    </div>
+                    
+                    <?php    
+                    }else{
+                    ?>
+                    
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="form-panel">
                                 <h4><i class="fa fa-angle-right"></i> Agregar Tipo de Curso</h4>
                                 <section id="editor_grilla_nueva">
                                     <form class="form" method="POST" action="upload.php">
-                                        <input type="hidden" name="edicion_slider" id="edicion_tipo_cursos" value="true" />
+                                        <input type="hidden" name="agregar_tipo" id="agregar_tipo" value="true" />
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Nombre Es: </label>
                                             <input type="text" id="nombre_es" name="nombre_es" />
@@ -80,13 +132,14 @@ $tiposCurso = getTiposCursos($mysqli);
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Superior: </label>
-                                            <select class="form-control" name="id_pais">
+                                            <select class="form-control" name="tipo_curso" id="tipo_curso">
+                                                <option value="0">Sin Superior</option>
                                                 <?php foreach($tiposCurso as $i=>$j){ ?>
                                                 <option value="<?=$j['id']?>"><?=$j['nombre_es']?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-success">Agregar Tipo</button>
+                                        <button type="button" class="btn btn-success" id="btn_agregar">Agregar Tipo</button>
                                     </form>
                                 </section>
                             </div><!-- /content-panel -->
@@ -109,26 +162,26 @@ $tiposCurso = getTiposCursos($mysqli);
                                     <?php
                                     foreach($tiposCurso as $i=>$j){
                                     ?>
-                                        <tr>
+                                        <tr class="<?=$j['id']?>">
                                             <td><?=$j['nombre_es']?></td>
                                             <td><?=$j['nombre_in']?></td>
                                             <td><?=$j['nombre_pt']?></td>
                                             <td class="text-right">
-                                                <a href="news_admin.php?id=<?=$j['id']?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                <button class="btn btn-danger btn-xs" onclick="javascript:eliminarTipo(this, <?=$j['id']?>)"><i class="fa fa-trash-o "></i></button>
+                                                <a href="cursos_tipo.php?id=<?=$j['id']?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                <button class="btn btn-danger btn-xs" onclick="javascript:eliminarTipo(this, <?=$j['id']?>, <?=$j['id']?>)"><i class="fa fa-trash-o "></i></button>
                                             </td>
                                         </tr>
                                     <?php
                                         $subTipos = getTiposCursos($mysqli, $j['id']);
                                         foreach($subTipos as $id=>$data){
                                     ?>
-                                        <tr>
+                                        <tr class="<?=$j['id']?>">
                                             <td>&nbsp;&nbsp;- <?=$data['nombre_es']?></a></td>
                                             <td class="text-right"></td>
                                             <td class="text-right"></td>
                                             <td class="text-right">
-                                                <a href="news_admin.php?id=<?=$data['id']?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                                <button class="btn btn-danger btn-xs" onclick="javascript:eliminarTipo(this, <?=$data['id']?>)"><i class="fa fa-trash-o "></i></button>
+                                                <a href="cursos_tipo.php?id=<?=$data['id']?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                                <button class="btn btn-danger btn-xs" onclick="javascript:eliminarTipo(this, <?=$data['id']?>,'')"><i class="fa fa-trash-o "></i></button>
                                             </td>
                                         </tr>
                                     <?php
@@ -140,6 +193,10 @@ $tiposCurso = getTiposCursos($mysqli);
                             </div>
                         </div>    
                     </div><!-- /row -->
+                    <?php
+                    }
+                    ?>
+                    
                 </section><! --/wrapper -->
             </section><!-- /MAIN CONTENT -->
             
@@ -161,7 +218,7 @@ $tiposCurso = getTiposCursos($mysqli);
         
         <!--script for this page-->
         <script type="text/javascript">
-        function eliminarTipo(boton, id_tipo){
+        function eliminarTipo(boton, id_tipo, classtr){
             $.ajax({
                 url: "controller_ajax.php",
                 method: "POST",
@@ -169,11 +226,59 @@ $tiposCurso = getTiposCursos($mysqli);
                 dataType: "json",
                 success: function(data){
                     if(data.result == 'ok'){
-                        $(boton).parents("tr").fadeOut("slow");
+                        if(classtr != ''){
+                            $("."+classtr).fadeOut("slow");
+                        }else{
+                            $(boton).parents("tr").fadeOut("slow");
+                        }
+                        location.reload(true);
                     }
                 }
             });
         }
+        
+        $('#btn_agregar').click(function(){
+            $.ajax({
+                url: "controller_ajax.php",
+                method: "POST",
+                data: {
+                    option : 'agregar_tipo_curso', 
+                    nombre_es: $('#nombre_es').val(), 
+                    nombre_in: $('#nombre_in').val(), 
+                    nombre_pt: $('#nombre_pt').val(), 
+                    tipo_curso: $('#tipo_curso').val()
+                },
+                dataType: "json",
+                success: function(data){
+                    if(data.result == 'ok'){
+                        location.reload(true);
+                    }
+                }
+            }); 
+        });
+        
+        $('#btn_editar').click(function(){
+            $.ajax({
+                url: "controller_ajax.php",
+                method: "POST",
+                data: {
+                    option : 'editar_tipo_curso', 
+                    nombre_es: $('#nombre_es').val(), 
+                    nombre_in: $('#nombre_in').val(), 
+                    nombre_pt: $('#nombre_pt').val(), 
+                    tipo_curso:$('#tipo_curso').val(),
+                    id_tipo: $('#id_tipo').val()
+                },
+                dataType: "json",
+                success: function(data){
+                    if(data.result == 'ok'){
+                        window.location.href='cursos_tipo.php';
+                    }
+                }
+            }); 
+        });
+        
+        
         </script>
         
     </body>

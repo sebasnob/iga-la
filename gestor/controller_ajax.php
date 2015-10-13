@@ -110,6 +110,52 @@ switch($_POST['option']){
         }
         print(json_encode($retorno));
     break;
+    
+    case "agregar_tipo_curso":
+        $retorno = array();
+        $resultado = $mysqli->query("INSERT INTO tipos SET nombre_es='{$_POST['nombre_es']}', nombre_in='{$_POST['nombre_in']}', nombre_pt='{$_POST['nombre_pt']}', padre='{$_POST['tipo_curso']}'");
+        if($resultado){
+            $retorno['result'] = 'ok';
+        }else{
+            $retorno['result'] = 'Ocurrio un error al modificar el estado';
+        }
+        print(json_encode($retorno));
+    break;
+    
+    case "editar_tipo_curso":
+        $retorno = array();
+        $nombre_es = $_POST['nombre_es'];
+        $nombre_in = $_POST['nombre_in'];
+        $nombre_pt = $_POST['nombre_pt'];
+        $tipo_curso = $_POST['tipo_curso'];
+        $resultado = $mysqli->query("UPDATE tipos SET nombre_es='{$nombre_es}', nombre_in='{$nombre_in}', nombre_pt='{$nombre_pt}', padre='{$tipo_curso}' WHERE id={$_POST['id_tipo']}");
+        if($resultado){
+            $retorno['result'] = 'ok';
+        }else{
+            $retorno['result'] = 'Ocurrio un error al modificar el estado';
+        }
+        print(json_encode($retorno));
+    break;
+    
+    case "eliminar_tipo_curso":
+        $retorno = array();
+        if(isset($_POST['id_tipo'])){
+            $res_sel = $mysqli->query("SELECT id FROM tipos WHERE id={$_POST['id_tipo']}");
+            if($res_sel->num_rows > 0){
+                $cursos_hijos = getTiposCursos($mysqli, $_POST['id_tipo']);
+                foreach($cursos_hijos as $i=>$d){
+                    $mysqli->query("DELETE FROM tipos WHERE id={$d['id']}");
+                }
+                $mysqli->query("DELETE FROM tipos WHERE id={$_POST['id_tipo']}");
+                $retorno['result'] = 'ok';
+            }else{
+                $retorno['result'] = 'fail';
+            }
+        }else{
+            $retorno['result'] = 'fail';
+        }
+        print(json_encode($retorno));
+    break;
 }
 
 ?>

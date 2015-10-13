@@ -18,11 +18,14 @@ MAIN SIDEBAR MENU
                 </a>
             </li>
             <li class="sub-menu">
-                <a href="list_cursos.php" >
+                <a href="javascript:;" >
                     <i class="fa fa-th"></i>
-                    <span>Listado de Cursos</span>
+                    <span>Cursos</span>
                 </a>
-
+                <ul class="sub">
+                    <li><a  href="list_cursos.php">Todos los Cursos</a></li>
+                    <li><a  href="cursos_tipo.php">Tipos de Cursos</a></li>
+                </ul>
             </li>
             <li class="sub-menu">
                 <a href="grilla_edit.php" >

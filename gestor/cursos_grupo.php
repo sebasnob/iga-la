@@ -116,8 +116,19 @@ if($logged == 'out'){
                             <div class="col-lg-12">
                              <div class="form-panel">
                            <div id="datos_curso">
-                           
+                            <div class="form-group">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Estado:</b></h4>
+                                <select name="estado_curso" id="estado_curso">
+                                    <option value="0">Deshabilitado</option>
+                                    <option value="1">Habilitado</option>
+                                </select>
+                             </div>
                              <div class="form-group">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Nombre del Curso:</b></h4>
+                                <input type="text" id="nombre_curso" name="nombre_curso" class="form-control"/>
+                             </div>
+                           
+                            <div class="form-group">
                                 <div id="sliderPreview">
                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Seleccione la nueva imagen de cabecera:</b></h4> 
                                    <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="" alt="">

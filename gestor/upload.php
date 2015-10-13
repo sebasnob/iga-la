@@ -289,6 +289,19 @@ if(isset($_POST['edicion_curso_grupo'])){
     }
     //### FIN EDICION DESCRIPCION DE OBJETIVOS ###//
     
+    //### EDICION ESTADO DE LOS CURSOS ###//
+    if(isset($_POST['estado_curso']) && $_POST['estado_curso'] != ''){
+        $filiales = $_POST['filial'];
+        foreach($filiales as $id=>$value){
+            $query = "UPDATE curso_filial_idioma SET estado='{$_POST['estado_curso']}' WHERE cod_curso='{$_POST['cod_curso']}' AND id_filial='{$value}' AND id_idioma='{$_POST['idioma_curso']}'";
+            $result = $mysqli->query($query);
+            if($result){
+                    $message .= "<br/>Estado modificados correctamente.<br/>";
+            }
+        }
+    }
+    //### FIN EDICION ESTADO DE LOS CURSOS ###//
+    
     header("Location: result.php?cod_curso={$_POST['cod_curso']}");
     exit;
 }
