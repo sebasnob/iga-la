@@ -19,6 +19,7 @@ $sliderArray = getSlider($mysqli);
 $paises = getPaises($mysqli);
 $idiomas = getIdiomas($mysqli);
 
+
 ?>
 <!DOCTYPE html>
 
@@ -142,7 +143,7 @@ $idiomas = getIdiomas($mysqli);
                                                 <label>Idioma: </label>
                                                 <select class="form-control input-sm"  name="cod_idioma">
                                                 <?php foreach ($idiomas as $idioma){ ?>
-                                                    <option value="<?=$idioma['cod_idioma']?>" <?php if($idioma['cod_idioma'] == $imgSlider['cod_idioma']){echo 'selected';} ?> ><?=$pais['pais']?></option>
+                                                    <option value="<?=$idioma['cod_idioma']?>" <?php if($idioma['cod_idioma'] == $imgSlider['cod_idioma']){echo 'selected';} ?> ><?=$idioma['idioma']?></option>
                                                 <?php }?>
                                                 </select>
                                             </div>

@@ -427,11 +427,25 @@ function detectCountry($mysqli){
     curl_close($ch);
 }
 
-function getImagenesGrilla($mysqli, $idioma = 'ES', $id_pais='1')
+function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false)
 {
-    //TODO crear select por prioridad
-    $result = $mysqli->query("SELECT * FROM grilla WHERE grilla.habilitado = 1 AND grilla.idioma = '{$idioma}' AND id_pais='{$id_pais}' order by grilla.prioridad");
-    if($result->num_rows > 0){
+    $query = "SELECT * FROM grilla WHERE grilla.habilitado = 1";
+    
+    if($idioma)
+    {
+        $query .= " AND grilla.idioma = '{$idioma}' ";
+    }
+    if($id_pais)
+    {
+        $query .= " AND grilla.id_pais='{$id_pais}'";
+    }
+    
+    $query .= "order by grilla.prioridad";
+    
+    $result = $mysqli->query($query);
+    
+    if($result->num_rows > 0)
+    {
         while($grilla = $result->fetch_assoc())
         {
             $retorno[] = array( 'id'=>$grilla['id'],
@@ -445,7 +459,9 @@ function getImagenesGrilla($mysqli, $idioma = 'ES', $id_pais='1')
                                 'habilitado'=>$grilla['habilitado']);
         }
         return $retorno;
-    }else{
+    }
+    else
+    {
         return false;
     }
 }
