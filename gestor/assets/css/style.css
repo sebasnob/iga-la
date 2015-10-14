@@ -2512,3 +2512,14 @@ padding: 10px;
 border: 4px solid #ccc;
 
 }
+
+.tipocurso {
+    padding: 20px;
+}
+.tipocurso ul{
+    overflow-y: scroll;
+    height: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding:10px;
+}

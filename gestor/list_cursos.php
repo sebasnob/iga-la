@@ -61,68 +61,67 @@ if($logged == 'out'){
                             <div class="pull-left"><h5><i class="fa fa-tasks"></i> Listado de Cursos</h5></div>
                             <br>
                         </div>
-                          <div class="panel-body">
-                              <div class="task-content">
+                        <div class="panel-body">
+                            <div class="task-content">
                             <?php
-                                $tiposCurso = getTiposCursos($mysqli);
-                                $cursos = getCursos($mysqli);
-                                foreach($cursos as $i=>$j){
-                                ?>
-                                 <ul class="task-list">
-                                      <li>
-                                          <div class="task-title">
-                                              <span class="task-title-sp"><?=$j['cod_curso']?>&nbsp;&nbsp;<?=$j['nombre_es']?></span>
-                                              <!--<span class="badge bg-theme">Nuevo</span>-->
-                                              <div class="pull-right">
-                                                  <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            $tiposCurso = getTiposCursos($mysqli);
+                            $cursos = getCursos($mysqli);
+                            foreach($cursos as $i=>$j){
+                                $tipos_asignados = getTiposAsignados($mysqli, $j['cod_curso']);
+                            ?>
+                                <ul class="task-list">
+                                    <li>
+                                        <div class="task-title">
+                                            <span class="task-title-sp"><?=$j['cod_curso']?>&nbsp;&nbsp;<?=$j['nombre_es']?></span>
+                                            <!--<span class="badge bg-theme">Nuevo</span>-->
+                                            <div class="pull-right">
+                                                <a data-toggle="collapse" href="#<?=$j['cod_curso']?>collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                                     Edicion Rapida
-                                                  </a>
-                                                  <ul class="dropdown-menu list-inline">
-                                                    <li>
-                                                        <ul style="overflow-y: scroll;height: 200px;background-color: #fff;border: 1px solid #ccc;padding-left:0px;padding-right:25px;">
-                                                            <?php
-                                                            foreach($tiposCurso as $id_t=>$data_t){
-                                                            ?>
-                                                              <li><input type="checkbox" name="tipos"/>&nbsp;<?=$data_t['nombre_es']?></li>
-                                                            <?php
-                                                                $subTipos = getTiposCursos($mysqli, $data_t['id']);
-                                                                foreach($subTipos as $id=>$data){
-                                                            ?>
-                                                              <li style="padding-left:18px">&nbsp;&nbsp; <input type="checkbox" name="tipos"/> <?=$data['nombre_es']?></li>
-                                                            <?php
-                                                                }
-                                                            }
-                                                           ?>
-                                                        </ul>
-                                                    </li>
-                                                    <li style="vertical-align:top">
-                                                        Cambiar Color<input type="text" id="select_color_fondo" value="#<?=$j['color']?>"/>
-                                                    </li>
-                                                    <br/>
-                                                    <br/>
-                                                    <li>
-                                                        <button type="button" class="btn btn-success">Aceptar</button>
-                                                        <button type="button" class="btn btn-default">Cerrar</button>
-                                                    </li>
-                                                  </ul>
-                                                  
-                                                  <a class="btn btn-primary btn-xs" href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-pencil"></i></a>
-                                                  <a class="btn btn-default btn-xs" href="cursos_grupo.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-th-list"></i></a>
-                                              </div>
-                                          </div>
-                                      </li>
-                                  </ul>
-                                  <?php
-                                    }
-                                   ?>
-                              </div>
-
-                              <div class=" add-task-row">
-                                  <!--<a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Agregar Nuevo Curso</a>-->
-                                  <a class="btn btn-default btn-sm pull-right" href="todo_list.html#">Buscar Curso</a>
-                              </div>
-                          </div>
-                      </section>
+                                                </a>
+                                                <a class="btn btn-primary btn-xs" href="cursos.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-pencil"></i></a>
+                                                <a class="btn btn-default btn-xs" href="cursos_grupo.php?cod_curso=<?=$j['cod_curso']?>"><i class="fa fa-th-list"></i></a>
+                                            </div>
+                                            <ul class="collapse tipocurso " id="<?=$j['cod_curso']?>collapseExample">
+                                            <form id="formTipoCurso<?=$j['cod_curso']?>" name="formTipoCurso<?=$j['cod_curso']?>" method="POST">
+                                                <li>
+                                                    <ul>
+                                                    <?php
+                                                    foreach($tiposCurso as $id_t=>$data_t){
+                                                    ?>
+                                                        <li><input type="checkbox" name="tipos[]" value="<?=$data_t['id']?>" <?php echo (in_array($data_t['id'], $tipos_asignados))?"checked='checked'":''; ?> />&nbsp;<?=$data_t['nombre_es']?></li>
+                                                        <?php
+                                                        $subTipos = getTiposCursos($mysqli, $data_t['id']);
+                                                        foreach($subTipos as $id=>$data){
+                                                        ?>
+                                                        <li style="padding-left:18px">&nbsp;&nbsp; <input type="checkbox" name="tipos[]" value="<?=$data['id']?>" <?php echo (in_array($data['id'], $tipos_asignados))?"checked='checked'":''; ?> /> <?=$data['nombre_es']?></li>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                    </ul>      
+                                                </li>
+                                                <li style="vertical-align:top;padding:5px;">
+                                                    Asignar Color &nbsp;<input type="text" id="colorCurso<?=$j['cod_curso']?>" name="colorCurso<?=$j['cod_curso']?>" value="<?=$j['color']?>"/>
+                                                </li>
+                                                <li style="padding:5px;">
+                                                    <button type="button" class="btn btn-success" onclick="javascript:cambiarTipoColor(this, 'formTipoCurso<?=$j['cod_curso']?>', '<?=$j['cod_curso']?>')" data-loading-text="Cambiando...">Aceptar</button>
+                                                    <a data-toggle="collapse" href="#<?=$j['cod_curso']?>collapseExample" class="btn btn-default" aria-expanded="false" aria-controls="collapseExample">Cerrar</a>
+                                                </li>
+                                            </form>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            <?php
+                            }
+                            ?>
+                            </div>
+                        <div class=" add-task-row">
+                            <!--<a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Agregar Nuevo Curso</a>-->
+                            <a class="btn btn-default btn-sm pull-right" href="todo_list.html#">Buscar Curso</a>
+                        </div>
+                    </div>
+                    </section>
                    </div><!-- /col-md-12-->
               </div><!-- /row -->
        </section><! --/wrapper -->
@@ -148,9 +147,26 @@ if($logged == 'out'){
             localStorage.clear();
         });
         
-        $('.dropdown-menu').click(function(e) {
-            e.stopPropagation();
-        });
+        function cambiarTipoColor(boton, form, cod_curso){
+            var btn = $(boton).button('loading');
+            var listCheckbox = new Array();
+            $('#'+form+' input:checkbox:checked').each(function(){
+                listCheckbox.push($(this).val());
+            });
+            var color = $('#colorCurso'+cod_curso).val();
+            $.ajax({
+                url: "controller_ajax.php",
+                method: "POST",
+                data: {option : 'asignar_curso_corto', cod_curso : cod_curso, arrayCheck:listCheckbox, color:color},
+                dataType: "json",
+                success: function(data){
+                    if(data.result == 'ok'){
+                        
+                    }
+                    btn.button('reset');
+                }
+            });
+        }
     </script>
 
   </body>

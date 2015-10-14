@@ -181,7 +181,6 @@ if($logged == 'out'){
                         <div class="row mt">
                             <div class="col-lg-12">
                                 <button id="confirm" class="btn btn-success">Guardar cambios</button>
-                                <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
                             </div><!-- /col-lg-12 -->
                         </div><!-- /row --> 
                     </form>

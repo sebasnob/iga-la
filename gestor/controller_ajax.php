@@ -156,6 +156,42 @@ switch($_POST['option']){
         }
         print(json_encode($retorno));
     break;
+    
+    case "asignar_curso_corto":
+        $cod_curso = $_POST['cod_curso'];
+        $tipos = array();
+        $retorno = array();
+        
+        if(isset($_POST['arrayCheck'])) $tipos = $_POST['arrayCheck'];
+        
+        if(isset($cod_curso)){
+            $mysqli->query("UPDATE curso_tipo SET estado=0 WHERE cod_curso='{$cod_curso}'");
+            
+            foreach($tipos as $id=>$data){
+                $query = "SELECT id FROM curso_tipo WHERE cod_curso='{$cod_curso}' AND id_tipo='{$data}'";
+                $resultado = $mysqli->query($query);
+                if($resultado->num_rows == 0){
+                    $mysqli->query("INSERT INTO curso_tipo SET cod_curso='{$cod_curso}', id_tipo='{$data}', estado=1");
+                }else{
+                    $mysqli->query("UPDATE curso_tipo SET estado=1 WHERE cod_curso='{$cod_curso}' AND id_tipo='{$data}'");
+                }
+                $retorno['result'] = 'ok';
+            }
+            
+            if($_POST['color']){
+                $res_color = $mysqli->query("UPDATE cursos SET color='{$_POST['color']}' WHERE cod_curso='{$cod_curso}'");
+                if($res_color){
+                    $retorno['result'] = 'ok';
+                }else{
+                    $retorno['result'] = 'Error al cambiar el color';
+                }
+            }
+        }else{
+            $retorno['result'] = 'No se encuentra el curso';
+        }
+        
+        print(json_encode($retorno));
+    break;
 }
 
 ?>

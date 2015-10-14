@@ -895,4 +895,22 @@ function getTipoCurso($mysqli, $id_tipo){
     return $tipo;
 }
 
+function getTiposAsignados($mysqli, $cod_curso){
+    $tipos = array();
+    if(isset($cod_curso)){
+        $resultado = $mysqli->query("SELECT id_tipo FROM curso_tipo WHERE cod_curso='{$cod_curso}' AND estado=1");
+        if($resultado->num_rows > 0){
+            while($respuesta = $resultado->fetch_assoc())
+            {
+                $tipos[] = $respuesta['id_tipo'];
+            }
+        }else{
+            $tipos = array();
+        }
+        $resultado->free();
+    }
+    
+    return $tipos;
+}
+
 ?>
