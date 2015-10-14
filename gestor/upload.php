@@ -828,11 +828,9 @@ if(isset($_POST['edicion_slider']))
             {
                 $query = "UPDATE slider "
                                 . "SET alt = '{$_POST['alt']}', "
-                                . "url = '{$ruta}', "
-                                . "url_thumb = '{$ruta_thumb}', "
                                 . "link = '{$_POST['link']}', "
                                 . "id_pais = {$_POST['id_pais']}, "
-                                . "cod_idioma = '{$_POST['cod_idioma']}', "
+                                . "cod_idioma = '{$_POST['cod_idioma']}' "
                                 . "WHERE slider.id = {$_POST['id_img_slider']}";
                 $mysqli->query($query);
             }
