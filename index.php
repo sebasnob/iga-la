@@ -12,6 +12,7 @@ if(!isset($_SESSION['idioma_seleccionado']['cod_idioma']))
 {
     $_SESSION['idioma_seleccionado']['cod_idioma'] = $_SESSION['pais']['cod_idioma'];
     $_SESSION['idioma_seleccionado']['idioma'] = $_SESSION['pais']['idioma'];
+    $_SESSION['idioma_seleccionado']['id_idioma'] = $_SESSION['pais']['id_idioma'];
 }
 
 $paises = getPaises($mysqli);
@@ -166,7 +167,6 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                                     <li>
                                         <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
                                                 <?=$d['idioma']?> 
-                                            <span class="caret"></span>
                                         </a>
                                     </li>
                                     <?php
@@ -307,68 +307,41 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="col-sm-6 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
                             <a class="twitter-timeline" href="https://twitter.com/IGA_LA" data-widget-id="650168451454119936">Tweets por el @IGA_LA.</a>
-                            
-                            
                         </div>
-                        
                     </div>
-                    
                 </div>
-                
-                
+                <!-- noticias -->
                 <div class="row">
-                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
-                        <h2>Novedades</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>
-                    </div>
+                    <div class="heading col-sm-8 col-sm-offset-2">&nbsp;</div>
                 </div>
+                
                 <div class="blog-posts">
                     <div class="row">
+                        <?php
+                        $novedades = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma']);
+                        foreach ($novedades as $id=>$data){
+                        ?>
                         <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
                             <div class="post-thumb">
-                                <a href="#"><img class="img-responsive" src="images/blog/1.jpg" alt=""></a> 
+                                <a href="#"><img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt=""></a> 
                             </div>
                             <div class="entry-header">
-                                <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
+                                <h3><a href="#"><?=$data['titulo']?></a></h3>
                             </div>
                             <div class="entry-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p><?=$data['descripcion']?></p>
                             </div>
                         </div>
-                        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
-                            <div class="post-thumb">
-                                <a href="#"><img class="img-responsive" src="images/blog/1.jpg" alt=""></a> 
-                            </div>
-                            <div class="entry-header">
-                                <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
-                            </div>
-                            <div class="entry-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
-                            <div class="post-thumb">
-                                <a href="#"><img class="img-responsive" src="images/blog/1.jpg" alt=""></a> 
-                            </div>
-                            <div class="entry-header">
-                                <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
-                            </div>
-                            <div class="entry-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
-                    
                 </div>
+                <!-- fin noticias -->
             </div>
-            
-            
-        </div>
-        
-    </section><!--/#blog-->
+        </section><!--/#blog-->
     
     <section id="features" class="parallax">
         <div class="container">
@@ -396,13 +369,7 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
             </div>
         </div>
     </section><!--/#features-->
-    
-    
-    
-    
-    
-    
-    
+
     <section id="team">
         <div class="container">
             <div class="row">
@@ -585,7 +552,7 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                     </div>
                     
                     <div class="col-sm-4 text-center">
-                        <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquisia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
+                        <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
                     </div>
                     <div class="col-sm-4 text-center">
                         <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>

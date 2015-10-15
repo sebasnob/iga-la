@@ -143,8 +143,8 @@ if($logged == 'out'){
                                             <input type="text" id="titulo" name="titulo" value="<?php echo (isset($novedad['titulo']))?$novedad['titulo']:''; ?>" class="form-control"/>
                                         </div>
                                         <div class="form-group">
+                                            <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen:</b></h4>
                                             <div id="imagenPreview">
-                                              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen:</b></h4>
                                               <?php
                                                 if($accion == 'editar'){
                                               ?>
@@ -153,8 +153,7 @@ if($logged == 'out'){
                                                 }
                                               ?>
                                             </div>
-                                              
-                                           <input id="imagen" type="file" name="imagen" class="img"/>
+                                            <input id="imagen" type="file" name="imagen" class="img" />
                                         </div>
 
                                         <div class="form-group">
@@ -210,14 +209,13 @@ if($logged == 'out'){
                 ]
             });
             
-            var descripcion = '<?php echo (isset($novedad['descripcion']))?$novedad['descripcion']:''; ?>';
-            CKEDITOR.instances['descripcion'].setData(descripcion);
+            CKEDITOR.instances['descripcion'].setData(<?php echo (isset($novedad['descripcion']))?json_encode($novedad['descripcion']):''; ?>);
             
             $('#confirm').click(function(){
                 $('#form_change').submit();
             });
             
-            //Cambiar la imagen previa de los uniformes
+            //Cambiar la imagen previa
             $("#imagen").on("change", function(){
                 var files = !!this.files ? this.files : [];
                 if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support

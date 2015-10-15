@@ -165,7 +165,8 @@ function getProvincias($mysqli, $id_pais=''){
     }
     
     $provincias = array();
-    $query = "SELECT id, nombre FROM provincias ".$cond;
+    $query = "SELECT p.id, p.nombre FROM filiales as f INNER JOIN provincias AS p ON p.id=f.id_provincia {$cond} GROUP BY p.id ORDER BY p.nombre";
+    //$query = "SELECT id, nombre FROM provincias ".$cond;
     $result = $mysqli->query($query);
     while($prov = $result->fetch_assoc()){
 	$provincias[] = array('id'=>$prov['id'],'nombre'=>$prov['nombre']);
@@ -407,7 +408,7 @@ function detectCountry($mysqli){
         
         $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$cod_pais, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
-        $query2 = "SELECT idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
+        $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
         $result2 = $mysqli->query($query2);
         $idioma = $result2->fetch_assoc();
         $_SESSION['pais'] = array('id'=>$tablaPais['id'],
@@ -415,13 +416,14 @@ function detectCountry($mysqli){
                                   'pais'=>$tablaPais['pais'],
                                   'flag'=>$tablaPais['flag'],
                                   'idioma'=>$idioma['idioma'],
-                                  'cod_idioma'=>$idioma['cod_idioma']);
+                                  'cod_idioma'=>$idioma['cod_idioma'],
+                                  'id_idioma'=>$idioma['id']);
         
 //        $_SESSION['ciudad'] = $resp->{'city'};
     }
     else
     {
-        $_SESSION['pais'] = array('pais'=>'Argentina','cod_pais'=>"AR", 'idioma'=>'ES', 'flag'=>'images/flags/ar.png');
+        $_SESSION['pais'] = array('pais'=>'Argentina','cod_pais'=>"AR", 'idioma'=>'ES', 'flag'=>'images/flags/ar.png', 'id_idioma'=>'1');
         $_SESSION['ciudad'] = 'Rosario';
     }
     curl_close($ch);
@@ -706,7 +708,7 @@ function cambiarPais($cod_pais, $mysqli){
         
     $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$tablaPaisdatos['cod_pais'], 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
-    $query2 = "SELECT idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
+    $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
         
     $result2 = $mysqli->query($query2);
     $idioma = $result2->fetch_assoc();
@@ -717,10 +719,12 @@ function cambiarPais($cod_pais, $mysqli){
                                   'pais'=>$tablaPais['pais'],
                                   'flag'=>$tablaPais['flag'],
                                   'idioma'=>$idioma['idioma'],
-                                  'cod_idioma'=>$idioma['cod_idioma']);
+                                  'cod_idioma'=>$idioma['cod_idioma'],
+                                  'id_idioma'=>$idioma['id']);
     
     $_SESSION['idioma_seleccionado']['cod_idioma'] = $idioma['cod_idioma'];
     $_SESSION['idioma_seleccionado']['idioma'] = $idioma['idioma'];
+    $_SESSION['idioma_seleccionado']['id_idioma'] = $idioma['id'];
     if(isset($_SESSION['id_filial'])){ unset($_SESSION['id_filial']);}
     
     echo 'ok';
@@ -748,6 +752,7 @@ function cambiarIdioma($cod_idioma, $mysqli)
     session_start();
     $_SESSION['idioma_seleccionado']['cod_idioma'] = $cod_idioma;
     $_SESSION['idioma_seleccionado']['idioma'] = $tablaIdiomas['idioma'];
+    $_SESSION['idioma_seleccionado']['id_idioma'] = $tablaIdiomas['id'];
     echo 'ok';
 }
 
@@ -817,17 +822,34 @@ if(isset($_POST['filialSeleccionada']))
 
 function getNovedades($mysqli, $id_pais='', $id_idioma=''){
     $cond = '';
+    $novedades = array();
     
     if(isset($id_pais) && $id_pais != '' && isset($id_idioma) && $id_idioma != ''){
-        $cond .= ' WHERE id_pais={$id_pais} AND id_idioma={$id_idioma}';
+        $cond .= " WHERE id_pais={$id_pais} AND id_idioma={$id_idioma}";
     }
-    
-    $resultado = $mysqli->query("SELECT id, titulo, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades {$cond}");
-    $novedades = array();
 
-    while($respuesta = $resultado->fetch_assoc())
-    {
-        $novedades[] = $respuesta;
+    $resultado = $mysqli->query("SELECT id, imagen, titulo, descripcion, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades {$cond}");
+    if($resultado->num_rows > 0){
+        while($respuesta = $resultado->fetch_assoc())
+        {
+            $novedades[] = $respuesta;
+        }
+    }
+    $resultado->free();
+    
+    return $novedades;
+}
+
+function getNovedadesHome($mysqli, $id_pais='1', $id_idioma='1', $limit='3'){
+    $cond = '';
+    $novedades = array();
+    
+    $resultado = $mysqli->query("SELECT id, imagen, titulo, descripcion, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades WHERE estado=1 AND id_pais={$id_pais} AND id_idioma={$id_idioma} ORDER BY id DESC limit {$limit}");
+    if($resultado->num_rows > 0){
+        while($respuesta = $resultado->fetch_assoc())
+        {
+            $novedades[] = $respuesta;
+        }
     }
     $resultado->free();
     

@@ -120,7 +120,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                         <li>
                                             <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
                                                 <?=$d['idioma']?> 
-                                                <span class="caret"></span>
                                             </a>
                                         </li>
                                     <?php
@@ -157,20 +156,23 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </div>
                     </div><!--/.ads-->     
+                    <br/>
                     <div class="widget ads">
                         <div class="row">
-                             <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
-                               <div class="post-thumb">
-                                                    <a href="#"><img class="img-responsive" src="images/blog/3.jpg" alt=""></a>
-                                                </div>
-                                                <div class="entry-header">
-                                                    <h3><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
-                                                </div>
-                                                <div class="entry-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                                </div>
-
-                        </div>
+                            <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
+                                <?php
+                                $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
+                                ?>
+                                <div class="post-thumb">
+                                    <a href="index.php#blog"><img class="img-responsive" src="images/novedades/<?=$novedad[0]['imagen']?>" alt=""></a>
+                                </div>
+                                <div class="entry-header">
+                                    <h3><a href="index.php#blog"><?=$novedad[0]['titulo']?></a></h3>
+                                </div>
+                                <div class="entry-content">
+                                    <p><?=$novedad[0]['descripcion']?></p>
+                                </div>
+                            </div>
                         </div>
                     </div><!--/.categories-->
                 </aside>        
@@ -323,12 +325,12 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <div class="col-sm-4 text-center">
                             <p><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
                         </div>
-                        
+
                         <div class="col-sm-4 text-center">
-                            <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquisia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
+                            <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
                         </div>
                         <div class="col-sm-4 text-center">
-                            <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/" target="_blank">lifeWEB</a></p>
+                            <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
                         </div>
                     </div>
                 </div>
