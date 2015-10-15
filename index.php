@@ -57,63 +57,8 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
         <!--/.preloader-->
         
         <header id="home">
-            <div id="home-slider" class="container-fluid">
-                <div class="caption">
-                    <h1 class="animated fadeInLeftBig">
-                    <?php
-                    switch($_SESSION['idioma_seleccionado']['cod_idioma']){
-                        case 'IN':
-                                echo $datos_home['titulo_in'];
-                            break;
-                        case 'POR':
-                                echo $datos_home['titulo_por'];
-                            break;
-                        default: 
-                                echo $datos_home['titulo_es'];
-                            break;
-                    }
-                    ?>
-                    </h1>
-                    <p class="animated fadeInRightBig">
-                    <?php
-                    switch($_SESSION['idioma_seleccionado']['cod_idioma']){
-                        case 'IN':
-                                echo $datos_home['subtitulo_in'];
-                            break;
-                        case 'POR':
-                                echo $datos_home['subtitulo_por'];
-                            break;
-                        default: 
-                                echo $datos_home['subtitulo_es'];
-                            break;
-                    }
-                    ?>
-                    </p>
-                    <!--<h1 class="animated fadeInLeftBig">Bienvenidos a <span>IGA</span></h1>
-                    <p class="animated fadeInRightBig">INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS </p>-->
-                    <a data-scroll class="btn btn-start animated fadeInUpBig" href="#slider">
-                        <?php switch($_SESSION['idioma_seleccionado']['cod_idioma'])
-                        {
-                            case 'IN':
-                                echo 'What do you want to learn today ?';
-                            break;
-                            case 'POR':
-                                echo 'Você quer aprender hoje?';
-                            break;
-                            default: 
-                                echo 'Que Deseas aprender hoy?';
-                            break;
-                        }
-                        ?>
-                    </a>
-                </div>
-                <div class="embed-responsive embed-responsive-16by9 ">
-                    <div id="background">
-                        
-                         <!--<iframe id='player' width="100%" height="100%" src="<?=$datos_home['url_video']?>" frameborder="0" volumen="0" class="hidden-sm hidden-xs"></iframe>-->
-                    </div>
-                </div>          
-            </div>
+           
+            
             <div class="main-nav">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -181,7 +126,7 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                 </div>
             </div><!--/#main-nav-->
             
-        </header><!--/#home-->
+       
         
         <div id="slider" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner" style="cursor:pointer">
@@ -202,7 +147,8 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
             <a class="left-control" href="#slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
             <a class="right-control" href="#slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
         </div><!--/#home-slider-->
-        
+        </div>
+        </header><!--/#home--> 
         <section id="portfolio">
             <div class="container-fluid">
                 <div class="row">
