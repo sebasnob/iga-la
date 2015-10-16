@@ -42,7 +42,7 @@ $idiomas = getIdiomas($mysqli);
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
         
-        <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />
+        <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php?cod_curso=<?=$_GET['cod_curso']?>" />
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>

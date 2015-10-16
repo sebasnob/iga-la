@@ -24,7 +24,7 @@ MAIN SIDEBAR MENU
                 </a>
                 <ul class="sub">
                     <li><a  href="list_cursos.php">Todos los Cursos</a></li>
-                    <li><a  href="cursos_tipo.php">Tipos de Cursos</a></li>
+                    <!-- <li><a  href="cursos_tipo.php">Tipos de Cursos</a></li>-->
                 </ul>
             </li>
             <li class="sub-menu">
