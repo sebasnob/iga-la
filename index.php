@@ -127,10 +127,13 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
             </div><!--/#main-nav-->
             
        
-        
+        <?php
+        if(count($slider) > 0){
+            print_r($slider);
+        ?>
         <div id="slider" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner" style="cursor:pointer">
-                <?php $i=0; foreach ($slider as $slid){?>
+                <?php $i=0; foreach($slider as $slid){?>
                 <div 
                         class="item <?php if($i == 0){echo 'active';}?>" 
                         <?php if(isset($slid['link']) && $slid['link'] != '')
@@ -147,9 +150,17 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
             <a class="left-control" href="#slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
             <a class="right-control" href="#slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
         </div><!--/#home-slider-->
+        <?php
+        }
+        ?>
         </div>
         </header><!--/#home--> 
         <section id="portfolio">
+            <?php
+            if(!$gridArray){
+                
+            }else{
+            ?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
@@ -161,9 +172,7 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
             <div class="container-fluid" id="grilla">
                 <div class="row">
                     <?php 
-                    if(!$gridArray){
-                        echo "  No existen cursos disponibles para el pais seleccionado.";
-                    }else{
+                   
                         foreach ($gridArray as $imgGrid){
                     ?>
                     <div class="col-md-<?php echo $imgGrid['cols']?>">
@@ -186,12 +195,12 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                             </div>
                         </div>
                     </div>
-                    <?php 
-                        }
-                     
-                    ?>
+                    
                 </div>
             </div> <!--/#container-fluid-porfolios-->
+            <?php 
+                }
+            ?>
             <div id="portfolio-single-wrap">
                 <?php foreach ($gridArray as $imgGrid){
                     

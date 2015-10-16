@@ -442,8 +442,8 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false)
         $query .= " AND grilla.id_pais='{$id_pais}'";
     }
     
-    $query .= "order by grilla.prioridad";
-    
+    $query .= " order by grilla.prioridad";
+
     $result = $mysqli->query($query);
     
     if($result->num_rows > 0)
