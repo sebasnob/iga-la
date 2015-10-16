@@ -323,3 +323,11 @@ function iralink(url)
 //    console.log(url);
     window.open(url);
 }
+
+function getSelectCursos(selector, select){
+    if($('#'+selector).val() == '3'){
+        $('#'+select).show();
+    }else{
+        $('#'+select).hide();
+    }
+}

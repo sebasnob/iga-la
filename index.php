@@ -493,16 +493,22 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                                 <div class="col-sm-7">
                                     <div class="row">
                                         <div class="form-group form-inline">
-                                            <select class="form-control" name="subject">
+                                            <select id="opciones" class="form-control" name="subject" onchange="javascript:getSelectCursos('opciones','cursos_contacto')">
                                                 <option value="">Elegi una opción</option>
                                                 <option value="3">Cursos</option>
                                                 <option value="4">Atencion al alumno</option>
                                             </select>
                                             &nbsp;
-                                            <select class="form-control" name="cursos_contacto">
+                                            <select class="form-control" name="cursos_contacto" id="cursos_contacto" style="display: none;">
                                                 <option value="">Elegi una opción</option>
-                                                <option value="3">Gastronomia y Alta Cocina</option>
-                                                <option value="4">Gastronomia y Alta Cocina 2</option>
+                                                <?php
+                                                $cursos = getCursos($mysqli);
+                                                foreach($cursos as $id=>$data){
+                                                ?>
+                                                <option value="4"><?=$data['nombre_es']?></option>
+                                                <?php
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
