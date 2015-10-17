@@ -696,7 +696,12 @@ if(isset($_POST['edicion_slider']))
                 $valid_file = true;
                 //now is the time to modify the future file name and validate the file
                 $new_file_name = strtolower($_FILES['photo']['name']); //rename file
-                if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
+                $Length = 10;
+                $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+                
+                $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+                
+                if($_FILES['photo']['size'] > (12288000)) //can't be larger than 12 MB
                 {
                     $valid_file = false;
                     $message = 'Oops!  Your file\'s size is to large.';
@@ -768,7 +773,11 @@ if(isset($_POST['edicion_slider']))
                     $valid_file = true;
                     //now is the time to modify the future file name and validate the file
                     $new_file_name = strtolower($_FILES['photo']['name']); //rename file
-                    if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
+                    $Length = 10;
+                    $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+                    $new_file_name =  $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+                    
+                    if($_FILES['photo']['size'] > (12288000)) //can't be larger than 12 MB
                     {
                         $valid_file = false;
                         $message = 'Oops!  Your file\'s size is to large.';
