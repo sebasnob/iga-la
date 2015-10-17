@@ -479,35 +479,35 @@ color: white;
 ********portfolio CSS*****
 **************************/
 
-#portfolio .container-fluid, 
-#portfolio .col-sm-3  {
+.portfolio .container-fluid, 
+.portfolio .col-sm-3  {
   overflow: hidden;
   padding: 0;
 }
 
-#portfolio .container-fluid, 
-#portfolio .col-sm-6  {
+.portfolio .container-fluid, 
+.portfolio .col-sm-6  {
   overflow: hidden;
   padding: 0;
 }
 
-#portfolio .container-fluid, 
-#portfolio .col-md-3  {
+.portfolio .container-fluid, 
+.portfolio .col-md-3  {
   overflow: hidden;
   padding: 0;
 }
 
-#portfolio .container-fluid, 
-#portfolio .col-md-6  {
+.portfolio .container-fluid, 
+.portfolio .col-md-6  {
   overflow: hidden;
   padding: 0;
 }
 
-#portfolio .folio-item {
+.portfolio .folio-item {
   position: relative;
 }
 
-#portfolio .overlay {
+.portfolio .overlay {
   background-color: #000;
   color: #fff; 
   left: 0;
@@ -572,7 +572,7 @@ color: white;
   transition: all 0.8s ease-in-out;
 }
 
-#portfolio .folio-item:hover .folio-image {
+.portfolio .folio-item:hover .folio-image {
  /* -webkit-transform: scale(1.5) rotate(-15deg);
   transform: scale(1.5) rotate(-15deg);*/
 }
@@ -581,18 +581,18 @@ color: white;
   width: 100%;
 }
 
-#portfolio .folio-item:hover .overlay {
+.portfolio .folio-item:hover .overlay {
   opacity: 0.8;
   bottom: 0;
   height: 100%;
 }
 
-#portfolio .folio-item:hover .folio-overview .folio-expand {
+.portfolio .folio-item:hover .folio-overview .folio-expand {
   margin-top: 0;
   margin-left:0;
 }
 
-#portfolio .folio-item:hover .overlay .folio-info {
+.portfolio .folio-item:hover .overlay .folio-info {
   opacity: 1;  
   margin-bottom:0;
   margin-top:0;
@@ -1207,4 +1207,40 @@ padding-bottom: 50px;
 
 /*Presets*/
 
+.nav .menuCursos a{
+    color: #fff;
+}
 
+#desplegableCursos{
+    display: none;
+    position: absolute;
+    height: 130px;
+    width: 200px;
+    z-index: 9;
+    background-color: #002F5E;
+}
+#slider{
+    max-height: 500px;
+}
+#cover{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+#cursos{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px
+}
+
+#desplegableCursos a:hover{
+    color: #396CC8;
+}

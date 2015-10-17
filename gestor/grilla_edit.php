@@ -15,8 +15,31 @@ if($logged == 'out'){
     exit();
 }
 
+$pais_filtro = 0;
+if(isset($_GET['pais_filtro'])){
+    $pais_filtro = $_GET['pais_filtro'];
+}
+$idioma_filtro = 0;
+if(isset($_GET['idioma_filtro'])){
+    $idioma_filtro = $_GET['idioma_filtro'];
+}
+$tipo_filtro = 0;
+if(isset($_GET['tipo_filtro'])){
+    $tipo_filtro = $_GET['tipo_filtro'];
+}
+
+//chino 3416582587
+$habilitado_filtro = 0;
+if(isset($_GET['habilitado_filtro'])){
+    $habilitado_filtro = $_GET['habilitado_filtro'];
+}
+$id_curso_filtro = 0;
+if(isset($_GET['id_curso_filtro'])){
+    $id_curso_filtro = $_GET['id_curso_filtro'];
+}
+
 $cursos = getCursos($mysqli);
-$gridArray = getImagenesGrilla($mysqli);
+$gridArray = getImagenesGrilla($mysqli, $idioma_filtro, $pais_filtro, $tipo_filtro, $habilitado_filtro, $id_curso_filtro);
 $paises = getPaises($mysqli);
 
 ?>
@@ -102,6 +125,14 @@ $paises = getPaises($mysqli);
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Tipo: </label>
+                                            <select class="form-control" name="tipo">
+                                                <option value="1">Curso</option>
+                                                <option value="2">Curso Corto</option>
+                                                <option value="3">Cocineritos</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Habilitado: </label>
                                             <select class="form-control" name="habilitado">
                                                 <option value="1">Si</option>
@@ -137,7 +168,58 @@ $paises = getPaises($mysqli);
                                 
                                 <section id="editor_grilla_editar" style="display: inline-block;">
                                     <h4><i class="fa fa-angle-right"></i> Editar Grilla</h4>
-                                    
+                                    <div class="col-md-12">
+                                        <h4>filtro</h4>
+                                        <div>
+                                            <div class="form-inline pull-left">
+                                                <label >Curso: </label>
+                                                <select class="form-control input-sm" id="id_curso_filtro">
+                                                    <option value="0">Seleccione</option>
+                                                    <?php foreach($cursos as $i=>$j){?>
+                                                        <option value="<?=$j['cod_curso']?>"><?=$j['nombre_es']?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="form-inline pull-left">
+                                                <label >Tipo: </label>
+                                                <select class="form-control input-sm" id="tipo_filtro">
+                                                    <option value="0">Seleccione</option>
+                                                    <option value="1">Cursos</option>
+                                                    <option value="2">Cursos Cortos</option>
+                                                    <option value="3">Cocineritos</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-inline pull-left">
+                                                <label >Habilitado: </label>
+                                                <select class="form-control input-sm" id="habilitado_filtro">
+                                                    <option value="0">Seleccione</option>
+                                                    <option value="1">Si</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-inline pull-left">
+                                                <label >Pais: </label>
+                                                <select class="form-control input-sm" id="pais_filtro">
+                                                    <option value="0">Seleccione</option>
+                                                    <?php foreach($paises as $pais){?>
+                                                    <option value="<?=$pais['id']?>"><?=$pais['pais']?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="form-inline pull-left">
+                                                <label >Idioma: </label>
+                                                <select class="form-control input-sm" id="idioma_filtro">
+                                                    <option value="0">Seleccione</option>
+                                                    <option value="es">Espa&ntilde;ol</option>
+                                                    <option value="in">Ingles</option>
+                                                    <option value="pt">Portugues</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-inline pull-left">
+                                                <button id="buscarGrilla" class="btn btn-success">Buscar</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <?php foreach ($gridArray as $imgGrid){?>
                                     <div class="col-md-4">
                                         <form  enctype="multipart/form-data" method="POST" action="upload.php">
@@ -177,6 +259,14 @@ $paises = getPaises($mysqli);
                                                     
                                                     <option value="<?=$j['cod_curso']?>"  <?php if($imgGrid['id_curso'] == $j['cod_curso']){echo 'selected';}?>><?=$j['nombre_es']?></option>
                                                     <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Tipo: </label>
+                                                <select class="form-control input-sm" name="tipo">
+                                                    <option value="1" <?php if($imgGrid['tipo'] == 1){echo 'selected';}?>>Cursos</option>
+                                                    <option value="2" <?php if($imgGrid['tipo'] == 2){echo 'selected';}?>>Cursos Cortos</option>
+                                                    <option value="3" <?php if($imgGrid['tipo'] == 3){echo 'selected';}?>>Cocineritos</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -235,7 +325,7 @@ $paises = getPaises($mysqli);
         <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
         <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-        
+        <script type="text/javascript" src="../js/main.js"></script>
         
         <!--common script for all pages-->
         <script src="assets/js/common-scripts.js"></script>

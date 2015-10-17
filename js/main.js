@@ -313,9 +313,9 @@ function filialModalSeleccionada(filial, cod_curso){
 
 function scroll(to)
 {
-    event.preventDefault();
     var body = $("html, body");
-    body.stop().animate({scrollTop:$(to).position().top - 70}, '500', 'swing');
+    $('#desplegableCursos').hide();
+    body.stop().animate({scrollTop:$(to).position().top}, '500', 'swing');
 }
 
 function iralink(url)
@@ -331,3 +331,32 @@ function getSelectCursos(selector, select){
         $('#'+select).hide();
     }
 }
+
+$('#cursos').click(function(){
+    
+    var top = $('#cursos').position().top + 52;
+    var left = $('#cursos').position().left;
+    
+    $('#desplegableCursos').css({ top: top + 'px'});
+    $('#desplegableCursos').css({ left: left + 'px'});
+    
+    $('#desplegableCursos').slideToggle('fast');
+});
+
+$('#buscarGrilla').click(function(){
+    var idioma_filtro = $('#idioma_filtro').val();
+    var pais_filtro = $('#pais_filtro').val();
+    var tipo_filtro = $('#tipo_filtro').val();
+    var habilitado_filtro = $('#habilitado_filtro').val();
+    var id_curso_filtro = $('#id_curso_filtro').val();
+
+    var url = '../gestor/grilla_edit.php';
+    url += '?idioma_filtro=' + idioma_filtro;
+    url += '&pais_filtro=' + pais_filtro;
+    url += '&tipo_filtro=' + tipo_filtro;
+    url += '&habilitado_filtro=' + habilitado_filtro;
+    url += '&id_curso_filtro=' + id_curso_filtro;
+    
+    window.location.replace(url);
+    
+});

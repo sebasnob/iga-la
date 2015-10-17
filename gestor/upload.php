@@ -586,7 +586,7 @@ if(isset($_POST['edicion_grilla']))
                     $ruta = substr($ruta, 3);
                     $ruta_thumb = substr($ruta_thumb, 3);
                     
-                    $query = "INSERT INTO grilla (cols, img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, id_pais) VALUES ({$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', {$_POST['pais']})";
+                    $query = "INSERT INTO grilla (cols, img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, id_pais, tipo) VALUES ({$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', {$_POST['pais']}, {$_POST['tipo']})";
                     $mysqli->query($query);
                             
                 }
@@ -672,7 +672,8 @@ if(isset($_POST['edicion_grilla']))
                                 . "cod_curso = {$_POST['id_curso']}, "
                                 . "habilitado = {$_POST['habilitado']}, "
                                 . "idioma = '{$_POST['idioma']}', "
-                                . "id_pais = {$_POST['pais']} WHERE grilla.id = {$_POST['id_img_grilla']}";
+                                . "id_pais = {$_POST['pais']}, "
+                                . "tipo = {$_POST['tipo']} WHERE grilla.id = {$_POST['id_img_grilla']}";
                         $mysqli->query($query);
                     }
                 }
@@ -685,7 +686,8 @@ if(isset($_POST['edicion_grilla']))
                                 . "cod_curso = {$_POST['id_curso']}, "
                                 . "habilitado = {$_POST['habilitado']}, "
                                 . "idioma = '{$_POST['idioma']}', "
-                                . "id_pais = {$_POST['pais']} WHERE grilla.id = {$_POST['id_img_grilla']}";
+                                . "id_pais = {$_POST['pais']}, "
+                                . "tipo = {$_POST['tipo']} WHERE grilla.id = {$_POST['id_img_grilla']}";
                 $mysqli->query($query);
             }
         }

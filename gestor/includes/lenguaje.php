@@ -41,7 +41,11 @@ $lenguaje['campus_ES'] = "Campus";
 $lenguaje['nombre_defecto_ES'] = "Curso no Disponible";
 $lenguaje['duracion_defecto_ES'] = "";
 $lenguaje['descripcion_defecto_ES'] = "Actualmente este Curso no se encuentra Disponible en este País";
-
+$lenguaje['cursos_cortos_ES'] = "Cursos Cortos";
+$lenguaje['cocineritos_ES'] = "Cocineritos";
+$lenguaje['no_existen_cursos_ES'] = "No existen cursos disponibles para el pais seleccionado.";
+$lenguaje['no_existen_cursos_ES'] = "No existen cursos cortos disponibles para el pais seleccionado.";
+$lenguaje['no_existen_cursos_ES'] = "No existen cursos de cocineritos disponibles para el pais seleccionado.";
 
 //ingles
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
@@ -85,6 +89,11 @@ $lenguaje['campus_IN'] = "Campus";
 $lenguaje['nombre_defecto_IN'] = "Course not Available";
 $lenguaje['duracion_defecto_IN'] = "";
 $lenguaje['descripcion_defecto_IN'] = "Currently this course is not available in this country";
+$lenguaje['cursos_cortos_IN'] = "";
+$lenguaje['cocineritos_IN'] = "";
+$lenguaje['no_existen_cursos_IN'] = "";
+$lenguaje['no_existen_cursos_cortos_IN'] = "";
+$lenguaje['no_existen_cursos_cocineritos_IN'] = "";
 
 //portugues
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
@@ -127,4 +136,9 @@ $lenguaje['contacto_POR'] = "Contato";
 $lenguaje['campus_POR'] = "Campus";
 $lenguaje['nombre_defecto_POR'] = "Claro que não Disponível";
 $lenguaje['duracion_defecto_POR'] = "";
-$lenguaje['descripcion_defecto_IN'] = "Atualmente este curso não está disponível no país";
+$lenguaje['descripcion_defecto_POR'] = "Atualmente este curso não está disponível no país";
+$lenguaje['cursos_cortos_POR'] = "";
+$lenguaje['cocineritos_POR'] = "";
+$lenguaje['no_existen_cursos_POR'] = "";
+$lenguaje['no_existen_cursos_cortos_POR'] = "";
+$lenguaje['no_existen_cursos_cocineritos_POR'] = "";

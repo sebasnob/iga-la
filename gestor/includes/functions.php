@@ -429,10 +429,14 @@ function detectCountry($mysqli){
     curl_close($ch);
 }
 
-function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false)
+function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = false, $habilitado_filtro = false, $id_curso_filtro = false)
 {
-    $query = "SELECT * FROM grilla WHERE grilla.habilitado = 1";
+    $query = "SELECT * FROM grilla WHERE 1 = 1"; 
     
+    if($idioma)
+    {
+        $query .= " AND grilla.habilitado = '{$habilitado_filtro}'";
+    }
     if($idioma)
     {
         $query .= " AND grilla.idioma = '{$idioma}' ";
@@ -441,8 +445,16 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false)
     {
         $query .= " AND grilla.id_pais='{$id_pais}'";
     }
+    if($tipo)
+    {
+        $query .= " AND grilla.tipo='{$tipo}'";
+    }
+    if($id_curso_filtro)
+    {
+        $query .= " AND grilla.cod_curso='{$id_curso_filtro}'";
+    }
     
-    $query .= " order by grilla.prioridad";
+    $query .= " order by grilla.prioridad, grilla.id_pais, grilla.idioma, grilla.tipo";
 
     $result = $mysqli->query($query);
     
@@ -458,6 +470,7 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false)
                                 'prioridad'=>$grilla['prioridad'],
                                 'idioma'=>$grilla['idioma'],
                                 'id_pais'=>$grilla['id_pais'],
+                                'tipo'=>$grilla['tipo'],
                                 'habilitado'=>$grilla['habilitado']);
         }
         return $retorno;

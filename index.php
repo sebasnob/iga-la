@@ -20,6 +20,11 @@ $datos_home = getDatosHome($mysqli);
 $idiomas = getIdiomas($mysqli);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma']);
+
+                                            
+$gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1, 1);
+$gridArrayCursosCortos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 2, 1);
+$gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 3, 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,10 +50,6 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
         
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" href="images/favicon.ico">
-        
-        <?php
-            $gridArray = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id']);
-        ?>
     </head><!--/head-->
     
     <body>
@@ -76,7 +77,7 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">     
                             <li class="scroll active"><a href="#home"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="#portfolio"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li id="cursos"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></li>
                             <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
                             <li class="scroll"><a href="#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
@@ -123,6 +124,13 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                         </ul>
                     </div>
                 </div>
+                <div id="desplegableCursos">
+                    <ul class="nav">
+                        <li class="menuCursos"><a href="javascript:scroll('#grillaCursos')"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                        <li class="menuCursos"><a href="javascript:scroll('#grillaCocineritos')"><?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                        <li class="menuCursos"><a href="javascript:scroll('#grillaCursosCortos')"><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                    </ul>
+                </div>
             </div><!--/#main-nav-->
        
         <?php
@@ -151,7 +159,7 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
         }
         ?>
         </header><!--/#home--> 
-        <section id="portfolio">
+        <section id="grillaCursos" class="portfolio">
             <div class="container-fluid">
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
@@ -163,10 +171,10 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
             <div class="container-fluid" id="grilla">
                 <div class="row">
                     <?php 
-                    if(!$gridArray){
-                        echo "No existen cursos disponibles para el pais seleccionado.";
+                    if(!$gridArrayCursos){
+                        echo $lenguaje['no_existen_cursos_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                     }else{
-                        foreach ($gridArray as $imgGrid){
+                        foreach ($gridArrayCursos as $imgGrid){
                     ?>
                     <div class="col-md-<?php echo $imgGrid['cols']?>">
                         <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
@@ -194,7 +202,7 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                 </div>
             </div> <!--/#container-fluid-porfolios-->
             <div id="portfolio-single-wrap">
-                <?php foreach ($gridArray as $imgGrid){
+                <?php foreach ($gridArrayCursos as $imgGrid){
                     
                     $nombre_defecto = $lenguaje['nombre_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                     $duracion_defecto = $lenguaje['duracion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
@@ -228,7 +236,168 @@ $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccio
                 }
                 ?>
             </div>
-        </section><!--/#portfolio-->
+        </section><!--/#grillaCursos-->
+        
+        
+        <section id="grillaCocineritos" class="portfolio">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <h2><?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+                        <p><?=$lenguaje['cursos_destacados_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></p>
+                    </div>
+                </div> 
+            </div>
+            <div class="container-fluid" id="grilla">
+                <div class="row">
+                    <?php 
+                    if(!$gridArrayCursosCortos){
+                        echo $lenguaje['no_existen_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ;
+                    }else{
+                        foreach ($gridArrayCursosCortos as $imgGrid){
+                    ?>
+                    <div class="col-md-<?php echo $imgGrid['cols']?>">
+                        <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="folio-image">
+                                <img class="img-responsive" src="<?php echo $imgGrid['img_url']?>" alt="">
+                            </div>
+                            <div class="overlay">
+                                <div class="overlay-content">
+                                    <div class="overlay-text">
+                                        <div class="folio-overview">
+                                            <span class="folio-expand ">
+                                                <a href="javascript:descripcionCurso('<?php echo $imgGrid['id_curso']?>')">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php 
+                        }
+                    ?>
+                </div>
+            </div> <!--/#container-fluid-porfolios-->
+            <div id="portfolio-single-wrap">
+                <?php foreach ($gridArrayCursosCortos as $imgGrid){
+                    
+                    $nombre_defecto = $lenguaje['nombre_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $duracion_defecto = $lenguaje['duracion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $descripcion_defecto = $lenguaje['descripcion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
+                ?>
+                    <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
+                    <div class="row">
+                        <div class="col-sm-9">
+                                <div class="project-info">
+                                    <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
+                                    <div class="entry-meta">
+                                        
+                                        <span>
+                                            <i class="fa fa-calendar"></i>&nbsp;Duración: 
+                                            <?php echo ($cursos_datos['horas'] != '' && $cursos_datos['horas'] != 0)? $cursos_datos['horas']." horas": ''; ?>
+                                            <?php echo ($cursos_datos['meses'] != '' && $cursos_datos['meses'] != 0)? ", ".$cursos_datos['meses']." meses": ''; ?>
+                                            <?php echo ($cursos_datos['anios'] != '' && $cursos_datos['anios'] != 0)? ", ".$cursos_datos['anios']." años": ''; ?>
+                                        </span>
+                                        
+                                    </div>
+                                    <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                                </div>
+                            <div class="col-sm-9"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
+                        </div>
+                        <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <?php 
+                    } 
+                }
+                ?>
+            </div>
+        </section><!--/#grillaCocineritos-->
+        
+        <section id="grillaCursosCortos" class="portfolio">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <h2><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+                        <p><?=$lenguaje['cursos_destacados_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></p>
+                    </div>
+                </div> 
+            </div>
+            <div class="container-fluid" id="grilla">
+                <div class="row">
+                    <?php 
+                    if(!$gridArrayCocineritos){
+                        echo $lenguaje['no_existen_cursos_cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    }else{
+                        foreach ($gridArrayCocineritos as $imgGrid){
+                    ?>
+                    <div class="col-md-<?php echo $imgGrid['cols']?>">
+                        <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="folio-image">
+                                <img class="img-responsive" src="<?php echo $imgGrid['img_url']?>" alt="">
+                            </div>
+                            <div class="overlay">
+                                <div class="overlay-content">
+                                    <div class="overlay-text">
+                                        <div class="folio-overview">
+                                            <span class="folio-expand ">
+                                                <a href="javascript:descripcionCurso('<?php echo $imgGrid['id_curso']?>')">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php 
+                        }
+                    ?>
+                </div>
+            </div> <!--/#container-fluid-porfolios-->
+            <div id="portfolio-single-wrap">
+                <?php foreach ($gridArrayCocineritos as $imgGrid){
+                    
+                    $nombre_defecto = $lenguaje['nombre_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $duracion_defecto = $lenguaje['duracion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $descripcion_defecto = $lenguaje['descripcion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
+                ?>
+                    <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
+                    <div class="row">
+                        <div class="col-sm-9">
+                                <div class="project-info">
+                                    <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
+                                    <div class="entry-meta">
+                                        
+                                        <span>
+                                            <i class="fa fa-calendar"></i>&nbsp;Duración: 
+                                            <?php echo ($cursos_datos['horas'] != '' && $cursos_datos['horas'] != 0)? $cursos_datos['horas']." horas": ''; ?>
+                                            <?php echo ($cursos_datos['meses'] != '' && $cursos_datos['meses'] != 0)? ", ".$cursos_datos['meses']." meses": ''; ?>
+                                            <?php echo ($cursos_datos['anios'] != '' && $cursos_datos['anios'] != 0)? ", ".$cursos_datos['anios']." años": ''; ?>
+                                        </span>
+                                        
+                                    </div>
+                                    <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                                </div>
+                            <div class="col-sm-9"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
+                        </div>
+                        <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <?php 
+                    } 
+                }
+                ?>
+            </div>
+        </section><!--/#grillaCursosCortos-->
+        
+        
         
         <section id="blog">
             <div class="container">
