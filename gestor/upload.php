@@ -551,6 +551,11 @@ if(isset($_POST['edicion_grilla']))
                 $valid_file = true;
                 //now is the time to modify the future file name and validate the file
                 $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+                $Length = 10;
+                $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+                
+                $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+                
                 if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
                 {
                     $valid_file = false;
@@ -624,6 +629,11 @@ if(isset($_POST['edicion_grilla']))
                     $valid_file = true;
                     //now is the time to modify the future file name and validate the file
                     $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+                    $Length = 10;
+                    $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+                
+                    $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+                    
                     if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
                     {
                         $valid_file = false;
@@ -940,6 +950,10 @@ if(isset($_POST['edicion_grilla_editar']))
                 $valid_file = true;
                 //now is the time to modify the future file name and validate the file
                 $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+                $Length = 10;
+                $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+                
+                $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
                 if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
                 {
                     $valid_file = false;
