@@ -44,8 +44,8 @@ $lenguaje['descripcion_defecto_ES'] = "Actualmente este Curso no se encuentra Di
 $lenguaje['cursos_cortos_ES'] = "Cursos Cortos";
 $lenguaje['cocineritos_ES'] = "Cocineritos";
 $lenguaje['no_existen_cursos_ES'] = "No existen cursos disponibles para el pais seleccionado.";
-$lenguaje['no_existen_cursos_ES'] = "No existen cursos cortos disponibles para el pais seleccionado.";
-$lenguaje['no_existen_cursos_ES'] = "No existen cursos de cocineritos disponibles para el pais seleccionado.";
+$lenguaje['no_existen_cursos_cortos_ES'] = "No existen cursos cortos disponibles para el pais seleccionado.";
+$lenguaje['no_existen_cursos_cocineritos_ES'] = "No existen cursos de cocineritos disponibles para el pais seleccionado.";
 
 //ingles
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
