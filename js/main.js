@@ -360,3 +360,27 @@ $('#buscarGrilla').click(function(){
     window.location.replace(url);
     
 });
+
+$('.btn-submit').click(function(){
+    $.ajax({
+      type: "POST",
+      url: "gestor/controller_ajax.php",
+      data: { 
+          "option":"enviar_consulta",
+          "filial": $('#filiales').val(),
+          "nombre": $('#name').val(),
+          "email": $('#email').val(),
+          "phone": $('#phone').val(),
+          "tipo": $('#opciones').val()
+      },
+      dataType:'json',
+      success: function(data)
+      {
+            
+      },
+      error: function(data)
+      {
+            console.log(data);
+      }
+    });
+});

@@ -192,6 +192,17 @@ switch($_POST['option']){
         
         print(json_encode($retorno));
     break;
+    
+    case "enviar_consulta":
+        if(isset($_POST['tipo']) && $_POST['tipo'] == '3' ){
+            if(isset($_POST['filial']) && isset($_POST['nombre']) && isset($_POST['email']) && isset($_POST['phone'])){
+                $retorno = guardarConsultaCurso($_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone']);
+            }else{
+                $retorno = array("success" => false, "error" => 'Faltan datos!');
+            }
+            print(json_encode($retorno));
+        }
+    break;
 }
 
 ?>

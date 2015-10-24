@@ -1,6 +1,7 @@
 <?php
 include_once 'psl-config.php';
 include_once 'db_connect.php';
+include_once 'webservice/wsc_sistema.php';
  
 function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
     $query1 = "SELECT cfi.id, cfi.estado FROM curso_filial_idioma as cfi 
@@ -962,6 +963,38 @@ function getTiposAsignados($mysqli, $cod_curso){
     }
     
     return $tipos;
+}
+
+function guardarConsultaCurso($filial,$email,$nombre,$phone){
+    $html = "";
+    $param = array(
+	"codigo" => -1,
+	"asunto" => "Cursos",
+	"tipo_asunto" => "curso",
+	"cod_curso_asunto" => 1,
+	"cod_filial" => $filial,
+	"destacar" => 0,
+	"estado" => "pendiente",
+	"fechahora" => date("Y-m-d H:i:s"),
+	"generado_por_filial" => 0,
+	"mail" => $email,
+	"nombre" => $nombre,
+	"notificar" => 1,
+	"respuesta_automatica_enviada" => 0,
+	"telefono" => $phone,
+	"html_respuesta" => $html
+    );
+    $wsc = new wsc_sistema("sincronizar_consulta_web", $param);
+    $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
+    if (is_array($respuesta) && isset($respuesta['success']) && $respuesta['success'] == "success"){
+            $result = array("success" => true, "data" => $param);
+    } else if ($wsc->isError()){
+            $result = array("success" => false, "error" => $wsc->getError());
+    } else {
+            $result = array("success" => false, "Error" => $wsc->getResponse());
+    }
+    
+    return $result;
 }
 
 ?>

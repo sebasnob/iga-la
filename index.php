@@ -582,18 +582,18 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                     <br/>
                     <div class="contact-form" style="display:none">
                         <div class="row">
-                            <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                            <form id="main-contact-form" name="contact-form" method="post" action="#">
                                 <div class="col-sm-4">
                                     <input type="hidden" value="" id="correo" name="correo">
                                     <div class="row">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            <input type="text" name="name" id="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                         </div>
                                     </div>
                                 </div>
