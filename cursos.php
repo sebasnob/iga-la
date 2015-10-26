@@ -157,12 +157,14 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </div>
                     </div><!--/.ads-->     
                     <br/>
+                    <?php
+                    $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
+                    if(count($novedad) > 0){
+                    ?>
                     <div class="widget ads">
                         <div class="row">
                             <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
-                                <?php
-                                $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
-                                ?>
+                                
                                 <div class="post-thumb">
                                     <a href="index.php#blog"><img class="img-responsive" src="images/novedades/<?=$novedad[0]['imagen']?>" alt=""></a>
                                 </div>
@@ -175,6 +177,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </div>
                     </div><!--/.categories-->
+                    <?php
+                    }
+                    ?>
                 </aside>        
                 <div class="col-sm-8 col-sm-pull-4">
                     <section id="curso">
