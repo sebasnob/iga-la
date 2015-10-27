@@ -182,9 +182,8 @@ function descripcionCurso(id_curso)
 
 function cerrarCurso()
 {
-    console.log('asdasdasd');
     var body = $("html, body");
-    body.stop().animate({scrollTop:$('#portfolio').position().top}, '500', 'swing', function() {$('.curso').hide();});
+    body.stop().animate({scrollTop:$('.portfolio').position().top}, '500', 'swing', function() {$('.curso').hide();});
 };
 
 function cambiarPais(cod_pais){

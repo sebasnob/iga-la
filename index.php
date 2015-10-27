@@ -251,10 +251,10 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
             <div class="container-fluid" id="grilla">
                 <div class="row">
                     <?php 
-                    if(!$gridArrayCursosCortos){
-                        echo $lenguaje['no_existen_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ;
+                    if(!$gridArrayCocineritos){
+                        echo $lenguaje['no_existen_cursos_cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ;
                     }else{
-                        foreach ($gridArrayCursosCortos as $imgGrid){
+                        foreach ($gridArrayCocineritos as $imgGrid){
                     ?>
                     <div class="col-md-<?php echo $imgGrid['cols']?>">
                         <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
@@ -282,7 +282,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                 </div>
             </div> <!--/#container-fluid-porfolios-->
             <div id="portfolio-single-wrap">
-                <?php foreach ($gridArrayCursosCortos as $imgGrid){
+                <?php foreach ($gridArrayCocineritos as $imgGrid){
                     
                     $nombre_defecto = $lenguaje['nombre_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                     $duracion_defecto = $lenguaje['duracion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
@@ -330,10 +330,10 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
             <div class="container-fluid" id="grilla">
                 <div class="row">
                     <?php 
-                    if(!$gridArrayCocineritos){
-                        echo $lenguaje['no_existen_cursos_cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                    if(!$gridArrayCursosCortos){
+                        echo $lenguaje['no_existen_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                     }else{
-                        foreach ($gridArrayCocineritos as $imgGrid){
+                        foreach ($gridArrayCursosCortos as $imgGrid){
                     ?>
                     <div class="col-md-<?php echo $imgGrid['cols']?>">
                         <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
@@ -361,7 +361,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                 </div>
             </div> <!--/#container-fluid-porfolios-->
             <div id="portfolio-single-wrap">
-                <?php foreach ($gridArrayCocineritos as $imgGrid){
+                <?php foreach ($gridArrayCursosCortos as $imgGrid){
                     
                     $nombre_defecto = $lenguaje['nombre_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                     $duracion_defecto = $lenguaje['duracion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];

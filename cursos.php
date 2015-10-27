@@ -63,6 +63,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
     $id_idioma = $idioma['id'];
     $showModal = 0;
     
+    $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
+    
     $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
 
 ?>
@@ -409,6 +411,45 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             var showModal = <?=$showModal?>;
             if(showModal === 1){
                 $('#selectFilialModal').modal('show');
+            }
+            
+            $("select#provincias option[value='<?=$prov['id_provincia']?>']").attr('selected','selected');
+            $.ajax({
+                url: "gestor/controller_ajax.php",
+                method: "POST",
+                data: { 
+                    option : 'select_filiales', 
+                    cod_curso : '<?=$_GET['cod_curso']?>', 
+                    id_provincia : '<?=$prov['id_provincia']?>'
+                },
+                dataType: "json",
+                success: function(data){
+                    changeSelectOptions("filiales_matricula", data.options, 'nombre', 'id');
+                    $("select#filiales_matricula option[value='<?=$_SESSION['id_filial']?>']").attr("selected", "selected");
+                    $('#matricula_curso').show();
+                }
+            });
+            
+            $('#provincias').change(function(){
+                $('#matricula_curso').hide();
+            });
+            
+            function changeSelectOptions(select_id, array_index, texto, value){
+                var options, index, select, option;
+
+                // Get the raw DOM object for the select box
+                select = document.getElementById(select_id);
+
+                // Clear the old options
+                select.options.length = 0;
+
+                // Load the new options
+                options = array_index; // Or whatever source information you're working with
+                select.options.add(new Option('- Seleccione -', '0'));
+                for (index = 0; index < options.length; ++index) {
+                    option = options[index];
+                    select.options.add(new Option(option[texto], option[value]));
+                }
             }
         });
         </script>

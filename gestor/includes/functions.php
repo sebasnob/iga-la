@@ -175,6 +175,15 @@ function getProvincias($mysqli, $id_pais=''){
     return $provincias;
 }
 
+function getProvinciaFromFilial($mysqli, $id_filial){
+    $query = "SELECT id_provincia FROM filiales WHERE id={$id_filial}";
+    $resultado = $mysqli->query($query);
+    $respuesta = $resultado->fetch_assoc();
+    $resultado->free();
+    
+    return $respuesta;
+}
+
 function getFiliales($mysqli, $id_provincia='', $id_pais=''){
     $cond = '';
     if(isset($id_provincia) && $id_provincia != ''){
