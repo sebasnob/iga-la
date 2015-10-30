@@ -17,7 +17,7 @@ if(!isset($_SESSION['idioma_seleccionado']['cod_idioma']))
 
 $paises = getPaises($mysqli);
 $datos_home = getDatosHome($mysqli);
-$idiomas = getIdiomas($mysqli);
+$idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma']);
 
@@ -59,7 +59,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
         <!--/.preloader-->
         
         <header id="home">
-           
+            
             
             <div class="main-nav">
                 <div class="container-fluid">
@@ -104,6 +104,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                                     <?=$_SESSION['idioma_seleccionado']['idioma']?> 
                                     <span class="caret"></span>
                                 </a>
+                                <?php if(count($idiomas) > 1) { ?>
                                 <ul class="dropdown-menu">
                                 <?php
                                     foreach($idiomas as $i=>$d){
@@ -115,7 +116,10 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                                         </a>
                                     </li>
                                     <?php
+                                        }
                                     }
+                                ?>
+                                    <?php
                                 }
                                 ?>
                                 </ul>
@@ -132,14 +136,14 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                     </ul>
                 </div>
             </div><!--/#main-nav-->
-       
+            
         <?php
         if(count($slider) > 0){
         ?>
-        <div id="slider" class="carousel slide carousel-fade" data-ride="carousel">
-            <div class="carousel-inner" style="cursor:pointer">
+            <div id="slider" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner" style="cursor:pointer">
                 <?php $i=0; foreach($slider as $slid){?>
-                <div 
+                    <div 
                         class="item <?php if($i == 0){echo 'active';}?>" 
                         <?php if(isset($slid['link']) && $slid['link'] != '')
                         {
@@ -149,12 +153,12 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                         } ?>
                         title='<?= $slid['alt'];?>' 
                         style="background-image: url(<?= $slid['url'];?>)">
-                </div>
+                    </div>
                 <?php $i++;} ?>
-            </div>
-            <a class="left-control" href="#slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-            <a class="right-control" href="#slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
-        </div><!--/#home-slider-->
+                </div>
+                <a class="left-control" href="#slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                <a class="right-control" href="#slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
+            </div><!--/#home-slider-->
         <?php
         }
         ?>
@@ -209,23 +213,23 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                     $descripcion_defecto = $lenguaje['descripcion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                     $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
                 ?>
-                    <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
+                <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
                     <div class="row">
                         <div class="col-sm-9">
-                                <div class="project-info">
-                                    <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
-                                    <div class="entry-meta">
-                                        
-                                        <span>
-                                            <i class="fa fa-calendar"></i>&nbsp;Duración: 
+                            <div class="project-info">
+                                <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
+                                <div class="entry-meta">
+                                    
+                                    <span>
+                                        <i class="fa fa-calendar"></i>&nbsp;Duración: 
                                             <?php echo ($cursos_datos['horas'] != '' && $cursos_datos['horas'] != 0)? $cursos_datos['horas']." horas": ''; ?>
                                             <?php echo ($cursos_datos['meses'] != '' && $cursos_datos['meses'] != 0)? ", ".$cursos_datos['meses']." meses": ''; ?>
                                             <?php echo ($cursos_datos['anios'] != '' && $cursos_datos['anios'] != 0)? ", ".$cursos_datos['anios']." años": ''; ?>
-                                        </span>
-                                        
-                                    </div>
-                                    <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                                    </span>
+                                    
                                 </div>
+                                <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                            </div>
                             <div class="col-sm-9"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
                         </div>
                         <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
@@ -289,23 +293,23 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                     $descripcion_defecto = $lenguaje['descripcion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                     $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
                 ?>
-                    <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
+                <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
                     <div class="row">
                         <div class="col-sm-9">
-                                <div class="project-info">
-                                    <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
-                                    <div class="entry-meta">
-                                        
-                                        <span>
-                                            <i class="fa fa-calendar"></i>&nbsp;Duración: 
+                            <div class="project-info">
+                                <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
+                                <div class="entry-meta">
+                                    
+                                    <span>
+                                        <i class="fa fa-calendar"></i>&nbsp;Duración: 
                                             <?php echo ($cursos_datos['horas'] != '' && $cursos_datos['horas'] != 0)? $cursos_datos['horas']." horas": ''; ?>
                                             <?php echo ($cursos_datos['meses'] != '' && $cursos_datos['meses'] != 0)? ", ".$cursos_datos['meses']." meses": ''; ?>
                                             <?php echo ($cursos_datos['anios'] != '' && $cursos_datos['anios'] != 0)? ", ".$cursos_datos['anios']." años": ''; ?>
-                                        </span>
-                                        
-                                    </div>
-                                    <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                                    </span>
+                                    
                                 </div>
+                                <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                            </div>
                             <div class="col-sm-9"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
                         </div>
                         <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
@@ -368,23 +372,23 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                     $descripcion_defecto = $lenguaje['descripcion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                     $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
                 ?>
-                    <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
+                <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
                     <div class="row">
                         <div class="col-sm-9">
-                                <div class="project-info">
-                                    <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
-                                    <div class="entry-meta">
-                                        
-                                        <span>
-                                            <i class="fa fa-calendar"></i>&nbsp;Duración: 
+                            <div class="project-info">
+                                <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
+                                <div class="entry-meta">
+                                    
+                                    <span>
+                                        <i class="fa fa-calendar"></i>&nbsp;Duración: 
                                             <?php echo ($cursos_datos['horas'] != '' && $cursos_datos['horas'] != 0)? $cursos_datos['horas']." horas": ''; ?>
                                             <?php echo ($cursos_datos['meses'] != '' && $cursos_datos['meses'] != 0)? ", ".$cursos_datos['meses']." meses": ''; ?>
                                             <?php echo ($cursos_datos['anios'] != '' && $cursos_datos['anios'] != 0)? ", ".$cursos_datos['anios']." años": ''; ?>
-                                        </span>
-                                        
-                                    </div>
-                                    <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                                    </span>
+                                    
                                 </div>
+                                <p class="lead"><?= $cursos_datos['descripcion']?></p>
+                            </div>
                             <div class="col-sm-9"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
                         </div>
                         <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
@@ -450,259 +454,259 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                 <!-- fin noticias -->
             </div>
         </section><!--/#blog-->
-    
-    <section id="features" class="parallax">
-        <div class="container">
-            <div class="row count">
-                <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
-                    <i class="fa fa-user"></i>
-                    <h3 class="timer">4000</h3>
-                    <p><?=$lenguaje['alumnos_felices_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                </div>
-                <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
-                    <i class="fa fa-home"></i>
-                    <h3 class="timer">200</h3>                    
-                    <p><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                </div> 
-                <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms">
-                    <i class="fa fa-folder-o"></i>
-                    <h3 class="timer">10</h3>                    
-                    <p><?=$lenguaje['cursos_disponibles_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                </div> 
-                <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms">
-                    <i class="fa fa-comment-o"></i>                    
-                    <h3>24/7</h3>
-                    <p><?=$lenguaje['consultas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                </div>                 
-            </div>
-        </div>
-    </section><!--/#features-->
-
-    <section id="team">
-        <div class="container">
-            <div class="row">
-                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
-                    <h2>IGA</h2>
-                    <p><?=$lenguaje['capacitamos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                </div>
-            </div>
-            <div class="team-members">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <div class="member-image">
-                                <img class="img-responsive" src="images/team/1.jpg" alt="">
-                            </div>
-                            <div class="member-info">
-                                <h3><?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                
-                                <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="500ms">
-                            <div class="member-image">
-                                <img class="img-responsive" src="images/team/2.jpg" alt="">
-                            </div>
-                            <div class="member-info">
-                                <h3><?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="800ms">
-                            <div class="member-image">
-                                <img class="img-responsive" src="images/team/3.jpg" alt="">
-                            </div>
-                            <div class="member-info">
-                                <h3><?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="1100ms">
-                            <div class="member-image">
-                                <img class="img-responsive" src="images/team/4.jpg" alt="">
-                            </div>
-                            <div class="member-info">
-                                    <?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>            
-        </div>
-    </section><!--/#team-->
-    
-    
-    <section id="contact">
         
-        <div id="contact-us" >
+        <section id="features" class="parallax">
+            <div class="container">
+                <div class="row count">
+                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <i class="fa fa-user"></i>
+                        <h3 class="timer">4000</h3>
+                        <p><?=$lenguaje['alumnos_felices_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>
+                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+                        <i class="fa fa-home"></i>
+                        <h3 class="timer">200</h3>                    
+                        <p><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div> 
+                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms">
+                        <i class="fa fa-folder-o"></i>
+                        <h3 class="timer">10</h3>                    
+                        <p><?=$lenguaje['cursos_disponibles_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div> 
+                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms">
+                        <i class="fa fa-comment-o"></i>                    
+                        <h3>24/7</h3>
+                        <p><?=$lenguaje['consultas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>                 
+                </div>
+            </div>
+        </section><!--/#features-->
+        
+        <section id="team">
             <div class="container">
                 <div class="row">
-                    <div class="heading text-center wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2><?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
-                        <br/>
-                        <div class="col-sm-12 text-center wow fadeIn" id="select_filial">
-                            <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
-                                <div class="form-group">
-                                    <b><?=$lenguaje['encontra_tu_iga_en_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?><?=$_SESSION['pais']['pais']?></b>&nbsp;
-                                    <!--<label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
-                                    <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
-                                        <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
-                                        <?php foreach ($provincias as $provincia){?>
-                                        <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
-                                        <?php }?>
-                                    </select>    
+                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+                        <h2>IGA</h2>
+                        <p><?=$lenguaje['capacitamos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>
+                </div>
+                <div class="team-members">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="member-image">
+                                    <img class="img-responsive" src="images/team/1.jpg" alt="">
                                 </div>
-                                <div class="form-group">
-                                    <!--<label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
-                                    <select id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
-                                        <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
-                                    </select>
+                                <div class="member-info">
+                                    <h3><?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    
+                                    <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                                 </div>
-                            </form>
+                                
+                            </div>
                         </div>
-                        <div class="col-sm-5" style="display: none" id="direccion_filial">
-                            <div class="contact-info">
-                                <ul class="address">
-                                    <li><i class="fa fa-map-marker"></i> <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="direccion"></span> </li>
-                                    <li><i class="fa fa-phone"></i> <span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="telefono"></span></li>
-                                    <li><i class="fa fa-envelope"></i> <span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="mail"></span></li>
-                                </ul>
-                            </div>                            
+                        <div class="col-sm-3">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="500ms">
+                                <div class="member-image">
+                                    <img class="img-responsive" src="images/team/2.jpg" alt="">
+                                </div>
+                                <div class="member-info">
+                                    <h3><?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="800ms">
+                                <div class="member-image">
+                                    <img class="img-responsive" src="images/team/3.jpg" alt="">
+                                </div>
+                                <div class="member-info">
+                                    <h3><?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="1100ms">
+                                <div class="member-image">
+                                    <img class="img-responsive" src="images/team/4.jpg" alt="">
+                                </div>
+                                <div class="member-info">
+                                    <?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br/>
-                    <div class="contact-form" style="display:none">
-                        <div class="row">
-                            <form id="main-contact-form" name="contact-form" method="post" action="#">
-                                <div class="col-sm-4">
-                                    <input type="hidden" value="" id="correo" name="correo">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                </div>            
+            </div>
+        </section><!--/#team-->
+        
+        
+        <section id="contact">
+            
+            <div id="contact-us" >
+                <div class="container">
+                    <div class="row">
+                        <div class="heading text-center wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <h2><?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+                            <br/>
+                            <div class="col-sm-12 text-center wow fadeIn" id="select_filial">
+                                <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
+                                    <div class="form-group">
+                                        <b><?=$lenguaje['encontra_tu_iga_en_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?><?=$_SESSION['pais']['pais']?></b>&nbsp;
+                                        <!--<label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
+                                        <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
+                                            <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
+                                        <?php foreach ($provincias as $provincia){?>
+                                            <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
+                                        <?php }?>
+                                        </select>    
+                                    </div>
+                                    <div class="form-group">
+                                        <!--<label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
+                                        <select id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
+                                            <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-5" style="display: none" id="direccion_filial">
+                                <div class="contact-info">
+                                    <ul class="address">
+                                        <li><i class="fa fa-map-marker"></i> <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="direccion"></span> </li>
+                                        <li><i class="fa fa-phone"></i> <span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="telefono"></span></li>
+                                        <li><i class="fa fa-envelope"></i> <span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="mail"></span></li>
+                                    </ul>
+                                </div>                            
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="contact-form" style="display:none">
+                            <div class="row">
+                                <form id="main-contact-form" name="contact-form" method="post" action="#">
+                                    <div class="col-sm-4">
+                                        <input type="hidden" value="" id="correo" name="correo">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <input type="text" name="name" id="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-1">&nbsp;</div>
-                                <div class="col-sm-7">
-                                    <div class="row">
-                                        <div class="form-group form-inline">
-                                            <select id="opciones" class="form-control" name="subject" onchange="javascript:getSelectCursos('opciones','cursos_contacto')">
-                                                <option value="">Elegi una opción</option>
-                                                <option value="3">Cursos</option>
-                                                <option value="4">Atencion al alumno</option>
-                                            </select>
-                                            &nbsp;
-                                            <select class="form-control" name="cursos_contacto" id="cursos_contacto" style="display: none;">
-                                                <option value="">Elegi una opción</option>
+                                    <div class="col-sm-1">&nbsp;</div>
+                                    <div class="col-sm-7">
+                                        <div class="row">
+                                            <div class="form-group form-inline">
+                                                <select id="opciones" class="form-control" name="subject" onchange="javascript:getSelectCursos('opciones','cursos_contacto')">
+                                                    <option value="">Elegi una opción</option>
+                                                    <option value="3">Cursos</option>
+                                                    <option value="4">Atencion al alumno</option>
+                                                </select>
+                                                &nbsp;
+                                                <select class="form-control" name="cursos_contacto" id="cursos_contacto" style="display: none;">
+                                                    <option value="">Elegi una opción</option>
                                                 <?php
                                                 $cursos = getCursos($mysqli);
                                                 foreach($cursos as $id=>$data){
                                                 ?>
-                                                <option value="4"><?=$data['nombre_es']?></option>
+                                                    <option value="4"><?=$data['nombre_es']?></option>
                                                 <?php
                                                 }
                                                 ?>
-                                            </select>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
+                                            </div>                        
+                                            <div class="form-group">
+                                                <button type="submit" class="btn-submit"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
-                                        </div>                        
-                                        <div class="form-group">
-                                            <button type="submit" class="btn-submit"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+                <!-- <div id="google-map" data-latitude="52.365629" data-longitude="4.871331" class="hidden"></div>-->
+                <!-- <div id="google-map">
+                    <iframe style="pointer-events:none; width: 100%" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.1441195581438!2d-60.64096080000006!3d-32.94720419999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab0fef47530f%3A0xb7b9732d2220d371!2sIGA+Instituto+Gastron%C3%B3mico+de+las+Am%C3%A9ricas!5e0!3m2!1ses-419!2sar!4v1442353059311" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>-->
+                <div id="google-map" style="display: none"></div>
+        </section><!--/#contact-->
+        <footer id="footer">
+            <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <div class="container text-center">
+                    <div class="footer-logo">
+                        <a href="index.html"><img class="img-responsive" src="images/logo-iga_transparent.png" alt=""></a>
+                    </div>
+                    <div class="social-icons">
+                        <ul>
+                           <!-- <li><a class="envelope" href="#"><i class="fa fa-envelope"></i></a></li>-->
+                            <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li> 
+                           <!-- <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>-->
+                            <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                           <!-- <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>-->
+                           <!-- <li><a class="tumblr" href="#"><i class="fa fa-tumblr-square"></i></a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 text-center">
+                            <p><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
+                        </div>
+                        
+                        <div class="col-sm-4 text-center">
+                            <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
                         </div>
                     </div>
                 </div>
-            </div>   
-            <!-- <div id="google-map" data-latitude="52.365629" data-longitude="4.871331" class="hidden"></div>-->
-            <!-- <div id="google-map">
-                <iframe style="pointer-events:none; width: 100%" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.1441195581438!2d-60.64096080000006!3d-32.94720419999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab0fef47530f%3A0xb7b9732d2220d371!2sIGA+Instituto+Gastron%C3%B3mico+de+las+Am%C3%A9ricas!5e0!3m2!1ses-419!2sar!4v1442353059311" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-            </div>-->
-            <div id="google-map" style="display: none"></div>
-    </section><!--/#contact-->
-    <footer id="footer">
-        <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-            <div class="container text-center">
-                <div class="footer-logo">
-                    <a href="index.html"><img class="img-responsive" src="images/logo-iga_transparent.png" alt=""></a>
-                </div>
-                <div class="social-icons">
-                    <ul>
-                       <!-- <li><a class="envelope" href="#"><i class="fa fa-envelope"></i></a></li>-->
-                        <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li> 
-                       <!-- <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>-->
-                        <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                       <!-- <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>-->
-                       <!-- <li><a class="tumblr" href="#"><i class="fa fa-tumblr-square"></i></a></li>-->
-                    </ul>
-                </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4 text-center">
-                        <p><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
-                    </div>
-                    
-                    <div class="col-sm-4 text-center">
-                        <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <script type="text/javascript" src="js/jquery.inview.min.js"></script>
-    <script type="text/javascript" src="js/wow.min.js"></script>
-    <script type="text/javascript" src="js/mousescroll.js"></script>
-    <script type="text/javascript" src="js/smoothscroll.js"></script>
-    <script type="text/javascript" src="js/jquery.countTo.js"></script>
-    <script type="text/javascript" src="js/lightbox.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <!-- Plugins Facebook -->
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.4";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!-- Plugins Twitter -->
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    <script>
-    $('#filiales').change(function(){
-        $('#direccion_filial').fadeIn("slow");
-        $('#select_filial').removeClass("col-sm-12");
-        $('#select_filial').addClass("col-sm-7");
-    });
-    </script>
-</body>
+        </footer>
+        
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script type="text/javascript" src="js/jquery.inview.min.js"></script>
+        <script type="text/javascript" src="js/wow.min.js"></script>
+        <script type="text/javascript" src="js/mousescroll.js"></script>
+        <script type="text/javascript" src="js/smoothscroll.js"></script>
+        <script type="text/javascript" src="js/jquery.countTo.js"></script>
+        <script type="text/javascript" src="js/lightbox.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <!-- Plugins Facebook -->
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.4";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <!-- Plugins Twitter -->
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <script>
+        $('#filiales').change(function(){
+            $('#direccion_filial').fadeIn("slow");
+            $('#select_filial').removeClass("col-sm-12");
+            $('#select_filial').addClass("col-sm-7");
+        });
+        </script>
+    </body>
 </html>

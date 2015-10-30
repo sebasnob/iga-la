@@ -36,14 +36,25 @@ function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
     return $respuesta;*/
 }
 
-function getIdiomas($mysqli, $id_idioma=''){
-    $cond='';
-    if(isset($id_idioma) && $id_idioma != ''){
-        $cond=' WHERE id='.$id_idioma;
+function getIdiomas($mysqli, $id_idioma = false, $id_pais = false)
+{
+    $cond = ' WHERE 1 = 1';
+    
+    if($id_idioma && !$id_pais)
+    {
+        $cond .= ' AND id = ' . $id_idioma;
     }
-    $resultado = $mysqli->query("SELECT id, idioma, cod_idioma FROM idiomas {$cond}");
+    
+    if($id_pais && !$id_idioma)
+    {
+        $cond .= ' AND id IN (select id_idioma from pais_idioma WHERE id_pais = ' . $id_pais . ')';
+    }
+    
+    $query = "SELECT id, idioma, cod_idioma FROM idiomas {$cond}";
+    $resultado = $mysqli->query($query);
     $idiomas = array();
-    while($respuesta = $resultado->fetch_assoc()){
+    while($respuesta = $resultado->fetch_assoc())
+    {
         $idiomas[] = $respuesta;
     }
     $resultado->free();
@@ -747,7 +758,7 @@ function cambiarPais($cod_pais, $mysqli){
         
     $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$tablaPaisdatos['cod_pais'], 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
-    $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
+    $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select min(id_idioma) from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
         
     $result2 = $mysqli->query($query2);
     $idioma = $result2->fetch_assoc();
