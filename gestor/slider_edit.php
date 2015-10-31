@@ -70,18 +70,18 @@ $idiomas = getIdiomas($mysqli);
                                     <form  enctype="multipart/form-data" method="POST" action="upload.php" class="form">
                                         <input type="hidden" name="edicion_slider" id="edicion_slider" value="true" />
                                         <input type="hidden" name="edicion_slider_nueva" id="edicion_slider_nueva" value="true" />
-                                        <div class="form-group">
-                                            <input type="file" accept="file_extension|image" class="form-control" name="photo" required autofocus>
+                                        <div class="form-inline">
+                                            <input style="min-height:50px" type="file" accept="file_extension|image" class="form-control" name="photo" required autofocus>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Link: </label>
                                             <input type="text" id="link" name="link" class="form-control">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Alt: </label>
                                             <input type="text" id="alt" name="alt" class="form-control">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
                                             <select class="form-control" name="id_pais">
                                                 <?php foreach ($paises as $pais){ ?>
@@ -89,7 +89,7 @@ $idiomas = getIdiomas($mysqli);
                                                 <?php }?>
                                             </select>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Idioma: </label>
                                             <select class="form-control" name="cod_idioma">
                                                 <?php foreach ($idiomas as $idioma){ ?>
