@@ -290,6 +290,23 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </div><!--/.author-->
                     </section>
+                    <hr>
+                    <section id="malla_curricular" >
+                        <h3><?=$lenguaje['malla_curricular_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                        <div class="well">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['url_uniforme']?>" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <strong>Con la inscripción al curso,</strong>
+                                    </div>
+                                <?=$datos_curso['desc_uniforme']?>
+                                </div>
+                            </div>
+                        </div><!--/.author-->
+                    </section>
                 </div><!--/.col-md-8-->
                 <div class="col-md-12">
                     <section id="objetivo">

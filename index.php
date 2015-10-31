@@ -11,7 +11,13 @@ if(!isset($_SESSION['pais']))
 if(!isset($_SESSION['idioma_seleccionado']['cod_idioma']))
 {
     $_SESSION['idioma_seleccionado']['cod_idioma'] = $_SESSION['pais']['cod_idioma'];
+}
+if(!isset($_SESSION['idioma_seleccionado']['idioma']))
+{
     $_SESSION['idioma_seleccionado']['idioma'] = $_SESSION['pais']['idioma'];
+}
+if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
+{
     $_SESSION['idioma_seleccionado']['id_idioma'] = $_SESSION['pais']['id_idioma'];
 }
 
