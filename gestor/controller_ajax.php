@@ -47,7 +47,7 @@ switch($_POST['option']){
     case "get_datos_curso":
         $datos_curso = getDatosCurso($mysqli, $_POST['cod_curso'], $_POST['id_idioma'], $_POST['id_filial']);
         if(is_array($datos_curso)){
-            $datos_curso = array_map('utf8_encode', $datos_curso);
+            array_walk_recursive($datos_curso,'myFunc');
         }
         
         print(json_encode($datos_curso));
@@ -203,6 +203,62 @@ switch($_POST['option']){
             print(json_encode($retorno));
         }
     break;
+    
+    case "eliminar_de_malla":
+        $retorno = array();
+        if(isset($_POST['id']))
+        {
+            $query = "DELETE FROM malla_curricular WHERE id = " . $_POST['id'];
+            
+            $resultado = $mysqli->query($query);
+            
+            if($resultado)
+            {
+                $retorno['result'] = 'ok';
+            }
+            else
+            {
+                $retorno['result'] = 'Ocurrio un error al modificar el estado';
+            }
+        }
+        else
+        {
+            $retorno['result'] = 'Faltan variables';
+        }
+        print(json_encode($retorno));
+    break;
+    
+    case "agregar_a_malla":
+        $retorno = array();
+        if(isset($_POST['materia']) && isset($_POST['cuatrimestre']) && isset($_POST['id_cfi']))
+        {
+            $query = "INSERT INTO malla_curricular (id_curso_filial_idioma, cuatrimestre, materia) VALUES ({$_POST['id_cfi']}, {$_POST['cuatrimestre']}, '{$_POST['materia']}')";
+            
+            $resultado = $mysqli->query($query);
+            
+            if($resultado)
+            {
+                $retorno['result'] = 'ok';
+            }
+            else
+            {
+                $retorno['result'] = 'Ocurrio un error al modificar el estado';
+            }
+        }
+        else
+        {
+            $retorno['result'] = 'Faltan variables';
+        }
+        
+        print(json_encode($retorno));
+    break;
 }
+
+//funciones auxiliares
+
+function myFunc(&$item, $key) {
+    $item = utf8_encode($item);
+}
+
 
 ?>

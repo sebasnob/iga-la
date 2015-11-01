@@ -129,6 +129,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                              <div class="col-lg-12">
                                <div class="form-panel">
                                     <div id="datos_curso">
+                                        <input type="hidden" id="id_cfi">
                                       <!--<div class="row">
                                           <div id="selector_color" class="col-md-6 text-left" >
                                               <input type="color" id="select_color" value="<? //$curso['color']?>" />
@@ -187,6 +188,20 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                                           </div>
                                           <textarea name="uniformes_txt" id="uniformes_txt" class="form-control" rows="5"></textarea>
                                           <input id="uploadUniformes" type="file" name="imageUniformes" class="img" />
+                                          
+                                          <h4 class="mb">
+                                              <i class="fa fa-angle-right"></i> 
+                                              <b>Malla Curricular:</b>
+                                          </h4>
+                                          <div class="form-group">
+                                              <div id="malla">
+                                                  <div>
+                                                    <label>Cuatrimestre:</label><input id="cuatrimestre" type="number">
+                                                    <label>Materia:</label><input id="materia" type="text">
+                                                    <input type="button" value="+" onclick="agregarAMalla()">
+                                                  </div>
+                                              </div>
+                                          </div>
                                           
                                           <div class="form-group">
                                              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Objetivos:</b></h4>
@@ -297,10 +312,14 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
         	    success: function(data){
                         if(data.id){
                             $('#error_datos_curso').hide();
-                            
                             $('#imagePreview').attr("src", "../"+data.url_cabecera);
                             $('#materialesPreview img').attr("src", "../"+data.url_material);
                             $('#uniformesPreview img').attr("src", "../"+data.url_uniforme);
+                            $('#id_cfi').val(data.id_cfi);
+                            $.each(data.malla_curricular, function(index, value)
+                            {
+                                $('#malla').prepend("<div id="+value.id+"><label>Cuatrimestre:</label><input readonly type='number' value = " + value.cuatrimestre + "><label>Materia:</label><input readonly type = 'text' value =  "+ value.materia +"><input type = 'button' onclick='eliminarDeMalla("+ value.id +")' value='-'></div>");
+                            });
                             
                             $('#horas').val(data.horas);
                             $('#meses').val(data.meses);
@@ -504,6 +523,42 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                 });
             });
             
+            function eliminarDeMalla(id)
+            {
+                 $.ajax({
+        	    url: "controller_ajax.php",
+        	    method: "POST",
+        	    data: {
+                        option : 'eliminar_de_malla',
+                        id : id
+                    },
+                    dataType: "json",
+        	    success: function()
+                    {
+                        $('#'+id).remove();
+                    }
+                });
+            }
+            
+            function agregarAMalla()
+            {
+                 $.ajax({
+        	    url: "controller_ajax.php",
+        	    method: "POST",
+        	    data: {
+                        option : 'agregar_a_malla',
+                        cuatrimestre: $('#cuatrimestre').val(),
+                        materia: $('#materia').val(),
+                        id_cfi: $('#id_cfi').val()
+                    },
+                    dataType: "json",
+        	    success: function(data)
+                    {
+                        location.reload();
+                    }
+                });
+            }
+            
             $(document).ready(function(){
                 if(localStorage.getItem("pais")){
                    $("select#paises_curso option[value='"+localStorage.getItem("pais")+"']").attr("selected", "selected");
@@ -521,6 +576,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                     getDatosCurso(<?=$_GET['cod_curso']?>, localStorage.getItem("pais"), localStorage.getItem('idioma'), localStorage.getItem("filial"));
                 }
             });
+            
         </script>
         
     </body>

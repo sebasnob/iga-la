@@ -46,7 +46,7 @@ $lenguaje['cocineritos_ES'] = "Cocineritos";
 $lenguaje['no_existen_cursos_ES'] = "No existen cursos disponibles para el pais seleccionado.";
 $lenguaje['no_existen_cursos_cortos_ES'] = "No existen cursos cortos disponibles para el pais seleccionado.";
 $lenguaje['no_existen_cursos_cocineritos_ES'] = "No existen cursos de cocineritos disponibles para el pais seleccionado.";
-$lenguaje['malla_curricular__ES'] = "Malla Curricular";
+$lenguaje['malla_curricular_ES'] = "Malla Curricular";
 
 //ingles
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
@@ -95,6 +95,7 @@ $lenguaje['cocineritos_IN'] = "";
 $lenguaje['no_existen_cursos_IN'] = "";
 $lenguaje['no_existen_cursos_cortos_IN'] = "";
 $lenguaje['no_existen_cursos_cocineritos_IN'] = "";
+$lenguaje['malla_curricular_IN'] = "Curriculum";
 
 //portugues
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
@@ -143,3 +144,4 @@ $lenguaje['cocineritos_POR'] = "";
 $lenguaje['no_existen_cursos_POR'] = "";
 $lenguaje['no_existen_cursos_cortos_POR'] = "";
 $lenguaje['no_existen_cursos_cocineritos_POR'] = "";
+$lenguaje['malla_curricular_POR'] = "Curriculum";

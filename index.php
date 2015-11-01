@@ -108,7 +108,9 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                             <li style="padding: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <?=$_SESSION['idioma_seleccionado']['idioma']?> 
-                                    <span class="caret"></span>
+                                    <?php if(count($idiomas) > 1) { ?>
+                                        <span class="caret"></span>
+                                    <?php } ?>
                                 </a>
                                 <?php if(count($idiomas) > 1) { ?>
                                 <ul class="dropdown-menu">

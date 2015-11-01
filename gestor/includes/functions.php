@@ -21,6 +21,14 @@ function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
         $datos_curso['estado'] = $res_cpif['estado'];
         $qry_datos->free();
         
+        $query3 = "select * from malla_curricular WHERE id_curso_filial_idioma = " . $res_cpif['id'];
+        $qry_malla = $mysqli->query($query3);
+        while ($datos_malla = $qry_malla->fetch_assoc())
+        {
+            $datos_curso['malla_curricular'][] = $datos_malla;
+        }
+        $qry_malla->free();
+        
         return $datos_curso;
     }else{
         return "No existen datos para la filial e idiomas seleccionados.";
@@ -1015,6 +1023,27 @@ function guardarConsultaCurso($filial,$email,$nombre,$phone){
     }
     
     return $result;
+}
+
+function getMallaCurricular($mysqli, $id_cfi)
+{
+    $resultado = $mysqli->query("SELECT * FROM malla_curricular WHERE id_curso_filial_idioma = {$id_cfi} ORDER BY cuatrimestre");
+    
+    if($resultado->num_rows > 0)
+    {
+        while($respuesta = $resultado->fetch_assoc())
+        {
+            $malla[] = $respuesta;
+        }
+    }
+    else
+    {
+        $malla = array();
+    }
+    
+    $resultado->free();
+        
+    return $malla;
 }
 
 ?>
