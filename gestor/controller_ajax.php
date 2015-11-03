@@ -2,6 +2,8 @@
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 
+error_reporting(E_ALL ^ E_NOTICE);
+
 if(!isset($_POST['option']) || empty($_POST['option'])){
     echo "error - No option :(";
     exit();
@@ -251,6 +253,85 @@ switch($_POST['option']){
         }
         
         print(json_encode($retorno));
+    break;
+    
+    case "get_cursos_con_cupo":
+        if(isset($_POST['id_filial']) && $_POST['id_filial'] != '' && isset($_POST['cod_curso']) && $_POST['cod_curso'] != ''){
+            $retorno = "<tr>
+                            <td>Comision</td>
+                            <td>Inicio</td>
+                            <td>Dias</td>
+                            <td>Horario</td>
+                            <td>Matricula</td>
+                            <td>Cuotas</td>
+                            <td>Vigencia</td>
+                            <td>Cupos</td>
+                        <tr>
+                        <tr>
+                    <td>Comision 766</td>
+                    <td>2016-03-16</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>350.00</td>
+                    <td>&nbsp;</td>
+                    <td>2015-11-13</td>
+                    <td>&nbsp;</td>
+                </tr><tr>
+                    <td>Comision 767</td>
+                    <td>2016-03-15</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>350.00</td>
+                    <td>&nbsp;</td>
+                    <td>2015-11-13</td>
+                    <td>&nbsp;</td>
+                </tr><tr>
+                    <td>Comision 768</td>
+                    <td>2016-03-16</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>350.00</td>
+                    <td>&nbsp;</td>
+                    <td>2015-11-13</td>
+                    <td>&nbsp;</td>
+                </tr><tr>
+                    <td>Comision 769</td>
+                    <td>2016-03-19</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>350.00</td>
+                    <td>&nbsp;</td>
+                    <td>2015-11-13</td>
+                    <td>&nbsp;</td>
+                </tr><tr>
+                    <td>Comision 770</td>
+                    <td>2016-03-15</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>350.00</td>
+                    <td>&nbsp;</td>
+                    <td>2015-11-13</td>
+                    <td>&nbsp;</td>
+                </tr>";
+            /*$retorno = "";
+            $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
+            foreach($curso_cupo as $id=>$datos_curso){
+                $retorno .="<tr>
+                    <td>Comision {$datos_curso['codigo']}</td>
+                    <td>{$datos_curso['inicio_clases']}</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>{$datos_curso['valormatricula']}</td>
+                    <td>&nbsp;</td>
+                    <td>{$datos_curso['fechavigencia']}</td>
+                    <td>&nbsp;</td>
+                </tr>";
+            }*/
+        }else{
+            
+        }
+        
+        print($retorno);
     break;
 }
 

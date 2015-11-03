@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+error_reporting(E_ALL ^ E_NOTICE);
+
 include_once 'gestor/includes/functions.php';
 include_once 'gestor/includes/lenguaje.php';
 
@@ -237,13 +240,19 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </form>
                         <br/>
-                        <div id="matricula_curso" style="display: none">
-                            <ul class="list-group">
-                                <li class="list-group-item "><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes y Miércoles </strong> - de 18:30 a 20:30 y de 18:30 a 22:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                                <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Miércoles </strong> - de 15:30 a 17:30 <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                                <li class="list-group-item" ><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes</strong> - de 18:30 a 20:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                                <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..." > <strong>Sábado </strong> - de 12:00 a 14:00 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                            </ul>  
+                        
+                        <div class="table-responsive" id="matricula_curso" style="display: none">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="8" class="text-center">Planilla de Horarios</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
                             
                             <form id="main-contact-form" name="contact-form" method="post" action="#">
                                 <div class="row">
@@ -269,6 +278,18 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 </div>
                             </form>
                         </div>
+                        
+                        <!--
+                        <div id="matricula_curso" style="display: none">
+                            <ul class="list-group">
+                                <li class="list-group-item "><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes y Miércoles </strong> - de 18:30 a 20:30 y de 18:30 a 22:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
+                                <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Miércoles </strong> - de 15:30 a 17:30 <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
+                                <li class="list-group-item" ><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes</strong> - de 18:30 a 20:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
+                                <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..." > <strong>Sábado </strong> - de 12:00 a 14:00 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
+                            </ul>  
+                            
+                            
+                        </div> -->
                     </section>
                     <hr>
                     <section id="meterial_curso" >
@@ -452,10 +473,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         $('#filiales').change(function(){
             filialModalSeleccionada($(this).val(), <?=$_GET['cod_curso']?>);
         });
-        
-        $('#filiales_matricula').change(function(){
-            $('#matricula_curso').show();
-        });
         </script>
         <script>
         $(document).ready(function(){
@@ -477,6 +494,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 success: function(data){
                     changeSelectOptions("filiales_matricula", data.options, 'nombre', 'id');
                     $("select#filiales_matricula option[value='<?=$_SESSION['id_filial']?>']").attr("selected", "selected");
+                    
+                    getCursosConCupo($('#filiales_matricula').val(), '<?=$_GET['cod_curso']?>');
+                    
                     $('#matricula_curso').show();
                 }
             });
@@ -484,6 +504,26 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             $('#provincias').change(function(){
                 $('#matricula_curso').hide();
             });
+            
+            $('#filiales_matricula').change(function(){
+                getCursosConCupo($(this).val(), '<?=$_GET['cod_curso']?>');
+                $('#matricula_curso').show();
+            });
+            
+            function getCursosConCupo(id_filial, cod_curso){
+                $.ajax({
+                    url: "gestor/controller_ajax.php",
+                    method: "POST",
+                    data: {
+                        option : 'get_cursos_con_cupo', 
+                        cod_curso : cod_curso, 
+                        id_filial : id_filial
+                    },
+                    success: function(data){
+                        $('.table-bordered > tbody').html(data);
+                    }
+                });
+            }
             
             function changeSelectOptions(select_id, array_index, texto, value){
                 var options, index, select, option;
@@ -502,6 +542,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     select.options.add(new Option(option[texto], option[value]));
                 }
             }
+            
+            
         });
         </script>
     </body>

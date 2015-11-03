@@ -2,6 +2,7 @@
 include_once 'psl-config.php';
 include_once 'db_connect.php';
 include_once 'webservice/wsc_sistema.php';
+include_once 'webservice/webServices.php';
  
 function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
     $query1 = "SELECT cfi.id, cfi.estado FROM curso_filial_idioma as cfi 
@@ -1044,6 +1045,21 @@ function getMallaCurricular($mysqli, $id_cfi)
     $resultado->free();
         
     return $malla;
+}
+
+function getCursoConCupo($id_filial, $cod_curso){
+    $webservice = new webServices();
+    $str_cupos = $webservice->send("JSON_getCursosConCupo");
+    $cupos = json_decode($str_cupos,true);
+
+    $curso_cupo = array();
+    foreach($cupos[$id_filial] as $id=>$datos){
+	if($datos['codigocurso'] == $cod_curso){
+            $curso_cupo[] = $datos;
+	}
+    }
+    
+    return $curso_cupo;
 }
 
 ?>
