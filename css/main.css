@@ -346,15 +346,12 @@ background-color: #002f5e;
   /*background-color: rgba(0,0,0,.2);*/
 }
 .dropdown-menu li a{
-
-  color: #010F2C;
+  //color: #010F2C;
+  color: #FFFFFF;
 }
 .dropdown-menu li a:hover{
 color: white;
    background-color: rgba(0,0,0,.2);
-}
-.dropdown-menu li a{
-
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
@@ -675,7 +672,7 @@ section#cursado_planes select.form-control{
     height: 40px;
 }
 
-section#cursado_planes button{
+/*section#cursado_planes button{
     width: 200px;
     height: 40px;
     border: none;
@@ -683,7 +680,7 @@ section#cursado_planes button{
     font-size: 15px;
     text-transform: uppercase;
 
-}
+}*/
 
 section#cursado_planes button:hover{
  background-color: #ccc;

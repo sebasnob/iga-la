@@ -218,14 +218,14 @@ function getFiliales($mysqli, $id_provincia='', $id_pais=''){
     return $filiales;
 }
 
-function getDatosHome($mysqli){
+/*function getDatosHome($mysqli){
     $query = "SELECT id, url_video, titulo_es, titulo_in, titulo_por, subtitulo_es, subtitulo_por, subtitulo_in, menu_color, fuente_color FROM home";
     $resultado = $mysqli->query($query);
     $datos_home = $resultado->fetch_assoc();
     $resultado->free();
 	
     return $datos_home;
-}
+}*/
 
 /*function setChanges($mysqli, $id_curso, $color){
     $resultado = $mysqli->query("UPDATE cursos SET color='".$color."' WHERE id = ".$id_curso);
@@ -414,11 +414,6 @@ function esc_url($url) {
 }
 
 function detectCountry($mysqli){
-//    $myIp = $_SERVER['REMOTE_ADDR'];
-    $myIp = "190.2.100.6";
-
-//    die(var_dump($myIp));
-    
     $url = "http://ipinfo.io/";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -846,7 +841,7 @@ function getSlider($mysqli, $id_pais = false, $cod_idioma = false)
     }
 
     $result = $mysqli->query($query);
-    $sliders = '';
+    $sliders = array();
     if($result)
     {
         while($slider = $result->fetch_assoc())
@@ -1021,6 +1016,32 @@ function guardarConsultaCurso($filial,$email,$nombre,$phone){
             $result = array("success" => false, "error" => $wsc->getError());
     } else {
             $result = array("success" => false, "Error" => $wsc->getResponse());
+    }
+    
+    return $result;
+}
+
+function reservaInscripcion($nombre, $email, $telefono, $id_comision, $id_filial, $id_plan){
+    $param = array(
+            "nombre" => $nombre,
+            "email" => $email,
+            "telefono" => $telefono,
+            "id_comision" => $id_comision,
+            "id_filial" => $id_filial,
+            "id_plan" => $id_plan
+        );
+    $wsc = new wsc_sistema("sincronizar_reservas_inscripciones_web", $param);
+    $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
+    if (is_array($respuesta)){
+        if (isset($respuesta['success']) && $respuesta['success'] == "success"){
+            $result = array("success" => true, "data" => $param);
+        } else {
+            $result = array("success" => false, "error" => $respuesta['error']);
+        }
+    } else if ($wsc->isError()){
+        $result = array("success" => false, "error" => $wsc->getError());
+    } else {
+        $result = array("success" => false, "Error" => $wsc->getResponse());
     }
     
     return $result;

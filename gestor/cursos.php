@@ -316,10 +316,10 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                             $('#materialesPreview img').attr("src", "../"+data.url_material);
                             $('#uniformesPreview img').attr("src", "../"+data.url_uniforme);
                             $('#id_cfi').val(data.id_cfi);
-                            $.each(data.malla_curricular, function(index, value)
+                            /*$.each(data.malla_curricular, function(index, value)
                             {
                                 $('#malla').prepend("<div id="+value.id+"><label>Cuatrimestre:</label><input readonly type='number' value = " + value.cuatrimestre + "><label>Materia:</label><input readonly type = 'text' value =  "+ value.materia +"><input type = 'button' onclick='eliminarDeMalla("+ value.id +")' value='-'></div>");
-                            });
+                            });*/
                             
                             $('#horas').val(data.horas);
                             $('#meses').val(data.meses);

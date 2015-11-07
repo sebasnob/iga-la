@@ -266,72 +266,169 @@ switch($_POST['option']){
                             <td>Cuotas</td>
                             <td>Vigencia</td>
                             <td>Cupos</td>
-                        <tr>
-                        <tr>
+                            <td>&nbsp;</td>
+                        <tr>";
+            
+            /*$retorno .= "<tr>
+                            <td>Comision</td>
+                            <td>Inicio</td>
+                            <td>Dias</td>
+                            <td>Horario</td>
+                            <td>Matricula</td>
+                            <td>Cuotas</td>
+                            <td>Vigencia</td>
+                            <td>Cupos</td>
+                            <td>&nbsp;</td>
+                        <tr><tr>
                     <td>Comision 766</td>
                     <td>2016-03-16</td>
                     <td>&nbsp;</td>
+                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1700.00</b><br/>Cuotas 15
+ a 26&nbsp;&nbsp;<b>$2300.00</b><br/></td><td>2015-11-13</td>
                     <td>&nbsp;</td>
-                    <td>350.00</td>
-                    <td>&nbsp;</td>
-                    <td>2015-11-13</td>
-                    <td>&nbsp;</td>
+                    <td><button type='button' id='766' class='btn btn-sm'>Reservar</button></td>
                 </tr><tr>
                     <td>Comision 767</td>
                     <td>2016-03-15</td>
                     <td>&nbsp;</td>
+                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1700.00</b><br/>Cuotas 15
+ a 26&nbsp;&nbsp;<b>$2300.00</b><br/></td><td>2015-11-13</td>
                     <td>&nbsp;</td>
-                    <td>350.00</td>
-                    <td>&nbsp;</td>
-                    <td>2015-11-13</td>
-                    <td>&nbsp;</td>
+                    <td><button type='button' id='767' class='btn btn-sm'>Reservar</button></td>
                 </tr><tr>
                     <td>Comision 768</td>
                     <td>2016-03-16</td>
                     <td>&nbsp;</td>
+                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1700.00</b><br/>Cuotas 15
+ a 26&nbsp;&nbsp;<b>$2300.00</b><br/></td><td>2015-11-13</td>
                     <td>&nbsp;</td>
-                    <td>350.00</td>
-                    <td>&nbsp;</td>
-                    <td>2015-11-13</td>
-                    <td>&nbsp;</td>
+                    <td><button type='button' id='768' class='btn btn-sm'>Reservar</button></td>
                 </tr><tr>
                     <td>Comision 769</td>
                     <td>2016-03-19</td>
                     <td>&nbsp;</td>
+                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1700.00</b><br/>Cuotas 15
+ a 26&nbsp;&nbsp;<b>$2300.00</b><br/></td><td>2015-11-13</td>
                     <td>&nbsp;</td>
-                    <td>350.00</td>
-                    <td>&nbsp;</td>
-                    <td>2015-11-13</td>
-                    <td>&nbsp;</td>
-                </tr><tr>
+                    <td><button type='button' id='769' class='btn btn-sm'>Reservar</button></td>
+                </tr>
+                <tr >
                     <td>Comision 770</td>
                     <td>2016-03-15</td>
                     <td>&nbsp;</td>
+                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1300.00</b><br/>Cuotas 15
+ a 26&nbsp;&nbsp;<b>$1900.00</b><br/></td><td>2015-11-13</td>
                     <td>&nbsp;</td>
-                    <td>350.00</td>
-                    <td>&nbsp;</td>
-                    <td>2015-11-13</td>
-                    <td>&nbsp;</td>
-                </tr>";
-            /*$retorno = "";
+                    <td>
+                        <button type='button' data-toggle='collapse' data-target='#reserva-770' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivConsulta(770)'>Reservar</button>
+                        <br/><br/>
+                        <button type='button' data-toggle='collapse' data-target='#consulta-770' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivReserva(770)'>Consultar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='8' class='hiddenRow'>
+                    <div class='accordian-body collapse' id='reserva-770'>
+                        aaaaaaaaaaaaaa
+                    </div>
+                    <div class='accordian-body collapse' id='consulta-770'>
+                        bbbbbbbbbbbbbb
+                    </div>
+                    </td>
+                </tr>
+                ";*/
+            
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
             foreach($curso_cupo as $id=>$datos_curso){
                 $retorno .="<tr>
                     <td>Comision {$datos_curso['codigo']}</td>
                     <td>{$datos_curso['inicio_clases']}</td>
                     <td>&nbsp;</td>
+                    <td>&nbsp;</td>";
+                $retorno .= "<td>\${$datos_curso['valormatricula']}</td>";
+                    if(isset($datos_curso['detalle_cuotas']) && is_array($datos_curso['detalle_cuotas'])){
+                        $retorno .= "<td>";
+                        foreach($datos_curso['detalle_cuotas'] as $cuotas){
+                            $retorno .= "Cuotas ".$cuotas['cuota_inicio']." a ".$cuotas['cuota_fin']."&nbsp;&nbsp;<b>$".$cuotas['valor']."</b><br/>";
+                        }
+                        $retorno .= "</td>";
+                    }
+                $retorno .= "<td>{$datos_curso['fechavigencia']}</td>
                     <td>&nbsp;</td>
-                    <td>{$datos_curso['valormatricula']}</td>
-                    <td>&nbsp;</td>
-                    <td>{$datos_curso['fechavigencia']}</td>
-                    <td>&nbsp;</td>
+                    <td>
+                        <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>Reservar</button>
+                        <br/><br/>
+                        <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>Consultar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='9' class='hiddenRow'>
+                    <div class='accordian-body collapse' id='reserva-{$datos_curso['codigo']}'>";
+                $retorno .= '<form id="main-reserve-form" name="main-reserve-form" method="post" action="#">
+                                <input type="hidden" name="id_comision" value="'.$datos_curso['codigo'].'" />
+                                <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
+                                <input type="hidden" name="id_plan" value="'.$datos_curso['id_plan'].'" />
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="Dirección de Email" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        *Su reserva caduca 48 horas después de haber realizado esta operación.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-sm" id="btn-reserva">Reservar Lugar</button>
+                                    <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm accordion-toggle">Cerrar</button>
+                                </div>
+                            </form>';
+                
+                $retorno .="</div>
+                    <div class='accordian-body collapse' id='consulta-{$datos_curso['codigo']}'>";
+                $retorno .= '<form id="main-contact-form" name="main-contact-form" method="post" action="#">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Nombre" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control" placeholder="Dirección de Email" required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="telefono" class="form-control" placeholder="Teléfono" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="message" id="message" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
+                                </div>                        
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-sm">Consultar</button>
+                                    <button type="button" data-toggle="collapse" data-target="#consulta-'.$datos_curso['codigo'].'" class="btn btn-sm accordion-toggle" >Cerrar</button>
+                                </div>
+                            </form>';
+                
+                $retorno .="</div>
+                    </td>
                 </tr>";
-            }*/
+            }
         }else{
             
         }
         
         print($retorno);
+    break;
+    
+    case "reserva_cupo":
+    
     break;
 }
 

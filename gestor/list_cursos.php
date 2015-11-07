@@ -83,23 +83,23 @@ if($logged == 'out'){
                                             </div>
                                             <ul class="collapse tipocurso " id="<?=$j['cod_curso']?>collapseExample">
                                             <form id="formTipoCurso<?=$j['cod_curso']?>" name="formTipoCurso<?=$j['cod_curso']?>" method="POST">
-                                                <li>
+                                                <!--<li>
                                                     <ul>
                                                     <?php
-                                                    foreach($tiposCurso as $id_t=>$data_t){
+                                                    //foreach($tiposCurso as $id_t=>$data_t){
                                                     ?>
                                                         <li><input type="checkbox" name="tipos[]" value="<?=$data_t['id']?>" <?php echo (in_array($data_t['id'], $tipos_asignados))?"checked='checked'":''; ?> />&nbsp;<?=$data_t['nombre_es']?></li>
                                                         <?php
-                                                        $subTipos = getTiposCursos($mysqli, $data_t['id']);
-                                                        foreach($subTipos as $id=>$data){
+                                                        //$subTipos = getTiposCursos($mysqli, $data_t['id']);
+                                                        //foreach($subTipos as $id=>$data){
                                                         ?>
                                                         <li style="padding-left:18px">&nbsp;&nbsp; <input type="checkbox" name="tipos[]" value="<?=$data['id']?>" <?php echo (in_array($data['id'], $tipos_asignados))?"checked='checked'":''; ?> /> <?=$data['nombre_es']?></li>
                                                     <?php
-                                                        }
-                                                    }
+                                                        //}
+                                                    //}
                                                     ?>
                                                     </ul>      
-                                                </li>
+                                                </li>-->
                                                 <li style="vertical-align:top;padding:5px;">
                                                     Asignar Color &nbsp;<input type="text" id="colorCurso<?=$j['cod_curso']?>" name="colorCurso<?=$j['cod_curso']?>" value="<?=$j['color']?>"/>
                                                 </li>

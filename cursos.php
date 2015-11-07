@@ -228,15 +228,12 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     
                                 <?php }?>
                                 </select>    
-                                
                             </div>
-                            
                             <div class="form-group">
                                 <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
                                 <select id="filiales_matricula" class="form-control">
                                     <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
                                 </select>
-                                
                             </div>
                         </form>
                         <br/>
@@ -245,7 +242,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th colspan="8" class="text-center">Planilla de Horarios</th>
+                                        <th colspan="9" class="text-center">Planilla de Horarios</th>
                                     </tr>
                                 </thead>
                                 
@@ -253,43 +250,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     
                                 </tbody>
                             </table>
-                            
-                            <form id="main-contact-form" name="contact-form" method="post" action="#">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="Nombre" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="email" name="email" class="form-control" placeholder="Dirección de Email" required="required">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="telefono" class="form-control" placeholder="Teléfono" required="required">
-                                </div>
-                                <div class="form-group">
-                                    <textarea name="message" id="message" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
-                                </div>                        
-                                <div class="form-group">
-                                    <button type="submit" class="btn-btn-default">Reservar Lugar</button>
-                                </div>
-                            </form>
                         </div>
-                        
-                        <!--
-                        <div id="matricula_curso" style="display: none">
-                            <ul class="list-group">
-                                <li class="list-group-item "><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes y Miércoles </strong> - de 18:30 a 20:30 y de 18:30 a 22:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                                <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Miércoles </strong> - de 15:30 a 17:30 <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                                <li class="list-group-item" ><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> <strong>Lunes</strong> - de 18:30 a 20:30 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                                <li class="list-group-item"><input type="checkbox" id="blankCheckbox" value="option1" aria-label="..." > <strong>Sábado </strong> - de 12:00 a 14:00 - <strong>Matrícula</strong> $400 - 22 Cuotas de $995</li>
-                            </ul>  
-                            
-                            
-                        </div> -->
                     </section>
                     <hr>
                     <section id="meterial_curso" >
@@ -421,7 +382,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 }
 ?>
         <!-- Modal -->
-        <div class="modal fade" id="selectFilialModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="selectFilialModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -473,6 +434,16 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         $('#filiales').change(function(){
             filialModalSeleccionada($(this).val(), <?=$_GET['cod_curso']?>);
         });
+        
+        function ocultarDivReserva(id){
+            $('#reserva-'+id).removeClass("collapse in");
+            $('#reserva-'+id).addClass("collapse");
+        }
+
+        function ocultarDivConsulta(id){
+            $('#consulta-'+id).removeClass("collapse in");
+            $('#consulta-'+id).addClass("collapse");
+        }
         </script>
         <script>
         $(document).ready(function(){
@@ -510,7 +481,27 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 $('#matricula_curso').show();
             });
             
+            $('#btn-reserva').click(function(){
+                $.ajax({
+                    url: "gestor/controller_ajax.php",
+                    method: "POST",
+                    data: {
+                        option : 'reserva_cupo',
+                        nombre: "", 
+                        email: "",
+                        telefono: "",
+                        id_comision: "",
+                        id_filial: "",
+                        id_plan:""
+                    },
+                    success: function(data){
+                        $('.table-bordered > tbody').html(data);
+                    }
+                });
+            });
+            
             function getCursosConCupo(id_filial, cod_curso){
+                $('.table-bordered > tbody').html("<tr><td colspan='8' class='text-center'><img src='images/preloader.gif' /><br/>Cargando Información..</td></tr>");
                 $.ajax({
                     url: "gestor/controller_ajax.php",
                     method: "POST",
@@ -543,7 +534,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 }
             }
             
-            
+
         });
         </script>
     </body>

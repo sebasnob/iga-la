@@ -22,7 +22,6 @@ if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 }
 
 $paises = getPaises($mysqli);
-$datos_home = getDatosHome($mysqli);
 $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma']);
@@ -48,7 +47,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
         
-        <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />
+        <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
@@ -61,12 +60,9 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
     <body>
         <div id="fb-root"></div>
         <!--.preloader-->
-        <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+        <!--<div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>-->
         <!--/.preloader-->
-        
         <header id="home">
-            
-            
             <div class="main-nav">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -98,7 +94,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                                 foreach($paises as $i=>$d){
                                     if($_SESSION['pais']['cod_pais'] != $d['cod_pais']){
                                 ?>
-                                    <li><a href="javascript:cambiarPais('<?=$d['cod_pais']?>')" ><img src="<?=$d['flag']?>" /><?=$d['pais']?></a></li>
+                                    <li><a href="javascript:cambiarPais('<?=$d['cod_pais']?>')" ><img src="<?=$d['flag']?>" /><span style="margin-left: 5px;"> <?=$d['pais']?></span></a></li>
                                 <?php
                                     }
                                 }
