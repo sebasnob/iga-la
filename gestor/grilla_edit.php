@@ -69,6 +69,20 @@ $paises = getPaises($mysqli);
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+        DIV.table 
+        {
+            display:table;
+        }
+        FORM.tr, DIV.tr
+        {
+            display:table-row;
+        }
+        SPAN.td
+        {
+            display:table-cell;
+        }
+        </style>
     </head>
     
     <body>
@@ -168,59 +182,136 @@ $paises = getPaises($mysqli);
                                 
                                 <section id="editor_grilla_editar" style="display: inline-block;">
                                     <h4><i class="fa fa-angle-right"></i> Editar Grilla</h4>
-                                    <div class="col-md-12">
-                                        <h4>filtro</h4>
-                                        <div>
-                                            <div class="form-inline pull-left">
-                                                <label >Curso: </label>
+                                    <div class="col-md-12" style="padding-bottom: 20px">
+                                        <div class="tr form-inline">
+                                            <span class="td">
+                                                <label for="curso">Curso:</label>
                                                 <select class="form-control input-sm" id="id_curso_filtro">
                                                     <option value="0">Seleccione</option>
                                                     <?php foreach($cursos as $i=>$j){?>
                                                         <option value="<?=$j['cod_curso']?>"><?=$j['nombre_es']?></option>
                                                     <?php }?>
                                                 </select>
-                                            </div>
-                                            <div class="form-inline pull-left">
-                                                <label >Tipo: </label>
+                                            </span>
+                                            <span class="td">
+                                                <label for="tipo">Tipo:</label>
                                                 <select class="form-control input-sm" id="tipo_filtro">
                                                     <option value="0">Seleccione</option>
                                                     <option value="1">Cursos</option>
                                                     <option value="2">Cursos Cortos</option>
                                                     <option value="3">Cocineritos</option>
                                                 </select>
-                                            </div>
-                                            <div class="form-inline pull-left">
-                                                <label >Habilitado: </label>
+                                            </span>
+                                            <span class="td">
+                                                <label for="habilitado">Habilitado: </label>
                                                 <select class="form-control input-sm" id="habilitado_filtro">
                                                     <option value="0">Seleccione</option>
                                                     <option value="1">Si</option>
                                                     <option value="0">No</option>
                                                 </select>
-                                            </div>
-                                            <div class="form-inline pull-left">
-                                                <label >Pais: </label>
+                                            </span>
+                                            <span class="td">
+                                                <label for="curso">Pais:</label>
                                                 <select class="form-control input-sm" id="pais_filtro">
                                                     <option value="0">Seleccione</option>
                                                     <?php foreach($paises as $pais){?>
                                                     <option value="<?=$pais['id']?>"><?=$pais['pais']?></option>
                                                     <?php }?>
                                                 </select>
-                                            </div>
-                                            <div class="form-inline pull-left">
-                                                <label >Idioma: </label>
+                                            </span>
+                                            <span class="td">
+                                                <label for="curso">Idioma: </label>
                                                 <select class="form-control input-sm" id="idioma_filtro">
                                                     <option value="0">Seleccione</option>
                                                     <option value="es">Espa&ntilde;ol</option>
                                                     <option value="in">Ingles</option>
                                                     <option value="pt">Portugues</option>
                                                 </select>
-                                            </div>
-                                            <div class="form-inline pull-left">
-                                                <button id="buscarGrilla" class="btn btn-success">Buscar</button>
-                                            </div>
+                                            </span>
+                                            <span class="td">
+                                                &nbsp;&nbsp;<button id="buscarGrilla" class="btn btn-success">Buscar</button>
+                                            </span>
                                         </div>
                                     </div>
-                                <?php foreach ($gridArray as $imgGrid){?>
+                                    
+                                    <div class="col-md-12">
+                                        <?php 
+                                            foreach ($gridArray as $imgGrid){
+                                        ?>
+                                            <div class="tr">
+                                              <form enctype="multipart/form-data" method="POST" action="upload.php">
+                                                <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
+                                                <input type="hidden" name="edicion_grilla_editar" id="edicion_grilla_editar" value="true" />
+                                                <input type="hidden" name="id_img_grilla" id="id_img_grilla" value="<?php echo $imgGrid['id']?>" />
+                                                <span class="td">
+                                                    <div id="photo-preview">
+                                                        <img src="../<?php echo $imgGrid['thumb_url']?>" width="100px" /><br/>
+                                                    </div>
+                                                    <input type="file" accept="file_extension|image" name="photo" id="photo" autofocus />
+                                                </span>
+                                                <span class="td">
+                                                    <select class="form-control input-sm" name="cols">
+                                                        <option value="3" <?php if($imgGrid['cols'] == 3){echo 'selected';}?>>1</option>
+                                                        <option value="6" <?php if($imgGrid['cols'] == 6){echo 'selected';}?>>2</option>
+                                                    </select>
+                                                </span>
+                                                <span class="td">
+                                                    <select class="form-control input-sm" name="prioridad">
+                                                        <option value="1" <?php if($imgGrid['prioridad'] == 1){echo 'selected';}?>>1</option>
+                                                        <option value="2" <?php if($imgGrid['prioridad'] == 2){echo 'selected';}?>>2</option>
+                                                        <option value="3" <?php if($imgGrid['prioridad'] == 3){echo 'selected';}?>>3</option>
+                                                        <option value="4" <?php if($imgGrid['prioridad'] == 4){echo 'selected';}?>>4</option>
+                                                        <option value="5" <?php if($imgGrid['prioridad'] == 5){echo 'selected';}?>>5</option>
+                                                        <option value="6" <?php if($imgGrid['prioridad'] == 6){echo 'selected';}?>>6</option>
+                                                        <option value="7" <?php if($imgGrid['prioridad'] == 7){echo 'selected';}?>>7</option>
+                                                        <option value="8" <?php if($imgGrid['prioridad'] == 8){echo 'selected';}?>>8</option>
+                                                    </select>
+                                                </span>
+                                                <span class="td">
+                                                    <select class="form-control input-sm" name="id_curso">
+                                                        <?php foreach($cursos as $i=>$j){?>
+                                                        <option value="<?=$j['cod_curso']?>"  <?php if($imgGrid['id_curso'] == $j['cod_curso']){echo 'selected';}?>><?=$j['nombre_es']?></option>
+                                                        <?php }?>
+                                                    </select>
+                                                </span>
+                                                <span class="td">
+                                                    <select class="form-control input-sm" name="tipo">
+                                                        <option value="1" <?php if($imgGrid['tipo'] == 1){echo 'selected';}?>>Cursos</option>
+                                                        <option value="2" <?php if($imgGrid['tipo'] == 2){echo 'selected';}?>>Cursos Cortos</option>
+                                                        <option value="3" <?php if($imgGrid['tipo'] == 3){echo 'selected';}?>>Cocineritos</option>
+                                                    </select>
+                                                </span>
+                                                <span class="td">
+                                                    <select class="form-control input-sm" name="habilitado">
+                                                        <option value="1" <?php if($imgGrid['habilitado'] == 1){echo 'selected';}?>>Si</option>
+                                                        <option value="0" <?php if($imgGrid['habilitado'] == 0){echo 'selected';}?>>No</option>
+                                                    </select>
+                                                </span>
+                                                <span class="td">
+                                                    <select class="form-control input-sm" name="pais">
+                                                        <?php foreach($paises as $pais){?>
+                                                        <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgGrid['id_pais']){ echo 'selected';}?>><?=$pais['pais']?></option>
+                                                        <?php }?>
+                                                    </select>
+                                                </span>
+                                                <span class="td">
+                                                    <select class="form-control input-sm" name="idioma">
+                                                        <option value="es" <?php if($imgGrid['idioma'] == 'es'){echo 'selected';}?>>Espa&ntilde;ol</option>
+                                                        <option value="in" <?php if($imgGrid['idioma'] == 'en'){echo 'selected';}?>>Ingles</option>
+                                                        <option value="pt" <?php if($imgGrid['idioma'] == 'pt'){echo 'selected';}?>>Portugues</option>
+                                                    </select>
+                                                </span>
+                                                <span class="td">
+                                                    <button type="submit" class="btn btn-success">Aceptar</button>
+                                                    <button type="button" onclick="borrar(this.form)" class="btn btn-danger">Borrar</button>
+                                                </span>
+                                              </form>
+                                            </div>
+                                        <?php
+                                            }
+                                        ?>
+                                    </div>
+                                    <!--
                                     <div class="col-md-4">
                                         <form  enctype="multipart/form-data" method="POST" action="upload.php">
                                             <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
@@ -302,8 +393,8 @@ $paises = getPaises($mysqli);
                                             </div>
                                             <br>
                                         </form>
-                                    </div>
-                                <?php } ?>
+                                    </div>-->
+                                <?php //} ?>
                                 </section>        
                             </div>
                         </div>    
@@ -331,7 +422,21 @@ $paises = getPaises($mysqli);
         <script src="assets/js/common-scripts.js"></script>
         
         <!--script for this page-->
-        
+        <script type="text/javascript">
+         //Cambiar la imagen previa de los uniformes
+            $("#photo").on("change", function(){
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+                    reader.onloadend = function(){ // set image data as background of div
+                        //$("#imagePreview").css("background-image", "url("+this.result+")");
+                        $("#photo-preview").html("<img class='img-responsive animated fadeInLeftBig' width='100px' src='"+this.result+"' alt=''>");
+                    }
+                }
+            });
+        </script>
         
     </body>
 </html>

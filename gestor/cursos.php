@@ -411,12 +411,6 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                 }
             }
             
-            /*$("#select_color").change(function(){
-                $("#chose_color").val($("#select_color").val());
-                $("h1, h2, h3, h4").css("color", $("#select_color").val());
-                $("#muestra_color").css("color", $("#select_color").val());
-            });*/
-	
             $("#confirm").click(function(){
                 //$(".overlay").show();
                 $("#form_change").submit();
