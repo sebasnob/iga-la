@@ -223,9 +223,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
                                     <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
                                 <?php foreach ($provincias as $provincia){?>
-                                    
                                     <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
-                                    
                                 <?php }?>
                                 </select>    
                             </div>
@@ -246,7 +244,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     </tr>
                                 </thead>
                                 
-                                <tbody>
+                                <tbody  style="font-size:11px">
                                     
                                 </tbody>
                             </table>
@@ -452,7 +450,10 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 $('#selectFilialModal').modal('show');
             }
             
+            //Asigno al desplegable de provincias, el valor por defecto que se selecciono en el modal
             $("select#provincias option[value='<?=$prov['id_provincia']?>']").attr('selected','selected');
+            
+            //Traigo la informacion de los cupos disponibles
             $.ajax({
                 url: "gestor/controller_ajax.php",
                 method: "POST",
@@ -481,24 +482,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 $('#matricula_curso').show();
             });
             
-            $('#btn-reserva').click(function(){
-                $.ajax({
-                    url: "gestor/controller_ajax.php",
-                    method: "POST",
-                    data: {
-                        option : 'reserva_cupo',
-                        nombre: "", 
-                        email: "",
-                        telefono: "",
-                        id_comision: "",
-                        id_filial: "",
-                        id_plan:""
-                    },
-                    success: function(data){
-                        $('.table-bordered > tbody').html(data);
-                    }
-                });
-            });
+            
             
             function getCursosConCupo(id_filial, cod_curso){
                 $('.table-bordered > tbody').html("<tr><td colspan='8' class='text-center'><img src='images/preloader.gif' /><br/>Cargando Información..</td></tr>");
@@ -536,6 +520,25 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             
 
         });
+        
+        function reservarCupo(formid){
+            $.ajax({
+                url: "gestor/controller_ajax.php",
+                method: "POST",
+                data: {
+                    option : 'reserva_cupo',
+                    nombre: $("#"+formid+" input[name=name]").val(), 
+                    email: $("#"+formid+" input[name=email]").val(),
+                    telefono: $("#"+formid+" input[name=telefono]").val(),
+                    id_comision: $("#"+formid+" input[name=id_comision]").val(),
+                    id_filial: $("#"+formid+" input[name=id_filial]").val(),
+                    id_plan: $("#"+formid+" input[name=id_plan]").val()
+                },
+                success: function(data){
+                    console.log(data);
+                }
+            });
+        }
         </script>
     </body>
 </html>

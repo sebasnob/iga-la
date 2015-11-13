@@ -260,8 +260,7 @@ switch($_POST['option']){
             $retorno = "<tr>
                             <td>Comision</td>
                             <td>Inicio</td>
-                            <td>Dias</td>
-                            <td>Horario</td>
+                            <td>Dias y Horarios</td>
                             <td>Matricula</td>
                             <td>Cuotas</td>
                             <td>Vigencia</td>
@@ -269,59 +268,21 @@ switch($_POST['option']){
                             <td>&nbsp;</td>
                         <tr>";
             
-            /*$retorno .= "<tr>
-                            <td>Comision</td>
-                            <td>Inicio</td>
-                            <td>Dias</td>
-                            <td>Horario</td>
-                            <td>Matricula</td>
-                            <td>Cuotas</td>
-                            <td>Vigencia</td>
-                            <td>Cupos</td>
-                            <td>&nbsp;</td>
-                        <tr><tr>
-                    <td>Comision 766</td>
-                    <td>2016-03-16</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1700.00</b><br/>Cuotas 15
- a 26&nbsp;&nbsp;<b>$2300.00</b><br/></td><td>2015-11-13</td>
-                    <td>&nbsp;</td>
-                    <td><button type='button' id='766' class='btn btn-sm'>Reservar</button></td>
-                </tr><tr>
-                    <td>Comision 767</td>
+            /*$retorno .= "
+                <tr>
+                    <td>770</td>
                     <td>2016-03-15</td>
+                    <td>
+                        Miercoles de 8:30 a 12:30 hs <br/>
+                        Viernes de 8:30 a 10:20 hs
+                    </td>
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1700.00</b><br/>Cuotas 15
- a 26&nbsp;&nbsp;<b>$2300.00</b><br/></td><td>2015-11-13</td>
-                    <td>&nbsp;</td>
-                    <td><button type='button' id='767' class='btn btn-sm'>Reservar</button></td>
-                </tr><tr>
-                    <td>Comision 768</td>
-                    <td>2016-03-16</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1700.00</b><br/>Cuotas 15
- a 26&nbsp;&nbsp;<b>$2300.00</b><br/></td><td>2015-11-13</td>
-                    <td>&nbsp;</td>
-                    <td><button type='button' id='768' class='btn btn-sm'>Reservar</button></td>
-                </tr><tr>
-                    <td>Comision 769</td>
-                    <td>2016-03-19</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1700.00</b><br/>Cuotas 15
- a 26&nbsp;&nbsp;<b>$2300.00</b><br/></td><td>2015-11-13</td>
-                    <td>&nbsp;</td>
-                    <td><button type='button' id='769' class='btn btn-sm'>Reservar</button></td>
-                </tr>
-                <tr >
-                    <td>Comision 770</td>
-                    <td>2016-03-15</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td><td></td><td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1300.00</b><br/>Cuotas 15
+                    <td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1300.00</b><br/>Cuotas 15
  a 26&nbsp;&nbsp;<b>$1900.00</b><br/></td><td>2015-11-13</td>
                     <td>&nbsp;</td>
                     <td>
                         <button type='button' data-toggle='collapse' data-target='#reserva-770' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivConsulta(770)'>Reservar</button>
-                        <br/><br/>
+                        <br/>
                         <button type='button' data-toggle='collapse' data-target='#consulta-770' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivReserva(770)'>Consultar</button>
                     </td>
                 </tr>
@@ -340,10 +301,16 @@ switch($_POST['option']){
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
             foreach($curso_cupo as $id=>$datos_curso){
                 $retorno .="<tr>
-                    <td>Comision {$datos_curso['codigo']}</td>
-                    <td>{$datos_curso['inicio_clases']}</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>";
+                    <td>{$datos_curso['codigo']}</td>
+                    <td>{$datos_curso['inicio_clases']}</td>";
+                if(isset($datos_curso['horarios']) && is_array($datos_curso['horarios'])){
+                    $dias = array("1"=>"Lunes", "2"=>"Martes", "3"=>"Miércoles", "4"=>"Jueves", "5"=>"Viernes", "6"=>"Sábado", "7"=>"Domingo");
+                    $retorno .= "<td>";
+                    foreach($datos_curso['horarios'] as $horarios){
+                        $retorno .= $dias[$horarios['dia']]." de ".substr($horarios['horadesde'], 0, 5)." a ".substr($horarios['horahasta'], 0, 5)." hs.<br/>";
+                    }
+                    $retorno .= "</td>";
+                }
                 $retorno .= "<td>\${$datos_curso['valormatricula']}</td>";
                     if(isset($datos_curso['detalle_cuotas']) && is_array($datos_curso['detalle_cuotas'])){
                         $retorno .= "<td>";
@@ -363,7 +330,7 @@ switch($_POST['option']){
                 <tr>
                     <td colspan='9' class='hiddenRow'>
                     <div class='accordian-body collapse' id='reserva-{$datos_curso['codigo']}'>";
-                $retorno .= '<form id="main-reserve-form" name="main-reserve-form" method="post" action="#">
+                $retorno .= '<form id="form-reserva-'.$datos_curso['codigo'].'" name="form-reserva-'.$datos_curso['codigo'].'" method="post" action="#">
                                 <input type="hidden" name="id_comision" value="'.$datos_curso['codigo'].'" />
                                 <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
                                 <input type="hidden" name="id_plan" value="'.$datos_curso['id_plan'].'" />
@@ -384,7 +351,7 @@ switch($_POST['option']){
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-sm" id="btn-reserva">Reservar Lugar</button>
+                                    <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\')">Reservar Lugar</button>
                                     <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm accordion-toggle">Cerrar</button>
                                 </div>
                             </form>';
@@ -428,7 +395,15 @@ switch($_POST['option']){
     break;
     
     case "reserva_cupo":
-    
+        $result = array();
+        if(isset($_POST['nombre']) && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['id_comision']) && isset($_POST['id_filial']) && isset($_POST['id_plan'])){
+            $result = reservaInscripcion($_POST['nombre'], $_POST['email'], $_POST['telefono'], $_POST['id_comision'], $_POST['id_filial'], $_POST['id_plan']);
+        }else{
+            $result = array("success"=>false, "error"=>"Faltan datos.");
+        }
+        
+        print(json_encode($result));
+        
     break;
 }
 

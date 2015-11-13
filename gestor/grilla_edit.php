@@ -107,7 +107,6 @@ $paises = getPaises($mysqli);
                                         <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
                                         <input type="hidden" name="edicion_grilla_nueva" id="edicion_grilla_nueva" value="true" />
                                         <div class="form-group">
-                                            
                                             <input type="file" accept="file_extension|image"  name="photo" required autofocus>
                                         </div>
                                         <div class="form-group">
@@ -179,7 +178,6 @@ $paises = getPaises($mysqli);
                     <div class="row mt">
                         <div class="col-md-12">
                             <div class="form-panel">
-                                
                                 <section id="editor_grilla_editar" style="display: inline-block;">
                                     <h4><i class="fa fa-angle-right"></i> Editar Grilla</h4>
                                     <div class="col-md-12" style="padding-bottom: 20px">
@@ -244,10 +242,10 @@ $paises = getPaises($mysqli);
                                                 <input type="hidden" name="edicion_grilla_editar" id="edicion_grilla_editar" value="true" />
                                                 <input type="hidden" name="id_img_grilla" id="id_img_grilla" value="<?php echo $imgGrid['id']?>" />
                                                 <span class="td">
-                                                    <div id="photo-preview">
+                                                    <div>
                                                         <img src="../<?php echo $imgGrid['thumb_url']?>" width="100px" /><br/>
                                                     </div>
-                                                    <input type="file" accept="file_extension|image" name="photo" id="photo" autofocus />
+                                                    <input type="file" accept="file_extension|image" name="photo" autofocus />
                                                 </span>
                                                 <span class="td">
                                                     <select class="form-control input-sm" name="cols">
@@ -416,27 +414,10 @@ $paises = getPaises($mysqli);
         <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
         <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-        <script type="text/javascript" src="../js/main.js"></script>
+        <!--<script type="text/javascript" src="../js/main.js"></script>-->
         
         <!--common script for all pages-->
         <script src="assets/js/common-scripts.js"></script>
-        
-        <!--script for this page-->
-        <script type="text/javascript">
-         //Cambiar la imagen previa de los uniformes
-            $("#photo").on("change", function(){
-                var files = !!this.files ? this.files : [];
-                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-                if (/^image/.test( files[0].type)){ // only image file
-                    var reader = new FileReader(); // instance of the FileReader
-                    reader.readAsDataURL(files[0]); // read the local file
-                    reader.onloadend = function(){ // set image data as background of div
-                        //$("#imagePreview").css("background-image", "url("+this.result+")");
-                        $("#photo-preview").html("<img class='img-responsive animated fadeInLeftBig' width='100px' src='"+this.result+"' alt=''>");
-                    }
-                }
-            });
-        </script>
         
     </body>
 </html>
