@@ -24,7 +24,7 @@ if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 $paises = getPaises($mysqli);
 $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
-$slider = getSlider($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma']);
+$slider = getSlider($mysqli, $_SESSION['pais']['id']);
 
                                             
 $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1, 1);
@@ -146,7 +146,10 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
         ?>
             <div id="slider" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner" style="cursor:pointer">
-                <?php $i=0; foreach($slider as $slid){?>
+                <?php 
+                    $i=0; 
+                    foreach($slider as $slid){
+                ?>
                     <div 
                         class="item <?php if($i == 0){echo 'active';}?>" 
                         <?php if(isset($slid['link']) && $slid['link'] != '')
@@ -158,7 +161,10 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                         title='<?= $slid['alt'];?>' 
                         style="background-image: url(<?= $slid['url'];?>)">
                     </div>
-                <?php $i++;} ?>
+                <?php
+                        $i++;
+                    } 
+                ?>
                 </div>
                 <a class="left-control" href="#slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
                 <a class="right-control" href="#slider" data-slide="next"><i class="fa fa-angle-right"></i></a>

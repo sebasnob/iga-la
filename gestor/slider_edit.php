@@ -84,16 +84,9 @@ $idiomas = getIdiomas($mysqli);
                                         <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
                                             <select class="form-control" name="id_pais">
+                                                <option value="0">Todos</option>
                                                 <?php foreach ($paises as $pais){ ?>
                                                 <option value="<?=$pais['id']?>"><?=$pais['pais']?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
-                                        <div class="form-inline">
-                                            <label class="col-sm-2 col-sm-2 control-label">Idioma: </label>
-                                            <select class="form-control" name="cod_idioma">
-                                                <?php foreach ($idiomas as $idioma){ ?>
-                                                <option value="<?=$idioma['cod_idioma']?>"><?=$idioma['idioma']?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
@@ -134,16 +127,9 @@ $idiomas = getIdiomas($mysqli);
                                             <div class="form-group">
                                                 <label>Pais:</label>
                                                 <select class="form-control input-sm"  name="id_pais">
+                                                    <option value="0" >Todos</option>
                                                 <?php foreach ($paises as $pais){ ?>
                                                     <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgSlider['id_pais']){echo 'selected';} ?> ><?=$pais['pais']?></option>
-                                                <?php }?>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Idioma: </label>
-                                                <select class="form-control input-sm"  name="cod_idioma">
-                                                <?php foreach ($idiomas as $idioma){ ?>
-                                                    <option value="<?=$idioma['cod_idioma']?>" <?php if($idioma['cod_idioma'] == $imgSlider['cod_idioma']){echo 'selected';} ?> ><?=$idioma['idioma']?></option>
                                                 <?php }?>
                                                 </select>
                                             </div>

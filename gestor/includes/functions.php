@@ -819,34 +819,22 @@ function getFilial($id_filial, $mysqli)
     return $filial;
 }
 
-function getSlider($mysqli, $id_pais = false, $cod_idioma = false)
+function getSlider($mysqli, $id_pais = false)
 {
     $query = "SELECT * FROM slider";
     
     if($id_pais)
     {
-        $query .= " WHERE id_pais = {$id_pais}";
+        $query .= " WHERE id_pais in (0, {$id_pais})";
     }
     
-    if($cod_idioma)
-    {
-        if($id_pais)
-        {
-            $query .= " AND cod_idioma = '{$cod_idioma}'";
-        }
-        else
-        {
-            $query .= " WHERE cod_idioma = '{$cod_idioma}'";
-        }
-    }
-
     $result = $mysqli->query($query);
     $sliders = array();
     if($result)
     {
         while($slider = $result->fetch_assoc())
         {
-            $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'cod_idioma'=>$slider['cod_idioma'], 'id_pais'=>$slider['id_pais']);
+            $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$slider['id_pais']);
         }
     }
     return $sliders;
