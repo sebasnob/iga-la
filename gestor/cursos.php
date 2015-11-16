@@ -316,10 +316,10 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                             $('#materialesPreview img').attr("src", "../"+data.url_material);
                             $('#uniformesPreview img').attr("src", "../"+data.url_uniforme);
                             $('#id_cfi').val(data.id_cfi);
-                            /*$.each(data.malla_curricular, function(index, value)
+                            $.each(data.malla_curricular, function(index, value)
                             {
                                 $('#malla').prepend("<div id="+value.id+"><label>Cuatrimestre:</label><input readonly type='number' value = " + value.cuatrimestre + "><label>Materia:</label><input readonly type = 'text' value =  "+ value.materia +"><input type = 'button' onclick='eliminarDeMalla("+ value.id +")' value='-'></div>");
-                            });*/
+                            });
                             
                             $('#horas').val(data.horas);
                             $('#meses').val(data.meses);
@@ -546,9 +546,11 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                         id_cfi: $('#id_cfi').val()
                     },
                     dataType: "json",
-        	    success: function(data)
+        	    success: function(value)
                     {
-                        location.reload();
+                        $('#malla').prepend("<div id="+value.id+"><label>Cuatrimestre:</label><input readonly type='number' value = " + value.cuatrimestre + "><label>Materia:</label><input readonly type = 'text' value =  "+ value.materia +"><input type = 'button' onclick='eliminarDeMalla("+ value.id +")' value='-'></div>");
+                        $('#cuatrimestre').val('');
+                        $('#materia').val('');
                     }
                 });
             }
@@ -560,12 +562,10 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                 }
                 
                 if(localStorage.getItem("provincia")){
-                    console.log("Prov: "+localStorage.getItem("provincia"));
                     getFiliales(<?=$_GET['cod_curso']?>, $("#paises_curso").val(), localStorage.getItem("provincia"));
                 }
                 
                 if(localStorage.getItem("idioma")){
-                    console.log("Filial: "+localStorage.getItem("filial"));
                     $("select#idioma_curso option[value='"+localStorage.getItem("idioma")+"']").attr("selected", "selected");
                     getDatosCurso(<?=$_GET['cod_curso']?>, localStorage.getItem("pais"), localStorage.getItem('idioma'), localStorage.getItem("filial"));
                 }
