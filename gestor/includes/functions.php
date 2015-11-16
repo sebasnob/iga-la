@@ -166,6 +166,16 @@ function getPaises($mysqli){
     return $paises;
 }
 
+function getAuspiciantes($mysqli){
+    $auspiciantes = array();
+    $result = $mysqli->query("SELECT id, nombre, url_img, cod_pais FROM auspiciantes");
+    while($auspiciante = $result->fetch_assoc())
+    {
+	$auspiciantes[] = array('id'=>$auspiciante['id'],'nombre'=>$auspiciante['nombre'], 'url_img'=>$auspiciante['url_img'],'cod_pais'=>$auspiciante['cod_pais']);
+    }
+    return $auspiciantes;
+}
+
 function getIdiomasPais($mysqli, $id_pais=''){
     $cond='';
     if(isset($id_pais) && $id_pais != ''){

@@ -45,6 +45,12 @@ MAIN SIDEBAR MENU
                     <span>Editar Slider</span>
                 </a>
             </li>
+            <li class="sub-menu">
+                <a href="auspiciantes_edit.php" >
+                    <i class="fa fa-credit-card"></i>
+                    <span>Editar Auspiciantes</span>
+                </a>
+            </li>
         </ul>
         <!-- sidebar menu end-->
     </div>
