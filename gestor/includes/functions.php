@@ -977,13 +977,14 @@ function getTiposAsignados($mysqli, $cod_curso){
     return $tipos;
 }
 
-function guardarConsultaCurso($filial,$email,$nombre,$phone){
+function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_asunto){
     $html = "";
+    $tipo_asunto = ($cod_tipo_asunto == 3)?'curso':'asunto';
     $param = array(
 	"codigo" => -1,
-	"asunto" => "Cursos",
-	"tipo_asunto" => "curso",
-	"cod_curso_asunto" => 1,
+	"asunto" => $asunto,
+	"tipo_asunto" => $tipo_asunto,
+	"cod_curso_asunto" => $cod_tipo_asunto,
 	"cod_filial" => $filial,
 	"destacar" => 0,
 	"estado" => "pendiente",

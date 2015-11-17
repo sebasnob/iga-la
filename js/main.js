@@ -361,6 +361,7 @@ $('#buscarGrilla').click(function(){
 });
 
 $('.btn-submit').click(function(){
+    $(this).button('loading');
     $.ajax({
       type: "POST",
       url: "gestor/controller_ajax.php",
@@ -376,6 +377,7 @@ $('.btn-submit').click(function(){
       dataType:'json',
       success: function(data)
       {
+          $('.btn-submit').button('reset');
           if(data.success){
             $('#mensaje_contacto').html("<div class='text-reserva-ok'>"+data.mensaje+"</div>");
             $('#main-contact-form')[0].reset();
@@ -385,6 +387,7 @@ $('.btn-submit').click(function(){
       },
       error: function(data)
       {
+          $('.btn-submit').button('reset');
           $('#mensaje_contacto').html("<div class='text-reserva-error'>"+data.mensaje+"</div>");
       }
     });
