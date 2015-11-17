@@ -246,6 +246,10 @@ switch($_POST['option']){
             if($resultado)
             {
                 $retorno['result'] = 'ok';
+                $retorno['id'] = $mysqli->insert_id;
+                $retorno['cuatrimestre'] = $_POST['cuatrimestre'];
+                $retorno['materia'] = $_POST['materia'];
+                
             }
             else
             {
