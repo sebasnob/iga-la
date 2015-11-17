@@ -596,7 +596,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                         <br/>
                         <div class="contact-form" style="display:none">
                             <div class="row">
-                                <form id="main-contact-form" name="contact-form" method="post" action="#">
+                                <form id="main-contact-form" name="contact-form">
                                     <div class="col-sm-4">
                                         <input type="hidden" value="" id="correo" name="correo">
                                         <div class="row">
@@ -609,6 +609,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                                             <div class="form-group">
                                                 <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                             </div>
+                                            <div id="mensaje_contacto"></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-1">&nbsp;</div>
@@ -616,13 +617,19 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                                         <div class="row">
                                             <div class="form-group form-inline">
                                                 <select id="opciones" class="form-control" name="subject" onchange="javascript:getSelectCursos('opciones','cursos_contacto')">
-                                                    <option value="">Elegi una opción</option>
-                                                    <option value="3">Cursos</option>
-                                                    <option value="4">Atencion al alumno</option>
+                                                    <option value=""><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
+                                                    <option value="3"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
+                                                    <?php
+                                                    if($_SESSION['pais']['id'] == 1){
+                                                    ?>
+                                                        <option value="4">Atencion al alumno</option>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
                                                 &nbsp;
                                                 <select class="form-control" name="cursos_contacto" id="cursos_contacto" style="display: none;">
-                                                    <option value="">Elegi una opción</option>
+                                                    <option value=""><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
                                                 <?php
                                                 $cursos = getCursos($mysqli);
                                                 foreach($cursos as $id=>$data){
@@ -639,7 +646,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                                                 <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
                                             </div>                        
                                             <div class="form-group">
-                                                <button type="submit" class="btn-submit"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
+                                                <button type="button" class="btn-submit"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
                                             </div>
                                         </div>
                                     </div>

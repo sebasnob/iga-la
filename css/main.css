@@ -700,6 +700,15 @@ section#feature_cursos{
 
 }
 
+.text-reserva-ok{
+    color: #05843F;
+    font-size: 14px;
+}
+
+.text-reserva-error{
+    color: #DD3131;
+    font-size: 12px;
+}
 
 /*************************
 *********Team CSS*********

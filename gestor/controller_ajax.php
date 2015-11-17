@@ -1,6 +1,8 @@
 <?php
+session_start();
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
+include_once 'includes/lenguaje.php';
 
 error_reporting(E_ALL ^ E_NOTICE);
 
@@ -197,13 +199,16 @@ switch($_POST['option']){
     
     case "enviar_consulta":
         if(isset($_POST['tipo']) && $_POST['tipo'] == '3' ){
-            if(isset($_POST['filial']) && isset($_POST['nombre']) && isset($_POST['email']) && isset($_POST['phone'])){
-                $retorno = guardarConsultaCurso($_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone']);
+            if(isset($_POST['filial']) && isset($_POST['nombre']) && $_POST['nombre'] != '' && isset($_POST['email']) && $_POST['email'] != '' && isset($_POST['phone']) && $_POST['phone'] != '' && isset($_POST['message']) && $_POST['message'] != ''){
+                guardarConsultaCurso($_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone']);
+                $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
             }else{
-                $retorno = array("success" => false, "error" => 'Faltan datos!');
+                $retorno = array("success" => false, "mensaje" => $lenguaje['faltan_datos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
             }
-            print(json_encode($retorno));
+        }else{
+            $retorno = array("success" => false, "mensaje" => $lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
         }
+        print(json_encode($retorno));
     break;
     
     case "eliminar_de_malla":
@@ -320,7 +325,7 @@ switch($_POST['option']){
                         $retorno .= "</td>";
                     }
                 $retorno .= "<td>{$datos_curso['fechavigencia']}</td>
-                    <td>&nbsp;</td>
+                    <td>{$datos_curso['cupo']}</td>
                     <td>
                         <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>Reservar</button>
                         <br/><br/>
@@ -351,9 +356,10 @@ switch($_POST['option']){
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\')">Reservar Lugar</button>
+                                    <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this)" data-loading-text="Reservando...">Reservar Lugar</button>
                                     <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm accordion-toggle">Cerrar</button>
                                 </div>
+                                <div class="error text-center text-reserva-error"></div>
                             </form>';
                 
                 $retorno .="</div>

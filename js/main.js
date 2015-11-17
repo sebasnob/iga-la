@@ -128,7 +128,7 @@ jQuery(function($) {
 	});
 
 	// Contact form
-	var form = $('#main-contact-form');
+	/*var form = $('#main-contact-form');
 	form.submit(function(event){
 		event.preventDefault();
 		var form_status = $('<div class="form_status"></div>');
@@ -140,7 +140,7 @@ jQuery(function($) {
 		}).done(function(data){
 			form_status.html('<p class="text-success">Thank you for contact us. As early as possible  we will contact you</p>').delay(3000).fadeOut();
 		});
-	});
+	});*/
 
 	
 	
@@ -370,16 +370,22 @@ $('.btn-submit').click(function(){
           "nombre": $('#name').val(),
           "email": $('#email').val(),
           "phone": $('#phone').val(),
-          "tipo": $('#opciones').val()
+          "tipo": $('#opciones').val(),
+          "message": $('#message').val()
       },
       dataType:'json',
       success: function(data)
       {
-            
+          if(data.success){
+            $('#mensaje_contacto').html("<div class='text-reserva-ok'>"+data.mensaje+"</div>");
+            $('#main-contact-form')[0].reset();
+          }else{
+            $('#mensaje_contacto').html("<div class='text-reserva-error'>"+data.mensaje+"</div>");  
+          }
       },
       error: function(data)
       {
-            console.log(data);
+          $('#mensaje_contacto').html("<div class='text-reserva-error'>"+data.mensaje+"</div>");
       }
     });
 });

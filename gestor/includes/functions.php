@@ -1022,14 +1022,14 @@ function reservaInscripcion($nombre, $email, $telefono, $id_comision, $id_filial
     $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
     if (is_array($respuesta)){
         if (isset($respuesta['success']) && $respuesta['success'] == "success"){
-            $result = array("success" => true, "data" => $param);
+            $result = array("success" => true, "data" => $param, "error" => "Reserva registrada con éxito, nos estaremos comunicando a la brevedad.");
         } else {
             $result = array("success" => false, "error" => $respuesta['error']);
         }
     } else if ($wsc->isError()){
         $result = array("success" => false, "error" => $wsc->getError());
     } else {
-        $result = array("success" => false, "Error" => $wsc->getResponse());
+        $result = array("success" => false, "error" => $wsc->getResponse());
     }
     
     return $result;
