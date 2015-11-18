@@ -47,6 +47,10 @@ $lenguaje['no_existen_cursos_ES'] = "No existen cursos disponibles para el pais 
 $lenguaje['no_existen_cursos_cortos_ES'] = "No existen cursos cortos disponibles para el pais seleccionado.";
 $lenguaje['no_existen_cursos_cocineritos_ES'] = "No existen cursos de cocineritos disponibles para el pais seleccionado.";
 $lenguaje['malla_curricular_ES'] = "Malla Curricular";
+$lenguaje['atencion_alumno_ES'] = "Atención al alumno";
+$lenguaje['seleccion_opcion_ES'] = "Seleccione una Opción";
+$lenguaje['consulta_enviada_ES'] = "Consulta enviada. Nos comunicaremos a la brevedad!";
+$lenguaje['faltan_datos_ES'] = "Faltan datos!";
 
 //ingles
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
@@ -96,6 +100,10 @@ $lenguaje['no_existen_cursos_IN'] = "";
 $lenguaje['no_existen_cursos_cortos_IN'] = "";
 $lenguaje['no_existen_cursos_cocineritos_IN'] = "";
 $lenguaje['malla_curricular_IN'] = "Curriculum";
+$lenguaje['atencion_alumno_IN'] = "Student assistance";
+$lenguaje['seleccion_opcion_IN'] = "Choose an option.";
+$lenguaje['consulta_enviada_IN'] = "Your requirements correctly.";
+$lenguaje['faltan_datos_IN'] = "Missing some data!";
 
 //portugues
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
@@ -145,3 +153,7 @@ $lenguaje['no_existen_cursos_POR'] = "";
 $lenguaje['no_existen_cursos_cortos_POR'] = "";
 $lenguaje['no_existen_cursos_cocineritos_POR'] = "";
 $lenguaje['malla_curricular_POR'] = "Curriculum";
+$lenguaje['atencion_alumno_POR'] = "Atendimento ao aluno";
+$lenguaje['seleccion_opcion_POR'] = "Escolha uma opÇão";
+$lenguaje['consulta_enviada_POR'] = "Suas exigências corretamente.";
+$lenguaje['faltan_datos_POR'] = "Dados em falta!";

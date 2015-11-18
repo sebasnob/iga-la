@@ -200,7 +200,7 @@ section {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0,0,0,.7);
+  //background: rgba(0,0,0,.7);
 }
 
 .carousel-fade .carousel-inner .active {
@@ -700,6 +700,15 @@ section#feature_cursos{
 
 }
 
+.text-reserva-ok{
+    color: #05843F;
+    font-size: 14px;
+}
+
+.text-reserva-error{
+    color: #DD3131;
+    font-size: 12px;
+}
 
 /*************************
 *********Team CSS*********

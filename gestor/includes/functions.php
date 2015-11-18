@@ -994,13 +994,14 @@ function getTiposAsignados($mysqli, $cod_curso){
     return $tipos;
 }
 
-function guardarConsultaCurso($filial,$email,$nombre,$phone){
+function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_asunto){
     $html = "";
+    $tipo_asunto = ($cod_tipo_asunto == 3)?'curso':'asunto';
     $param = array(
 	"codigo" => -1,
-	"asunto" => "Cursos",
-	"tipo_asunto" => "curso",
-	"cod_curso_asunto" => 1,
+	"asunto" => $asunto,
+	"tipo_asunto" => $tipo_asunto,
+	"cod_curso_asunto" => $cod_tipo_asunto,
 	"cod_filial" => $filial,
 	"destacar" => 0,
 	"estado" => "pendiente",
@@ -1039,14 +1040,14 @@ function reservaInscripcion($nombre, $email, $telefono, $id_comision, $id_filial
     $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
     if (is_array($respuesta)){
         if (isset($respuesta['success']) && $respuesta['success'] == "success"){
-            $result = array("success" => true, "data" => $param);
+            $result = array("success" => true, "data" => $param, "error" => "Reserva registrada con éxito, nos estaremos comunicando a la brevedad.");
         } else {
             $result = array("success" => false, "error" => $respuesta['error']);
         }
     } else if ($wsc->isError()){
         $result = array("success" => false, "error" => $wsc->getError());
     } else {
-        $result = array("success" => false, "Error" => $wsc->getResponse());
+        $result = array("success" => false, "error" => $wsc->getResponse());
     }
     
     return $result;
