@@ -69,17 +69,19 @@ $auspiciantes = getAuspiciantes($mysqli);
                                     <form class="form" enctype="multipart/form-data" method="POST" action="upload.php">
                                         <input type="hidden" name="nuevoAuspiciante" value="true">
                                         <label>Nombre: </label>
-                                        <input type="text" name="name" required>
+                                        <input type="text" name="name">
                                         <label>Pais: </label>
-                                        <select name="pais" required>
+                                        <select name="pais">
                                             <option value="0">seleccione un pais</option>
                                             <?php foreach ($paises as $pais){?>
                                                 <option value="<?= $pais['id'] ?>"><?= $pais['pais'] ?></option>
                                             <?php } ?>
                                         </select>
                                         <label>Imagen: </label>
-                                        <input type="file" accept="file_extension|image"  name="photo" required style="display: inline;">
-                                        <br><br><br>
+                                        <input type="file" accept="file_extension|image" name="photo" style="display: inline;">
+                                        <br><br>
+                                        <div id="respuesta" class="alert" style="display: none"></div>
+                                        <br>
                                         <input type="submit" class="btn btn-success" value="Agregar">
                                     </form>
                                 </section>
@@ -91,29 +93,32 @@ $auspiciantes = getAuspiciantes($mysqli);
                             <div class="form-panel">
                                 <h4><i class="fa fa-angle-right"></i> Listado de Auspisiantes</h4>
                                 <section>
-                                    <?php foreach ($auspiciantes as $auspiciante){?>
-                                    <div id="<?= $auspiciante['id']?>">
-                                        <label>Nombre:</label>
-                                        <input type="text" value="<?= $auspiciante['nombre']?>" name="name">
-                                        <label>Pais:</label>
-                                        <select id="pais" required>
-                                            <option value="0">seleccione un pais</option>
-                                            <?php foreach ($paises as $pais){?>
-                                                <option value="<?= $pais['id'] ?>" <?php if($pais['id'] == $auspiciante['cod_pais']){echo 'selected';}?>><?= $pais['pais'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        <label>Imagen:</label>
-                                        <input type="file" 
-                                               accept="file_extension|image"  
-                                               name="photo" 
-                                               required 
-                                               style="display: inline;"
-                                               value="<?= $auspiciante['url_img']?>">
-                                        <img src="<?= $auspiciante['url_img']?>">
-                                        <input class="btn btn-danger" type = 'button' onclick='eliminarAuspiciante()' value='Eliminar'>
-                                        <input class="btn btn-warning" type = 'button' onclick='editarAuspiciante()' value='Editar'>
-                                    </div>
-                                    <?php } ?>
+                                        <?php foreach ($auspiciantes as $auspiciante){?>
+                                        <div>
+                                            <form class="form" enctype="multipart/form-data" method="POST" action="upload.php">
+                                                <input type="hidden" name="id" value="<?= $auspiciante['id']?>">
+                                                <label>Nombre:</label>
+                                                <input type="text" value="<?= $auspiciante['nombre']?>" name="name">
+                                                <label>Pais:</label>
+                                                <select name="pais" required>
+                                                    <option value="0">seleccione un pais</option>
+                                                    <?php foreach ($paises as $pais){?>
+                                                        <option value="<?= $pais['id'] ?>" <?php if($pais['id'] == $auspiciante['cod_pais']){echo 'selected';}?>><?= $pais['pais'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <label>Imagen:</label>
+                                                <input type="file" 
+                                                       accept="file_extension|image"  
+                                                       name="photo" 
+                                                       required 
+                                                       style="display: inline;"
+                                                       value="<?= $auspiciante['url_img']?>">
+                                                <img src="../<?= $auspiciante['url_img']?>" style="max-width: 100px;">
+                                                <input class="btn btn-danger" type = 'button' onclick='eliminarAuspiciante(this.form)' value='Eliminar'>
+                                                <input class="btn btn-warning" type = 'button' onclick='editarAuspiciante(this.form)' value='Editar'>
+                                            </form>
+                                        </div>
+                                        <?php } ?>
                                 </section>
                             </div>
                         </div>
@@ -137,5 +142,41 @@ $auspiciantes = getAuspiciantes($mysqli);
         <!--common script for all pages-->
         <script src="assets/js/common-scripts.js"></script>
         
+        <script>
+            
+            (function($) {  
+                $.get = function(key)   {  
+                    key = key.replace(/[\[]/, '\\[');  
+                    key = key.replace(/[\]]/, '\\]');  
+                    var pattern = "[\\?&]" + key + "=([^&#]*)";  
+                    var regex = new RegExp(pattern);  
+                    var url = unescape(window.location.href);  
+                    var results = regex.exec(url);  
+                    if (results === null) {  
+                        return null;  
+                    } else {  
+                        return results[1];  
+                    }  
+                }  
+            })(jQuery); 
+            
+            if($.get('result') != null)
+            {
+                if($.get('result') === 'ok')
+                {
+                    $('#respuesta').removeClass('alert-danger');
+                    $('#respuesta').html('Auspiciante agregado correctamente');
+                    $('#respuesta').addClass('alert-success');
+                    $('#respuesta').show('slow').delay(3000).hide('slow');
+                }
+                else
+                {
+                    $('#respuesta').removeClass('alert-success');
+                    $('#respuesta').html('Hubo un error, no fue posible agregar el Auspiciante');
+                    $('#respuesta').addClass('alert-danger');
+                    $('#respuesta').show('slow').delay(3000).hide('slow');
+                }
+            };
+        </script>
     </body>
 </html>

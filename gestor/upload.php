@@ -1085,56 +1085,108 @@ if(isset($_POST['nuevoAuspiciante']))
     $query_ins = false;
     $nombre = $_POST['name'];
     $cod_pais = $_POST['pais'];
-    
     if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
+    {
+        //if no errors...
+        if(!$_FILES['photo']['error'])
         {
-            //if no errors...
-            if(!$_FILES['photo']['error'])
-            {
-                $valid_file = true;
-                //now is the time to modify the future file name and validate the file
-                $new_file_name = strtolower($_FILES['photo']['name']); //rename file
-                $Length = 10;
-                $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+            $valid_file = true;
+            //now is the time to modify the future file name and validate the file
+            $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+            $Length = 10;
+            $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
                 
-                $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
-                if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
-                {
-                    $valid_file = false;
-                    $message = 'Oops!  Your file\'s size is to large.';
-                }
+            $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+            if($_FILES['photo']['size'] > (6144000)) //can't be larger than 6 MB
+            {
+                $valid_file = false;
+                $message = 'Oops!  Your file\'s size is to large.';
+            }
 
-                $pos = strpos($_FILES['photo']['type'], "image");
-                if ($pos === FALSE)
-                {
-                    $valid_file = false;
-                    $message = 'Oops!  El archivo no es una imagen.';
-                }
-                //if the file has passed the test
-                if($valid_file)
-                {
-                    //move it to where we want it to be
-                    $ruta = '../images/auspiciantes/'.$new_file_name;
-                    move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
+            $pos = strpos($_FILES['photo']['type'], "image");
+            if ($pos === FALSE)
+            {
+                $valid_file = false;
+                $message = 'Oops!  El archivo no es una imagen.';
+            }
+            //if the file has passed the test
+            if($valid_file)
+            {
+                //move it to where we want it to be
+                $ruta = '../images/auspiciantes/'.$new_file_name;
+                move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
                     
-                    $ruta = substr($ruta, 3);
-                    $query_ins = "INSERT INTO auspiciantes (nombre, url_img, cod_pais) value ('{$nombre}', '{$ruta}', {$cod_pais})";
+                $ruta = substr($ruta, 3);
+                $query_ins = "INSERT INTO auspiciantes (nombre, url_img, cod_pais) value ('{$nombre}', '{$ruta}', {$cod_pais})";
+                $respuesta = $mysqli->query($query_ins);
+                
+                if($respuesta)
+                {
+                    header("Location: auspiciantes_edit.php?result=ok");
+                    exit();
+                }
+                else
+                {
+                    header("Location: auspiciantes_edit.php?result=ko");
+                    exit();
                 }
             }
         }
-
-    die(var_dump($query_ins));
-    
+    }
+    exit();
 }
 
-if(isset($_POST['eliminarAuspiciante']))
+if(isset($_GET['eliminarAuspiciante']))
 {
+    $result = $mysqli->query("SELECT url_img FROM auspiciantes WHERE id = {$_POST['id']}");
+
+    $retorno = $result->fetch_assoc();
+
+    if(file_exists("../".$retorno['url_img']))
+    {
+        unlink("../".$retorno['url_img']);
+    }
     
+    $query_del = 'DELETE FROM auspiciantes WHERE auspiciantes.id = ' . $_POST['id'];
+    
+    $respuesta = $mysqli->query($query_del);
+                
+    header("Location: auspiciantes_edit.php");
+    exit();
 }
 
-if(isset($_POST['editarAuspiciante']))
+if(isset($_GET['editarAuspiciante']))
 {
+    $nombre = $_POST['name'];
+    $cod_pais = $_POST['pais'];
+    $id_auspiciante = $_POST['id'];
     
+    if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
+    {
+        //if no errors...
+        if(!$_FILES['photo']['error'])
+        {
+            $result = $mysqli->query("SELECT url_img FROM auspiciantes WHERE id = {$_POST['id']}");
+            $retorno = $result->fetch_assoc();
+            if(file_exists("../".$retorno['url_img']))
+            {
+                unlink("../".$retorno['url_img']);
+            }
+            
+            //move it to where we want it to be
+            $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+            $ruta = '../images/auspiciantes/'.$new_file_name;
+            move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
+            $ruta = substr($ruta, 3);
+
+            $mysqli->query("UPDATE auspiciantes SET url_img = '{$ruta}' WHERE id = {$_POST['id']}");
+        }
+    }
+    
+    $mysqli->query("UPDATE auspiciantes SET nombre = '{$nombre}', cod_pais = '{$cod_pais}' WHERE id = {$_POST['id']}");
+    
+    header("Location: auspiciantes_edit.php");
+    exit();
 }
 
 //Funcion auxiliar para determinar la extension de un archivo
@@ -1151,5 +1203,3 @@ function getExtension($str)
     
     return $ext;
 }
-    
-?>

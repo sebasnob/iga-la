@@ -91,3 +91,23 @@ function regformhash(form, uid, email, password, conf) {
     form.submit();
     return true;
 }
+
+function eliminarAuspiciante(form)
+{
+    var r = confirm("Esta seguro que desea borrar esto?");
+    if (r === true) 
+    {
+        form.action = form.action + "?eliminarAuspiciante=true";
+        form.submit();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+function editarAuspiciante(form)
+{
+    form.action = form.action + "?editarAuspiciante=true";
+    form.submit();
+}
