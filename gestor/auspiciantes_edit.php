@@ -70,9 +70,10 @@ $auspiciantes = getAuspiciantes($mysqli);
                                         <input type="hidden" name="nuevoAuspiciante" value="true">
                                         <label>Nombre: </label>
                                         <input type="text" name="name">
+                                        <label>Link: </label>
+                                        <input type="text" name="link">
                                         <label>Pais: </label>
-                                        <select name="pais">
-                                            <option value="0">seleccione un pais</option>
+                                        <select name="pais[]" multiple="true">
                                             <?php foreach ($paises as $pais){?>
                                                 <option value="<?= $pais['id'] ?>"><?= $pais['pais'] ?></option>
                                             <?php } ?>
@@ -99,11 +100,18 @@ $auspiciantes = getAuspiciantes($mysqli);
                                                 <input type="hidden" name="id" value="<?= $auspiciante['id']?>">
                                                 <label>Nombre:</label>
                                                 <input type="text" value="<?= $auspiciante['nombre']?>" name="name">
+                                                <label>Link: </label>
+                                                <input type="text" value="<?= $auspiciante['link']?>" name="link">
                                                 <label>Pais:</label>
-                                                <select name="pais" required>
-                                                    <option value="0">seleccione un pais</option>
+                                                <select name="pais[]" multiple="true" required>
                                                     <?php foreach ($paises as $pais){?>
-                                                        <option value="<?= $pais['id'] ?>" <?php if($pais['id'] == $auspiciante['cod_pais']){echo 'selected';}?>><?= $pais['pais'] ?></option>
+                                                        <option value="<?= $pais['id'] ?>"
+                                                            <?php if(in_array($pais['id'], $auspiciante['cod_pais']))
+                                                            {
+                                                                echo 'selected';
+                                                            }?>>
+                                                            <?= $pais['pais'] ?>
+                                                        </option>
                                                     <?php } ?>
                                                 </select>
                                                 <label>Imagen:</label>

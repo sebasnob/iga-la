@@ -1084,7 +1084,9 @@ if(isset($_POST['nuevoAuspiciante']))
 {
     $query_ins = false;
     $nombre = $_POST['name'];
-    $cod_pais = $_POST['pais'];
+    $cod_pais = json_encode($_POST['pais']);
+    $link = $_POST['link'];
+
     if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
     {
         //if no errors...
@@ -1117,7 +1119,7 @@ if(isset($_POST['nuevoAuspiciante']))
                 move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
                     
                 $ruta = substr($ruta, 3);
-                $query_ins = "INSERT INTO auspiciantes (nombre, url_img, cod_pais) value ('{$nombre}', '{$ruta}', {$cod_pais})";
+                $query_ins = "INSERT INTO auspiciantes (nombre, url_img, cod_pais, link) value ('{$nombre}', '{$ruta}', '{$cod_pais}', '{$link}')";
                 $respuesta = $mysqli->query($query_ins);
                 
                 if($respuesta)
@@ -1158,8 +1160,9 @@ if(isset($_GET['eliminarAuspiciante']))
 if(isset($_GET['editarAuspiciante']))
 {
     $nombre = $_POST['name'];
-    $cod_pais = $_POST['pais'];
+    $cod_pais = json_encode($_POST['pais']);
     $id_auspiciante = $_POST['id'];
+    $link = $_POST['link'];
     
     if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != '')
     {
@@ -1175,6 +1178,10 @@ if(isset($_GET['editarAuspiciante']))
             
             //move it to where we want it to be
             $new_file_name = strtolower($_FILES['photo']['name']); //rename file
+            $Length = 10;
+            $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+            $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+            
             $ruta = '../images/auspiciantes/'.$new_file_name;
             move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
             $ruta = substr($ruta, 3);
@@ -1183,7 +1190,7 @@ if(isset($_GET['editarAuspiciante']))
         }
     }
     
-    $mysqli->query("UPDATE auspiciantes SET nombre = '{$nombre}', cod_pais = '{$cod_pais}' WHERE id = {$_POST['id']}");
+    $mysqli->query("UPDATE auspiciantes SET nombre = '{$nombre}', cod_pais = '{$cod_pais}', link = '{$link}' WHERE id = {$_POST['id']}");
     
     header("Location: auspiciantes_edit.php");
     exit();
