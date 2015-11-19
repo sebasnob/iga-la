@@ -132,7 +132,7 @@ function getCursos($mysqli, $cod_curso = '')
     return $filiales;
 }*/
 
-function getCursoPais($mysqli, $cod_curso=''){
+/*function getCursoPais($mysqli, $cod_curso=''){
     $cond = '';
     if(isset($cod_curso) && $cod_curso != ''){
 	$cond = ' WHERE cp.cod_curso='.$cod_curso;
@@ -145,7 +145,7 @@ function getCursoPais($mysqli, $cod_curso=''){
     $result->free();
     
     return $cursos_paises;
-}
+}*/
 
 
 function getPais($mysqli, $cod_pais){
@@ -582,11 +582,14 @@ function ws_insertLocalidades($mysqli){
 }
 
 function ws_insertFiliales($mysqli){
-    $message = '';
+    /*$message = '';
     $fp_filiales = fopen("../ws/filiales.json","r");
     $linea_filiales = fgets($fp_filiales);
 
-    $array_filiales = json_decode($linea_filiales);
+    $array_filiales = json_decode($linea_filiales);*/
+    
+    $ws = new webServices();
+    $array_filiales = json_decode($ws->send('JSON_getFiliales'));
 
     foreach ($array_filiales as $id=>$value){
         $res_prov = $mysqli->query("SELECT id_provincia FROM localidades WHERE id=".$value->id_localidad);
@@ -614,41 +617,46 @@ function ws_insertFiliales($mysqli){
 }
 
 function ws_insertCursos($mysqli){
-    $message = '';
+    /*$message = '';
     $fp_cursos = fopen("../ws/cursos.json","r");
     $linea_cursos = fgets($fp_cursos);
 
-    $array_cursos = json_decode($linea_cursos);
+    $array_cursos = json_decode($linea_cursos);*/
+    
+    $ws = new webServices();
+    $array_cursos = json_decode($ws->send('JSON_getCursos'));
 
     foreach ($array_cursos as $id=>$value){
-        $query_sel = "SELECT cod_curso, nombre_es FROM cursos WHERE cod_curso={$value->codigo} AND nombre_es='{$value->nombre_es}'";
-        $result_sel = $mysqli->query($query_sel);
-        if($result_sel->num_rows == 0){
-            $nombre_es = addslashes(trim($value->nombre_es));
-            $nombre_portugues = addslashes(trim($value->nombre_portugues));
-            $nombre_ingles = addslashes(trim($value->nombre_ingles));
-            $descripcion = addslashes(trim($value->descripcion));
-            $descripcion_por = addslashes(trim($value->descripcion_por));
-            $descripcion_ing = addslashes(trim($value->descripcion_ing));
-            $descripcion_corta_esp = addslashes(trim($value->descripcion_corta_esp));
-            $descripcion_corta_por = addslashes(trim($value->descripcion_corta_por));
-            $descripcion_corta_ing = addslashes(trim($value->descripcion_corta_ing));
-            $descripcion_venta_esp = addslashes(trim($value->descripcion_venta_esp));
-            $descripcion_venta_por = addslashes(trim($value->descripcion_venta_por));
-            $descripcion_venta_ing = addslashes(trim($value->descripcion_venta_ing));
-            $titulo_secundario_esp = addslashes(trim($value->titulo_secundario_esp));
-            $titulo_secundario_por = addslashes(trim($value->titulo_secundario_por));
-            $titulo_secundario_ing = addslashes(trim($value->titulo_secundario_ing));
-            $query_ins = "INSERT INTO cursos (cod_curso, nombre_es, nombre_portugues, nombre_ingles, horas, meses, anios, color, logo, descripcion, descripcion_por, descripcion_ing, descripcion_corta_esp, descripcion_corta_por, descripcion_corta_ing, aniopertenece, activo, descripcion_venta_esp, descripcion_venta_por, descripcion_venta_ing, titulo_secundario_esp, titulo_secundario_por, titulo_secundario_ing, codfranquicia, id_subcategoria, id_categoria, tags) VALUES ('{$value->codigo}', '{$nombre_es}','{$nombre_portugues}','{$nombre_ingles}','{$value->canthoras}','{$value->cantmeses}','{$value->cantanios}','{$value->color}','{$value->logo}','{$descripcion}','{$descripcion_por}','{$descripcion_ing}','{$descripcion_corta_esp}','{$descripcion_corta_por}','{$descripcion_corta_ing}','{$value->aniopertenece}','{$value->activo}','{$descripcion_venta_esp}','{$descripcion_venta_por}','{$descripcion_venta_ing}','{$titulo_secundario_esp}','{$titulo_secundario_por}','{$titulo_secundario_ing}','{$value->codfranquicia}','{$value->id_subcategoria}','{$value->id_categoria}','{$value->tags}')";
-            //echo $query_ins;
-            $result_ins = $mysqli->query($query_ins);
-            if(!$result_ins){
-                $message.= "<br/>Error - al insertar el curso {$value->nombre_es}<br/>";
+        if($value->activo == 1){
+            $query_sel = "SELECT cod_curso, nombre_es FROM cursos WHERE cod_curso={$value->codigo} AND nombre_es='{$value->nombre_es}'";
+            $result_sel = $mysqli->query($query_sel);
+            if($result_sel->num_rows == 0){
+                $nombre_es = addslashes(trim($value->nombre_es));
+                $nombre_portugues = addslashes(trim($value->nombre_portugues));
+                $nombre_ingles = addslashes(trim($value->nombre_ingles));
+                $descripcion = addslashes(trim($value->descripcion));
+                $descripcion_por = addslashes(trim($value->descripcion_por));
+                $descripcion_ing = addslashes(trim($value->descripcion_ing));
+                $descripcion_corta_esp = addslashes(trim($value->descripcion_corta_esp));
+                $descripcion_corta_por = addslashes(trim($value->descripcion_corta_por));
+                $descripcion_corta_ing = addslashes(trim($value->descripcion_corta_ing));
+                $descripcion_venta_esp = addslashes(trim($value->descripcion_venta_esp));
+                $descripcion_venta_por = addslashes(trim($value->descripcion_venta_por));
+                $descripcion_venta_ing = addslashes(trim($value->descripcion_venta_ing));
+                $titulo_secundario_esp = addslashes(trim($value->titulo_secundario_esp));
+                $titulo_secundario_por = addslashes(trim($value->titulo_secundario_por));
+                $titulo_secundario_ing = addslashes(trim($value->titulo_secundario_ing));
+                $query_ins = "INSERT INTO cursos (cod_curso, nombre_es, nombre_portugues, nombre_ingles, horas, meses, anios, color, logo, descripcion, descripcion_por, descripcion_ing, descripcion_corta_esp, descripcion_corta_por, descripcion_corta_ing, aniopertenece, activo, descripcion_venta_esp, descripcion_venta_por, descripcion_venta_ing, titulo_secundario_esp, titulo_secundario_por, titulo_secundario_ing, codfranquicia, id_subcategoria, id_categoria, tags) VALUES ('{$value->codigo}', '{$nombre_es}','{$nombre_portugues}','{$nombre_ingles}','{$value->canthoras}','{$value->cantmeses}','{$value->cantanios}','{$value->color}','{$value->logo}','{$descripcion}','{$descripcion_por}','{$descripcion_ing}','{$descripcion_corta_esp}','{$descripcion_corta_por}','{$descripcion_corta_ing}','{$value->aniopertenece}','{$value->activo}','{$descripcion_venta_esp}','{$descripcion_venta_por}','{$descripcion_venta_ing}','{$titulo_secundario_esp}','{$titulo_secundario_por}','{$titulo_secundario_ing}','{$value->codfranquicia}','{$value->id_subcategoria}','{$value->id_categoria}','{$value->tags}')";
+                //echo $query_ins;
+                $result_ins = $mysqli->query($query_ins);
+                if(!$result_ins){
+                    $message.= "<br/>Error - al insertar el curso {$value->nombre_es}<br/>";
+                }else{
+                    $message.= "<br/>Correcto - Se inserto el curso {$value->nombre_es}";
+                }
             }else{
-                $message.= "<br/>Correcto - Se inserto el curso {$value->nombre_es}";
+                $message.= "<br/>Error - Ya existe el curso {$value->nombre_es} con id {$value->codigo}<br/>";
             }
-        }else{
-            $message.= "<br/>Error - Ya existe el curso {$value->nombre_es} con id {$value->codigo}<br/>";
         }
     }
     return $message;
