@@ -81,6 +81,7 @@ $paises = getPaises($mysqli);
         SPAN.td
         {
             display:table-cell;
+            width: 10%;
         }
         </style>
     </head>
@@ -225,9 +226,9 @@ $paises = getPaises($mysqli);
                                                     <option value="in">Ingles</option>
                                                     <option value="pt">Portugues</option>
                                                 </select>
-                                            </span>
+                                            </span>  
                                             <span class="td">
-                                                &nbsp;&nbsp;<button id="buscarGrilla" class="btn btn-success">Buscar</button>
+                                             <a class="btn btn-primary " id="buscarGrilla"><i class="fa fa-search"></i></a>
                                             </span>
                                         </div>
                                     </div>
@@ -300,8 +301,9 @@ $paises = getPaises($mysqli);
                                                     </select>
                                                 </span>
                                                 <span class="td">
-                                                    <button type="submit" class="btn btn-success">Aceptar</button>
-                                                    <button type="button" onclick="borrar(this.form)" class="btn btn-danger">Borrar</button>
+                                                   &nbsp;&nbsp;  <a class="btn btn-success btn-xs" type="submit"><i class="fa fa-check"></i></a>
+                                                     <a class="btn btn-danger btn-xs" type="button" onclick="borrar(this.form)" ><i class="fa fa-trash-o"></i></a>
+                                                   
                                                 </span>
                                               </form>
                                             </div>
@@ -309,90 +311,7 @@ $paises = getPaises($mysqli);
                                             }
                                         ?>
                                     </div>
-                                    <!--
-                                    <div class="col-md-4">
-                                        <form  enctype="multipart/form-data" method="POST" action="upload.php">
-                                            <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
-                                            <input type="hidden" name="edicion_grilla_editar" id="edicion_grilla_editar" value="true" />
-                                            <input type="hidden" name="id_img_grilla" id="id_img_grilla" value="<?php echo $imgGrid['id']?>" />
-                                            <div class="form-group">
-                                                <div class="form-img">
-                                                    <img src="../<?php echo $imgGrid['thumb_url']?>">
-                                                </div>
-                                                <input type="file" accept="file_extension|image" name="photo" autofocus>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Columnas: </label>
-                                                <select class="form-control input-sm" name="cols">
-                                                    <option value="3" <?php if($imgGrid['cols'] == 3){echo 'selected';}?>>1</option>
-                                                    <option value="6" <?php if($imgGrid['cols'] == 6){echo 'selected';}?>>2</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Posici&oacute;n: </label>
-                                                <select class="form-control input-sm" name="prioridad">
-                                                    <option value="1" <?php if($imgGrid['prioridad'] == 1){echo 'selected';}?>>1</option>
-                                                    <option value="2" <?php if($imgGrid['prioridad'] == 2){echo 'selected';}?>>2</option>
-                                                    <option value="3" <?php if($imgGrid['prioridad'] == 3){echo 'selected';}?>>3</option>
-                                                    <option value="4" <?php if($imgGrid['prioridad'] == 4){echo 'selected';}?>>4</option>
-                                                    <option value="5" <?php if($imgGrid['prioridad'] == 5){echo 'selected';}?>>5</option>
-                                                    <option value="6" <?php if($imgGrid['prioridad'] == 6){echo 'selected';}?>>6</option>
-                                                    <option value="7" <?php if($imgGrid['prioridad'] == 7){echo 'selected';}?>>7</option>
-                                                    <option value="8" <?php if($imgGrid['prioridad'] == 8){echo 'selected';}?>>8</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Curso: </label>
-                                                <select class="form-control input-sm" name="id_curso">
-                                                    <?php foreach($cursos as $i=>$j){?>
-                                                    
-                                                    <option value="<?=$j['cod_curso']?>"  <?php if($imgGrid['id_curso'] == $j['cod_curso']){echo 'selected';}?>><?=$j['nombre_es']?></option>
-                                                    <?php }?>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Tipo: </label>
-                                                <select class="form-control input-sm" name="tipo">
-                                                    <option value="1" <?php if($imgGrid['tipo'] == 1){echo 'selected';}?>>Cursos</option>
-                                                    <option value="2" <?php if($imgGrid['tipo'] == 2){echo 'selected';}?>>Cursos Cortos</option>
-                                                    <option value="3" <?php if($imgGrid['tipo'] == 3){echo 'selected';}?>>Cocineritos</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Habilitado: </label>
-                                                <select class="form-control input-sm" name="habilitado">
-                                                    <option value="1" <?php if($imgGrid['habilitado'] == 1){echo 'selected';}?>>Si</option>
-                                                    <option value="0" <?php if($imgGrid['habilitado'] == 0){echo 'selected';}?>>No</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Pais: </label>
-                                                <select class="form-control input-sm" name="pais">
-                                                    <?php foreach($paises as $pais){?>
-                                                    <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgGrid['id_pais']){ echo 'selected';}?>><?=$pais['pais']?></option>
-                                                    <?php }?>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Idioma: </label>
-                                                <select class="form-control input-sm" name="idioma">
-                                                    <option value="es" <?php if($imgGrid['idioma'] == 'es'){echo 'selected';}?>>Espa&ntilde;ol</option>
-                                                    <option value="in" <?php if($imgGrid['idioma'] == 'en'){echo 'selected';}?>>Ingles</option>
-                                                    <option value="pt" <?php if($imgGrid['idioma'] == 'pt'){echo 'selected';}?>>Portugues</option>
-                                                </select>
-                                            </div>
-                                            <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
-                                            <div class="row mt">
-                                                <div class="col-lg-12">
-                                                    <button type="submit" class="btn btn-success">Editar</button>
-                                                    <button type="button" onclick="borrar(this.form)" class="btn btn-danger">Borrar</button>
-                                                </div>
-                                                
-                                            </div>
-                                            <br>
-                                        </form>
-                                    </div>-->
-                                <?php //} ?>
+                              
                                 </section>        
                             </div>
                         </div>    

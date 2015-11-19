@@ -25,8 +25,8 @@ $paises = getPaises($mysqli);
 $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $slider = getSlider($mysqli, $_SESSION['pais']['id']);
+$auspiciantes = getAuspiciantes($mysqli);
 
-                                            
 $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1, 1);
 $gridArrayCursosCortos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 2, 1);
 $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 3, 1);
@@ -672,6 +672,25 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                         </ul>
                     </div>
                 </div>
+                <div class="container text-center">
+                    <?php foreach ($auspiciantes as $auspiciante){ 
+                        if(in_array($_SESSION['pais']['id'], $auspiciante['cod_pais']))
+                        {
+                            $tienQueAparecer = true;
+                    ?>
+                        <div class="footer-logo">
+                            <a href="<?= $auspiciante['link']?>">
+                                <img class="img-responsive" 
+                                    src="<?= $auspiciante['url_img']?>" 
+                                    alt="<?= $auspiciante['nombre']?>" 
+                                    style="max-width: 100px;"
+                                />
+                            </a>
+                        </div>
+                    <?php 
+                        }
+                    } ?>
+                </div>    
             </div>
             <div class="footer-bottom">
                 <div class="container">

@@ -166,6 +166,23 @@ function getPaises($mysqli){
     return $paises;
 }
 
+function getAuspiciantes($mysqli, $cod_pais = false){
+    $auspiciantes = array();
+    $query = "SELECT id, nombre, url_img, cod_pais, link FROM auspiciantes";
+    
+    if($cod_pais)
+    {
+        $query .= " WHERE cod_pais = " . $cod_pais;
+    }
+    
+    $result = $mysqli->query($query);
+    while($auspiciante = $result->fetch_assoc())
+    {
+	$auspiciantes[] = array('id'=>$auspiciante['id'],'nombre'=>$auspiciante['nombre'], 'url_img'=>$auspiciante['url_img'],'cod_pais'=>json_decode($auspiciante['cod_pais']), 'link'=>$auspiciante['link']);
+    }
+    return $auspiciantes;
+}
+
 function getIdiomasPais($mysqli, $id_pais=''){
     $cond='';
     if(isset($id_pais) && $id_pais != ''){
