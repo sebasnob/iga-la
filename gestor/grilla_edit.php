@@ -219,14 +219,14 @@ $paises = getPaises($mysqli);
                                             <span class="td">
                                                 <label for="curso">Idioma: </label>
                                                 <select class="form-control input-sm" id="idioma_filtro">
-                                                    <option value="0" <?php if(0 == $idioma_filtro){ echo 'selected';}?>>Seleccione</option>
-                                                    <option value="es" <?php if("es" == $idioma_filtro){ echo 'selected';}?>>Espa&ntilde;ol</option>
-                                                    <option value="in" <?php if("in" == $idioma_filtro){ echo 'selected';}?>>Ingles</option>
-                                                    <option value="pt" <?php if("pt" == $idioma_filtro){ echo 'selected';}?>>Portugues</option>
+                                                    <option value="0" <?php if (0 === $idioma_filtro){ echo 'selected';}?>>Seleccione</option>
+                                                    <option value="es" <?php if("es" === $idioma_filtro){ echo 'selected';}?>>Espa&ntilde;ol</option>
+                                                    <option value="in" <?php if("in" === $idioma_filtro){ echo 'selected';}?>>Ingles</option>
+                                                    <option value="pt" <?php if("pt" === $idioma_filtro){ echo 'selected';}?>>Portugues</option>
                                                 </select>
                                             </span>  
                                             <span class="td">
-                                             <a class="btn btn-primary " id="buscarGrilla"><i class="fa fa-search"></i></a>
+                                             &nbsp;&nbsp;<a class="btn btn-primary " id="buscarGrilla"><i class="fa fa-search"></i></a>
                                             </span>
                                         </div>
                                     </div>
