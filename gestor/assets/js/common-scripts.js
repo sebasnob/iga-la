@@ -130,3 +130,49 @@ var Script = function () {
 
 
 }();
+
+$('#buscarGrilla').click(function()
+{
+    var url = "grilla_edit.php?accion=filtrar";
+    
+    if($('#id_curso_filtro').val() != 0)
+    {
+        url += '&id_curso_filtro=' + $('#id_curso_filtro').val();
+    }
+    if($('#pais_filtro').val() != 0)
+    {
+        url += '&pais_filtro=' + $('#pais_filtro').val();
+    }
+    if($('#idioma_filtro').val() != 0)
+    {
+        url += '&idioma_filtro=' + $('#idioma_filtro').val();
+    }
+    if($('#tipo_filtro').val() != 0)
+    {
+        url += '&tipo_filtro=' + $('#tipo_filtro').val();
+    }
+    if($('#habilitado_filtro').val() != 0)
+    {
+        url += '&habilitado_filtro=' + $('#habilitado_filtro').val();
+    }
+
+    window.location.href = url;
+    
+});
+
+
+(function($) {  
+                $.get = function(key)   {  
+                    key = key.replace(/[\[]/, '\\[');  
+                    key = key.replace(/[\]]/, '\\]');  
+                    var pattern = "[\\?&]" + key + "=([^&#]*)";  
+                    var regex = new RegExp(pattern);  
+                    var url = unescape(window.location.href);  
+                    var results = regex.exec(url);  
+                    if (results === null) {  
+                        return null;  
+                    } else {  
+                        return results[1];  
+                    }  
+                }  
+            })(jQuery); 

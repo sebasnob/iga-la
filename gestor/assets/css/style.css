@@ -2526,3 +2526,15 @@ border: 4px solid #ccc;
 .form-inline{
     margin: 30px;
 }
+
+
+#grilla_editor select{
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+
+#filtro_grilla{
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: rgba(128, 128, 128, 0.31);
+}

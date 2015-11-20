@@ -496,7 +496,7 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = f
         $query .= " AND grilla.cod_curso='{$id_curso_filtro}'";
     }
     
-    $query .= " order by grilla.prioridad, grilla.id_pais, grilla.idioma, grilla.tipo";
+    $query .= " order by grilla.id_pais, grilla.prioridad, grilla.idioma, grilla.tipo";
 
     $result = $mysqli->query($query);
     
