@@ -108,30 +108,6 @@ function getCursos($mysqli, $cod_curso = '')
     return $cursos;
 }
 
-/*function getFilialesCurso($mysqli, $cod_curso, $id_pais='', $id_provincia=''){
-    $cond='';
-    $inner='';
-    if(isset($id_pais) && $id_pais != ''){
-        $inner .= ' INNER JOIN pais_idioma as pi ON pi.id=cpif.id_pais_idioma '
-                . ' INNER JOIN paises as p ON p.id=pi.id_pais';
-        $cond .= ' AND p.id='.$id_pais;
-    }
-    
-    if(isset($id_provincia) && $id_provincia != ''){
-        $cond .= ' AND f.id_provincia='.$id_provincia;
-    }
-    
-    $query = "SELECT f.id, f.nombre FROM curso_pais_idioma_filial as cpif INNER JOIN filiales as f ON f.id=cpif.id_filial ".$inner." WHERE cpif.cod_curso=".$cod_curso. " ".$cond;
-    $resultado = $mysqli->query($query);
-    $filiales = array();
-    while($respuesta = $resultado->fetch_assoc()){
-        $filiales[] = $respuesta;
-    }
-    $resultado->free();
-    
-    return $filiales;
-}*/
-
 function getCursoPais($mysqli, $cod_curso=''){
     $cond = '';
     if(isset($cod_curso) && $cod_curso != ''){
@@ -471,11 +447,11 @@ function detectCountry($mysqli){
     curl_close($ch);
 }
 
-function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = false, $habilitado_filtro = false, $id_curso_filtro = false)
+function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = false, $habilitado_filtro = 3, $id_curso_filtro = false)
 {
     $query = "SELECT * FROM grilla WHERE 1 = 1"; 
     
-    if($idioma)
+    if($habilitado_filtro != 3)
     {
         $query .= " AND grilla.habilitado = '{$habilitado_filtro}'";
     }

@@ -28,7 +28,7 @@ if(isset($_GET['tipo_filtro'])){
     $tipo_filtro = $_GET['tipo_filtro'];
 }
 
-$habilitado_filtro = 1;
+$habilitado_filtro = 3;
 if(isset($_GET['habilitado_filtro'])){
     $habilitado_filtro = $_GET['habilitado_filtro'];
 }
@@ -203,6 +203,7 @@ $paises = getPaises($mysqli);
                                             <span class="td">
                                                 <label for="habilitado">Habilitado: </label>
                                                 <select class="form-control input-sm" id="habilitado_filtro">
+                                                    <option value="3" <?php if(3 == $habilitado_filtro){ echo 'selected';}?>>Todos</option>
                                                     <option value="0" <?php if(0 == $habilitado_filtro){ echo 'selected';}?>>No</option>
                                                     <option value="1" <?php if(1 == $habilitado_filtro){ echo 'selected';}?>>Si</option>
                                                 </select>
