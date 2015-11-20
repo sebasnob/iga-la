@@ -692,7 +692,7 @@ if(isset($_POST['edicion_grilla']))
             }
         }
     }
-    header('Location: grilla_edit.php');
+    header('Location: grilla_edit.php?accion=filtrar');
     exit;
 }
 
@@ -939,7 +939,7 @@ if(isset($_POST['edicion_grilla_editar']))
         }
 
         $mysqli->query("DELETE FROM grilla WHERE grilla.id = " . $id_img_grilla);
-        header('Location: grilla_edit.php');
+        header('Location: grilla_edit.php?accion=filtrar');
         exit;
     }
     else
@@ -996,7 +996,7 @@ if(isset($_POST['edicion_grilla_editar']))
         }
 
         $mysqli->query($query);
-        header('Location: grilla_edit.php');
+        header('Location: grilla_edit.php?accion=filtrar');
         exit;
     }
 }
