@@ -69,18 +69,19 @@ $paises = getPaises($mysqli);
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <style>
-            DIV.table 
-            {
-                display:table;
-            }
-            FORM.tr, DIV.tr
-            {
-                display:table-row;
-            }
-            SPAN.td
-            {
-                display:table-cell;
-            }
+        DIV.table 
+        {
+            display:table;
+        }
+        FORM.tr, DIV.tr
+        {
+            display:table-row;
+        }
+        SPAN.td
+        {
+            display:table-cell;
+            width: 10%;
+        }
         </style>
     </head>
     
@@ -223,9 +224,9 @@ $paises = getPaises($mysqli);
                                                     <option value="in" <?php if("in" == $idioma_filtro){ echo 'selected';}?>>Ingles</option>
                                                     <option value="pt" <?php if("pt" == $idioma_filtro){ echo 'selected';}?>>Portugues</option>
                                                 </select>
-                                            </span>
+                                            </span>  
                                             <span class="td">
-                                                &nbsp;&nbsp;<button id="buscarGrilla" class="btn btn-success">Buscar</button>
+                                             <a class="btn btn-primary " id="buscarGrilla"><i class="fa fa-search"></i></a>
                                             </span>
                                         </div>
                                     </div>
