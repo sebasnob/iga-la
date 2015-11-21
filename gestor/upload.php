@@ -707,20 +707,23 @@ if(isset($_POST['edicion_slider']))
             {
                 $valid_file = true;
                 //now is the time to modify the future file name and validate the file
+
                 $new_file_name = strtolower($_FILES['photo']['name']); //rename file
-                $Length = 10;
-                $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+//                $Length = 10;
+//                $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
                 
-                $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+//                $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+                
+                $new_file_name = str_replace(' ', '-', $new_file_name);
+                
                 
                 if($_FILES['photo']['size'] > (12288000)) //can't be larger than 12 MB
                 {
                     $valid_file = false;
                     $message = 'Oops!  Your file\'s size is to large.';
                 }
-                    
-                $pos = strpos($_FILES['photo']['type'], "image");
-                if ($pos === FALSE)
+                
+                if(!preg_match("/image/i", $_FILES['photo']['type']))
                 {
                     $valid_file = false;
                     $message = 'Oops!  El archivo no es una imagen.';
@@ -732,13 +735,13 @@ if(isset($_POST['edicion_slider']))
                     $ruta = '../images/slider/'.$new_file_name;
                     //ruta de los thumbs
                     $ruta_thumb = '../images/slider/thumb/'.$new_file_name;
-
-                    move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
-                    
+                    $respuesta = move_uploaded_file($_FILES['photo']['tmp_name'], $ruta);
                     //creo el thumb
                     $newThumb = new resize($ruta);
                     $newThumb->resizeImage(150,632,"landscape");
                     $exito = $newThumb->saveImage($ruta_thumb);
+                    
+                    
                     
                     $ruta = substr($ruta, 3);
                     $ruta_thumb = substr($ruta_thumb, 3);
@@ -859,65 +862,6 @@ if(isset($_POST['edicion_slider']))
     }
     header('Location: slider_edit.php');
     exit;
-}
-
-
-if(isset($_POST['edicion_home'])){
-    if(isset($_POST['url_video']) && $_POST['url_video'] != ''){
-        $query = "UPDATE home SET url_video='".$_POST['url_video']."'";
-        $result = $mysqli->query($query);
-        if($result){
-                $message = "<br/>El video se modifico correctamente.<br/>";
-        }
-    }
-    
-    if(isset($_POST['titulo']) && $_POST['titulo'] != ''){
-        switch($_POST['idioma']){
-            case 'IN':
-                    $query = "UPDATE home SET titulo_in='".$_POST['titulo']."'";
-                break;
-            case 'POR':
-                    $query = "UPDATE home SET titulo_por='".$_POST['titulo']."'";
-                break;
-            default: 
-                   $query = "UPDATE home SET titulo_es='".$_POST['titulo']."'"; 
-                break;
-        }
-        $result = $mysqli->query($query);
-        if($result){
-                $message = "<br/>El texto se modifico correctamente.<br/>";
-        }
-    }
-    
-    if(isset($_POST['subtitulo']) && $_POST['subtitulo'] != ''){
-        switch($_POST['idioma']){
-            case 'IN':
-                    $query = "UPDATE home SET subtitulo_in='".$_POST['subtitulo']."'";
-                break;
-            case 'POR':
-                    $query = "UPDATE home SET subtitulo_por='".$_POST['subtitulo']."'";
-                break;
-            default: 
-                   $query = "UPDATE home SET subtitulo_es='".$_POST['subtitulo']."'"; 
-                break;
-        }
-        $result = $mysqli->query($query);
-        if($result){
-                $message = "<br/>El texto se modifico correctamente.<br/>";
-        }
-    }
-    
-    if(isset($_POST['chose_color_fondo']) && $_POST['chose_color_fondo'] != ''){
-        $query = "UPDATE home SET menu_color='".$_POST['chose_color_fondo']."'";
-        $result = $mysqli->query($query);
-    }
-    
-    if(isset($_POST['chose_color_fuente']) && $_POST['chose_color_fuente'] != ''){
-        $query = "UPDATE home SET fuente_color='".$_POST['chose_color_fuente']."'";
-        $result = $mysqli->query($query);
-    }
-    
-    header("Location: home_edit.php?idioma=".$_POST['idioma']);
 }
 
 if(isset($_POST['edicion_grilla_editar']))

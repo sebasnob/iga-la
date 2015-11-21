@@ -95,18 +95,6 @@ if($logged == 'out'){
 
                     <div class="row mt">
                       <!-- PANEL 1 -->
-                        <div class="col-md-4 mb">
-                            <!-- WHITE PANEL - TOP USER -->
-                            <div class="panel-3 pn">
-                                <div class="panel-3-header">
-                                    <h5><a href="home_edit.php" style="color:white">EDITAR SLIDER Y CONTENIDO DEL HOME</a></h5>
-                                </div>
-                                <div class="centered">
-
-                                </div>
-                            </div>
-                        </div><!-- /col-md-4 -->
-                        
                         <div class="col-md-4 col-sm-4 mb">
                            <div class="panel-2 pn">
                             <div class="panel-2-header">

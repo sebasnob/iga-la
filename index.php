@@ -186,7 +186,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                 <div class="row">
                     <?php 
                     if(!$gridArrayCursos){
-                        echo $lenguaje['no_existen_cursos_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                        echo "<div class='text-center'>" . $lenguaje['no_existen_cursos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . "</div>";
                     }else{
                         foreach ($gridArrayCursos as $imgGrid){
                     ?>
@@ -266,7 +266,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                 <div class="row">
                     <?php 
                     if(!$gridArrayCocineritos){
-                        echo $lenguaje['no_existen_cursos_cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ;
+                        echo "<div class='text-center'>" . $lenguaje['no_existen_cursos_cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . "</div>";
                     }else{
                         foreach ($gridArrayCocineritos as $imgGrid){
                     ?>
@@ -345,7 +345,7 @@ $gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionad
                 <div class="row">
                     <?php 
                     if(!$gridArrayCursosCortos){
-                        echo $lenguaje['no_existen_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                        echo "<div class='text-center'>" . $lenguaje['no_existen_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . "</div>";
                     }else{
                         foreach ($gridArrayCursosCortos as $imgGrid){
                     ?>

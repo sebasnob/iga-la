@@ -79,11 +79,15 @@ $auspiciantes = getAuspiciantes($mysqli);
                                             <?php } ?>
                                         </select>
                                         <label>Imagen: </label>
-                                        <input type="file" accept="file_extension|image" name="photo" style="display: inline;">
+                                        <input type="file" accept="file_extension|image" id="photo" name="photo" style="display: inline;" required="">
                                         <br><br>
                                         <div id="respuesta" class="alert" style="display: none"></div>
                                         <br>
-                                        <input type="submit" class="btn btn-success" value="Agregar">
+                                        <button  onclick="enviar(this.form)" class="btn btn-success">Agregar</button>
+                                        <div id="cargando"  style="width: 50px;margin-left: 30px;display: none;">
+                                            <img src="../images/preloader.gif">
+                                            <span>Cargando...</span>
+                                        </div>
                                     </form>
                                 </section>
                             </div>

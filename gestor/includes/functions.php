@@ -20,7 +20,7 @@ function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
         $qry_datos = $mysqli->query($query2);
         $datos_curso = $qry_datos->fetch_assoc();
         $datos_curso['estado'] = $res_cpif['estado'];
-        $qry_datos->free();
+        if($qry_datos)$qry_datos->free();
         
         $query3 = "select * from malla_curricular WHERE id_curso_filial_idioma = " . $res_cpif['id'];
         $qry_malla = $mysqli->query($query3);
@@ -28,13 +28,13 @@ function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
         {
             $datos_curso['malla_curricular'][] = $datos_malla;
         }
-        $qry_malla->free();
+        if($qry_malla)$qry_malla->free();
         
         return $datos_curso;
     }else{
         return "No existen datos para la filial e idiomas seleccionados.";
     }
-    $qry_cpi->free();
+    if($qry_cpi)$qry_cpi->free();
     
     /*$cabecera = getCabecera($mysqli, $id_curso, $id_pais, $id_idioma);
     
@@ -66,27 +66,10 @@ function getIdiomas($mysqli, $id_idioma = false, $id_pais = false)
     {
         $idiomas[] = $respuesta;
     }
-    $resultado->free();
+    if($resultado)$resultado->free();
     
     return $idiomas;
 }
-
-/*function getPaisIdioma($mysqli, $id_pais, $id_idioma){
-    $qry = $mysqli->query("SELECT id FROM pais_idioma WHERE id_pais=".$id_pais." AND id_idioma=".$id_idioma);
-    $pais_idioma = $qry->fetch_assoc();
-    $qry->free();
-    
-    return $pais_idioma;
-}
-
-function getCurso($mysqli, $id_curso){
-    $query = "SELECT nombre, color FROM cursos WHERE id=".$id_curso;
-    $resultado = $mysqli->query($query);
-    $respuesta = $resultado->fetch_assoc();
-    $resultado->free();
-    
-    return $respuesta;
-}*/
 
 function getCursos($mysqli, $cod_curso = '')
 {
@@ -103,7 +86,7 @@ function getCursos($mysqli, $cod_curso = '')
     {
         $cursos[] = $respuesta;
     }
-    $resultado->free();
+    if($resultado)$resultado->free();
     
     return $cursos;
 }
@@ -118,7 +101,7 @@ function getCursoPais($mysqli, $cod_curso=''){
     while($c_p = $result->fetch_assoc()){
 	$cursos_paises[] = array('id'=>$c_p['id'], 'pais'=>$c_p['pais']);
     }
-    $result->free();
+    if($result)$result->free();
     
     return $cursos_paises;
 }
@@ -128,7 +111,7 @@ function getPais($mysqli, $cod_pais){
     $query = "SELECT id, pais, cod_pais, flag FROM paises WHERE cod_pais='".$cod_pais."'";
     $resultado = $mysqli->query($query);
     $respuesta = $resultado->fetch_assoc();
-    $resultado->free();
+    if($resultado)$resultado->free();
     
     return $respuesta;
 }
@@ -192,7 +175,7 @@ function getProvinciaFromFilial($mysqli, $id_filial){
     $query = "SELECT id_provincia FROM filiales WHERE id={$id_filial}";
     $resultado = $mysqli->query($query);
     $respuesta = $resultado->fetch_assoc();
-    $resultado->free();
+    if($resultado)$resultado->free();
     
     return $respuesta;
 }
@@ -210,15 +193,6 @@ function getFiliales($mysqli, $id_provincia='', $id_pais=''){
     }
     return $filiales;
 }
-
-/*function getDatosHome($mysqli){
-    $query = "SELECT id, url_video, titulo_es, titulo_in, titulo_por, subtitulo_es, subtitulo_por, subtitulo_in, menu_color, fuente_color FROM home";
-    $resultado = $mysqli->query($query);
-    $datos_home = $resultado->fetch_assoc();
-    $resultado->free();
-	
-    return $datos_home;
-}*/
 
 /*function setChanges($mysqli, $id_curso, $color){
     $resultado = $mysqli->query("UPDATE cursos SET color='".$color."' WHERE id = ".$id_curso);
@@ -870,7 +844,8 @@ function getNovedades($mysqli, $id_pais='', $id_idioma=''){
             $novedades[] = $respuesta;
         }
     }
-    $resultado->free();
+    
+    if($resultado)$resultado->free();
     
     return $novedades;
 }
@@ -886,19 +861,29 @@ function getNovedadesHome($mysqli, $id_pais='1', $id_idioma='1', $limit='3'){
             $novedades[] = $respuesta;
         }
     }
-    $resultado->free();
+    if($resultado)$resultado->free();
     
     return $novedades;
 }
 
 function getNovedad($mysqli, $id_novedad){
     $resultado = $mysqli->query("SELECT id, titulo, imagen, descripcion, link, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades WHERE id={$id_novedad}");
-    if($resultado->num_rows > 0){
-        $novedad = $resultado->fetch_assoc();
-    }else{
-        $novedad = array();
+    
+    if($resultado)
+    {
+        if($resultado->num_rows > 0)
+        {
+            $novedad = $resultado->fetch_assoc();
+        }
+        else
+        {
+            $novedad = array();
+        }
+        
+        $resultado->free();
     }
-    $resultado->free();
+    
+    
     
     return $novedad;
 }
@@ -906,7 +891,7 @@ function getNovedad($mysqli, $id_novedad){
 function getTotalNovedades($mysqli){
     $resultado = $mysqli->query("SELECT count(*) AS total FROM novedades");
     $total_novedades = $resultado->fetch_assoc();
-    $resultado->free();
+    if($resultado)$resultado->free();
     
     return $total_novedades['total'];
 }
@@ -923,7 +908,7 @@ function getTiposCursos($mysqli, $id_padre=''){
         }else{
             $tipos_cursos = array();
         }
-        $resultado->free();
+        if($resultado)$resultado->free();
     }else{
         $resultado = $mysqli->query("SELECT id, nombre_es, nombre_in, nombre_pt, padre FROM tipos WHERE padre=0");
         if($resultado->num_rows > 0){
@@ -934,7 +919,7 @@ function getTiposCursos($mysqli, $id_padre=''){
         }else{
             $tipos_cursos = array();
         }
-        $resultado->free();
+        if($resultado)$resultado->free();
     }
     
     return $tipos_cursos;
@@ -947,7 +932,7 @@ function getTipoCurso($mysqli, $id_tipo){
     }else{
         $tipo = array();
     }
-    $resultado->free();
+    if($resultado)$resultado->free();
     
     return $tipo;
 }
@@ -964,7 +949,7 @@ function getTiposAsignados($mysqli, $cod_curso){
         }else{
             $tipos = array();
         }
-        $resultado->free();
+        if($resultado)$resultado->free();
     }
     
     return $tipos;
@@ -1045,7 +1030,7 @@ function getMallaCurricular($mysqli, $id_cfi)
         $malla = array();
     }
     
-    $resultado->free();
+    if($resultado)$resultado->free();
         
     return $malla;
 }
