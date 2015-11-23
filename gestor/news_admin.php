@@ -174,6 +174,7 @@ if($logged == 'out'){
                         <div class="row mt">
                             <div class="col-lg-12">
                                 <button id="confirm" class="btn btn-success">Guardar</button>
+                                <img src="../images/preloader.gif" style="height: 30px; margin-left: 10px; display: none">
                             </div><!-- /col-lg-12 -->
                         </div><!-- /row --> 
                     </form>
@@ -211,7 +212,9 @@ if($logged == 'out'){
             
             CKEDITOR.instances['descripcion'].setData(<?php echo (isset($novedad['descripcion']))?json_encode($novedad['descripcion']):''; ?>);
             
-            $('#confirm').click(function(){
+            $('#confirm').click(function()
+            {
+                $('#cargando').show('slow');
                 $('#form_change').submit();
             });
             

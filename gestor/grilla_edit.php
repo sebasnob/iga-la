@@ -28,7 +28,7 @@ if(isset($_GET['tipo_filtro'])){
     $tipo_filtro = $_GET['tipo_filtro'];
 }
 
-$habilitado_filtro = 1;
+$habilitado_filtro = 3;
 if(isset($_GET['habilitado_filtro'])){
     $habilitado_filtro = $_GET['habilitado_filtro'];
 }
@@ -107,7 +107,7 @@ $paises = getPaises($mysqli);
                                         <input type="hidden" name="edicion_grilla" id="edicion_grilla" value="true" />
                                         <input type="hidden" name="edicion_grilla_nueva" id="edicion_grilla_nueva" value="true" />
                                         <div class="form-group">
-                                            <input type="file" accept="file_extension|image"  name="photo" required autofocus>
+                                            <input type="file" accept="file_extension|image"  id="photo" name="photo" required autofocus>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Columnas:</label>
@@ -168,7 +168,11 @@ $paises = getPaises($mysqli);
                                                 <option value="pt">Portugues</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-success">Agregar Imagen</button>
+                                        <button onclick="enviar(this.form)" class="btn btn-success">Agregar Imagen</button>
+                                        <div id="cargando"  style="width: 50px;margin-left: 30px;display: none;">
+                                            <img src="../images/preloader.gif">
+                                            <span>Cargando...</span>
+                                        </div>
                                     </form>
                                 </section>
                             </div><!-- /content-panel -->
@@ -203,6 +207,7 @@ $paises = getPaises($mysqli);
                                             <span class="td">
                                                 <label for="habilitado">Habilitado: </label>
                                                 <select class="form-control input-sm" id="habilitado_filtro">
+                                                    <option value="3" <?php if(3 == $habilitado_filtro){ echo 'selected';}?>>Todos</option>
                                                     <option value="0" <?php if(0 == $habilitado_filtro){ echo 'selected';}?>>No</option>
                                                     <option value="1" <?php if(1 == $habilitado_filtro){ echo 'selected';}?>>Si</option>
                                                 </select>

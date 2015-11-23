@@ -12,6 +12,17 @@ function borrar(form)
     }
 }
 
+function enviar(form)
+{
+    if(!$('#photo').val() == '')
+    {
+        $('#cargando').show('fast');
+        $('#cargando').css('display','inline');
+        form.submit();
+    }    
+}
+
+
 function formhash(form, password) {
     // Create a new element input, this will be our hashed password field. 
     var p = document.createElement("input");

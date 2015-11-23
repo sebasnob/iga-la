@@ -71,7 +71,7 @@ $idiomas = getIdiomas($mysqli);
                                         <input type="hidden" name="edicion_slider" id="edicion_slider" value="true" />
                                         <input type="hidden" name="edicion_slider_nueva" id="edicion_slider_nueva" value="true" />
                                         <div class="form-inline">
-                                            <input style="min-height:50px" type="file" accept="file_extension|image" class="form-control" name="photo" required autofocus>
+                                            <input style="min-height:50px" type="file" accept="file_extension|image" class="form-control" id="photo" name="photo" required autofocus>
                                         </div>
                                         <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Link: </label>
@@ -90,7 +90,11 @@ $idiomas = getIdiomas($mysqli);
                                                 <?php }?>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-success">Agregar Imagen</button>
+                                        <button onclick="enviar(this.form)" class="btn btn-success">Agregar Imagen</button>
+                                        <div id="cargando"  style="width: 50px;margin-left: 30px;display: none;">
+                                            <img src="../images/preloader.gif">
+                                            <span>Cargando...</span>
+                                        </div>
                                     </form>
                                 </section>
                             </div><!-- /content-panel -->
@@ -101,11 +105,11 @@ $idiomas = getIdiomas($mysqli);
                         <div class="col-md-12">
                             <div class="form-panel">
                                 
-                                <section id="editor_grilla_editar" style="display: inline-block;">
+                                <section id="editor_grilla_editar" style="display: inline-block; width: 100%">
                                     <h4><i class="fa fa-angle-right"></i> Editar Slider</h4>
                                     
                                 <?php foreach ($sliderArray as $imgSlider){?>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <form  enctype="multipart/form-data" method="POST" action="upload.php">
                                             <input type="hidden" name="edicion_slider" id="edicion_slider" value="true" />
                                             <input type="hidden" name="edicion_slider_editar" id="edicion_slider_editar" value="true" />

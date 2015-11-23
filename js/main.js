@@ -214,7 +214,6 @@ function cambiarIdioma(cod_idioma){
               "cambiarIdioma" : "true" },
       success: function(data)
       {
-            console.log(data);
             location.reload(true);
             return false;
       },

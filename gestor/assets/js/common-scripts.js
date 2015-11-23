@@ -151,7 +151,7 @@ $('#buscarGrilla').click(function()
     {
         url += '&tipo_filtro=' + $('#tipo_filtro').val();
     }
-    if($('#habilitado_filtro').val() != 0)
+    if($('#habilitado_filtro').val() != 3)
     {
         url += '&habilitado_filtro=' + $('#habilitado_filtro').val();
     }

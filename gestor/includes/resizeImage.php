@@ -10,28 +10,30 @@ class resize
     {
         // *** Open up the file
         $this->image = $this->openImage($fileName);
- 
+        
+        
         // *** Get width and height
         $this->width  = imagesx($this->image);
         $this->height = imagesy($this->image);
+        
     }
 	
 	private function openImage($file)
 	{
 		// *** Get extension
 		$extension = strtolower(strrchr($file, '.'));
-	 
+                
 		switch($extension)
 		{
 			case '.jpg':
 			case '.jpeg':
-				$img = @imagecreatefromjpeg($file);
+				$img = imagecreatefromjpeg($file);
 				break;
 			case '.gif':
-				$img = @imagecreatefromgif($file);
+				$img = imagecreatefromgif($file);
 				break;
 			case '.png':
-				$img = @imagecreatefrompng($file);
+				$img = imagecreatefrompng($file);
 				break;
 			default:
 				$img = false;

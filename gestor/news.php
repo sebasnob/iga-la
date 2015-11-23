@@ -90,6 +90,7 @@ if($logged == 'out'){
                                                 <button class='btn <?php echo ($j['estado'] == 1)? "btn-default":"btn-success";?>  btn-xs' onclick="javascript:cambiarEstadoNovedad(this, span<?=$j["id"]?>, <?=$j['id']?>)"><i class='fa fa-check'></i></button>
                                                 <a href="news_admin.php?id=<?=$j['id']?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                                                 <button class="btn btn-danger btn-xs" onclick="javascript:eliminarNovedad(this, <?=$j['id']?>)"><i class="fa fa-trash-o "></i></button>
+                                                <img id="cargando" src="../images/preloader.gif" style="height: 20px;display: none">
                                             </td>
                                         </tr>
                                     <!--<div class="task-title">
@@ -159,6 +160,7 @@ if($logged == 'out'){
         }
         
         function eliminarNovedad(boton, id_noticia){
+            $('#cargando').show('slow');
             $.ajax({
                 url: "controller_ajax.php",
                 method: "POST",
@@ -168,6 +170,7 @@ if($logged == 'out'){
                     if(data.result == 'ok'){
                         $(boton).parents("tr").fadeOut("slow");
                     }
+                    $('#cargando').hide('slow');
                 }
             });
         }

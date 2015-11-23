@@ -11,12 +11,6 @@ MAIN SIDEBAR MENU
             <p class="centered"><a href="index.php"><img src="images/logo-iga_transparent.png"></a></p>
             <h5 class="centered"><?=strtoupper($_SESSION['username']);?></h5>
 
-            <!--<li class="sub-menu">
-               <a href="home_edit.php" >
-                    <i class="fa fa-home fa-lg"></i>
-                    <span>Editar Home</span>
-                </a>
-            </li>-->
             <li class="sub-menu">
                 <a href="javascript:;" >
                     <i class="fa fa-th"></i>
