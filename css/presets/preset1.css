@@ -37,6 +37,11 @@ a:hover, a:focus {
   background-color:#010F2C;
 }
 
+.main-nav{
+    background-color:#010f2c;
+    opacity: 0.7;
+}
+
 .twitter-left-control:hover, 
 .twitter-right-control:hover, 
 .btn-loadmore:hover  {
