@@ -24,7 +24,7 @@ jQuery(function($) {
 
 	//Scroll Menu
 	$(window).on('scroll', function(){
-		if( $(window).scrollTop()>slideHeight ){
+		if( $(window).scrollTop()>1 ){
 			$('.main-nav').addClass('navbar-fixed-top');
 		} else {
 			$('.main-nav').removeClass('navbar-fixed-top');

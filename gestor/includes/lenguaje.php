@@ -20,7 +20,7 @@ $lenguaje['alumnos_felices_ES'] = "Alumnos Felices :)";
 $lenguaje['filiales_ES'] = "Filiales";
 $lenguaje['cursos_disponibles_ES'] = "Cursos Disponibles";
 $lenguaje['consultas_ES'] = "Consultas";
-$lenguaje['novedades_ES'] = "Novedades - Redes sociales";
+$lenguaje['novedades_ES'] = "Novedades";
 $lenguaje['encontranos_ES'] = "Encontranos y seguinos en nuestras redes sociales";
 $lenguaje['contactate_ES'] = "Contactate con nosotros";
 $lenguaje['encontra_tu_iga_en_ES'] = "Encontra tu IGA en ";
@@ -41,8 +41,7 @@ $lenguaje['campus_ES'] = "Campus";
 $lenguaje['nombre_defecto_ES'] = "Curso no Disponible";
 $lenguaje['duracion_defecto_ES'] = "";
 $lenguaje['descripcion_defecto_ES'] = "Actualmente este Curso no se encuentra Disponible en este País";
-$lenguaje['cursos_cortos_ES'] = "Cursos Cortos";
-$lenguaje['cocineritos_ES'] = "Cocineritos";
+
 $lenguaje['no_existen_cursos_ES'] = "No existen cursos disponibles para el pais seleccionado.";
 $lenguaje['no_existen_cursos_cortos_ES'] = "No existen cursos cortos disponibles para el pais seleccionado.";
 $lenguaje['no_existen_cursos_cocineritos_ES'] = "No existen cursos de cocineritos disponibles para el pais seleccionado.";
@@ -51,6 +50,13 @@ $lenguaje['atencion_alumno_ES'] = "Atención al alumno";
 $lenguaje['seleccion_opcion_ES'] = "Seleccione una Opción";
 $lenguaje['consulta_enviada_ES'] = "Consulta enviada. Nos comunicaremos a la brevedad!";
 $lenguaje['faltan_datos_ES'] = "Faltan datos!";
+
+$lenguaje['gastro_ES'] = "Gastronomía y Alta Cocina";
+$lenguaje['certif_gastro_ES'] = "Certificación Avanzada en Gastronomía";
+$lenguaje['paste_avanzada_ES'] = "Pastelería Profesional & Avanzada";
+$lenguaje['gastro_intensivo_ES'] = "Gastronomía y Alta Cocina INTENSIVO";
+$lenguaje['cursos_cortos_ES'] = "Cursos Cortos";
+$lenguaje['cocineritos_ES'] = "Cocineritos";
 
 //ingles
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
@@ -73,7 +79,7 @@ $lenguaje['alumnos_felices_IN'] = "Happy Students :)";
 $lenguaje['filiales_IN'] = "Subsidiaries";
 $lenguaje['cursos_disponibles_IN'] = "Available Courses";
 $lenguaje['consultas_IN'] = "Support";
-$lenguaje['novedades_IN'] = "News - Social Networks";
+$lenguaje['novedades_IN'] = "News";
 $lenguaje['encontranos_IN'] = "Follow and find us on our social networks";
 $lenguaje['contactate_IN'] = "Get in touch with us";
 $lenguaje['encontra_tu_iga_en_IN'] = "Find Your IGA in ";
@@ -105,7 +111,17 @@ $lenguaje['seleccion_opcion_IN'] = "Choose an option.";
 $lenguaje['consulta_enviada_IN'] = "Your requirements correctly.";
 $lenguaje['faltan_datos_IN'] = "Missing some data!";
 
+$lenguaje['gastro_IN'] = "Gastronomy and Haute Cuisine";
+$lenguaje['certif_gastro_IN'] = "Advanced Certification in Gastronomy";
+$lenguaje['paste_avanzada_IN'] = "Advanced Professional Pastry and";
+$lenguaje['gastro_intensivo_IN'] = "Gastronomy and Haute Cuisine INTENSIVE";
+
 //portugues
+$lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
+$lenguaje['certif_gastro_POR'] = "Certificado Avançado em Gastronomia";
+$lenguaje['paste_avanzada_POR'] = "Advanced Professional e pastelaria";
+$lenguaje['gastro_intensivo_POR'] = "Gastronomia e Haute Cuisine INTENSIVO";
+
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
 $lenguaje['inicio_POR'] = 'Iniciação';
 $lenguaje['curso_POR'] = 'Cursos';
@@ -126,7 +142,7 @@ $lenguaje['alumnos_felices_POR'] = "Estudantes Felizes :)";
 $lenguaje['filiales_POR'] = "Subsidiárias";
 $lenguaje['cursos_disponibles_POR'] = "Cursos Disponíveis";
 $lenguaje['consultas_POR'] = "Consultas";
-$lenguaje['novedades_POR'] = "Notícias - Redes Sociais";
+$lenguaje['novedades_POR'] = "Notícias";
 $lenguaje['encontranos_POR'] = "Encontre-nos e siga-nos em nossas redes sociais";
 $lenguaje['contactate_POR'] = "Entre em contato conosco";
 $lenguaje['encontra_tu_iga_en_POR'] = "Encontre seu IGA em ";

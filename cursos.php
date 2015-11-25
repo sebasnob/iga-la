@@ -157,25 +157,14 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         
         <section id="head_image_curso">
             <div class="container-fluid">
-                <div class="row">
                     <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="" style="width: 100%;">
-                </div>
             </div>
         </section> 
         
         <section id="single_curso" class="container">
             <div class="row">
                 <aside class="col-sm-4 col-sm-push-8">
-                    <div class="widget ads">
-                        <div class="row">
-                            <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
-                                <div class="fb-page" data-href="https://www.facebook.com/IGA.GASTRONOMIA" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true">
-                                    <div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/IGA.GASTRONOMIA"><a href="https://www.facebook.com/IGA.GASTRONOMIA">IGA</a></blockquote></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--/.ads-->     
-                    <br/>
+                    <br>
                     <?php
                     $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
                     if(count($novedad) > 0){
