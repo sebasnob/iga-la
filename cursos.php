@@ -311,7 +311,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </div>
                     </section>
                 </div><!--/.col-md-8-->
-                <div class="col-md-12">
+                <div class="col-sm-12">
                     <section id="objetivo">
                         <h2>Nuestro Objetivo</h2>
                         <div class="entry-meta">
