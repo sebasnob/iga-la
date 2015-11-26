@@ -190,7 +190,6 @@ section {
   transition-property: opacity;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 91vh !important;
 }
 
 .carousel-fade .carousel-inner .item:after {
@@ -1221,12 +1220,12 @@ padding-bottom: 50px;
     display: none;
     position: absolute;
     height: 130px;
-    width: 435px;
+    width: 575px;
     z-index: 9;
-    background-color: #002F5E;
+    background-color: #010F2C;
 }
 #slider{
-    height: 91vh;
+    height: 100vh;
 }
 #cover{
     position: absolute;
@@ -1248,7 +1247,7 @@ padding-bottom: 50px;
 }
 
 #desplegableCursos a:hover{
-    color: #396CC8;
+    color: #000;
 }
 
 .navbar-nav li{
@@ -1257,4 +1256,34 @@ padding-bottom: 50px;
 
 .navbar-fixed-top{
     opacity: 0.7;
+}
+
+@media screen and (max-width: 629px) {
+    #slider{
+        height: 47vh;
+    }
+}
+
+@media screen and (min-width: 630px) and (max-width: 767px) {
+    #slider{
+        height: 57vh;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-height: 974px) {
+    #slider{
+        height: 67vh;
+    }
+}
+
+@media screen and (min-width: 975px) and (max-height: 1024px) {
+    #slider{
+        height: 77vh;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-height: 2024px) {
+    #slider{
+        height: 95vh;
+    }
 }

@@ -45,6 +45,12 @@ MAIN SIDEBAR MENU
                     <span>Editar Auspiciantes</span>
                 </a>
             </li>
+            <li class="sub-menu">
+                <a href="cursos_cortos_edit.php" >
+                    <i class="fa fa-list-ul"></i>
+                    <span>Cursos Cortos</span>
+                </a>
+            </li>
         </ul>
         <!-- sidebar menu end-->
     </div>

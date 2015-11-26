@@ -133,37 +133,37 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                 </div>
                 <div id="desplegableCursos">
-                    <ul class="nav">
+                    <ul class="nav" style="float: left">
                         <li class="menuCursos">
                             <a href="cursos.php?cod_curso=1">
                                 <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
                             </a>
                         </li>
                         <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=1">
-                                <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            <a href="cursos.php?cod_curso=63">
+                                <?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
                             </a>
                         </li>
                         <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=1">
-                                <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            <a href="cursos.php?cod_curso=17">
+                                <?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav">
+                    <ul class="nav" style="float: right">
                         <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=1">
-                                <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            <a href="cursos.php?cod_curso=31">
+                                <?=$lenguaje['paste_avanzada_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
                             </a>
                         </li>
                         <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=1">
-                                <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            <a href="cursos.php?cod_curso=95">
+                                <?=$lenguaje['gastro_intensivo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
                             </a>
                         </li>
                         <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=1">
-                                <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            <a href="cursos_cortos.php">
+                                <?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
                             </a>
                         </li>
                     </ul>
@@ -510,7 +510,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                 <div class="container text-center">
                     <div class="footer-logo">
-                        <a href="index.html"><img class="img-responsive" src="images/logo-iga_transparent.png" alt=""></a>
+                        <a href="index.php"><img class="img-responsive" src="images/logo-iga_transparent.png" alt=""></a>
                     </div>
                     <div class="social-icons">
                         <ul>

@@ -7,11 +7,6 @@ include_once 'gestor/includes/functions.php';
 include_once 'gestor/includes/lenguaje.php';
 
 //unset($_SESSION);
-if(!isset($_GET['cod_curso']) || $_GET['cod_curso'] == ''){
-    header("Location:index.php");
-    exit();
-}
-
 if(!isset($_SESSION['pais']))
 {
     detectCountry($mysqli);
@@ -52,7 +47,6 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
         
-        <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php?cod_curso=<?=$_GET['cod_curso']?>" />
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
@@ -66,7 +60,6 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 {
     $id_filial = (isset($_GET['id_filial'])) ? $_GET['id_filial'] : $_SESSION['id_filial'];
-    $cod_curso = $_GET['cod_curso'];
     
     $res_idioma = $mysqli->query("SELECT id FROM idiomas WHERE cod_idioma='{$_SESSION['idioma_seleccionado']['cod_idioma']}'");
     $idioma = $res_idioma->fetch_assoc();
@@ -74,10 +67,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
     $showModal = 0;
     
     $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
-    
-    $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
-    
-    $malla_curricular = getMallaCurricular($mysqli, $datos_curso['id_cfi']);
 ?>
         <div id="fb-root"></div>
         <header id="home">
@@ -90,18 +79,17 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.php">
+                        <a class="navbar-brand" href="index.html">
                             <h1><img class="img-responsive" src="images/logo-iga_transparent.png" alt="logo"></h1>
                         </a>                    
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">     
-                            <li class="scroll active"><a href="index.php"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="index.php#portfolio"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            
-                            <li class="scroll"><a href="index.php#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="index.php#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
-                            <li class="scroll"><a href="index.php#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll active"><a href="#"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li id="cursos"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></li>
+                            <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
+                            <li class="scroll"><a href="#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
                         </ul>
                         
@@ -113,7 +101,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 foreach($paises as $i=>$d){
                                     if($_SESSION['pais']['cod_pais'] != $d['cod_pais']){
                                 ?>
-                                    <li><a href="javascript:cambiarPais('<?=$d['cod_pais']?>')" ><img src="<?=$d['flag']?>" /><?=$d['pais']?></a></li>
+                                    <li><a href="javascript:cambiarPais('<?=$d['cod_pais']?>')" ><img src="<?=$d['flag']?>" /><span style="margin-left: 5px;"> <?=$d['pais']?></span></a></li>
                                 <?php
                                     }
                                 }
@@ -124,8 +112,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <?=$_SESSION['idioma_seleccionado']['idioma']?> 
                                     <?php if(count($idiomas) > 1) { ?>
-                                        <span class="caret"></span>
-                                    <?php } ?>    
+                                    <span class="caret"></span>
+                                    <?php } ?>
                                 </a>
                                 <?php if(count($idiomas) > 1) { ?>
                                 <ul class="dropdown-menu">
@@ -139,31 +127,102 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                         </a>
                                     </li>
                                     <?php
+                                        }
                                     }
+                                ?>
+                                    <?php
                                 }
                                 ?>
                                 </ul>
-                                <?php
-                                }
-                                ?>
                             </li>
                             
                         </ul>
                     </div>
                 </div>
+                <div id="desplegableCursos">
+                    <ul class="nav" style="float: left">
+                        <li class="menuCursos">
+                            <a href="cursos.php?cod_curso=1">
+                                <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            </a>
+                        </li>
+                        <li class="menuCursos">
+                            <a href="cursos.php?cod_curso=63">
+                                <?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            </a>
+                        </li>
+                        <li class="menuCursos">
+                            <a href="cursos.php?cod_curso=17">
+                                <?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav" style="float: right">
+                        <li class="menuCursos">
+                            <a href="cursos.php?cod_curso=31">
+                                <?=$lenguaje['paste_avanzada_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            </a>
+                        </li>
+                        <li class="menuCursos">
+                            <a href="cursos.php?cod_curso=95">
+                                <?=$lenguaje['gastro_intensivo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            </a>
+                        </li>
+                        <li class="menuCursos">
+                            <a href="cursos_cortos.php">
+                                <?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div><!--/#main-nav-->
-            
-        </header><!--/#home-->
+        </header>    
         
         <section id="head_image_curso">
             <div class="container-fluid">
-                    <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="" style="width: 100%;">
+                <img class="img-responsive animated fadeInLeftBig" src="images/Cabecera-Cursos-Cortos-Mayo-2015.jpg" alt="" style="width: 100%;">
             </div>
         </section> 
         
         <section id="single_curso" class="container">
             <div class="row">
-                <aside class="col-sm-4 col-sm-push-8">
+                <div class="col-sm-8">
+                    <br>
+                    <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+                    <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
+                        <div class="form-group">
+                            <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                            <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
+                                <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
+                                <?php foreach ($provincias as $provincia){?>
+                                <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
+                                <?php }?>
+                            </select>    
+                        </div>
+                        <div class="form-group">
+                            <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                            <select id="filiales_matricula" class="form-control">
+                                <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
+                            </select>
+                        </div>
+                    </form>
+                    <br/>
+                    <table>
+                        <thead>
+                            <th>Bebidas:</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> - Bartender</td>
+                            </tr>
+                            <tr>
+                                <td> - Sommelier</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        
+                </div><!--/.col-md-8-->
+                <div class="col-sm-4">
                     <br>
                     <?php
                     $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
@@ -188,129 +247,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     <?php
                     }
                     ?>
-                </aside>        
-                <div class="col-sm-8 col-sm-pull-4">
-                    <section id="curso">
-                        <h2><?=$datos_curso['nombre']?></h2>
-                        <div class="entry-meta">
-                            <span>
-                                <i class="fa fa-calendar"></i>&nbsp;Duración:
-                    	    <?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." horas": ''; ?>
-                    	    <?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." meses": ''; ?>
-                    	    <?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." años": ''; ?>
-                            </span>
-                        </div>
-                    <?=$datos_curso['descripcion']?>
-                    </section>
-                    <hr>
-                    <section id="cursado_planes">
-                        <h3>Cursado y plan de pagos</h3>
-                        <p>Para ver los inicios de clases, los horarios de cursado y las formas de pago, seleccione una provincia y un local.</p>
-                        <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
-                            <div class="form-group">
-                                <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
-                                <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
-                                    <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
-                                <?php foreach ($provincias as $provincia){?>
-                                    <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
-                                <?php }?>
-                                </select>    
-                            </div>
-                            <div class="form-group">
-                                <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
-                                <select id="filiales_matricula" class="form-control">
-                                    <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
-                                </select>
-                            </div>
-                        </form>
-                        <br/>
-                        
-                        <div class="table-responsive" id="matricula_curso" style="display: none">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th colspan="9" class="text-center">Planilla de Horarios</th>
-                                    </tr>
-                                </thead>
-                                
-                                <tbody  style="font-size:11px">
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                    <hr>
-                    <section id="meterial_curso" >
-                        <h3>Material del curso</h3>
-                        <div class="well">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['url_material']?>" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <div class="media-heading">
-                                        <strong>Cada curso de IGA</strong>
-                                    </div>
-                                <?=$datos_curso['desc_material']?>
-                                </div>
-                            </div>
-                        </div><!--/.author-->
-                    </section>
-                    <hr>
-                    <section id="uniformes" >
-                        <h3>Uniformes</h3>
-                        <div class="well">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <img class="avatar img-thumbnail" src="<?=$datos_curso['url_uniforme']?>" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <div class="media-heading">
-                                        <strong>Con la inscripción al curso,</strong>
-                                    </div>
-                                <?=$datos_curso['desc_uniforme']?>
-                                </div>
-                            </div>
-                        </div><!--/.author-->
-                    </section>
-                    <hr>
-                    <section id="malla_curricular" >
-                        <h3><?=$lenguaje['malla_curricular_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                        <div class="well">
-                            <div class="table">
-                                <?php 
-                                    $cuatri = 0;
-                                    foreach ($malla_curricular as $malla)
-                                    {
-                                        $cuatrimestre = $malla['cuatrimestre'];
-                                        $materia = $malla['materia'];
-                                        
-                                        if($cuatri != $cuatrimestre)
-                                        {
-                                            switch ($cuatrimestre)
-                                            {
-                                                case 1 :
-                                                    echo "<h3>1er cuatrimestre</h3>";
-                                                    break;
-                                                case 2 :
-                                                    echo "<h3>2do cuatrimestre</h3>";
-                                                    break;
-                                                case 3 :
-                                                    echo "<h3>3er cuatrimestre</h3>";
-                                                    break;
-                                                case 4 :
-                                                    echo "<h3>4to cuatrimestre</h3>";
-                                                    break;
-                                            }
-                                            $cuatri ++;
-                                        }
-                                        echo "<h4>" . $materia . "</h4>";
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                    </section>
-                </div><!--/.col-md-8-->
+                </div>
                 <div class="col-md-12">
                     <section id="objetivo">
                         <h2>Nuestro Objetivo</h2>
