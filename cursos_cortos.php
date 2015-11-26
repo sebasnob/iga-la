@@ -395,32 +395,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 
         });
         
-        function reservarCupo(formid, boton){
-            var btn = $(boton).button('loading');
-            $.ajax({
-                url: "gestor/controller_ajax.php",
-                method: "POST",
-                data: {
-                    option : 'reserva_cupo',
-                    nombre: $("#"+formid+" input[name=name]").val(),
-                    email: $("#"+formid+" input[name=email]").val(),
-                    telefono: $("#"+formid+" input[name=telefono]").val(),
-                    id_comision: $("#"+formid+" input[name=id_comision]").val(),
-                    id_filial: $("#"+formid+" input[name=id_filial]").val(),
-                    id_plan: $("#"+formid+" input[name=id_plan]").val()
-                },
-                dataType: 'json',
-                success: function(data){
-                    console.log(data);
-                    btn.button('reset');
-                    if(data.success){
-                        $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.error+"</div>");
-                    }else{
-                        $('#'+formid+' > div.error').html(data.error)
-                    }
-                }
-            });
-        }
         </script>
     </body>
 </html>
