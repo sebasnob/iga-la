@@ -67,6 +67,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
     $showModal = 0;
     
     $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
+    
+    $cursos_cortos = getCursosCortos($mysqli);
+    $categorias_cursos_cortos = getCategoriasCursosCortos($mysqli);
 ?>
         <div id="fb-root"></div>
         <header id="home">
@@ -79,7 +82,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <h1><img class="img-responsive" src="images/logo-iga_transparent.png" alt="logo"></h1>
                         </a>                    
                     </div>
@@ -189,38 +192,28 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 <div class="col-sm-8">
                     <br>
                     <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
-                    <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
-                        <div class="form-group">
-                            <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
-                            <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
-                                <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
-                                <?php foreach ($provincias as $provincia){?>
-                                <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
-                                <?php }?>
-                            </select>    
-                        </div>
-                        <div class="form-group">
-                            <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
-                            <select id="filiales_matricula" class="form-control">
-                                <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
-                            </select>
-                        </div>
-                    </form>
+
                     <br/>
-                    <table>
-                        <thead>
-                            <th>Bebidas:</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> - Bartender</td>
-                            </tr>
-                            <tr>
-                                <td> - Sommelier</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <?php 
                         
+                        $categoria = '';
+                        foreach ($cursos_cortos as $curso_corto){
+                        
+                    ?>
+                    <div>
+                        <h3>
+                        <?php if($categoria !== $curso_corto['categoria'])
+                        {
+                            echo $categorias_cursos_cortos[$curso_corto['categoria']]['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                            $categoria = $curso_corto['categoria'];
+                        }
+                        ?>
+                        </h3>
+                        <h4>
+                            <?= '<a href="cursos.php?cod_curso=' . $curso_corto['cod_curso'] .'"> - ' . $curso_corto['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</a>'?>
+                        </h4>
+                    </div>
+                    <?php } ?>
                 </div><!--/.col-md-8-->
                 <div class="col-sm-4">
                     <br>
@@ -248,20 +241,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     }
                     ?>
                 </div>
-                <div class="col-md-12">
-                    <section id="objetivo">
-                        <h2>Nuestro Objetivo</h2>
-                        <div class="entry-meta">
-                            <span>
-                                <i class="fa fa-calendar"></i>&nbsp;Duración:
-                	<?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." horas": ''; ?>
-                	<?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." meses": ''; ?>
-                	<?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." años": ''; ?>
-                            </span>
-                        </div>
-                    <?=$datos_curso['objetivos']?>
-                    </section>
-                </div>
+
             </div><!--/.row-->
         </section><!--/#single_cursos-->
         
@@ -356,7 +336,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         }(document, 'script', 'facebook-jssdk'));
         
         $('#filiales').change(function(){
-            filialModalSeleccionada($(this).val(), <?=$_GET['cod_curso']?>);
+            filialModalSeleccionadaCC($(this).val());
         });
         
         function ocultarDivReserva(id){
@@ -385,46 +365,14 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 method: "POST",
                 data: { 
                     option : 'select_filiales', 
-                    cod_curso : '<?=$_GET['cod_curso']?>', 
                     id_provincia : '<?=$prov['id_provincia']?>'
                 },
                 dataType: "json",
                 success: function(data){
                     changeSelectOptions("filiales_matricula", data.options, 'nombre', 'id');
                     $("select#filiales_matricula option[value='<?=$_SESSION['id_filial']?>']").attr("selected", "selected");
-                    
-                    getCursosConCupo($('#filiales_matricula').val(), '<?=$_GET['cod_curso']?>');
-                    
-                    $('#matricula_curso').show();
                 }
             });
-            
-            $('#provincias').change(function(){
-                $('#matricula_curso').hide();
-            });
-            
-            $('#filiales_matricula').change(function(){
-                getCursosConCupo($(this).val(), '<?=$_GET['cod_curso']?>');
-                $('#matricula_curso').show();
-            });
-            
-            
-            
-            function getCursosConCupo(id_filial, cod_curso){
-                $('.table-bordered > tbody').html("<tr><td colspan='8' class='text-center'><img src='images/preloader.gif' /><br/>Cargando Información..</td></tr>");
-                $.ajax({
-                    url: "gestor/controller_ajax.php",
-                    method: "POST",
-                    data: {
-                        option : 'get_cursos_con_cupo', 
-                        cod_curso : cod_curso, 
-                        id_filial : id_filial
-                    },
-                    success: function(data){
-                        $('.table-bordered > tbody').html(data);
-                    }
-                });
-            }
             
             function changeSelectOptions(select_id, array_index, texto, value){
                 var options, index, select, option;

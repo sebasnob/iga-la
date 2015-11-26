@@ -51,7 +51,7 @@ $lenguaje['seleccion_opcion_ES'] = "Seleccione una Opción";
 $lenguaje['consulta_enviada_ES'] = "Consulta enviada. Nos comunicaremos a la brevedad!";
 $lenguaje['faltan_datos_ES'] = "Faltan datos!";
 
-$lenguaje['titulo_cursos_cortos_ES'] = "Usted está viendo los cursos cortos de:";
+$lenguaje['titulo_cursos_cortos_ES'] = "Usted está viendo los cursos cortos";
 
 $lenguaje['gastro_ES'] = "Gastronomía y Alta Cocina";
 $lenguaje['certif_gastro_ES'] = "Certificación Avanzada en Gastronomía";
@@ -118,14 +118,14 @@ $lenguaje['certif_gastro_IN'] = "Advanced Certification in Gastronomy";
 $lenguaje['paste_avanzada_IN'] = "Advanced Professional Pastry and";
 $lenguaje['gastro_intensivo_IN'] = "Gastronomy and Haute Cuisine INTENSIVE";
 
-$lenguaje['titulo_cursos_cortos_IN'] = "You are viewing the short courses from:";
+$lenguaje['titulo_cursos_cortos_IN'] = "You are viewing the short courses";
 
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
 $lenguaje['certif_gastro_POR'] = "Certificado Avançado em Gastronomia";
 $lenguaje['paste_avanzada_POR'] = "Advanced Professional e pastelaria";
 $lenguaje['gastro_intensivo_POR'] = "Gastronomia e Haute Cuisine INTENSIVO";
-$lenguaje['titulo_cursos_cortos_POR'] = "Você está visitando os cursos de curta duração de:";
+$lenguaje['titulo_cursos_cortos_POR'] = "Você está visitando os cursos de curta duração";
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
 $lenguaje['inicio_POR'] = 'Iniciação';
 $lenguaje['curso_POR'] = 'Cursos';

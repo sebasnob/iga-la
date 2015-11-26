@@ -1058,4 +1058,40 @@ function getCursoConCupo($id_filial, $cod_curso){
     return $curso_cupo;
 }
 
+function getCursosCortos($mysqli, $cod_curso = false)
+{
+    $cursosCortos = array();
+    $query = "SELECT * FROM cursos_cortos order by categoria";
+    
+    if($cod_curso)
+    {
+        $query .= " WHERE cod_curso = " . $cod_curso;
+    }
+    
+    $result = $mysqli->query($query);
+    while($curso_corto = $result->fetch_assoc())
+    {
+	$cursosCortos[] = array('cod_curso'=>$curso_corto['cod_curso'],
+                                'nombre_ES'=>$curso_corto['nombre_ES'], 
+                                'nombre_IN'=>$curso_corto['nombre_IN'], 
+                                'nombre_POR'=>$curso_corto['nombre_POR'], 
+                                'categoria'=>$curso_corto['categoria']); 
+    }
+    return $cursosCortos;
+}
+
+function getCategoriasCursosCortos($mysqli)
+{
+    $categoriasCursosCortos = array();
+    $query = "SELECT * FROM categorias_cursos_cortos";
+    
+    $result = $mysqli->query($query);
+    
+    while($cat = $result->fetch_assoc())
+    {
+        $categoriasCursosCortos[$cat['id']] = $cat;
+    }
+    
+    return $categoriasCursosCortos;
+}
 ?>

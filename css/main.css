@@ -95,7 +95,8 @@ a:hover {
 }
 
 section {
-  /*padding: 40px 0;*/
+    padding: 40px 0;
+    border-top: 1px #EFE8E8 solid;
 }
 
 .heading {
@@ -1287,4 +1288,14 @@ padding-bottom: 50px;
     #slider{
         height: 95vh;
     }
+}
+
+
+#single_curso h4 {
+    color: #337ab7;
+    font-size: 18px;
+}
+
+#single_curso h3 {
+    font-size: 22px;
 }

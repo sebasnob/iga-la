@@ -316,32 +316,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             </div>
         </section><!--/#blog-->
         
-        <section id="features" class="parallax">
-            <div class="container">
-                <div class="row count">
-                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <i class="fa fa-user"></i>
-                        <h3 class="timer">4000</h3>
-                        <p><?=$lenguaje['alumnos_felices_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div>
-                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
-                        <i class="fa fa-home"></i>
-                        <h3 class="timer">200</h3>                    
-                        <p><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div> 
-                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms">
-                        <i class="fa fa-folder-o"></i>
-                        <h3 class="timer">10</h3>                    
-                        <p><?=$lenguaje['cursos_disponibles_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div> 
-                    <div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms">
-                        <i class="fa fa-comment-o"></i>                    
-                        <h3>24/7</h3>
-                        <p><?=$lenguaje['consultas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div>                 
-                </div>
-            </div>
-        </section><!--/#features-->
         
         <section id="team">
             <div class="container">

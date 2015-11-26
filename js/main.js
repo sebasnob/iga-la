@@ -309,6 +309,10 @@ function filialModalSeleccionada(filial, cod_curso){
     window.location = "cursos.php?cod_curso="+cod_curso+"&id_filial="+filial;
 }
 
+function filialModalSeleccionadaCC(filial){
+    var filial = filial;
+    window.location = "cursos_cortos.php?id_filial="+filial;
+}
 function scroll(to)
 {
     var body = $("html, body");
