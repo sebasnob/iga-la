@@ -1,17 +1,9 @@
 /* lg */ 
 @media (min-width: 1200px) {
 
-#slider{
 
-	max-height: 450px;
-}
 
-.left-control, .right-control {
-			font-size: 20px;
-		height: 30px;
-		line-height: 25px;
-		width: 30px;
-	}
+
 
 
 }
@@ -19,12 +11,7 @@
 /* md */
 @media (min-width: 992px) and (max-width: 1199px) {
 
-.left-control, .right-control {
-		font-size: 20px;
-		height: 30px;
-		line-height: 25px;
-		width: 30px;
-	}
+
 
 }
 
