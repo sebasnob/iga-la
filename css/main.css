@@ -163,12 +163,12 @@ section {
 #slider {
   overflow: hidden;
   position: relative;
-  max-width: 1920px;
+  max-width: 1024px;
   margin: 0 auto;
 }
 
 #grilla{
-    max-width: 1920px;
+    max-width: 1024px;
     margin: 0 auto;
 }
 
