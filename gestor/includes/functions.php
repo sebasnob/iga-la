@@ -964,8 +964,8 @@ function getTiposAsignados($mysqli, $cod_curso){
     return $tipos;
 }
 
-function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_asunto){
-    $html = "";
+function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_asunto,$message){
+    $html = $message;
     $tipo_asunto = ($cod_tipo_asunto == 3)?'curso':'asunto';
     $param = array(
 	"codigo" => -1,

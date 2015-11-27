@@ -206,7 +206,7 @@ switch($_POST['option']){
             }
             
             if(isset($_POST['filial']) && isset($_POST['nombre']) && $_POST['nombre'] != '' && isset($_POST['email']) && $_POST['email'] != '' && isset($_POST['phone']) && $_POST['phone'] != '' && isset($_POST['message']) && $_POST['message'] != ''){
-                guardarConsultaCurso($_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo']);
+                guardarConsultaCurso($_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message']);
                 $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
             }else{
                 $retorno = array("success" => false, "mensaje" => $lenguaje['faltan_datos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
@@ -374,29 +374,31 @@ switch($_POST['option']){
                 
                 $retorno .="</div>
                     <div class='accordian-body collapse' id='consulta-{$datos_curso['codigo']}'>";
-                $retorno .= '<form id="main-contact-form" name="main-contact-form" method="post" action="#">
+                $retorno .= '<form id="form-contacto-'.$datos_curso['codigo'].'" name="form-contacto-'.$datos_curso['codigo'].'" method="post" action="#">
+                                <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="Nombre" required="required">
+                                            <input type="text" name="name" class="form-control" placeholder="Nombre" required="required" />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control" placeholder="Dirección de Email" required="required">
+                                            <input type="text" name="email" class="form-control" placeholder="Dirección de Email" required="required" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="telefono" class="form-control" placeholder="Teléfono" required="required">
+                                    <input type="text" name="phone" class="form-control" placeholder="Teléfono" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="message" id="message" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
+                                    <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
                                 </div>                        
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-sm">Consultar</button>
+                                    <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this)" data-loading-text="Consultando...">Consultar</button>
                                     <button type="button" data-toggle="collapse" data-target="#consulta-'.$datos_curso['codigo'].'" class="btn btn-sm accordion-toggle" >Cerrar</button>
                                 </div>
+                                <div class="error text-center text-consulta-error"></div>
                             </form>';
                 
                 $retorno .="</div>

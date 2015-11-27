@@ -547,8 +547,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         });
         
         function reservarCupo(formid, boton){
-            var btn = $(boton).button('loading');
-            
             if($("#"+formid+" input[name=name]").val() == '')
             {
                 alert('Por favor, ingrese su nombre');
@@ -561,10 +559,11 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             }
             if($("#"+formid+" input[name=telefono]").val() == '')
             {
-                alert('Por favor, ingrese su nombre');
+                alert('Por favor, ingrese su telefono');
                 return 0;
             }
             
+            var btn = $(boton).button('loading');
             $.ajax({
                 url: "gestor/controller_ajax.php",
                 method: "POST",
@@ -587,6 +586,54 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         $('#'+formid+' > div.error').html(data.error)
                     }
                 }
+            });
+        }
+    
+        function consultarCurso(formid, boton){
+            if($("#"+formid+" input[name=name]").val() == '')
+            {
+                alert('Por favor, ingrese su nombre');
+                return 0;
+            }
+            if($("#"+formid+" input[name=email]").val() == '')
+            {
+                alert('Por favor, ingrese su email');
+                return 0;
+            }
+            if($("#"+formid+" input[name=telefono]").val() == '')
+            {
+                alert('Por favor, ingrese su telefono');
+                return 0;
+            }
+            if($("#"+formid+" input[name=message]").val() == '')
+            {
+                alert('Por favor, ingrese su consulta.');
+                return 0;
+            }
+            
+            $(boton).button('loading');
+            $.ajax({
+              type: "POST",
+              url: "gestor/controller_ajax.php",
+              data: {
+                option:"enviar_consulta",
+                nombre: $("#"+formid+" input[name=name]").val(),
+                email: $("#"+formid+" input[name=email]").val(),
+                phone: $("#"+formid+" input[name=phone]").val(),
+                message: $("#"+formid+" textarea[name=mensaje]").val(),
+                filial: $("#"+formid+" input[name=id_filial]").val(),
+                tipo: "3"
+              },
+              dataType:'json',
+              success: function(data)
+              {
+                    $(boton).button('reset');
+                    if(data.success){
+                        $('#'+formid).html("<div class='text-center text-consulta-error'>"+data.error+"</div>");
+                    }else{
+                        $('#'+formid+' > div.error').html(data.error)
+                    }
+              }
             });
         }
         </script>
