@@ -395,3 +395,7 @@ $('.btn-submit').click(function(){
       }
     });
 });
+
+$('.fullParaCerrarMenu').click(function(){
+    $('#desplegableCursos').hide('fast');
+});
