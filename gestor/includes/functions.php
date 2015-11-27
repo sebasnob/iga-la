@@ -434,10 +434,6 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = f
     {
         $query .= " AND grilla.idioma = '{$idioma}' ";
     }
-    if($id_pais)
-    {
-        $query .= " AND grilla.id_pais='{$id_pais}'";
-    }
     if($tipo)
     {
         $query .= " AND grilla.tipo='{$tipo}'";
@@ -448,23 +444,39 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = f
     }
     
     $query .= " order by grilla.id_pais, grilla.prioridad, grilla.idioma, grilla.tipo";
-
     $result = $mysqli->query($query);
     
     if($result->num_rows > 0)
     {
         while($grilla = $result->fetch_assoc())
         {
-            $retorno[] = array( 'id'=>$grilla['id'],
+            $arrayPaises = json_decode($grilla['id_pais']);
+            if(!$id_pais)
+            {    
+                $retorno[] = array( 'id'=>$grilla['id'],
                                 'cols'=>$grilla['cols'],
                                 'img_url'=>$grilla['img_url'],
                                 'thumb_url'=>$grilla['thumb_url'],
                                 'id_curso'=>$grilla['cod_curso'],
                                 'prioridad'=>$grilla['prioridad'],
                                 'idioma'=>$grilla['idioma'],
-                                'id_pais'=>$grilla['id_pais'],
+                                'id_pais'=> $arrayPaises,
                                 'tipo'=>$grilla['tipo'],
                                 'habilitado'=>$grilla['habilitado']);
+            }
+            else if(in_array($id_pais, $arrayPaises))
+            {
+                $retorno[] = array( 'id'=>$grilla['id'],
+                                'cols'=>$grilla['cols'],
+                                'img_url'=>$grilla['img_url'],
+                                'thumb_url'=>$grilla['thumb_url'],
+                                'id_curso'=>$grilla['cod_curso'],
+                                'prioridad'=>$grilla['prioridad'],
+                                'idioma'=>$grilla['idioma'],
+                                'id_pais'=> $arrayPaises,
+                                'tipo'=>$grilla['tipo'],
+                                'habilitado'=>$grilla['habilitado']);
+            }
         }
         return $retorno;
     }
@@ -799,18 +811,25 @@ function getSlider($mysqli, $id_pais = false)
 {
     $query = "SELECT * FROM slider";
     
-    if($id_pais)
-    {
-        $query .= " WHERE id_pais in (0, {$id_pais})";
-    }
-    
     $result = $mysqli->query($query);
     $sliders = array();
+    
     if($result)
     {
         while($slider = $result->fetch_assoc())
         {
-            $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$slider['id_pais']);
+            $arrayPais = json_decode($slider['id_pais']);
+            if($id_pais)
+            {
+                if(in_array($id_pais, $arrayPais))
+                {
+                    $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais);
+                }
+            }
+            else
+            {
+                $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais);
+            }
         }
     }
     return $sliders;
@@ -838,63 +857,116 @@ if(isset($_POST['filialSeleccionada']))
     echo json_encode($return);
 }
 
-function getNovedades($mysqli, $id_pais='', $id_idioma=''){
+function getNovedades($mysqli, $id_pais=false, $id_idioma=false){
     $cond = '';
     $novedades = array();
-    
-    if(isset($id_pais) && $id_pais != '' && isset($id_idioma) && $id_idioma != ''){
-        $cond .= " WHERE id_pais={$id_pais} AND id_idioma={$id_idioma}";
+    if($id_idioma){
+        $cond .= " WHERE id_idioma={$id_idioma}";
     }
 
-    $resultado = $mysqli->query("SELECT id, imagen, titulo, descripcion, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades {$cond}");
-    if($resultado->num_rows > 0){
-        while($respuesta = $resultado->fetch_assoc())
-        {
-            $novedades[] = $respuesta;
-        }
-    }
+    $query = "SELECT * FROM novedades {$cond}";
     
-    if($resultado)$resultado->free();
+    $resultado = $mysqli->query($query);
     
-    return $novedades;
-}
-
-function getNovedadesHome($mysqli, $id_pais='1', $id_idioma='1', $limit='3'){
-    $cond = '';
-    $novedades = array();
-    
-    $resultado = $mysqli->query("SELECT id, imagen, titulo, descripcion, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades WHERE estado=1 AND id_pais={$id_pais} AND id_idioma={$id_idioma} ORDER BY id DESC limit {$limit}");
-    if($resultado->num_rows > 0){
-        while($respuesta = $resultado->fetch_assoc())
-        {
-            $novedades[] = $respuesta;
-        }
-    }
-    if($resultado)$resultado->free();
-    
-    return $novedades;
-}
-
-function getNovedad($mysqli, $id_novedad){
-    $resultado = $mysqli->query("SELECT id, titulo, imagen, descripcion, link, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades WHERE id={$id_novedad}");
-    
-    if($resultado)
+    while($new = $resultado->fetch_assoc())
     {
-        if($resultado->num_rows > 0)
+        $arrPaises = json_decode($new['id_pais']);
+    
+        if(!$id_pais)
         {
-            $novedad = $resultado->fetch_assoc();
-        }
-        else
+            $novedades[] = array('id'=>$new['id'],
+                              'imagen'=>$new['imagen'],
+                              'titulo'=>$new['titulo'],
+                              'descripcion'=>$new['descripcion'],
+                              'fecha'=>$new['fecha'],
+                              'link'=>$new['link'],
+                              'estado'=>$new['estado'],
+                              'autor'=>$new['autor'],
+                              'id_pais'=>  $arrPaises,
+                              'id_idioma'=>$new['id_idioma']);
+        }  
+        else if(in_array($id_pais, $arrPaises))
         {
-            $novedad = array();
+            $novedades[] = array('id'=>$new['id'],
+                              'imagen'=>$new['imagen'],
+                              'titulo'=>$new['titulo'],
+                              'descripcion'=>$new['descripcion'],
+                              'fecha'=>$new['fecha'],
+                              'link'=>$new['link'],
+                              'estado'=>$new['estado'],
+                              'autor'=>$new['autor'],
+                              'id_pais'=>  $arrPaises,
+                              'id_idioma'=>$new['id_idioma']);
         }
-        
-        $resultado->free();
     }
     
+    if($resultado)$resultado->free();
+
+    return $novedades;
+}
+
+function getNovedad($mysqli, $id_novedad, $id_pais=false, $id_idioma=false){
+    $cond = " WHERE id={$id_novedad}";
     
+    if($id_idioma){
+        $cond .= " AND id_idioma={$id_idioma}";
+    }
+
+    $query = "SELECT * FROM novedades {$cond}";
+    $resultado = $mysqli->query($query);
     
-    return $novedad;
+    while($new = $resultado->fetch_assoc())
+    {
+        $arrPaises = json_decode($new['id_pais']);
+    
+        if(!$id_pais)
+        {
+            $novedades = array('id'=>$new['id'],
+                              'imagen'=>$new['imagen'],
+                              'titulo'=>$new['titulo'],
+                              'descripcion'=>$new['descripcion'],
+                              'fecha'=>$new['fecha'],
+                              'link'=>$new['link'],
+                              'estado'=>$new['estado'],
+                              'autor'=>$new['autor'],
+                              'id_pais'=>  $arrPaises,
+                              'id_idioma'=>$new['id_idioma']);
+        }  
+        else if(in_array($id_pais, $arrPaises))
+        {
+            $novedades = array('id'=>$new['id'],
+                              'imagen'=>$new['imagen'],
+                              'titulo'=>$new['titulo'],
+                              'descripcion'=>$new['descripcion'],
+                              'fecha'=>$new['fecha'],
+                              'link'=>$new['link'],
+                              'estado'=>$new['estado'],
+                              'autor'=>$new['autor'],
+                              'id_pais'=>  $arrPaises,
+                              'id_idioma'=>$new['id_idioma']);
+        }
+    }
+    
+    if($resultado)$resultado->free();
+
+    return $novedades;
+}
+
+function getNovedadesHome($mysqli, $id_pais=false, $id_idioma='1', $limit='3'){
+    $cond = '';
+    $novedades = array();
+    
+    $resultado = $mysqli->query("SELECT id, imagen, titulo, descripcion, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades WHERE estado=1 AND id_idioma={$id_idioma} ORDER BY id DESC limit {$limit}");
+    if($resultado->num_rows > 0){
+        while($respuesta = $resultado->fetch_assoc())
+        {
+            die(var_dump($respuesta));
+            $novedades[] = $respuesta;
+        }
+    }
+    if($resultado)$resultado->free();
+    
+    return $novedades;
 }
 
 function getTotalNovedades($mysqli){

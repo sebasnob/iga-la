@@ -83,12 +83,11 @@ $idiomas = getIdiomas($mysqli);
                                         </div>
                                         <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
-                                            <select class="form-control" name="id_pais">
-                                                <option value="0">Todos</option>
-                                                <?php foreach ($paises as $pais){ ?>
-                                                <option value="<?=$pais['id']?>"><?=$pais['pais']?></option>
-                                                <?php }?>
-                                            </select>
+                                            <select name="pais[]" multiple="true">
+                                            <?php foreach ($paises as $pais){?>
+                                                <option value="<?= $pais['id'] ?>"><?= $pais['pais'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                         </div>
                                         <button onclick="enviar(this.form)" class="btn btn-success">Agregar Imagen</button>
                                         <div id="cargando"  style="width: 50px;margin-left: 30px;display: none;">
@@ -130,11 +129,16 @@ $idiomas = getIdiomas($mysqli);
                                             </div>
                                             <div class="form-group">
                                                 <label>Pais:</label>
-                                                <select class="form-control input-sm"  name="id_pais">
-                                                    <option value="0" >Todos</option>
-                                                <?php foreach ($paises as $pais){ ?>
-                                                    <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgSlider['id_pais']){echo 'selected';} ?> ><?=$pais['pais']?></option>
-                                                <?php }?>
+                                                <select name="pais[]" multiple="true" required>
+                                                    <?php foreach ($paises as $pais){?>
+                                                        <option value="<?= $pais['id'] ?>"
+                                                            <?php if(in_array($pais['id'], $imgSlider['id_pais']))
+                                                            {
+                                                                echo 'selected';
+                                                            }?>>
+                                                            <?= $pais['pais'] ?>
+                                                        </option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>

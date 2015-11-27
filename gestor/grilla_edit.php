@@ -154,10 +154,10 @@ $paises = getPaises($mysqli);
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
-                                            <select class="form-control" name="pais">
-                                                <?php foreach($paises as $pais){?>
-                                                <option value="<?=$pais['id']?>"><?=$pais['pais']?></option>
-                                                <?php }?>
+                                            <select name="pais[]" multiple="true">
+                                            <?php foreach ($paises as $pais){?>
+                                                <option value="<?= $pais['id'] ?>"><?= $pais['pais'] ?></option>
+                                            <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -301,10 +301,16 @@ $paises = getPaises($mysqli);
                                                     <tr>    
                                                         <td>
                                                             <span>Pais: </span>
-                                                            <select class="form-control input-sm" name="pais" style="display: inline-block">
-                                                                        <?php foreach($paises as $pais){?>
-                                                                <option value="<?=$pais['id']?>" <?php if($pais['id'] == $imgGrid['id_pais']){ echo 'selected';}?>><?=$pais['pais']?></option>
-                                                                        <?php }?>
+                                                            <select name="pais[]" multiple="true" required>
+                                                                <?php foreach ($paises as $pais){?>
+                                                                    <option value="<?= $pais['id'] ?>"
+                                                                        <?php if(in_array($pais['id'], $imgGrid['id_pais']))
+                                                                        {
+                                                                            echo 'selected';
+                                                                        }?>>
+                                                                        <?= $pais['pais'] ?>
+                                                                    </option>
+                                                                <?php } ?>
                                                             </select>
                                                         </td>
                                                         <td>

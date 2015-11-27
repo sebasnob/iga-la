@@ -14,7 +14,10 @@ if($logged == 'out'){
     header("Location: login.php");
     exit();
 }
+
+$paises = getPaises($mysqli);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,7 +33,7 @@ if($logged == 'out'){
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <!--external css-->
         <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
+        
         <!-- Custom styles for this template -->
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/style-responsive.css" rel="stylesheet">
@@ -59,28 +62,28 @@ if($logged == 'out'){
                     ?>
                     <div class="row mt">
                         <div class="col-lg-12">
-                         <div class="form-panel">
-                             <div class="form-group">
+                            <div class="form-panel">
+                                <div class="form-group">
                                  <?php
                                  if(isset($_GET['id'])){
                                  ?>
-                                 <label>Edicion de Noticia finalizada</label>
-                                 <br/><br/>
-                                 <a id="preview" class="btn btn-success" href="news.php">Lista de Noticias</a>
-                                 <a id="preview" class="btn btn-primary" href="news_admin.php?id=<?=$_GET['id']?>">Volver al editor</a>   
+                                    <label>Edicion de Noticia finalizada</label>
+                                    <br/><br/>
+                                    <a id="preview" class="btn btn-success" href="news.php">Lista de Noticias</a>
+                                    <a id="preview" class="btn btn-primary" href="news_admin.php?id=<?=$_GET['id']?>">Volver al editor</a>   
                                  <?php
                                  }else{
                                  ?>
-                                 <label>Noticia Agregada correctamente</label>
-                                 <br/><br/>
-                                 <a id="preview" class="btn btn-success" href="news.php">Lista de Noticias</a>
-                                 <a id="preview" class="btn btn-primary" href="news_admin.php">Volver al editor</a>
+                                    <label>Noticia Agregada correctamente</label>
+                                    <br/><br/>
+                                    <a id="preview" class="btn btn-success" href="news.php">Lista de Noticias</a>
+                                    <a id="preview" class="btn btn-primary" href="news_admin.php">Volver al editor</a>
                                  <?php
                                  }
                                  ?>
-                             </div>
-                         </div>
-                       </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <?php
                     }else{
@@ -104,23 +107,19 @@ if($logged == 'out'){
                                 <div class="form-panel">
                                     <div id="datos_curso">
                                         <div class="form-group">
-                                            <label>Pais </label>
-                                            <select name="pais" id="pais" class="form-control">
-                                                <option value="0">- Seleccione -</option>
-                                                <?php
-                                                    $paises = getPaises($mysqli);
-                                                    foreach($paises as $i=>$d){
-                                                        $selected = '';
-                                                        if(isset($novedad['id_pais']) && $novedad['id_pais'] == $d['id']){
-                                                            $selected = "selected = 'selected'";
-                                                        }
-                                                ?>
-                                                        <option value="<?=$d['id']?>" <?=$selected?> ><?=$d['pais']?></option>
-                                                <?php
-                                                    }
-                                                ?>
+                                            <label>Pais </label><br>
+                                            <select name="pais[]" multiple="true" required>
+                                                <?php foreach ($paises as $pais){?>
+                                                <option value="<?= $pais['id'] ?>"
+                                                                        <?php if(in_array($pais['id'], $novedad['id_pais']))
+                                                                        {
+                                                                            echo 'selected';
+                                                                        }?>>
+                                                                        <?= $pais['pais'] ?>
+                                                </option>
+                                                                <?php } ?>
                                             </select>
-                                            
+                                            <br><br>
                                             <label>Idioma</label>
                                             <select name="idioma" id="idioma" class="form-control">
                                                 <option value="0">- Seleccione -</option>
@@ -148,14 +147,14 @@ if($logged == 'out'){
                                               <?php
                                                 if($accion == 'editar'){
                                               ?>
-                                              <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="../images/novedades/<?=$novedad['imagen']?>" alt="">
+                                                <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="../images/novedades/<?=$novedad['imagen']?>" alt="">
                                               <?php
                                                 }
                                               ?>
                                             </div>
                                             <input id="imagen" type="file" name="imagen" class="img" />
                                         </div>
-
+                                        
                                         <div class="form-group">
                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Descripción:</b></h4> 
                                             <textarea name="descripcion" id="descripcion" class="form-control" rows="5"><?php echo (isset($novedad['descripcion']))?$novedad['descripcion']:''; ?></textarea>
@@ -165,7 +164,7 @@ if($logged == 'out'){
                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Link:</b></h4> 
                                             <input type="text" id="link" name="link" value="<?php echo (isset($novedad['link']))?$novedad['link']:''; ?>" class="form-control"/>
                                         </div>
-
+                                        
                                     </div>    
                                 </div><!-- /form-panel -->
                             </div><!-- /col-lg-12 -->
@@ -206,7 +205,7 @@ if($logged == 'out'){
                 //uiColor: '#010F2C',
                 customConfig: 'config.js',
                 toolbar: [
-                        [ 'Bold', 'Italic', 'FontSize']
+                    [ 'Bold', 'Italic', 'FontSize']
                 ]
             });
             

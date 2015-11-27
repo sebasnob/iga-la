@@ -585,8 +585,8 @@ if(isset($_POST['edicion_grilla']))
                     
                     $ruta = substr($ruta, 3);
                     $ruta_thumb = substr($ruta_thumb, 3);
-                    
-                    $query = "INSERT INTO grilla (cols, img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, id_pais, tipo) VALUES ({$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', {$_POST['pais']}, {$_POST['tipo']})";
+                    $cod_pais = json_encode($_POST['pais']);
+                    $query = "INSERT INTO grilla (cols, img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, id_pais, tipo) VALUES ({$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', '{$cod_pais}', {$_POST['tipo']})";
                     $mysqli->query($query);
                             
                 }
@@ -664,6 +664,8 @@ if(isset($_POST['edicion_grilla']))
                         $ruta = substr($ruta, 3);
                         $ruta_thumb = substr($ruta_thumb, 3);
 
+                        $arrayPais = json_encode($_POST['pais']);
+                        
                         $query = "UPDATE grilla "
                                 . "SET cols = {$_POST['cols']}, "
                                 . "img_url = '{$ruta}', "
@@ -672,7 +674,7 @@ if(isset($_POST['edicion_grilla']))
                                 . "cod_curso = {$_POST['id_curso']}, "
                                 . "habilitado = {$_POST['habilitado']}, "
                                 . "idioma = '{$_POST['idioma']}', "
-                                . "id_pais = {$_POST['pais']}, "
+                                . "id_pais = '{$arrayPais}', "
                                 . "tipo = {$_POST['tipo']} WHERE grilla.id = {$_POST['id_img_grilla']}";
                         $mysqli->query($query);
                     }
@@ -680,14 +682,16 @@ if(isset($_POST['edicion_grilla']))
             }
             else
             {
+                $arrayPais = json_encode($_POST['pais']);
                 $query = "UPDATE grilla "
                                 . "SET cols = {$_POST['cols']}, "
                                 . "prioridad = {$_POST['prioridad']}, "
                                 . "cod_curso = {$_POST['id_curso']}, "
                                 . "habilitado = {$_POST['habilitado']}, "
                                 . "idioma = '{$_POST['idioma']}', "
-                                . "id_pais = {$_POST['pais']}, "
+                                . "id_pais = '{$arrayPais}', "
                                 . "tipo = {$_POST['tipo']} WHERE grilla.id = {$_POST['id_img_grilla']}";
+                                
                 $mysqli->query($query);
             }
         }
@@ -746,7 +750,9 @@ if(isset($_POST['edicion_slider']))
                     $ruta = substr($ruta, 3);
                     $ruta_thumb = substr($ruta_thumb, 3);
                     
-                    $query = "INSERT INTO slider (alt, url, url_thumb, link, id_pais, cod_idioma) VALUES ('{$_POST['alt']}', '{$ruta}','{$ruta_thumb}', '{$_POST['link']}','{$_POST['id_pais']}','{$_POST['cod_idioma']}')";
+                    $cod_pais = json_encode($_POST['pais']);
+                    
+                    $query = "INSERT INTO slider (alt, url, url_thumb, link, id_pais, cod_idioma) VALUES ('{$_POST['alt']}', '{$ruta}','{$ruta_thumb}', '{$_POST['link']}','{$cod_pais}','{$_POST['cod_idioma']}')";
                     $mysqli->query($query);
                 }
             }
@@ -946,7 +952,7 @@ if(isset($_POST['edicion_grilla_editar']))
 }
 
 if(isset($_POST['edicion_noticia'])){
-    $id_pais = $_POST['pais'];
+    $id_pais = json_encode($_POST['pais']);
     $id_idioma = $_POST['idioma'];
     $titulo = $_POST['titulo'];
     $descripcion = trim($_POST['descripcion']);
@@ -967,7 +973,7 @@ if(isset($_POST['edicion_noticia'])){
                     $result = 'error';
                 }
                 
-                $query_ins = "INSERT INTO novedades SET imagen='{$new_filename}', titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais={$id_pais}, id_idioma={$id_idioma}";
+                $query_ins = "INSERT INTO novedades SET imagen='{$new_filename}', titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma}";
                 $res_query = $mysqli->query($query_ins);
                 if($res_query){
                     $message .= "La novedad se agrego correctamente";
@@ -1006,7 +1012,7 @@ if(isset($_POST['edicion_noticia'])){
                 }
             }
 
-            $query_ins = "UPDATE novedades SET titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais={$id_pais}, id_idioma={$id_idioma} {$edit_image} WHERE id={$_POST['id_novedad']}";
+            $query_ins = "UPDATE novedades SET titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma} {$edit_image} WHERE id={$_POST['id_novedad']}";
             $res_query = $mysqli->query($query_ins);
             if($res_query){
                 $message .= "La novedad se edito correctamente";
