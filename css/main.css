@@ -163,7 +163,7 @@ section {
 #slider {
   overflow: hidden;
   position: relative;
-  max-width: 1024px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -195,6 +195,7 @@ section {
   transition-property: opacity;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100% !important;
 }
 
 .carousel-fade .carousel-inner .item:after {
@@ -1231,7 +1232,7 @@ padding-bottom: 50px;
     background-color: #010F2C;
 }
 #slider{
-    height: 100vh;
+    /*height: 100vh;*/
 }
 #cover{
     position: absolute;
