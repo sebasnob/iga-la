@@ -62,6 +62,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <!--.preloader-->
         <!--<div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>-->
         <!--/.preloader-->
+        <div class="fullParaCerrarMenu"></div>
         <header id="home">
             <div class="main-nav">
                 <div class="container-fluid">
@@ -169,7 +170,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </ul>
                 </div>
             </div><!--/#main-nav-->
-            
         <?php
         if(count($slider) > 0){
         ?>
@@ -517,6 +517,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     } ?>
                 </div>    
             </div>
+            <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">

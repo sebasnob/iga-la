@@ -1279,3 +1279,20 @@ padding-bottom: 50px;
 #single_curso h3 {
     font-size: 22px;
 }
+.fullParaCerrarMenu{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.arrowTop{
+    position: fixed;
+    height: 35px;
+    width: 35px;
+    background-color: transparent;
+    z-index: 99999999;
+    left: 95%;
+    top: 90%;
+    font-size: 50px;
+    color: #72A0FF;
+}

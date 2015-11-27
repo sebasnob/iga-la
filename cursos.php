@@ -80,6 +80,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
     $malla_curricular = getMallaCurricular($mysqli, $datos_curso['id_cfi']);
 ?>
         <div id="fb-root"></div>
+        <div class="fullParaCerrarMenu"></div>
         <header id="home">
             <div class="main-nav">
                 <div class="container-fluid">
