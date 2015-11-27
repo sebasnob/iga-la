@@ -163,33 +163,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         
         <section id="single_curso" class="container">
             <div class="row">
-                <aside class="col-sm-4 col-sm-push-8">
-                    <br>
-                    <?php
-                    $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
-                    if(count($novedad) > 0){
-                    ?>
-                    <div class="widget ads">
-                        <div class="row">
-                            <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
-                                
-                                <div class="post-thumb">
-                                    <a href="index.php#blog"><img class="img-responsive" src="images/novedades/<?=$novedad[0]['imagen']?>" alt=""></a>
-                                </div>
-                                <div class="entry-header">
-                                    <h3><a href="index.php#blog"><?=$novedad[0]['titulo']?></a></h3>
-                                </div>
-                                <div class="entry-content">
-                                    <p><?=$novedad[0]['descripcion']?></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--/.categories-->
-                    <?php
-                    }
-                    ?>
-                </aside>        
-                <div class="col-sm-8 col-sm-pull-4">
+                
+                <div class="col-sm-8">
                     <section id="curso">
                         <h2><?=$datos_curso['nombre']?></h2>
                         <div class="entry-meta">
@@ -311,6 +286,32 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </div>
                     </section>
                 </div><!--/.col-md-8-->
+                <div class="col-sm-4">
+                    <br>
+                    <?php
+                    $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
+                    if(count($novedad) > 0){
+                    ?>
+                    <div class="widget ads">
+                        <div class="row">
+                            <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
+                                
+                                <div class="post-thumb">
+                                    <a href="index.php#blog"><img class="img-responsive" src="images/novedades/<?=$novedad[0]['imagen']?>" alt=""></a>
+                                </div>
+                                <div class="entry-header">
+                                    <h3><a href="index.php#blog"><?=$novedad[0]['titulo']?></a></h3>
+                                </div>
+                                <div class="entry-content">
+                                    <p><?=$novedad[0]['descripcion']?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/.categories-->
+                    <?php
+                    }
+                    ?>
+                </div>        
                 <div class="col-sm-12">
                     <section id="objetivo">
                         <h2>Nuestro Objetivo</h2>
