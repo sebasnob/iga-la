@@ -244,7 +244,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 
             </div><!--/.row-->
         </section><!--/#single_cursos-->
-        
+        <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
         <footer id="footer">
             <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                 <div class="container text-center">
