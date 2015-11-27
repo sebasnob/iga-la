@@ -1229,7 +1229,7 @@ padding-bottom: 50px;
     height: 130px;
     width: 575px;
     z-index: 9;
-    background-color: #010F2C;
+   background:  rgba(1, 15, 44, 0.70) !important;
 }
 #slider{
     /*height: 100vh;*/
@@ -1262,11 +1262,11 @@ padding-bottom: 50px;
 }
 
 .navbar-fixed-top{
-   background:  rgba(1, 15, 44, 0.78) !important;
+   background:  rgba(1, 15, 44, 0.70) !important;
 }
 
 .dropdown-menu{
- background:  rgba(1, 15, 44, 0.78) !important;
+ background:  rgba(1, 15, 44, 0.70) !important;
   
 }
 
