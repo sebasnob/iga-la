@@ -24,6 +24,7 @@ function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
         
         $query3 = "select * from malla_curricular WHERE id_curso_filial_idioma = " . $res_cpif['id'];
         $qry_malla = $mysqli->query($query3);
+        $datos_curso['malla_curricular'] = array();
         while ($datos_malla = $qry_malla->fetch_assoc())
         {
             $datos_curso['malla_curricular'][] = $datos_malla;
