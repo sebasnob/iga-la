@@ -517,6 +517,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     } ?>
                 </div>    
             </div>
+            <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">

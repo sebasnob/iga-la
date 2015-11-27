@@ -399,3 +399,7 @@ $('.btn-submit').click(function(){
 $('.fullParaCerrarMenu').click(function(){
     $('#desplegableCursos').hide('fast');
 });
+
+$('.arrowTop').click(function(){
+    $('html, body').animate({scrollTop: 0}, 500);
+});
