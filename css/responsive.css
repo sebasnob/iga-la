@@ -1,10 +1,30 @@
 /* lg */ 
 @media (min-width: 1200px) {
 
+#slider{
+
+	max-height: 450px;
+}
+
+.left-control, .right-control {
+			font-size: 20px;
+		height: 30px;
+		line-height: 25px;
+		width: 30px;
+	}
+
+
 }
 
 /* md */
 @media (min-width: 992px) and (max-width: 1199px) {
+
+.left-control, .right-control {
+		font-size: 20px;
+		height: 30px;
+		line-height: 25px;
+		width: 30px;
+	}
 
 }
 
@@ -31,9 +51,7 @@
 		padding: 10px 20px;
 	}
 
-		header #background {
-		background: url(../images/slider/1.jpg);
-	}
+	
 }
 
 /* xs */
@@ -42,28 +60,7 @@
 		font-size: 14px;
 	}
 
-    header #background {
-	background: url(../images/slider/1.jpg);
-	} 
-	#home-slider .caption h1 {
-		font-size: 40px;
-	}
-	#home-slider .caption {
-		font-size: 15px;
-		padding: 0 30px;
-	}
-	.left-control, .right-control {
-		font-size: 20px;
-		height: 30px;
-		line-height: 25px;
-		width: 30px;
-	}
-	#home-slider:hover .right-control {
-		right: 15px;
-	}
-	#home-slider:hover .left-control {
-		left: 15px;
-	}
+ 
 	.caption .btn-start {
 		font-size: 12px;
 		padding: 10px 30px;
@@ -233,8 +230,6 @@
 		width:100%;
 		float: none;
 	}
-	  header #background {
-	background: url(../images/slider/1.jpg);
-	} 
+
 }
 

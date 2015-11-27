@@ -1264,35 +1264,7 @@ padding-bottom: 50px;
     opacity: 0.7;
 }
 
-@media screen and (max-width: 629px) {
-    #slider{
-        height: 47vh;
-    }
-}
 
-@media screen and (min-width: 630px) and (max-width: 767px) {
-    #slider{
-        height: 57vh;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-height: 974px) {
-    #slider{
-        height: 67vh;
-    }
-}
-
-@media screen and (min-width: 975px) and (max-height: 1024px) {
-    #slider{
-        height: 77vh;
-    }
-}
-
-@media screen and (min-width: 1025px) and (max-height: 2024px) {
-    #slider{
-        height: 95vh;
-    }
-}
 
 
 #single_curso h4 {
