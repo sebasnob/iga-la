@@ -1262,10 +1262,13 @@ padding-bottom: 50px;
 }
 
 .navbar-fixed-top{
-    opacity: 0.7;
+   background:  rgba(1, 15, 44, 0.78) !important;
 }
 
-
+.dropdown-menu{
+ background:  rgba(1, 15, 44, 0.78) !important;
+  
+}
 
 
 #single_curso h4 {
