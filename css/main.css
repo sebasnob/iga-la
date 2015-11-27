@@ -163,9 +163,14 @@ section {
 #slider {
   overflow: hidden;
   position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
-
+#grilla{
+    max-width: 1920px;
+    margin: 0 auto;
+}
 
  .caption .btn-start {
   color: #fff;
