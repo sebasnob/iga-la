@@ -28,8 +28,8 @@ switch($_POST['option']){
             $filiales = getFiliales($mysqli, $_POST['id_provincia']);
             foreach($filiales as $id=>$row){
                 //utf8_encode para que json_encode pueda trabajar con ñ o acentos
-                $filiales_2['options'][]=array_map('utf8_encode', $row);
-            } 
+                $filiales_2['options'][]=$row;
+            }
             print(json_encode($filiales_2));
         //}
     break;
