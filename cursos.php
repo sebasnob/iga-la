@@ -80,6 +80,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
     $malla_curricular = getMallaCurricular($mysqli, $datos_curso['id_cfi']);
 ?>
         <div id="fb-root"></div>
+        <div class="fullParaCerrarMenu"></div>
         <header id="home">
             <div class="main-nav">
                 <div class="container-fluid">
@@ -363,7 +364,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 </div>
             </div><!--/.row-->
         </section><!--/#single_cursos-->
-        
+        <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
         <footer id="footer">
             <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                 <div class="container text-center">

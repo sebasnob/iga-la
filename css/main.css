@@ -1229,7 +1229,7 @@ padding-bottom: 50px;
     height: 130px;
     width: 575px;
     z-index: 9;
-    background-color: #010F2C;
+   background:  rgba(1, 15, 44, 0.70) !important;
 }
 #slider{
     /*height: 100vh;*/
@@ -1262,10 +1262,13 @@ padding-bottom: 50px;
 }
 
 .navbar-fixed-top{
-    opacity: 0.7;
+   background:  rgba(1, 15, 44, 0.70) !important;
 }
 
-
+.dropdown-menu{
+ background:  rgba(1, 15, 44, 0.70) !important;
+  
+}
 
 
 #single_curso h4 {
@@ -1275,4 +1278,22 @@ padding-bottom: 50px;
 
 #single_curso h3 {
     font-size: 22px;
+}
+.fullParaCerrarMenu{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.arrowTop{
+    position: fixed;
+    height: 35px;
+    width: 35px;
+    background-color: transparent;
+    z-index: 99999999;
+    left: 95%;
+    top: 90%;
+    font-size: 50px;
+    color: #72A0FF;
+    cursor: pointer;
 }
