@@ -375,7 +375,8 @@ $('.btn-submit').click(function(){
           "email": $('#email').val(),
           "phone": $('#phone').val(),
           "tipo": $('#opciones').val(),
-          "message": $('#message').val()
+          "message": $('#message').val(),
+          "cod_curso": $('#cursos_contacto').val()
       },
       dataType:'json',
       success: function(data)

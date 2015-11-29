@@ -77,9 +77,9 @@ function getCursos($mysqli, $cod_curso = '')
     $cond = '';
     
     if(isset($cod_curso) && $cod_curso != ''){
-        $cond = ' WHERE cod_curso = '.$cod_curso;
+        $cond = ' WHERE cod_curso = '.$cod_curso.' ';
     }
-    
+
     $resultado = $mysqli->query("SELECT * FROM cursos {$cond} ORDER BY nombre_es");
     $cursos = array();
 
@@ -656,9 +656,9 @@ function ws_insertFilialIdioma($mysqli){
 	foreach($array_fiales as $id_filial=>$value_filial){
 	    $array_idiomas = getIdiomas($mysqli);
 	    foreach($array_idiomas as $id_idioma=>$value_idioma){
-		$query_sel = "SELECT id  FROM curso_filial_idioma WHERE cod_curso='{$value_cursos['cod_curso']}' AND id_filial='{$value_filial['id']}' AND id_idioma='{$value_idioma['id']}'";
+		/*$query_sel = "SELECT id  FROM curso_filial_idioma WHERE cod_curso='{$value_cursos['cod_curso']}' AND id_filial='{$value_filial['id']}' AND id_idioma='{$value_idioma['id']}'";
 		$result_sel = $mysqli->query($query_sel);
-		if($result_sel->num_rows == 0){
+		if($result_sel->num_rows == 0){*/
 		    $query_ins = "INSERT INTO curso_filial_idioma SET cod_curso='{$value_cursos['cod_curso']}',id_filial='{$value_filial['id']}',id_idioma='{$value_idioma['id']}',estado=1";
 		    $result_ins = $mysqli->query($query_ins);
 		    if(!$result_ins){
@@ -666,9 +666,9 @@ function ws_insertFilialIdioma($mysqli){
 		    }else{
 			$message.= "<br/>Correcto - Se inserto el curso {$value_cursos['nombre_es']} <br/>";
 		    }
-		}else{
+		/*}else{
 		    $message .= "Ya existe el curso {$value_cursos['nombre_es']} en la filial {$value_filial['nombre']} para el idioma {$value_idioma['idioma']} <br/>";
-		}
+		}*/
 	    }
 	}
     }
@@ -682,8 +682,8 @@ function ws_insertDatosCursos($mysqli){
     $result_sel = $mysqli->query($query);
     while($cfi = $result_sel->fetch_assoc()){
         $curso = getCursos($mysqli, $cfi['cod_curso']);
-        $result = $mysqli->query("SELECT id FROM curso_datos WHERE id_cfi=".$cfi['id']);
-        if($result->num_rows == 0){
+        /*$result = $mysqli->query("SELECT id FROM curso_datos WHERE id_cfi=".$cfi['id']);
+        if($result->num_rows == 0){*/
     	    switch($cfi['id_idioma']){
     		//Ingles
     		case "2":
@@ -710,9 +710,9 @@ function ws_insertDatosCursos($mysqli){
             }else{
                 $message.= "<br/>Correcto - Se inserto {$cfi['id']}";
             }
-        }else{
+        /*}else{
             $message.= "<br/>Error - Ya existe {$cfi['id']}<br/>";
-        }
+        }*/
     }
     return $message;
 }
@@ -1041,9 +1041,14 @@ function getTiposAsignados($mysqli, $cod_curso){
     return $tipos;
 }
 
-function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_asunto,$message,$coursecontact=false,$cod_comision="",$cod_plan=""){
+function guardarConsultaCurso($mysqli,$filial,$email,$nombre,$phone,$asunto,$cod_tipo_asunto,$message,$cod_curso="",$coursecontact="",$cod_comision="",$cod_plan=""){
     $html = $message;
-    $tipo_asunto = ($cod_tipo_asunto == 3)?'curso':'asunto';
+    if($cod_tipo_asunto == 3){
+        $tipo_asunto = 'curso';
+    }else{
+        $tipo_asunto = 'asunto';
+        $cod_curso="";
+    }
     $param = array(
 	"codigo" => -1,
 	"asunto" => $asunto,
@@ -1062,12 +1067,29 @@ function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_as
 	"html_respuesta" => $html
     );
     
-    if ($coursecontact){
+    if(isset($cod_curso) && $cod_curso != ''){
+        $curso = getCursos($mysqli, $cod_curso);
+        switch($_SESSION['idioma_seleccionado']['cod_idioma']){
+            case "ES":
+                $param['asunto'] = $curso[0]['nombre_es'];
+            break;
+
+            case "POR":
+                $param['asunto'] = $curso[0]['nombre_portugues'];
+            break;
+
+            case "IN":
+                $param['asunto'] = $curso[0]['nombre_ingles'];
+            break;
+        }
+    }
+    
+    if (isset($coursecontact) && $coursecontact != ''){
         $param['agregar_reserva'] = "true";
         $param['cod_comision'] = $cod_comision;
         $param['cod_plan'] = $cod_plan;
     }
-    
+print_r($param);die();
     $wsc = new wsc_sistema("sincronizar_consulta_web", $param);
     $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
     if (is_array($respuesta) && isset($respuesta['success']) && $respuesta['success'] == "success"){

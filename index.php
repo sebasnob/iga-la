@@ -453,7 +453,23 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                                 $cursos = getCursos($mysqli);
                                                 foreach($cursos as $id=>$data){
                                                 ?>
-                                                    <option value="4"><?=$data['nombre_es']?></option>
+                                                    <option value="<?=$data['cod_curso']?>">
+                                                        <?php
+                                                        switch($_SESSION['idioma_seleccionado']['cod_idioma']){
+                                                            case "ES":
+                                                                echo $data['nombre_es'];
+                                                            break;
+                                                            
+                                                            case "POR":
+                                                                echo $data['nombre_portugues'];
+                                                            break;
+                                                        
+                                                            case "IN":
+                                                                echo $data['nombre_ingles'];
+                                                            break;
+                                                        }
+                                                        ?>
+                                                    </option>
                                                 <?php
                                                 }
                                                 ?>
