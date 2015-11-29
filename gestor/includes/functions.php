@@ -512,16 +512,19 @@ function ws_insertPaises($mysqli){
 }
 
 function ws_insertProvincias($mysqli){
-    $message = '';
+    /*$message = '';
     $fp_prov = fopen("../ws/provincias.json","r");
     $linea_prov = fgets($fp_prov);
 
-    $array_prov = json_decode($linea_prov);
+    $array_prov = json_decode($linea_prov);*/
+    
+    $ws = new webServices();
+    $array_prov = json_decode($ws->send('JSON_getProvincias'));
 
     foreach ($array_prov as $id=>$value){
-        $query_sel = "SELECT id, nombre FROM provincias WHERE id={$value->id} AND nombre='{$value->nombre}'";
+        /*$query_sel = "SELECT id, nombre FROM provincias WHERE id={$value->id} AND nombre='{$value->nombre}'";
         $result_sel = $mysqli->query($query_sel);
-        if($result_sel->num_rows == 0){
+        if($result_sel->num_rows == 0){*/
             $query_ins = "INSERT INTO provincias SET id={$value->id}, nombre='{$value->nombre}', id_pais={$value->pais}, codigo_estado='{$value->codigo_estado}', identificador_estado='{$value->identificador_estado}'";
             $result_ins = $mysqli->query($query_ins);
             if(!$result_ins){
@@ -529,24 +532,26 @@ function ws_insertProvincias($mysqli){
             }else{
                 $message.= "<br/>Correcto - Se inserto la provincia {$value->nombre}, pais: {$value->pais}<br/>";
             }
-        }else{
+        /*}else{
             $message.= "<br/>Error - Ya existe la pronvincia {$value->nombre} con id {$value->id}<br/>";
-        }
+        }*/
     }
     return $message;
 }
 
 function ws_insertLocalidades($mysqli){
-    $message = '';
+    /*$message = '';
     $fp_loc = fopen("../ws/localidades.json","r");
     $linea_loc = fgets($fp_loc);
 
-    $array_loc = json_decode($linea_loc);
-
+    $array_loc = json_decode($linea_loc);*/
+    
+    $ws = new webServices();
+    $array_loc = json_decode($ws->send('JSON_getCiudades'));
     foreach ($array_loc as $id=>$value){
-        $query_sel = "SELECT id, nombre FROM localidades WHERE id={$value->id} AND nombre='{$value->nombre}'";
+        /*$query_sel = "SELECT id, nombre FROM localidades WHERE id={$value->id} AND nombre='{$value->nombre}'";
         $result_sel = $mysqli->query($query_sel);
-        if($result_sel->num_rows == 0){
+        if($result_sel->num_rows == 0){*/
             $query_ins = "INSERT INTO localidades SET id={$value->id}, departamento_id='{$value->departamento_id}', nombre='{$value->nombre}', id_provincia='{$value->provincia_id}', id_pais='{$value->pais}', codigo_municipio='{$value->codigo_municipio}', codigo_siafi='{$value->codigo_siafi}'";
             $result_ins = $mysqli->query($query_ins);
             if(!$result_ins){
@@ -554,9 +559,9 @@ function ws_insertLocalidades($mysqli){
             }else{
                 $message.= "<br/>Correcto - Se inserto la localidad {$value->nombre}, prov: {$value->provincia_id}<br/>";
             }
-        }else{
+        /*}else{
             $message.= "<br/>Error - Ya existe la localidad {$value->nombre} con id {$value->id}<br/>";
-        }
+        }*/
     }
     return $message;
 }
@@ -579,9 +584,9 @@ function ws_insertFiliales($mysqli){
             $prov['id_provincia'] = 1111;
         }
         
-        $query_sel = "SELECT id, nombre FROM filiales WHERE id={$value->codigo} AND nombre='{$value->nombre}'";
+        /*$query_sel = "SELECT id, nombre FROM filiales WHERE id={$value->codigo} AND nombre='{$value->nombre}'";
         $result_sel = $mysqli->query($query_sel);
-        if($result_sel->num_rows == 0){
+        if($result_sel->num_rows == 0){*/
             $query_ins = "INSERT INTO filiales SET id={$value->codigo}, nombre='{$value->nombre}', id_localidad='{$value->id_localidad}', id_provincia='{$prov['id_provincia']}', domicilio='{$value->domicilio}', telefono='{$value->telefono}', telefono2='{$value->telefono2}', codigopostal='{$value->codigopostal}', email='{$value->email}', latitud='{$value->latitud}', longitud='{$value->longitud}', idioma='{$value->idioma}'";
             $result_ins = $mysqli->query($query_ins);
             if(!$result_ins){
@@ -589,9 +594,9 @@ function ws_insertFiliales($mysqli){
             }else{
                 $message.= "<br/>Correcto - Se inserto la filial {$value->nombre}, prov: {$prov['id_provincia']}<br/>";
             }
-        }else{
+        /*}else{
             $message.= "<br/>Error - Ya existe la filial {$value->nombre} con id {$value->id}<br/>";
-        }
+        }*/
     }
     return $message;
 }
@@ -1036,7 +1041,7 @@ function getTiposAsignados($mysqli, $cod_curso){
     return $tipos;
 }
 
-function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_asunto,$message){
+function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_asunto,$message,$coursecontact=false,$cod_comision="",$cod_plan=""){
     $html = $message;
     $tipo_asunto = ($cod_tipo_asunto == 3)?'curso':'asunto';
     $param = array(
@@ -1056,6 +1061,13 @@ function guardarConsultaCurso($filial,$email,$nombre,$phone,$asunto,$cod_tipo_as
 	"telefono" => $phone,
 	"html_respuesta" => $html
     );
+    
+    if ($coursecontact){
+        $param['agregar_reserva'] = "true";
+        $param['cod_comision'] = $cod_comision;
+        $param['cod_plan'] = $cod_plan;
+    }
+    
     $wsc = new wsc_sistema("sincronizar_consulta_web", $param);
     $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
     if (is_array($respuesta) && isset($respuesta['success']) && $respuesta['success'] == "success"){

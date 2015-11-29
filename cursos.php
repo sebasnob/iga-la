@@ -606,7 +606,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 alert('Por favor, ingrese su telefono');
                 return 0;
             }
-            if($("#"+formid+" input[name=message]").val() == '')
+            if($("#"+formid+" textarea[name=message]").val() == '')
             {
                 alert('Por favor, ingrese su consulta.');
                 return 0;
