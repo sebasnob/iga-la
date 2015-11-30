@@ -99,9 +99,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <ul class="nav navbar-nav navbar-left">     
                             <li class="scroll active"><a href="index.php"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li id="cursos"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></li>
-                            <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
-                            <li class="scroll"><a href="#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="index.php#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="index.php#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
+                            <li class="scroll"><a href="index.php#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
                         </ul>
                         
@@ -601,7 +601,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 alert('Por favor, ingrese su email');
                 return 0;
             }
-            if($("#"+formid+" input[name=telefono]").val() == '')
+            if($("#"+formid+" input[name=phone]").val() == '')
             {
                 alert('Por favor, ingrese su telefono');
                 return 0;
@@ -623,6 +623,10 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 phone: $("#"+formid+" input[name=phone]").val(),
                 message: $("#"+formid+" textarea[name=mensaje]").val(),
                 filial: $("#"+formid+" input[name=id_filial]").val(),
+                coursecontact: true,
+                id_comision: $("#"+formid+" input[name=id_comision]").val(),
+                id_plan: $("#"+formid+" input[name=id_plan]").val(),
+                cod_curso: $("#"+formid+" input[name=cod_curso]").val(),
                 tipo: "3"
               },
               dataType:'json',
@@ -630,9 +634,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
               {
                     $(boton).button('reset');
                     if(data.success){
-                        $('#'+formid).html("<div class='text-center text-consulta-error'>"+data.error+"</div>");
+                        $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.mensaje+"</div>");
                     }else{
-                        $('#'+formid+' > div.error').html(data.error)
+                        $('#'+formid+' > div.error').html(data.mensaje);
                     }
               }
             });

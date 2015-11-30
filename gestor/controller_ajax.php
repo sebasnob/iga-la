@@ -205,8 +205,8 @@ switch($_POST['option']){
             if($_POST['tipo'] == '3'){
                 $asunto = $lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                 if($_POST['coursecontact']){
-                    $cod_comision = $_POST['cod_comision'];
-                    $cod_plan = $_POST['cod_plan'];
+                    $cod_comision = $_POST['id_comision'];
+                    $cod_plan = $_POST['id_plan'];
                     $coursecontact = "true";
                 }
             }else{
@@ -290,37 +290,6 @@ switch($_POST['option']){
                             <td>Cupos</td>
                             <td>&nbsp;</td>
                         <tr>";
-            
-            /*$retorno .= "
-                <tr>
-                    <td>770</td>
-                    <td>2016-03-15</td>
-                    <td>
-                        Miercoles de 8:30 a 12:30 hs <br/>
-                        Viernes de 8:30 a 10:20 hs
-                    </td>
-                    <td>&nbsp;</td>
-                    <td>Cuotas 1 a 14&nbsp;&nbsp;<b>$1300.00</b><br/>Cuotas 15
- a 26&nbsp;&nbsp;<b>$1900.00</b><br/></td><td>2015-11-13</td>
-                    <td>&nbsp;</td>
-                    <td>
-                        <button type='button' data-toggle='collapse' data-target='#reserva-770' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivConsulta(770)'>Reservar</button>
-                        <br/>
-                        <button type='button' data-toggle='collapse' data-target='#consulta-770' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivReserva(770)'>Consultar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan='8' class='hiddenRow'>
-                    <div class='accordian-body collapse' id='reserva-770'>
-                        aaaaaaaaaaaaaa
-                    </div>
-                    <div class='accordian-body collapse' id='consulta-770'>
-                        bbbbbbbbbbbbbb
-                    </div>
-                    </td>
-                </tr>
-                ";*/
-            
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
             foreach($curso_cupo as $id=>$datos_curso){
                 $retorno .="<tr>
@@ -383,7 +352,10 @@ switch($_POST['option']){
                 $retorno .="</div>
                     <div class='accordian-body collapse' id='consulta-{$datos_curso['codigo']}'>";
                 $retorno .= '<form id="form-contacto-'.$datos_curso['codigo'].'" name="form-contacto-'.$datos_curso['codigo'].'" method="post" action="#">
+                                <input type="hidden" name="id_comision" value="'.$datos_curso['codigo'].'" />
                                 <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
+                                <input type="hidden" name="id_plan" value="'.$datos_curso['id_plan'].'" />
+                                <input type="hidden" name="cod_curso" value="'.$_POST['cod_curso'].'" />
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">

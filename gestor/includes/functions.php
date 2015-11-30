@@ -1089,7 +1089,7 @@ function guardarConsultaCurso($mysqli,$filial,$email,$nombre,$phone,$asunto,$cod
         $param['cod_comision'] = $cod_comision;
         $param['cod_plan'] = $cod_plan;
     }
-print_r($param);die();
+
     $wsc = new wsc_sistema("sincronizar_consulta_web", $param);
     $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
     if (is_array($respuesta) && isset($respuesta['success']) && $respuesta['success'] == "success"){
@@ -1099,7 +1099,7 @@ print_r($param);die();
     } else {
             $result = array("success" => false, "Error" => $wsc->getResponse());
     }
-    
+
     return $result;
 }
 
