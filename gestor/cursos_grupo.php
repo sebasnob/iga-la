@@ -119,9 +119,9 @@ if($logged == 'out'){
                             <div class="form-group">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Estado:</b></h4>
                                 <select name="estado_curso" id="estado_curso">
-                                    <option value="0">Deshabilitado</option>
                                     <option value="1">Habilitado</option>
-                                </select>
+                                    <option value="0">Deshabilitado</option>
+                               </select>
                              </div>
                              <div class="form-group">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Nombre del Curso:</b></h4>
