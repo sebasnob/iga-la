@@ -60,7 +60,7 @@ function getIdiomas($mysqli, $id_idioma = false, $id_pais = false)
         $cond .= ' AND id IN (select id_idioma from pais_idioma WHERE id_pais = ' . $id_pais . ')';
     }
     
-    $query = "SELECT id, idioma, cod_idioma FROM idiomas {$cond}";
+    $query = "SELECT id, idioma, cod_idioma, idioma_in, idioma_por FROM idiomas {$cond}";
     $resultado = $mysqli->query($query);
     $idiomas = array();
     while($respuesta = $resultado->fetch_assoc())
@@ -401,18 +401,25 @@ function detectCountry($mysqli){
         
         $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$cod_pais, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
-        $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
+        $query2 = "SELECT id, idioma, cod_idioma, idioma_in, idioma_por FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
         $result2 = $mysqli->query($query2);
         $idioma = $result2->fetch_assoc();
+        $idioma_sel = $idioma['idioma'];
+        switch($cod_pais){
+            case "BR":
+                $idioma_sel = $idioma['idioma_por'];
+            break;
+            case "US":
+                $idioma_sel = $idioma['idioma_in'];
+            break;
+        }
         $_SESSION['pais'] = array('id'=>$tablaPais['id'],
                                   'cod_pais'=>$tablaPais['cod_pais'], 
                                   'pais'=>$tablaPais['pais'],
                                   'flag'=>$tablaPais['flag'],
-                                  'idioma'=>$idioma['idioma'],
+                                  'idioma'=>$idioma_sel,
                                   'cod_idioma'=>$idioma['cod_idioma'],
                                   'id_idioma'=>$idioma['id']);
-        
-//        $_SESSION['ciudad'] = $resp->{'city'};
     }
     else
     {

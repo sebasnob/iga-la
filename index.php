@@ -73,7 +73,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <h1><img class="img-responsive" src="images/logo-iga_transparent.png" alt="logo"></h1>
                         </a>                    
                     </div>
@@ -117,7 +117,19 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     ?>
                                     <li>
                                         <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
-                                                <?=$d['idioma']?> 
+                                                <?php
+                                                switch($_SESSION['idioma_seleccionado']['cod_idioma']){
+                                                    case "ES":
+                                                        echo $d['idioma'];
+                                                    break;
+                                                    case "POR":
+                                                        echo $d['idioma_por'];
+                                                    break;
+                                                    case "IN":
+                                                        echo $d['idioma_in'];
+                                                    break;
+                                                }          
+                                                ?> 
                                         </a>
                                     </li>
                                     <?php
