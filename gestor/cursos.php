@@ -113,7 +113,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                                             $idiomas = getIdiomas($mysqli);
                                             foreach($idiomas as $i=>$d){
                                         ?>
-                                        <option value="<?=$d['id']?>"><?=$d['idioma']?></option>
+                                        <option value="<?=$d['id']?>" <?php echo ($d['id'] == '1')?'selected="selected"':"" ?> ><?=$d['idioma']?></option>
                                         <?php
                                             }
                                         ?>

@@ -236,7 +236,8 @@ $paises = getPaises($mysqli);
                                         </div>
                                     </div>
                                     <div class="col-md-12" id="grilla_editor">
-                                        <?php 
+                                        <?php
+                                        if($gridArray){
                                             foreach ($gridArray as $imgGrid){
                                         ?>
                                         <form enctype="multipart/form-data" method="POST" action="upload.php">
@@ -332,6 +333,7 @@ $paises = getPaises($mysqli);
                                         <hr>
                                         <?php
                                             }
+                                        }
                                         ?>
                                     </div>
                                 </section>

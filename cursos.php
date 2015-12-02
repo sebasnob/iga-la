@@ -91,7 +91,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <h1><img class="img-responsive" src="images/logo-iga_transparent.png" alt="logo"></h1>
                         </a>                    
                     </div>
