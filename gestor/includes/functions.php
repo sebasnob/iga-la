@@ -862,14 +862,21 @@ if(isset($_POST['filialSeleccionada']))
     echo json_encode($return);
 }
 
-function getNovedades($mysqli, $id_pais=false, $id_idioma=false){
-    $cond = '';
+function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false){
+    $cond = ' WHERE 1 = 1';
     $novedades = array();
-    if($id_idioma){
-        $cond .= " WHERE id_idioma={$id_idioma}";
+    
+    if($id_idioma)
+    {
+        $cond .= " AND id_idioma={$id_idioma}";
     }
-
+    
     $query = "SELECT * FROM novedades {$cond}";
+    
+    if($maximo)
+    {
+        $query .= " LIMIT {$maximo}";
+    }
     
     $resultado = $mysqli->query($query);
     

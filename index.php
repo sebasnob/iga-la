@@ -73,7 +73,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <h1><img class="img-responsive" src="images/logo-iga_transparent.png" alt="logo"></h1>
                         </a>                    
                     </div>
@@ -293,18 +293,27 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 <div class="blog-posts">
                     <div class="row">
                         <?php
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma']);
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3);
                         foreach ($novedades as $id=>$data){
                         ?>
                         <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
                             <div class="post-thumb">
-                                <a href="#"><img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt=""></a> 
+                                <img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="">
                             </div>
                             <div class="entry-header">
                                 <h3><a href="#"><?=$data['titulo']?></a></h3>
                             </div>
                             <div class="entry-content">
-                                <p><?=$data['descripcion']?></p>
+                                <span>
+                                    <?=substr($data['descripcion'],0,250) . '...'?>
+                                </span>
+                                <br>
+                                <span>
+                                    <a href="novedades.php?id=<?=$data['id']?>">
+                                        <?=$lenguaje['ver_mas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                                    </a>
+                                </span>
+                                
                             </div>
                         </div>
                         <?php

@@ -60,6 +60,9 @@ $lenguaje['gastro_intensivo_ES'] = "Gastronomía y Alta Cocina INTENSIVO";
 $lenguaje['cursos_cortos_ES'] = "Cursos Cortos";
 $lenguaje['cocineritos_ES'] = "Cocineritos";
 
+$lenguaje['ver_mas_ES'] = "Ver Más";
+$lenguaje['mas_novedades_ES'] = "Más Novedades";
+
 //ingles
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
 $lenguaje['inicio_IN'] = 'Home';
@@ -119,6 +122,8 @@ $lenguaje['paste_avanzada_IN'] = "Advanced Professional Pastry and";
 $lenguaje['gastro_intensivo_IN'] = "Gastronomy and Haute Cuisine INTENSIVE";
 
 $lenguaje['titulo_cursos_cortos_IN'] = "You are viewing the short courses";
+$lenguaje['ver_mas_IN'] = "More";
+$lenguaje['mas_novedades_IN'] = "More News";
 
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
@@ -177,3 +182,5 @@ $lenguaje['atencion_alumno_POR'] = "Atendimento ao aluno";
 $lenguaje['seleccion_opcion_POR'] = "Escolha uma opÇão";
 $lenguaje['consulta_enviada_POR'] = "Suas exigências corretamente.";
 $lenguaje['faltan_datos_POR'] = "Dados em falta!";
+$lenguaje['ver_mas_POR'] = "Ver Mais";
+$lenguaje['mas_novedades_POR'] = "Mais Notícias";
