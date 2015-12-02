@@ -62,8 +62,13 @@ $lenguaje['cocineritos_ES'] = "Cocineritos";
 
 $lenguaje['ver_mas_ES'] = "Ver Más";
 $lenguaje['mas_novedades_ES'] = "Más Novedades";
+$lenguaje['Español_ES'] = "Español";
+$lenguaje['Ingles_ES'] = "Ingles";
+$lenguaje['Portugues_ES'] = "Portugues";
+$lenguaje['inscripcion_abierta_ES'] = ' - INSCRIPCIÓN ABIERTA';
 
 //ingles
+$lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
 $lenguaje['inicio_IN'] = 'Home';
 $lenguaje['curso_IN'] = 'Courses';
@@ -124,6 +129,9 @@ $lenguaje['gastro_intensivo_IN'] = "Gastronomy and Haute Cuisine INTENSIVE";
 $lenguaje['titulo_cursos_cortos_IN'] = "You are viewing the short courses";
 $lenguaje['ver_mas_IN'] = "More";
 $lenguaje['mas_novedades_IN'] = "More News";
+$lenguaje['Ingles_IN'] = "English";
+$lenguaje['Español_IN'] = "Spanish";
+$lenguaje['Portugues_IN'] = "Portuguese";
 
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
@@ -184,3 +192,7 @@ $lenguaje['consulta_enviada_POR'] = "Suas exigências corretamente.";
 $lenguaje['faltan_datos_POR'] = "Dados em falta!";
 $lenguaje['ver_mas_POR'] = "Ver Mais";
 $lenguaje['mas_novedades_POR'] = "Mais Notícias";
+$lenguaje['Español_POR'] = "Espanhol";
+$lenguaje['Ingles_POR'] = "Inglês";
+$lenguaje['Portugues_POR'] = 'Portugues';
+$lenguaje['inscripcion_abierta_POR'] = ' - INSCRIÇÕES ABERTAS';

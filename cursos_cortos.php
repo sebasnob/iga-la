@@ -73,6 +73,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 ?>
         <div id="fb-root"></div>
         <header id="home">
+            <div class="fullParaCerrarMenu"></div>
+        <header id="home">
             <div class="main-nav">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -88,14 +90,14 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">     
-                            <li class="scroll active"><a href="#"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll active"><a href="index.php"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li id="cursos"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></li>
-                            <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
-                            <li class="scroll"><a href="#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="index.php#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="index.php#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
+                            <li class="scroll"><a href="index.php#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
                         </ul>
-                        
+                            
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?=$_SESSION['pais']['flag']?>" /><span style="margin-left: 5px;"><?=$_SESSION['pais']['pais']?></span><span class="caret"></span></a>
@@ -138,7 +140,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 ?>
                                 </ul>
                             </li>
-                            
+                                
                         </ul>
                     </div>
                 </div>
@@ -194,6 +196,24 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
 
                     <br/>
+                    <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
+                            <div class="form-group">
+                                <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
+                                    <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
+                                <?php foreach ($provincias as $provincia){?>
+                                    <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
+                                <?php }?>
+                                </select>    
+                            </div>
+                            <div class="form-group">
+                                <label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
+                                <select id="filiales_matricula" class="form-control">
+                                    <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
+                                </select>
+                            </div>
+                        </form>
+                        <br/>
                     <?php 
                         
                         $categoria = '';
@@ -212,13 +232,21 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <h4>
                             <?= '<a href="cursos.php?cod_curso=' . $curso_corto['cod_curso'] .'"> - ' . $curso_corto['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</a>'?>
                         </h4>
+                            <?php 
+                               
+                                $datosCurso = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
+                                if(isset($datosCurso[0]['cupo']) && $datosCurso[0]['cupo'] != '' && $datosCurso[0]['cupo'] !== '0' && $datosCurso[0]['cupo'] !== 0)
+                                {
+                                    echo '<span>' . $lenguaje['inscripcion_abierta_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</span>';
+                                }
+                            ?>
                     </div>
                     <?php } ?>
                 </div><!--/.col-md-8-->
                 <div class="col-sm-4">
                     <br>
                     <?php
-                    $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
+                    $novedad = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
                     if(count($novedad) > 0){
                     ?>
                     <div class="widget ads">
@@ -232,7 +260,13 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     <h3><a href="index.php#blog"><?=$novedad[0]['titulo']?></a></h3>
                                 </div>
                                 <div class="entry-content">
-                                    <p><?=$novedad[0]['descripcion']?></p>
+                                    <p><?=substr($novedad[0]['descripcion'],0,250) . '...'?></p>
+                                    <br>
+                                    <span>
+                                        <a href="novedades.php?id=<?=$novedad[0]['id']?>">
+                                            <?=$lenguaje['ver_mas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                                        </a>
+                                    </span>
                                 </div>
                             </div>
                         </div>

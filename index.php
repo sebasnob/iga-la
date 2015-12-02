@@ -104,7 +104,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             </li>
                             <li style="padding: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <?=$_SESSION['idioma_seleccionado']['idioma']?> 
+                                    <?=$lenguaje[$_SESSION['idioma_seleccionado']['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?> 
                                     <?php if(count($idiomas) > 1) { ?>
                                         <span class="caret"></span>
                                     <?php } ?>
@@ -117,19 +117,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     ?>
                                     <li>
                                         <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
-                                                <?php
-                                                switch($_SESSION['idioma_seleccionado']['cod_idioma']){
-                                                    case "ES":
-                                                        echo $d['idioma'];
-                                                    break;
-                                                    case "POR":
-                                                        echo $d['idioma_por'];
-                                                    break;
-                                                    case "IN":
-                                                        echo $d['idioma_in'];
-                                                    break;
-                                                }          
-                                                ?> 
+                                                <?=$lenguaje[$d['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?> 
                                         </a>
                                     </li>
                                     <?php

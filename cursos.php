@@ -325,7 +325,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 <div class="col-sm-4">
                     <br>
                     <?php
-                    $novedad = getNovedadesHome($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
+                    $novedad = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
                     if(count($novedad) > 0){
                     ?>
                     <div class="widget ads">
@@ -339,7 +339,13 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     <h3><a href="index.php#blog"><?=$novedad[0]['titulo']?></a></h3>
                                 </div>
                                 <div class="entry-content">
-                                    <p><?=$novedad[0]['descripcion']?></p>
+                                    <p><?=substr($novedad[0]['descripcion'],0,250) . '...'?></p>
+                                    <br>
+                                    <span>
+                                        <a href="novedades.php?id=<?=$novedad[0]['id']?>">
+                                            <?=$lenguaje['ver_mas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                                        </a>
+                                    </span>
                                 </div>
                             </div>
                         </div>
