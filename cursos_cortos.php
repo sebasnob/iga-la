@@ -115,9 +115,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </li>
                             <li style="padding: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <?=$_SESSION['idioma_seleccionado']['idioma']?> 
+                                    <?=$lenguaje[$_SESSION['idioma_seleccionado']['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?> 
                                     <?php if(count($idiomas) > 1) { ?>
-                                    <span class="caret"></span>
+                                        <span class="caret"></span>
                                     <?php } ?>
                                 </a>
                                 <?php if(count($idiomas) > 1) { ?>
@@ -128,7 +128,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     ?>
                                     <li>
                                         <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
-                                                <?=$d['idioma']?> 
+                                                <?=$lenguaje[$d['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?> 
                                         </a>
                                     </li>
                                     <?php
