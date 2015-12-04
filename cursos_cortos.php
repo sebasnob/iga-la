@@ -234,11 +234,14 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </h4>
                             <?php 
                                
-                                $datosCurso = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
+                                /*
+                                 * $datosCurso = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
                                 if(isset($datosCurso[0]['cupo']) && $datosCurso[0]['cupo'] != '' && $datosCurso[0]['cupo'] !== '0' && $datosCurso[0]['cupo'] !== 0)
                                 {
                                     echo '<span>' . $lenguaje['inscripcion_abierta_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</span>';
                                 }
+                                 * 
+                                 */
                             ?>
                     </div>
                     <?php } ?>

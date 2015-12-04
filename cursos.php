@@ -122,7 +122,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </li>
                             <li style="padding: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <?=$_SESSION['idioma_seleccionado']['idioma']?> 
+                                    <?=$lenguaje[$_SESSION['idioma_seleccionado']['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?> 
                                     <?php if(count($idiomas) > 1) { ?>
                                         <span class="caret"></span>
                                     <?php } ?>
@@ -135,7 +135,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     ?>
                                     <li>
                                         <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
-                                                <?=$d['idioma']?> 
+                                                <?=$lenguaje[$d['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?> 
                                         </a>
                                     </li>
                                     <?php
@@ -205,18 +205,18 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <h2><?=$datos_curso['nombre']?></h2>
                         <div class="entry-meta">
                             <span>
-                                <i class="fa fa-calendar"></i>&nbsp;Duración:
-                    	    <?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." horas": ''; ?>
-                    	    <?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." meses": ''; ?>
-                    	    <?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." años": ''; ?>
+                                <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>:
+                    	    <?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." {$lenguaje['horas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
+                            <?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." {$lenguaje['meses_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
+                            <?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." {$lenguaje['anios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
                             </span>
                         </div>
                     <?=$datos_curso['descripcion']?>
                     </section>
                     <hr>
                     <section id="cursado_planes">
-                        <h3>Cursado y plan de pagos</h3>
-                        <p>Para ver los inicios de clases, los horarios de cursado y las formas de pago, seleccione una provincia y un local.</p>
+                        <h3><?=$lenguaje['cursado_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                        <p><?=$lenguaje['desc_cursado_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                         <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
                             <div class="form-group">
                                 <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
@@ -240,7 +240,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th colspan="9" class="text-center">Planilla de Horarios</th>
+                                        <th colspan="9" class="text-center"><?=$lenguaje['planilla_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></th>
                                     </tr>
                                 </thead>
                                 
@@ -252,7 +252,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     </section>
                     <hr>
                     <section id="meterial_curso" >
-                        <h3>Material del curso</h3>
+                        <h3><?=$lenguaje['material_estudio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <div class="well">
                             <div class="media">
                                 <div class="pull-left">
@@ -260,7 +260,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 </div>
                                 <div class="media-body">
                                     <div class="media-heading">
-                                        <strong>Cada curso de IGA</strong>
+                                        
                                     </div>
                                 <?=$datos_curso['desc_material']?>
                                 </div>
@@ -269,7 +269,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     </section>
                     <hr>
                     <section id="uniformes" >
-                        <h3>Uniformes</h3>
+                        <h3><?=$lenguaje['uniforme_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <div class="well">
                             <div class="media">
                                 <div class="pull-left">
@@ -277,7 +277,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 </div>
                                 <div class="media-body">
                                     <div class="media-heading">
-                                        <strong>Con la inscripción al curso,</strong>
+                                        
                                     </div>
                                 <?=$datos_curso['desc_uniforme']?>
                                 </div>
@@ -356,13 +356,13 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 </div>        
                 <div class="col-sm-12">
                     <section id="objetivo">
-                        <h2>Nuestro Objetivo</h2>
+                        <h2><?=$lenguaje['objetivos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
                         <div class="entry-meta">
                             <span>
-                                <i class="fa fa-calendar"></i>&nbsp;Duración:
-                	<?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." horas": ''; ?>
-                	<?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." meses": ''; ?>
-                	<?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." años": ''; ?>
+                                <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>::
+                	<?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." {$lenguaje['horas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
+                	<?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." {$lenguaje['meses_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
+                	<?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." {$lenguaje['anios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
                             </span>
                         </div>
                     <?=$datos_curso['objetivos']?>

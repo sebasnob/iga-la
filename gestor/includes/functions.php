@@ -1193,12 +1193,13 @@ function getCursoConCupo($id_filial, $cod_curso){
     $cupos = json_decode($str_cupos,true);
 
     $curso_cupo = array();
-    foreach($cupos[$id_filial] as $id=>$datos){
-	if($datos['codigocurso'] == $cod_curso){
-            $curso_cupo[] = $datos;
-	}
+    if(count($cupos) > 0){
+        foreach($cupos[$id_filial] as $id=>$datos){
+            if($datos['codigocurso'] == $cod_curso){
+                $curso_cupo[] = $datos;
+            }
+        }
     }
-    
     return $curso_cupo;
 }
 

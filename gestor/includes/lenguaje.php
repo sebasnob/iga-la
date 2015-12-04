@@ -67,6 +67,18 @@ $lenguaje['Ingles_ES'] = "Ingles";
 $lenguaje['Portugues_ES'] = "Portugues";
 $lenguaje['inscripcion_abierta_ES'] = ' - INSCRIPCIÓN ABIERTA';
 
+$lenguaje['duracion_ES'] = 'Duración';
+$lenguaje['cursado_ES'] = 'Cursado y Plan de Pagos';
+$lenguaje['desc_cursado_ES'] = 'Para ver los inicios de clases, los horarios de cursado y las formas de pago, seleccione una provincia y un local.';
+$lenguaje['material_estudio_ES'] = 'Material de estudio';
+$lenguaje['uniforme_ES'] = 'Uniforme';
+$lenguaje['malla_curricular_ES'] = 'Malla curricular';
+$lenguaje['objetivos_ES'] = 'Nuestro Objetivo';
+$lenguaje['horas_ES'] = 'Horas';
+$lenguaje['meses_ES'] = 'Meses';
+$lenguaje['anios_ES'] = 'Años';
+$lenguaje['planilla_ES'] = 'Planilla de horarios';
+
 //ingles
 $lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
@@ -122,7 +134,7 @@ $lenguaje['consulta_enviada_IN'] = "Your requirements correctly.";
 $lenguaje['faltan_datos_IN'] = "Missing some data!";
 
 $lenguaje['gastro_IN'] = "Gastronomy and Haute Cuisine";
-$lenguaje['certif_gastro_IN'] = "Advanced Certification in Gastronomy";
+$lenguaje['certif_gastro_IN'] = "Advanced Certification Gastronomy";
 $lenguaje['paste_avanzada_IN'] = "Advanced Professional Pastry and";
 $lenguaje['gastro_intensivo_IN'] = "Gastronomy and Haute Cuisine INTENSIVE";
 
@@ -132,6 +144,18 @@ $lenguaje['mas_novedades_IN'] = "More News";
 $lenguaje['Ingles_IN'] = "English";
 $lenguaje['Español_IN'] = "Spanish";
 $lenguaje['Portugues_IN'] = "Portuguese";
+
+$lenguaje['duracion_IN'] = 'Duration';
+$lenguaje['cursado_IN'] = 'Programs and installment plans';
+$lenguaje['desc_cursado_IN'] = 'In order to see the beginning of classes, time schedules and payment options, please select a state and a branch.';
+$lenguaje['material_estudio_IN'] = 'Study materials';
+$lenguaje['uniforme_IN'] = 'Uniform';
+$lenguaje['malla_curricular_IN'] = 'Levels';
+$lenguaje['objetivos_IN'] = 'Our goals';
+$lenguaje['horas_IN'] = 'Hours';
+$lenguaje['meses_IN'] = 'Months';
+$lenguaje['anios_IN'] = 'Years';
+$lenguaje['planilla_IN'] = 'Schedules';
 
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
@@ -196,3 +220,15 @@ $lenguaje['Español_POR'] = "Espanhol";
 $lenguaje['Ingles_POR'] = "Inglês";
 $lenguaje['Portugues_POR'] = 'Portugues';
 $lenguaje['inscripcion_abierta_POR'] = ' - INSCRIÇÕES ABERTAS';
+
+$lenguaje['duracion_POR'] = 'Duração';
+$lenguaje['cursado_POR'] = 'Freqüencia e planos de pagamento';
+$lenguaje['desc_cursado_POR'] = 'Para ver os horários do curso e os planos de pagamento, selecione um estado e uma filial.';
+$lenguaje['material_estudio_POR'] = 'Material de estudo';
+$lenguaje['uniforme_POR'] = 'Uniforme';
+$lenguaje['malla_curricular_POR'] = 'Grade curricular';
+$lenguaje['objetivos_POR'] = 'Nossos objetivos';
+$lenguaje['horas_POR'] = 'Horas';
+$lenguaje['meses_POR'] = 'Meses';
+$lenguaje['anios_POR'] = 'Anos';
+$lenguaje['planilla_POR'] = 'Folha de horas';
