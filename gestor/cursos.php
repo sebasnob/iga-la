@@ -170,12 +170,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                                              <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
                                           </div>
 
-                                         <div class="form-group">
-                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Plan de Estudio:</b></h4>
-                                              <textarea name="plan_estudio" id="plan_estudio" class="form-control" rows="5"></textarea>
-                                          </div>
-
-                                          <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4>
+                                        <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4>
                                           <div id="materialesPreview" class="form-group">
                                               <img class="avatar img-thumbnail" id="imgMaterialesPreview" src="" alt="" />
                                           </div>
@@ -217,7 +212,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
                             <div class="row mt">
                                 <div class="col-lg-12">  
-                                    <button id="confirm" class="btn btn-success">Guardar cambios</button>
+                                    <button id="confirm" type="button" class="btn btn-success" data-loading-text="Guardando...">Guardar cambios</button>
                                     <a id="preview" class="btn btn-default" href="preview.php?cod_curso=<?=$_GET['cod_curso']?>&idioma=<?=$idioma?>" target="_blank">Vista Previa</a>
                                     <a href="list_cursos.php" type="button" class="btn btn-info">Volver</a>
                                 </div><!-- /form-panel -->
@@ -298,6 +293,10 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
             }
             
             function getDatosCurso(cod_curso, id_pais, id_idioma, id_filial){
+                $('#confirm').button('loading');
+                $('#error_datos_curso').show("fast",function(){
+                    $(this).html("<div class='text-center'><img src='../images/preloader.gif' /><br/>Cargando Información..</div>");
+                });
                 $.ajax({
         	    url: "controller_ajax.php",
         	    method: "POST",
@@ -310,6 +309,7 @@ if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
                     },
                     dataType: "json",
         	    success: function(data){
+                        $('#confirm').button('reset');
                         if(data.id){
                             $('#error_datos_curso').hide();
                             $('#imagePreview').attr("src", "../"+data.url_cabecera);

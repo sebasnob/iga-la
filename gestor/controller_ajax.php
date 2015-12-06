@@ -50,10 +50,6 @@ switch($_POST['option']){
     
     case "get_datos_curso":
         $datos_curso = getDatosCurso($mysqli, $_POST['cod_curso'], $_POST['id_idioma'], $_POST['id_filial']);
-        if(is_array($datos_curso)){
-            array_walk_recursive($datos_curso,'myFunc');
-        }
-        
         print(json_encode($datos_curso));
         
     break;
@@ -404,12 +400,5 @@ switch($_POST['option']){
         
     break;
 }
-
-//funciones auxiliares
-
-function myFunc(&$item, $key) {
-    $item = utf8_encode($item);
-}
-
 
 ?>
