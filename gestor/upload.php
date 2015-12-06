@@ -856,10 +856,11 @@ if(isset($_POST['edicion_slider']))
             }
             else
             {
+                $cod_pais = json_encode($_POST['pais']);
                 $query = "UPDATE slider "
                                 . "SET alt = '{$_POST['alt']}', "
                                 . "link = '{$_POST['link']}', "
-                                . "id_pais = {$_POST['id_pais']}, "
+                                . "id_pais = '{$cod_pais}', "
                                 . "cod_idioma = '{$_POST['cod_idioma']}' "
                                 . "WHERE slider.id = {$_POST['id_img_slider']}";
                 $mysqli->query($query);
