@@ -15,6 +15,12 @@ if($logged == 'out'){
     exit();
 }
 
+if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
+    $datos_curso = getCursos($mysqli, $_GET['cod_curso']);
+}else{
+    header("Location: list_cursos.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,10 +44,6 @@ if($logged == 'out'){
     <link href="assets/css/table-responsive.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">  
         
-        <link rel="stylesheet" type="text/css" media="screen" href="styles.php?id_curso=<?=$_GET['cod_curso']?>">
-        
-        
-        
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -60,7 +62,7 @@ if($logged == 'out'){
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper site-min-height">
-                    <h3><i class="fa fa-angle-right"></i>Edición del curso para un grupo de filiales </h3>
+                    <h3><i class="fa fa-angle-right"></i>Edición del curso <b><?=$datos_curso[0]['nombre_es']?></b></h3>
                     <p>Formulario para modificar los datos de un curso en un grupo de filiales. Las modificaciones afectaran a todas las filiales en el idioma seleccionado. Si desea editar un curso en particular, seleccionelo desde el <a href="list_cursos.php">listado de cursos</a></p>
                     <br/>
                     <form method="POST" action="upload.php" id="form_change" enctype="multipart/form-data">
@@ -146,12 +148,6 @@ if($logged == 'out'){
                                 <div class="form-group">
                                     <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Descripción:</b></h4> 
                                     <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
-                                </div>
-                               
-                                 <div class="form-group">
-                                    <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Plan de Estudio:</b></h4> 
-                                   
-                                    <textarea name="plan_estudio" id="plan_estudio" class="form-control" rows="5"></textarea>
                                 </div>
                                 
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Materiales:</b></h4> 
@@ -274,8 +270,8 @@ if($logged == 'out'){
                 //Reinicio el select de filiales
                 $('.filial_items').html("&nbsp;");
                 //Reinicio el select de idiomas
-                $("#idioma_curso").find('option:selected').removeAttr("selected");
-                $('#idioma_curso option:nth-child(0)').attr('selected','selected');
+                /*$("#idioma_curso").find('option:selected').removeAttr("selected");
+                $('#idioma_curso option:nth-child(0)').attr('selected','selected');*/
                 
                 $.ajax({
         	    url: "controller_ajax.php",
