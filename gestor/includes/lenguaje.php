@@ -77,7 +77,17 @@ $lenguaje['objetivos_ES'] = 'Nuestro Objetivo';
 $lenguaje['horas_ES'] = 'Horas';
 $lenguaje['meses_ES'] = 'Meses';
 $lenguaje['anios_ES'] = 'Años';
+
 $lenguaje['planilla_ES'] = 'Planilla de horarios';
+$lenguaje['malla_comision_ES'] = 'Comisión';
+$lenguaje['malla_fecha_in_ES'] = 'Inicio';
+$lenguaje['malla_horarios_ES'] = 'Dias y Horarios';
+$lenguaje['malla_matricula_ES'] = 'Matrícula';
+$lenguaje['malla_cuotas_ES'] = 'Cuotas';
+$lenguaje['malla_vigencia_ES'] = 'Vigencia';
+$lenguaje['malla_cupos_ES'] = 'Cupos';
+$lenguaje['malla_boton_reserva_ES'] = 'Reservar';
+$lenguaje['malla_boton_consulta_ES'] = 'Consultar';
 
 //ingles
 $lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
@@ -155,7 +165,17 @@ $lenguaje['objetivos_IN'] = 'Our goals';
 $lenguaje['horas_IN'] = 'Hours';
 $lenguaje['meses_IN'] = 'Months';
 $lenguaje['anios_IN'] = 'Years';
-$lenguaje['planilla_IN'] = 'Schedules';
+$lenguaje['planilla_IN'] = 'Timetable';
+
+$lenguaje['malla_comision_IN'] = 'Group';
+$lenguaje['malla_fecha_in_IN'] = 'Home';
+$lenguaje['malla_horarios_IN'] = 'Days and Timetable';
+$lenguaje['malla_matricula_IN'] = 'Enrolment';
+$lenguaje['malla_cuotas_IN'] = 'Installments';
+$lenguaje['malla_vigencia_IN'] = 'Due data';
+$lenguaje['malla_cupos_IN'] = 'Available Programs';
+$lenguaje['malla_boton_reserva_IN'] = 'Books Place';
+$lenguaje['malla_boton_consulta_IN'] = 'Check';
 
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
@@ -164,7 +184,7 @@ $lenguaje['paste_avanzada_POR'] = "Advanced Professional e pastelaria";
 $lenguaje['gastro_intensivo_POR'] = "Gastronomia e Haute Cuisine INTENSIVO";
 $lenguaje['titulo_cursos_cortos_POR'] = "Você está visitando os cursos de curta duração";
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
-$lenguaje['inicio_POR'] = 'Iniciação';
+$lenguaje['inicio_POR'] = 'Home';
 $lenguaje['curso_POR'] = 'Cursos';
 $lenguaje['institucional_POR'] = 'Institucional';
 $lenguaje['pasion_POR'] = 'Faz sua paixão sua profissão';
@@ -231,4 +251,14 @@ $lenguaje['objetivos_POR'] = 'Nossos objetivos';
 $lenguaje['horas_POR'] = 'Horas';
 $lenguaje['meses_POR'] = 'Meses';
 $lenguaje['anios_POR'] = 'Anos';
-$lenguaje['planilla_POR'] = 'Folha de horas';
+$lenguaje['planilla_POR'] = 'Grade de horários';
+
+$lenguaje['malla_comision_POR'] = 'Turma';
+$lenguaje['malla_fecha_in_POR'] = 'Início';
+$lenguaje['malla_horarios_POR'] = 'Dias y Horário';
+$lenguaje['malla_matricula_POR'] = 'Matrícula';
+$lenguaje['malla_cuotas_POR'] = 'Parcelas';
+$lenguaje['malla_vigencia_POR'] = 'Vigência do Plano';
+$lenguaje['malla_cupos_POR'] = 'Vagas Disponíveis';
+$lenguaje['malla_boton_reserva_POR'] = 'Reservar uma Vaga';
+$lenguaje['malla_boton_consulta_POR'] = 'Consultar';

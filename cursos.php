@@ -359,7 +359,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <h2><?=$lenguaje['objetivos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
                         <div class="entry-meta">
                             <span>
-                                <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>::
+                                <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>:
                 	<?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." {$lenguaje['horas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
                 	<?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." {$lenguaje['meses_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
                 	<?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." {$lenguaje['anios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>

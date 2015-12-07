@@ -277,13 +277,13 @@ switch($_POST['option']){
     case "get_cursos_con_cupo":
         if(isset($_POST['id_filial']) && $_POST['id_filial'] != '' && isset($_POST['cod_curso']) && $_POST['cod_curso'] != ''){
             $retorno = "<tr>
-                            <td>Comision</td>
-                            <td>Inicio</td>
-                            <td>Dias y Horarios</td>
-                            <td>Matricula</td>
-                            <td>Cuotas</td>
-                            <td>Vigencia</td>
-                            <td>Cupos</td>
+                            <td>".$lenguaje['malla_comision_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                            <td>".$lenguaje['malla_fecha_in_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                            <td>".$lenguaje['malla_horarios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                            <td>".$lenguaje['malla_matricula_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                            <td>".$lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                            <td>".$lenguaje['malla_vigencia_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                            <td>".$lenguaje['malla_cupos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
                             <td>&nbsp;</td>
                         <tr>";
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
@@ -310,9 +310,9 @@ switch($_POST['option']){
                 $retorno .= "<td>{$datos_curso['fechavigencia']}</td>
                     <td>{$datos_curso['cupo']}</td>
                     <td>
-                        <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>Reservar</button>
+                        <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>".$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
                         <br/><br/>
-                        <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>Consultar</button>
+                        <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>".$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
                     </td>
                 </tr>
                 <tr>
