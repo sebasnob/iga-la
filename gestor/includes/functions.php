@@ -893,13 +893,17 @@ if(isset($_POST['filialSeleccionada']))
     echo json_encode($return);
 }
 
-function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false){
+function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false, $estado = false){
     $cond = ' WHERE 1 = 1';
     $novedades = array();
     
+    if($estado){
+        $cond .= ' AND estado = 1 ';
+    }
+    
     if($id_idioma)
     {
-        $cond .= " AND id_idioma={$id_idioma}";
+        $cond .= " AND id_idioma={$id_idioma} ";
     }
     
     $query = "SELECT * FROM novedades {$cond}";

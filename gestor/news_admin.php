@@ -111,10 +111,15 @@ $paises = getPaises($mysqli);
                                             <select name="pais[]" multiple="true" required>
                                                 <?php foreach ($paises as $pais){?>
                                                 <option value="<?= $pais['id'] ?>"
-                                                                        <?php if(in_array($pais['id'], $novedad['id_pais']))
-                                                                        {
-                                                                            echo 'selected';
-                                                                        }?>>
+                                                                        <?php 
+                                                                        if(isset($novedad)){
+                                                                            if(in_array($pais['id'], $novedad['id_pais']))
+                                                                            {
+                                                                                echo 'selected';
+                                                                            }
+                                                                        }
+                                                                        ?>
+                                                        >
                                                                         <?= $pais['pais'] ?>
                                                 </option>
                                                                 <?php } ?>
