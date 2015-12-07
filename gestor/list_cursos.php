@@ -83,25 +83,10 @@ if($logged == 'out'){
                                             </div>
                                             <ul class="collapse tipocurso " id="<?=$j['cod_curso']?>collapseExample">
                                             <form id="formTipoCurso<?=$j['cod_curso']?>" name="formTipoCurso<?=$j['cod_curso']?>" method="POST">
-                                                <!--<li>
-                                                    <ul>
-                                                    <?php
-                                                    //foreach($tiposCurso as $id_t=>$data_t){
-                                                    ?>
-                                                        <li><input type="checkbox" name="tipos[]" value="<?=$data_t['id']?>" <?php echo (in_array($data_t['id'], $tipos_asignados))?"checked='checked'":''; ?> />&nbsp;<?=$data_t['nombre_es']?></li>
-                                                        <?php
-                                                        //$subTipos = getTiposCursos($mysqli, $data_t['id']);
-                                                        //foreach($subTipos as $id=>$data){
-                                                        ?>
-                                                        <li style="padding-left:18px">&nbsp;&nbsp; <input type="checkbox" name="tipos[]" value="<?=$data['id']?>" <?php echo (in_array($data['id'], $tipos_asignados))?"checked='checked'":''; ?> /> <?=$data['nombre_es']?></li>
-                                                    <?php
-                                                        //}
-                                                    //}
-                                                    ?>
-                                                    </ul>      
-                                                </li>-->
                                                 <li style="vertical-align:top;padding:5px;">
-                                                    Asignar Color &nbsp;<input type="text" id="colorCurso<?=$j['cod_curso']?>" name="colorCurso<?=$j['cod_curso']?>" value="<?=$j['color']?>"/>
+                                                    Asignar Color &nbsp;
+                                                    <input type="text" id="colorCurso<?=$j['cod_curso']?>" name="colorCurso<?=$j['cod_curso']?>" value="<?=$j['color']?>"/>&nbsp;
+                                                    <input type="color" id="paletaColorCurso<?=$j['cod_curso']?>" name="paletaColorCurso<?=$j['cod_curso']?>" value="<?=$j['color']?>" onchange="javascript:cambiarColor('<?=$j['cod_curso']?>')" />
                                                 </li>
                                                 <li style="padding:5px;">
                                                     <button type="button" class="btn btn-success" onclick="javascript:cambiarTipoColor(this, 'formTipoCurso<?=$j['cod_curso']?>', '<?=$j['cod_curso']?>')" data-loading-text="Cambiando...">Aceptar</button>
@@ -166,6 +151,13 @@ if($logged == 'out'){
                     btn.button('reset');
                 }
             });
+        }
+        
+        function cambiarColor(cod_curso){
+            var colorCurso = 'colorCurso'+cod_curso;
+            var paletaColor = 'paletaColorCurso'+cod_curso;
+            
+            $('#'+colorCurso).val($('#'+paletaColor).val());
         }
     </script>
 

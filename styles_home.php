@@ -7,7 +7,7 @@ include_once 'gestor/includes/functions.php';
 if($_GET['cod_curso']){ 
     $query = $mysqli->query("SELECT color FROM cursos WHERE cod_curso=".$_GET['cod_curso']);
     $result = $query->fetch_assoc();
-    $color_curso = "#".$result['color'];
+    $color_curso = $result['color'];
 }else{
     $color_curso = "#000000";
 }
