@@ -89,6 +89,10 @@ $lenguaje['malla_cupos_ES'] = 'Cupos';
 $lenguaje['malla_boton_reserva_ES'] = 'Reservar';
 $lenguaje['malla_boton_consulta_ES'] = 'Consultar';
 
+$lenguaje['enviando_ES'] = 'Enviando..';
+$lenguaje['mail_valido_ES'] = 'Email no válido';
+$lenguaje['tel_valido_ES'] = 'Número de teléfono inválido';
+
 //ingles
 $lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
@@ -177,6 +181,10 @@ $lenguaje['malla_cupos_IN'] = 'Available Programs';
 $lenguaje['malla_boton_reserva_IN'] = 'Books Place';
 $lenguaje['malla_boton_consulta_IN'] = 'Check';
 
+$lenguaje['enviando_IN'] = 'Sending..';
+$lenguaje['mail_valido_IN'] = 'Invalid email';
+$lenguaje['tel_valido_IN'] = 'Invalid phone number';
+
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
 $lenguaje['certif_gastro_POR'] = "Certificado Avançado em Gastronomia";
@@ -262,3 +270,7 @@ $lenguaje['malla_vigencia_POR'] = 'Vigência do Plano';
 $lenguaje['malla_cupos_POR'] = 'Vagas Disponíveis';
 $lenguaje['malla_boton_reserva_POR'] = 'Reservar uma Vaga';
 $lenguaje['malla_boton_consulta_POR'] = 'Consultar';
+
+$lenguaje['enviando_POR'] = 'Envio..';
+$lenguaje['mail_valido__POR'] = 'E-mail inválido';
+$lenguaje['tel_valido_POR'] = 'Invalid phone number';
