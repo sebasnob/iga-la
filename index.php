@@ -221,14 +221,16 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     <div class="col-md-<?php echo $imgGrid['cols']?>">
                         <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
                             <div class="folio-image">
-                                <img class="img-responsive" src="<?php echo $imgGrid['img_url']?>" alt="">
+                                <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
+                                    <img class="img-responsive" src="<?php echo $imgGrid['img_url']?>" alt="">
+                                </a>    
                             </div>
                             <div class="overlay">
                                 <div class="overlay-content">
                                     <div class="overlay-text">
                                         <div class="folio-overview">
                                             <span class="folio-expand ">
-                                                <a href="javascript:descripcionCurso('<?php echo $imgGrid['id_curso']?>')">
+                                                <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                                                     <i class="fa fa-plus"></i>
                                                 </a>
                                             </span>
@@ -240,44 +242,10 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                     <?php 
                         }
+                    }
                     ?>
                 </div>
             </div> <!--/#container-fluid-porfolios-->
-            <div id="portfolio-single-wrap">
-                <?php foreach ($gridArrayCursos as $imgGrid){
-                    
-                    $nombre_defecto = $lenguaje['nombre_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
-                    $duracion_defecto = $lenguaje['duracion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
-                    $descripcion_defecto = $lenguaje['descripcion_defecto_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
-                    $cursos_datos = getCursosDatos($mysqli, $imgGrid['id_curso'], $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['cod_idioma'], $nombre_defecto, $duracion_defecto, $descripcion_defecto);
-                ?>
-                <div id="single-portfolio" class="container collapse curso curso<?php echo $imgGrid['id_curso']?>">
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <div class="project-info">
-                                <h2><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>"><?= $cursos_datos['nombre']?></a></h2>
-                                <div class="entry-meta">
-                                    
-                                    <span>
-                                        <i class="fa fa-calendar"></i>&nbsp;Duración: 
-                                            <?php echo ($cursos_datos['horas'] != '' && $cursos_datos['horas'] != 0)? $cursos_datos['horas']." horas": ''; ?>
-                                            <?php echo ($cursos_datos['meses'] != '' && $cursos_datos['meses'] != 0)? ", ".$cursos_datos['meses']." meses": ''; ?>
-                                            <?php echo ($cursos_datos['anios'] != '' && $cursos_datos['anios'] != 0)? ", ".$cursos_datos['anios']." años": ''; ?>
-                                    </span>
-                                    
-                                </div>
-                                <p class="lead"><?= $cursos_datos['descripcion']?></p>
-                            </div>
-                            <div class="col-sm-9"><a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">Click aquí para más informacion</a></div>
-                        </div>
-                        <a href="javascript:cerrarCurso();" class="close-folio-item2" ><i class="fa fa-times"></i></a>
-                    </div>
-                </div>
-                <?php 
-                    } 
-                }
-                ?>
-            </div>
         </section><!--/#grillaCursos-->
         
         <section id="blog">
