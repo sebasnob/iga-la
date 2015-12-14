@@ -342,6 +342,12 @@ $('#cursos').click(function(){
     $('#desplegableCursos').css({ top: top + 'px'});
     $('#desplegableCursos').css({ left: left + 'px'});
     
+    var cursosBack = $('.main-nav').css('background');
+    
+    
+    console.log(cursosBack);
+    
+    $('#desplegableCursos').css('background', cursosBack);
     $('#desplegableCursos').slideToggle('fast');
 });
 

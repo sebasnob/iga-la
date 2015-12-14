@@ -1218,9 +1218,8 @@ padding-bottom: 50px;
     display: none;
     position: absolute;
     height: 130px;
-    width: 575px;
+    width: 580px;
     z-index: 9;
-   background:  rgba(1, 15, 44, 0.70) !important;
 }
 #slider{
     /*height: 100vh;*/
