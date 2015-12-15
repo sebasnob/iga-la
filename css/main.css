@@ -1288,3 +1288,14 @@ padding-bottom: 50px;
     color: #72A0FF;
     cursor: pointer;
 }
+
+.modal-dialog{
+display: inline;
+}
+.form-group{
+    margin-right: 40px;
+}
+#selectFilialModal{
+    width: 100%;
+    margin: 5% auto;
+}
