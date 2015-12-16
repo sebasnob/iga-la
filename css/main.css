@@ -1258,7 +1258,7 @@ padding-bottom: 50px;
 
 .dropdown-menu{
  background:  rgba(1, 15, 44, 0.70) !important;
-  
+ min-width: 80px;
 }
 
 

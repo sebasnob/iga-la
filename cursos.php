@@ -107,27 +107,27 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?=$_SESSION['pais']['flag']?>" /><span style="margin-left: 5px;"><?=$_SESSION['pais']['pais']?></span><span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?=$_SESSION['pais']['flag']?>" /><span style="margin-left: 5px;"><?=substr($_SESSION['pais']['pais'], 0, 3)?></span><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                 <?php
                                 foreach($paises as $i=>$d){
                                     if($_SESSION['pais']['cod_pais'] != $d['cod_pais']){
                                 ?>
-                                    <li><a href="javascript:cambiarPais('<?=$d['cod_pais']?>')" ><img src="<?=$d['flag']?>" /><span style="margin-left: 5px;"> <?=$d['pais']?></span></a></li>
+                                    <li><a href="javascript:cambiarPais('<?=$d['cod_pais']?>')" ><img src="<?=$d['flag']?>" /><span style="margin-left: 5px;"> <?=substr($d['pais'], 0, 3)?></span></a></li>
                                 <?php
                                     }
                                 }
                                 ?>
                                 </ul>
                             </li>
+                            <?php if(count($idiomas) > 1) { ?>
                             <li style="padding: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <?=$lenguaje[$_SESSION['idioma_seleccionado']['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?> 
+                                    <?=substr($lenguaje[$_SESSION['idioma_seleccionado']['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']], 0, 2)?> 
                                     <?php if(count($idiomas) > 1) { ?>
                                         <span class="caret"></span>
                                     <?php } ?>
                                 </a>
-                                <?php if(count($idiomas) > 1) { ?>
                                 <ul class="dropdown-menu">
                                 <?php
                                     foreach($idiomas as $i=>$d){
@@ -135,19 +135,18 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     ?>
                                     <li>
                                         <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
-                                                <?=$lenguaje[$d['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?> 
+                                                <?=substr($lenguaje[$d['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']], 0, 2)?> 
                                         </a>
                                     </li>
                                     <?php
                                         }
                                     }
                                 ?>
-                                    <?php
-                                }
-                                ?>
                                 </ul>
                             </li>
-                            
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>
