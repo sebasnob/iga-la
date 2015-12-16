@@ -172,9 +172,9 @@ $novedad = getNovedad($mysqli, $_GET['id']);
         </header>
             
         <section id="novedad">
-                <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+                <div class="heading text-left col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
                     <h2><?=$novedad['titulo']?></h2>
-                    <img src="images/novedades/<?=$novedad['imagen']?>" class="img-responsive" />
+                    <img src="images/novedades/<?=$novedad['imagen']?>" class="img-responsive img-novedad" />
                     <p><?=$novedad['descripcion']?></p>
                 </div>
         </section>
