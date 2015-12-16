@@ -334,21 +334,26 @@ function getSelectCursos(selector, select){
     }
 }
 
-$('#cursos').click(function(){
-    
-    var top = $('#cursos').position().top + 52;
-    var left = $('#cursos').position().left;
-    
-    $('#desplegableCursos').css({ top: top + 'px'});
-    $('#desplegableCursos').css({ left: left + 'px'});
-    
-    var cursosBack = $('.main-nav').css('background');
-    
-    
-    console.log(cursosBack);
-    
-    $('#desplegableCursos').css('background', cursosBack);
-    $('#desplegableCursos').slideToggle('fast');
+$('#cursos').click(function()
+{
+    if($('#colapseButton').css('display') == 'block')
+    {
+        $('.navbar-collapse').removeClass('in');
+        scroll('#grillaCursos');
+    }
+    else
+    {
+        var top = $('#cursos').position().top + 52;
+        var left = $('#cursos').position().left;
+
+        $('#desplegableCursos').css({ top: top + 'px'});
+        $('#desplegableCursos').css({ left: left + 'px'});
+
+        var cursosBack = $('.main-nav').css('background');
+
+        $('#desplegableCursos').css('background', cursosBack);
+        $('#desplegableCursos').slideToggle('fast');
+    }
 });
 
 $('#buscarGrilla').click(function(){
