@@ -32,20 +32,15 @@ left: 95%;
 	.social-icons ul li {
 		margin-bottom: 10px;
 	}
-	.price {
-		font-size: 16px;
-		height: 110px;
-		line-height: 30px;
-		width: 100%;
-	}
-	.price span {
-		font-size: 40px;
-		margin-top: 27px;
-	}
+
 	.btn-signup {
 		padding: 10px 20px;
 	}
 
+#contact-us {
+  background:#fbfbfb;
+  
+}
 	
 }
 
@@ -213,6 +208,11 @@ left: 95%;
 	.footer-bottom p.pull-right {
 		float: none !important;
 	}
+
+	#contact-us {
+  background:#fbfbfb;
+ }
+
 }
 
 /* XS Portrait */
@@ -225,6 +225,11 @@ left: 95%;
 		width:100%;
 		float: none;
 	}
+
+	#contact-us {
+  background:#fbfbfb;
+  
+}
 
 }
 

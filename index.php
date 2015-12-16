@@ -384,7 +384,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-sm-5" style="display: none" id="direccion_filial">
+                            <div class="col-md-4" style="display: none" id="direccion_filial">
                                 <div class="contact-info">
                                     <ul class="address">
                                         <li><i class="fa fa-map-marker"></i> <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="direccion"></span> </li>
@@ -395,12 +395,12 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             </div>
                         </div>
                         <br/>
-                        <div class="contact-form" style="display:none">
+                        <div class="container contact-form" style="display: none">
                             <div class="row">
                                 <form id="main-contact-form" name="contact-form">
                                     <div class="col-sm-4">
                                         <input type="hidden" value="" id="correo" name="correo">
-                                        <div class="row">
+                                        
                                             <div class="form-group">
                                                 <input type="text" name="name" id="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                             </div>
@@ -411,11 +411,11 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                                 <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
                                             </div>
                                             <div id="mensaje_contacto"></div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-sm-1">&nbsp;</div>
                                     <div class="col-sm-7">
-                                        <div class="row">
+                                        
                                             <div class="form-group form-inline">
                                                 <select id="opciones" class="form-control" name="subject" onchange="javascript:getSelectCursos('opciones','cursos_contacto')">
                                                     <option value="0"><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
@@ -451,21 +451,22 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                                 ?>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="row">
+                                        
+                                        
                                             <div class="form-group">
                                                 <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
                                             </div>                        
                                             <div class="form-group">
                                                 <button type="button" class="btn-submit" data-loading-text="<?=$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
                                             </div>
-                                        </div>
+                                        
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                </div>   
+                </div>  
+               </div>    
                 <!-- <div id="google-map" data-latitude="52.365629" data-longitude="4.871331" class="hidden"></div>-->
                 <!-- <div id="google-map">
                     <iframe style="pointer-events:none; width: 100%" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.1441195581438!2d-60.64096080000006!3d-32.94720419999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab0fef47530f%3A0xb7b9732d2220d371!2sIGA+Instituto+Gastron%C3%B3mico+de+las+Am%C3%A9ricas!5e0!3m2!1ses-419!2sar!4v1442353059311" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
@@ -538,7 +539,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         $('#filiales').change(function(){
             $('#direccion_filial').fadeIn("slow");
             $('#select_filial').removeClass("col-sm-12");
-            $('#select_filial').addClass("col-sm-7");
+            $('#select_filial').addClass("col-md-8");
         });
         </script>
     </body>

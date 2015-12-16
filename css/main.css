@@ -944,6 +944,7 @@ section#feature_cursos{
   background:url(../images/contact-bg.jpg) no-repeat;
   padding-bottom: 0px; 
   border-bottom: 4px solid #036dc0;
+  background-size: cover;
 }
 
 #contact-us .heading {
@@ -952,15 +953,12 @@ section#feature_cursos{
 
 .form-control {
   background-color: transparent;
-  border-color: #ccc;  height: 50px;
-  border-radius: 0;
+  border-color: #ccc;  
+  border-radius: 4px;
   box-shadow: none;
-}
-
-select.form-control{
-  height: 30px;
   
 }
+
 
 
 textarea.form-control {
