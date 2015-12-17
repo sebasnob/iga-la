@@ -62,9 +62,10 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <!--<div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>-->
         <!--/.preloader-->
         <div class="fullParaCerrarMenu"></div>
+
         <header id="home">
             <div class="main-nav">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="navbar-header">
                         <button type="button" id="colapseButton" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
@@ -201,7 +202,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         ?>
         </header><!--/#home--> 
         <section id="grillaCursos" class="portfolio">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <h2><?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
@@ -209,7 +210,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                 </div> 
             </div>
-            <div class="container-fluid" id="grilla">
+            <div class="container" id="grilla">
                 <div class="row">
                     <?php 
                     if(!$gridArrayCursos){
@@ -291,8 +292,19 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             </div>
         </section><!--/#blog-->
         
+        <!--/#Solo en movil-->
+       <section id="team" class="visible-xs">
+        <div class="container">
+           <div class="row">
+            <div class="col-xs-12">
+              <p>hola esto es en celular</p>
+            </div>
+            </div>
+       </div>
+       </section>
+       <!--/#end movil-->
         
-        <section id="team">
+        <section id="team" class="hidden-xs">
             <div class="container">
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">

@@ -1,7 +1,9 @@
 /* lg */ 
 @media (min-width: 1200px) {
 
-
+.container{
+	max-width: 1110px;
+}
 .arrowTop{
 
 left: 96%;
@@ -18,7 +20,6 @@ left: 96%;
 .arrowTop{
 
 left: 95%;
-
 }
 
 }
@@ -39,8 +40,7 @@ left: 95%;
 
 #contact-us {
   background:#fbfbfb;
-  
-}
+  }
 	
 }
 
@@ -226,10 +226,12 @@ left: 95%;
 		float: none;
 	}
 
-	#contact-us {
+  #contact-us{
   background:#fbfbfb;
+  }
   
-}
+
+
 
 }
 

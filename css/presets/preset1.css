@@ -39,6 +39,7 @@ a:hover, a:focus {
 
 .main-nav{
     background-color:#010f2c;
+    height: 130px;
 }
 
 .twitter-left-control:hover, 
