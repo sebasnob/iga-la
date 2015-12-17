@@ -290,10 +290,38 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <!--/#Solo en movil-->
        <section id="team" class="visible-xs">
         <div class="container">
-           <div class="row">
-            <div class="col-xs-12">
-              <p>hola esto es en celular</p>
-            </div>
+            <div class="row">
+                <div class="accordion-container">
+                    <a href="#" class="accordion-toggle"><i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                    <div class="accordion-content">
+                        <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>
+		<!--/.accordion-content-->
+                </div>
+                <!--/.accordion-container-->
+                <div class="accordion-container">
+                    <a href="#" class="accordion-toggle"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                    <div class="accordion-content">
+                        <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>
+                    <!--/.accordion-content-->
+                </div>
+                <!--/.accordion-container-->
+                <div class="accordion-container">
+                    <a href="#" class="accordion-toggle"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                    <div class="accordion-content">
+                        <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>
+                    <!--/.accordion-content-->
+                </div>
+                <!--/.accordion-container-->
+                <div class="accordion-container">
+                    <a href="#" class="accordion-toggle"><i class="fa fa-star-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                    <div class="accordion-content">
+                            <p><?=$lenguaje['valores_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    </div>
+                    <!--/.accordion-content-->
+                </div>
             </div>
        </div>
        </section>
@@ -353,7 +381,8 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <img class="img-responsive" src="images/team/4.jpg" alt="">
                                 </div>
                                 <div class="member-info">
-                                    <?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                                    <h3><?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                                    <p><?=$lenguaje['valores_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                                 </div>
                             </div>
                         </div>
@@ -547,6 +576,28 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             $('#direccion_filial').fadeIn("slow");
             $('#select_filial').removeClass("col-sm-12");
             $('#select_filial').addClass("col-md-8");
+        });
+        
+        $(document).ready(function () {
+            $('.accordion-toggle').on('click', function(event){
+                event.preventDefault();
+                // create accordion variables
+                var accordion = $(this);
+                var accordionContent = accordion.next('.accordion-content');
+                var accordionToggleIcon = $(this).children('.toggle-icon');
+
+                // toggle accordion link open class
+                accordion.toggleClass("open");
+                // toggle accordion content
+                accordionContent.slideToggle(250);
+
+                // change plus/minus icon
+                if (accordion.hasClass("open")) {
+                        accordionToggleIcon.html("<i class='fa fa-minus-circle'></i>");
+                } else {
+                        accordionToggleIcon.html("<i class='fa fa-plus-circle'></i>");
+                }
+            });
         });
         </script>
     </body>
