@@ -173,6 +173,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         if(count($slider) > 0){
         ?>
             <div id="slider" class="carousel slide carousel-fade" data-ride="carousel">
+                
                 <div class="carousel-inner">
                 <?php 
                     $i=0; 
@@ -187,6 +188,11 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     
                         } ?>
                         title='<?= $slid['alt'];?>'>
+                        <h2 style="position: absolute;">
+                            <span style="color: white; font: bold 24px/45px Helvetica, Sans-Serif; letter-spacing: -1px;background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.7); padding: 10px; ">
+                                Asadasdsad sad asd
+                            </span>
+                        </h2>
                         <img class="img-responsive" src="<?= $slid['url'];?>">
                     </div>
                 <?php
@@ -194,6 +200,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     } 
                 ?>
                 </div>
+                
                 <a class="left-control" href="#slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
                 <a class="right-control" href="#slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
             </div><!--/#home-slider-->
@@ -202,16 +209,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         ?>
         </header><!--/#home--> 
         <section id="grillaCursos" class="portfolio">
-            <!--
-            <div class="container">
-                <div class="row">
-                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2><?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
-                        <p><?=$lenguaje['cursos_destacados_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></p>
-                    </div>
-                </div> 
-            </div>
-            -->
             <div class="container" id="grilla">
                 <div class="row">
                     <?php 
@@ -305,13 +302,13 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <section id="team" class="hidden-xs">
             <div class="container">
                 <div class="row">&nbsp;&nbsp;</div>
-                <!--<div class="row">
+                <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
                         <h2>IGA</h2>
                         <p><?=$lenguaje['capacitamos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div>
-                </div>-->
-                <!--<div class="team-members">
+                </div>
+                <div class="team-members">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
@@ -361,7 +358,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             </div>
                         </div>
                     </div>
-                </div>           --> 
+                </div>
             </div>
         </section><!--/#team-->
         
