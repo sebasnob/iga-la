@@ -76,9 +76,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             <div class="fullParaCerrarMenu"></div>
         <header id="home">
             <div class="main-nav">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <button type="button" id="colapseButton" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -97,7 +97,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <li class="scroll"><a href="index.php#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
                         </ul>
-                            
+                        
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?=$_SESSION['pais']['flag']?>" /><span style="margin-left: 5px;"><?=substr($_SESSION['pais']['pais'], 0, 3)?></span><span class="caret"></span></a>
@@ -140,7 +140,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <?php
                                 }
                             ?>
-                                
                         </ul>
                     </div>
                 </div>

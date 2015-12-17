@@ -190,7 +190,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         title='<?= $slid['alt'];?>'>
                         <h2 style="position: absolute;">
                             <span style="color: white; font: bold 24px/45px Helvetica, Sans-Serif; letter-spacing: -1px;background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.7); padding: 10px; ">
-                                Asadasdsad sad asd
+                                <?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                             </span>
                         </h2>
                         <img class="img-responsive" src="<?= $slid['url'];?>">
