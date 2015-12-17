@@ -90,7 +90,7 @@ section {
 }
 
 .heading {
-  padding-bottom:90px;
+  padding-bottom:10px;
 }
 
 .preloader {
@@ -323,16 +323,17 @@ section {
 }
 .navbar-brand {
   padding-left: 0px;
+  padding-top: 5px;
 }
 
 .navbar-left{
   
-  margin-top: 65px;
+  margin-top: 55px;
 }
 
 .navbar-right{
 
- margin-top: 60px;
+ margin-top: 50px;
 }
 
 .navbar-collapse{
@@ -356,10 +357,6 @@ background-color: rgba(0,0,0,.2);
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
   background-color: rgba(0,0,0,.2);
-}
-
-.navbar-nav>li>.dropdown-menu{
-  margin-top: 8px;
 }
 
 /*************************
@@ -832,6 +829,10 @@ section#feature_cursos{
 /*************************
 **********Blog CSS********
 **************************/
+#blog{
+    background-color: #d5d7e6;
+    padding-top:0px;
+}
 
 .post-thumb {
   position: relative;
