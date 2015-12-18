@@ -226,7 +226,12 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             <?php } else { ?>
                                 <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                             <?php } ?>    
-                                <img id="<?= 'grilla-'.$i ?>" class='img-responsive' <?php if($i > 1) {echo 'style="display:none;"';}?> src="<?=$imgGrid['img_url']?>">
+                                    <div class="text-right text-uppercase" id="<?= 'grilla-'.$i ?>" <?php if($i > 1) {echo 'style="display:none;"';}?> >
+                                    <img class='img-responsive' src="<?=$imgGrid['img_url']?>">
+                                    <div class="texto-flotante">
+                                        <span class="spanFlotante"><?=$imgGrid['desc']?></span>
+                                    </div>
+                                </div>    
                             </a>
                         <?php $i++;} ?>
                 </div>
