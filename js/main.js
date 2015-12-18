@@ -415,3 +415,19 @@ $('.fullParaCerrarMenu').click(function(){
 $('.arrowTop').click(function(){
     $('html, body').animate({scrollTop: 0}, 500);
 });
+
+$(document).ready(function(){
+   
+    $('.textos_grilla').hover(
+        function(){
+        var id = $(this).attr('id');    
+        for (i = 1; i < $('.textos_grilla').length; i++) 
+        { 
+            if(i != id)
+            $('#grilla-'+i).hide();
+        }    
+        
+        $('#grilla-' + +id).show('fast');
+        }, function(){return false});
+    
+});
