@@ -338,8 +338,12 @@ $('#cursos').click(function()
 {
     if($('#colapseButton').css('display') == 'block')
     {
-//        $('.navbar-collapse').removeClass('in');
-        scroll('#grillaCursos');
+        $('.navbar-collapse').removeClass('in');
+        
+        var body = $("html, body");
+        $('#desplegableCursos').hide();
+        var top = $('#grillaCursos').position().top - 200;
+        body.stop().animate({scrollTop:top}, '500', 'swing');
     }
     else
     {
@@ -420,14 +424,17 @@ $(document).ready(function(){
    
     $('.textos_grilla').hover(
         function(){
-        var id = $(this).attr('id');    
-        for (i = 1; i < $('.textos_grilla').length; i++) 
-        { 
-            if(i != id)
-            $('#grilla-'+i).hide();
-        }    
-        
-        $('#grilla-' + +id).show('fast');
+            var id = $(this).attr('id');    
+            for (i = 1; i < $('.textos_grilla').length; i++) 
+            {
+                if(i != id)
+                $('#grilla-'+i).hide();
+            }    
+            
+            if($('#grilla-' + id).css('display') === 'none')
+            {
+                $('#grilla-' +id).show('slide', {direction: 'left'}, 400);
+            }    
         }, function(){return false});
     
 });

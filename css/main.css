@@ -1299,16 +1299,11 @@ padding-bottom: 50px;
     cursor: pointer;
 }
 
-.modal-dialog{
-display: inline;
-}
+
 .form-group{
     margin-right: 0px;
 }
-#selectFilialModal{
-    width: 100%;
-    margin: 5% auto;
-}
+
 
 .img-novedad{
     margin: 0 auto;
@@ -1394,4 +1389,8 @@ display: inline;
 .navbar-toggle
 {
     margin-top: 60px;
+}
+
+.modal-body{
+    display: inline;
 }
