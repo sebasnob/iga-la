@@ -422,7 +422,7 @@ function detectCountry($mysqli){
     curl_close($ch);
 }
 
-function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = false, $habilitado_filtro = 3, $id_curso_filtro = false)
+function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $habilitado_filtro = 3, $id_curso_filtro = false)
 {
     $query = "SELECT * FROM grilla WHERE 1 = 1"; 
     
@@ -434,16 +434,13 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = f
     {
         $query .= " AND grilla.idioma = '{$idioma}' ";
     }
-    if($tipo)
-    {
-        $query .= " AND grilla.tipo='{$tipo}'";
-    }
     if($id_curso_filtro)
     {
         $query .= " AND grilla.cod_curso='{$id_curso_filtro}'";
     }
     
-    $query .= " order by grilla.id_pais, grilla.prioridad, grilla.idioma, grilla.tipo";
+    $query .= " order by grilla.id_pais, grilla.prioridad, grilla.idioma";
+//    die($query);
     $result = $mysqli->query($query);
     
     $retorno = array();
@@ -455,27 +452,25 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $tipo = f
             if(!$id_pais)
             {    
                 $retorno[] = array( 'id'=>$grilla['id'],
-                                'cols'=>$grilla['cols'],
                                 'img_url'=>$grilla['img_url'],
                                 'thumb_url'=>$grilla['thumb_url'],
                                 'id_curso'=>$grilla['cod_curso'],
                                 'prioridad'=>$grilla['prioridad'],
                                 'idioma'=>$grilla['idioma'],
                                 'id_pais'=> $arrayPaises,
-                                'tipo'=>$grilla['tipo'],
+                                'desc'=>$grilla['descripcion'],
                                 'habilitado'=>$grilla['habilitado']);
             }
             else if(in_array($id_pais, $arrayPaises))
             {
                 $retorno[] = array( 'id'=>$grilla['id'],
-                                'cols'=>$grilla['cols'],
                                 'img_url'=>$grilla['img_url'],
                                 'thumb_url'=>$grilla['thumb_url'],
                                 'id_curso'=>$grilla['cod_curso'],
                                 'prioridad'=>$grilla['prioridad'],
                                 'idioma'=>$grilla['idioma'],
                                 'id_pais'=> $arrayPaises,
-                                'tipo'=>$grilla['tipo'],
+                                'desc'=>$grilla['descripcion'],
                                 'habilitado'=>$grilla['habilitado']);
             }
         }

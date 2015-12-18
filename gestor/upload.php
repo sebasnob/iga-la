@@ -586,7 +586,7 @@ if(isset($_POST['edicion_grilla']))
                     $ruta = substr($ruta, 3);
                     $ruta_thumb = substr($ruta_thumb, 3);
                     $cod_pais = json_encode($_POST['pais']);
-                    $query = "INSERT INTO grilla (cols, img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, id_pais, tipo) VALUES ({$_POST['cols']}, '{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', '{$cod_pais}', {$_POST['tipo']})";
+                    $query = "INSERT INTO grilla (img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, id_pais, descripcion) VALUES ('{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', '{$cod_pais}', '{$_POST['desc']}')";
                     $mysqli->query($query);
                             
                 }
@@ -667,15 +667,14 @@ if(isset($_POST['edicion_grilla']))
                         $arrayPais = json_encode($_POST['pais']);
                         
                         $query = "UPDATE grilla "
-                                . "SET cols = {$_POST['cols']}, "
-                                . "img_url = '{$ruta}', "
+                                . "SET img_url = '{$ruta}', "
                                 . "thumb_url = '{$ruta_thumb}', "
                                 . "prioridad = {$_POST['prioridad']}, "
                                 . "cod_curso = {$_POST['id_curso']}, "
                                 . "habilitado = {$_POST['habilitado']}, "
                                 . "idioma = '{$_POST['idioma']}', "
                                 . "id_pais = '{$arrayPais}', "
-                                . "tipo = {$_POST['tipo']} WHERE grilla.id = {$_POST['id_img_grilla']}";
+                                . "descripcion = '{$_POST['desc']}' WHERE grilla.id = {$_POST['id_img_grilla']}";
                         $mysqli->query($query);
                     }
                 }
@@ -684,13 +683,12 @@ if(isset($_POST['edicion_grilla']))
             {
                 $arrayPais = json_encode($_POST['pais']);
                 $query = "UPDATE grilla "
-                                . "SET cols = {$_POST['cols']}, "
-                                . "prioridad = {$_POST['prioridad']}, "
+                                . "SET prioridad = {$_POST['prioridad']}, "
                                 . "cod_curso = {$_POST['id_curso']}, "
                                 . "habilitado = {$_POST['habilitado']}, "
                                 . "idioma = '{$_POST['idioma']}', "
                                 . "id_pais = '{$arrayPais}', "
-                                . "tipo = {$_POST['tipo']} WHERE grilla.id = {$_POST['id_img_grilla']}";
+                                . "descripcion = '{$_POST['desc']}' WHERE grilla.id = {$_POST['id_img_grilla']}";
                                 
                 $mysqli->query($query);
             }

@@ -27,7 +27,7 @@ $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $slider = getSlider($mysqli, $_SESSION['pais']['id']);
 $auspiciantes = getAuspiciantes($mysqli);
 
-$gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1, 1);
+$gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1);
 //$gridArrayCursosCortos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 2, 1);
 //$gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 3, 1);
 ?>
@@ -220,49 +220,18 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 <div class="col-md-offset-1 col-md-10" style="padding: 0">
                     <?php
                         $i = 1;
-                        foreach ($gridArrayCursos as $imgGrid){ ?>
-                            <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
-                                <img id="<?= 'grilla-'.$i ?>" class='img-responsive' <?php if($i > 1) {echo 'style="display:none;cursor: pointer;"';}?> src="<?=$imgGrid['img_url']?>">
+                        foreach ($gridArrayCursos as $imgGrid){ 
+                            if($i === 5){ ?>
+                                <a href="cursos_cortos.php">
+                            <?php } else { ?>
+                                <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
+                            <?php } ?>    
+                                <img id="<?= 'grilla-'.$i ?>" class='img-responsive' <?php if($i > 1) {echo 'style="display:none;"';}?> src="<?=$imgGrid['img_url']?>">
                             </a>
                         <?php $i++;} ?>
                 </div>
             </div>
         </section>    
-                <!--    <?php 
-                    if(!$gridArrayCursos){
-                        echo "<div class='text-center'>" . $lenguaje['no_existen_cursos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . "</div>";
-                    }else{
-                        foreach ($gridArrayCursos as $imgGrid){
-                    ?>
-                    <div class="col-md-<?php echo $imgGrid['cols']?>">
-                        <div class="folio-item wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <div class="folio-image">
-                                <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
-                                    <img class="img-responsive" src="<?php echo $imgGrid['img_url']?>" alt="">
-                                </a>    
-                            </div>
-                            <div class="overlay">
-                                <div class="overlay-content">
-                                    <div class="overlay-text">
-                                        <div class="folio-overview">
-                                            <span class="folio-expand ">
-                                                <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php 
-                        }
-                    }
-                    ?>
-                </div>
-            </div> /#container-fluid-porfolios-->
-        </section><!--/#grillaCursos-->
         
         <section id="blog">
             <div class="container">
