@@ -1372,4 +1372,26 @@ display: inline;
         padding: 10px 0;
         overflow: inherit;
     }
+    
+        .navbar-left{
+  
+        margin-top: 0px;
+      }
+
+      .navbar-right{
+
+       margin-top: 0px;
+      }
+
+      .navbar-collapse{
+        padding-right: 0px;
+        position: relative;
+        z-index: 9;
+        background-color: rgb(1, 15, 44); 
+        overflow: hidden;
+      }
+}
+.navbar-toggle
+{
+    margin-top: 60px;
 }
