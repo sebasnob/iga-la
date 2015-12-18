@@ -338,7 +338,7 @@ $('#cursos').click(function()
 {
     if($('#colapseButton').css('display') == 'block')
     {
-        $('.navbar-collapse').removeClass('in');
+//        $('.navbar-collapse').removeClass('in');
         scroll('#grillaCursos');
     }
     else
@@ -349,9 +349,9 @@ $('#cursos').click(function()
         $('#desplegableCursos').css({ top: top + 'px'});
         $('#desplegableCursos').css({ left: left + 'px'});
 
-        var cursosBack = $('.main-nav').css('background');
+        var cursosBack = $('.main-nav').css('background-color');
 
-        $('#desplegableCursos').css('background', cursosBack);
+        $('#desplegableCursos').css('background-color', cursosBack);
         $('#desplegableCursos').slideToggle('fast');
     }
 });
