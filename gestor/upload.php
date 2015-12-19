@@ -962,26 +962,31 @@ if(isset($_POST['edicion_noticia'])){
     if($_POST['accion'] == 'agregar'){
         $message = '';
         $result = 'ok';
+        $insert_images = "";
         if(isset($_FILES['imagen']['name']) && $_FILES['imagen']['name'] != ''){
-            if(!$_FILES['imagen']['error']){
-                $new_filename = str_replace(' ','',trim($_FILES['imagen']['name']));
-                $new_filename = str_replace(array('(','\'','´','{','}','+','*','¨','[',']','%','&','/','%','\$','#','"','!','?','¡',')'),'',$new_filename);
-                
-                if(!move_uploaded_file($_FILES['imagen']['tmp_name'], '../images/novedades/'.$new_filename)){
+            for($i=0; $i < count($_FILES['imagen']['name']); $i++){
+                $new_file_name = strtolower($_FILES['imagen']['name'][$i]);
+                $Length = 12;
+                $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+                $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
+
+                if(!move_uploaded_file($_FILES['imagen']['tmp_name'][$i], '../images/novedades/'.$new_file_name)){
                     $message .= "Hubo un error al subir la imagen";
                     $result = 'error';
-                }
-                
-                $query_ins = "INSERT INTO novedades SET imagen='{$new_filename}', titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma}";
-                $res_query = $mysqli->query($query_ins);
-                if($res_query){
-                    $message .= "La novedad se agrego correctamente";
                 }else{
-                    $message .= "Hubo un error al agregar la novedad";
-                    $result = 'error';
+                    if($i == 0){
+                        $insert_images .= " imagen='{$new_file_name}', ";
+                    }else{
+                        $insert_images .= " imagen{$i}='{$new_file_name}', ";
+                    }
                 }
+            }
+            $query_ins = "INSERT INTO novedades SET {$insert_images}  titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma}";
+            $res_query = $mysqli->query($query_ins);
+            if($res_query){
+                $message .= "La novedad se agrego correctamente";
             }else{
-                $message .= "Hubo un error con la imagen";
+                $message .= "Hubo un error al agregar la novedad";
                 $result = 'error';
             }
         }else{
@@ -997,6 +1002,7 @@ if(isset($_POST['edicion_noticia'])){
             //Edicion de imagen
             $edit_image = "";
             if(isset($_FILES['imagen']['name']) && $_FILES['imagen']['name'] != ''){
+                print_r($_FILES['imagen']['name']);die();
                 if(!$_FILES['imagen']['error']){
                     $new_filename = str_replace(' ','',trim($_FILES['imagen']['name']));
                     $new_filename = str_replace(array('(','\'','´','{','}','+','*','¨','[',']','%','&','/','%','\$','#','"','!','?','¡',')'),'',$new_filename);

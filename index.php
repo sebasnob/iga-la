@@ -250,7 +250,9 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         ?>
                         <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
                             <div class="post-thumb">
-                                <img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="">
+                                <a href="novedades.php?id=<?=$data['id']?>">
+                                    <img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="">
+                                </a>
                             </div>
                             <div class="entry-header">
                                 <h3><?=$data['titulo']?></h3>
