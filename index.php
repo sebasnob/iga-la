@@ -208,16 +208,19 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         }
         ?>
         </header><!--/#home--> 
-        <section id="grillaCursos" class="portfolio" style="display: inline-block;">
-            <div class="row" style="padding:0">
-                <div id="1" class="col-md-offset-1 col-md-2 col-sm-6 col-xs-12 textos_grilla" style="background-color: #2B933E;"><span><?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></div>
-                <div id="2" class="col-md-2 col-sm-12 col-md-2 col-sm-6 col-xs-12 textos_grilla" style="background-color: #C40F79;"><span><?=$lenguaje['paste_avanzada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></div>
-                <div id="3" class="col-md-2 col-sm-12 col-md-2 col-sm-6 col-xs-12 textos_grilla" style="background-color: #246553;"><span><?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></div>
-                <div id="4" class="col-md-2 col-sm-12 col-md-2 col-sm-6 col-xs-12 textos_grilla" style="background-color: #F5B432;"><span><?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></div>
-                <div id="5" class="col-md-2 col-sm-12 col-md-2 col-sm-12 col-xs-12 textos_grilla" style="background-color: #264699;"><span><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></div>
-            </div>
-            <div class="row" style="padding:0">
-                <div class="col-md-offset-1 col-md-10" style="padding: 0">
+        <section id="grillaCursos" class="portfolio">
+            <div class="container">
+                
+            <table>
+                <tr style="height: 100px">
+                <td id="1" class="col-sm-6 col-xs-12 textos_grilla padre" style="background-color: #2B933E;"><span><?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
+                <td id="2" class="col-sm-6 col-xs-12 textos_grilla padre" style="background-color: #C40F79;"><span><?=$lenguaje['paste_avanzada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
+                <td id="3" class="col-sm-6 col-xs-12 textos_grilla padre" style="background-color: #246553;"><span><?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
+                <td id="4" class="col-sm-6 col-xs-12 textos_grilla padre" style="background-color: #F5B432;"><span><?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
+                <td id="5" class="col-sm-12 col-xs-12 textos_grilla padre" style="background-color: #264699;"><span><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
+                </tr>
+            </table>
+                <div class="col-md-12" style="padding: 0">
                     <?php
                         $i = 1;
                         foreach ($gridArrayCursos as $imgGrid){ 
