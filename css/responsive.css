@@ -20,12 +20,9 @@ left: 96%;
 
 /* md */
 @media (min-width: 992px) and (max-width: 1199px) {
-
-.arrowTop{
-
-left: 95%;
-}
-
+    .arrowTop{
+        left: 95%;
+    }
 }
 
 /* sm */
@@ -42,9 +39,16 @@ left: 95%;
 		padding: 10px 20px;
 	}
 
-#contact-us {
-  background:#fbfbfb;
-  }
+    #contact-us {
+        background:#fbfbfb;
+    }
+    
+    #grillaCursos{
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 	
 }
 
@@ -216,7 +220,12 @@ left: 95%;
 	#contact-us {
   background:#fbfbfb;
  }
-
+        #grillaCursos{
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
 }
 
 /* XS Portrait */

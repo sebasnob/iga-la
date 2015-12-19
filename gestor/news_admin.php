@@ -111,18 +111,18 @@ $paises = getPaises($mysqli);
                                             <select name="pais[]" multiple="true" required>
                                                 <?php foreach ($paises as $pais){?>
                                                 <option value="<?= $pais['id'] ?>"
-                                                                        <?php 
-                                                                        if(isset($novedad)){
-                                                                            if(in_array($pais['id'], $novedad['id_pais']))
-                                                                            {
-                                                                                echo 'selected';
-                                                                            }
-                                                                        }
-                                                                        ?>
-                                                        >
-                                                                        <?= $pais['pais'] ?>
+                                                    <?php 
+                                                    if(isset($novedad)){
+                                                        if(in_array($pais['id'], $novedad['id_pais']))
+                                                        {
+                                                            echo 'selected';
+                                                        }
+                                                    }
+                                                    ?>
+                                                >
+                                                <?= $pais['pais'] ?>
                                                 </option>
-                                                                <?php } ?>
+                                                <?php } ?>
                                             </select>
                                             <br><br>
                                             <label>Idioma</label>
@@ -147,17 +147,45 @@ $paises = getPaises($mysqli);
                                             <input type="text" id="titulo" name="titulo" value="<?php echo (isset($novedad['titulo']))?$novedad['titulo']:''; ?>" class="form-control"/>
                                         </div>
                                         <div class="form-group">
-                                            <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen:</b></h4>
-                                            <div id="imagenPreview">
+                                            <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen 1:</b></h4>
+                                            <div id="imagenPreview1">
                                               <?php
                                                 if($accion == 'editar'){
                                               ?>
-                                                <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="../images/novedades/<?=$novedad['imagen']?>" alt="">
+                                                <img class="img-responsive animated fadeInLeftBig" id="imagePreview" src="../images/novedades/<?=$novedad['imagen']?>" alt="" width="250px" />
                                               <?php
                                                 }
                                               ?>
                                             </div>
-                                            <input id="imagen" type="file" name="imagen" class="img" />
+                                            <input id="imagen" type="file" name="imagen[]" class="img" />
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen 2:</b></h4>
+                                            <div id="imagenPreview2">
+                                              <?php
+                                                if($accion == 'editar'){
+                                              ?>
+                                                <img class="img-responsive animated fadeInLeftBig" id="imagePreview2" src="../images/novedades/<?=$novedad['imagen1']?>" alt="" width="250px" />
+                                              <?php
+                                                }
+                                              ?>
+                                            </div>
+                                            <input id="imagen2" type="file" name="imagen[]" class="img" />
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen 3:</b></h4>
+                                            <div id="imagenPreview3">
+                                              <?php
+                                                if($accion == 'editar'){
+                                              ?>
+                                                <img class="img-responsive animated fadeInLeftBig" id="imagePreview3" src="../images/novedades/<?=$novedad['imagen2']?>" alt="" width="250px" />
+                                              <?php
+                                                }
+                                              ?>
+                                            </div>
+                                            <input id="imagen3" type="file" name="imagen[]" class="img" />
                                         </div>
                                         
                                         <div class="form-group">
@@ -232,6 +260,32 @@ $paises = getPaises($mysqli);
                     reader.onloadend = function(){ // set image data as background of div
                         //$("#imagePreview").css("background-image", "url("+this.result+")");
                         $("#imagenPreview").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
+                    }
+                }
+            });
+            
+            $("#imagen2").on("change", function(){
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+                    reader.onloadend = function(){ // set image data as background of div
+                        //$("#imagePreview").css("background-image", "url("+this.result+")");
+                        $("#imagenPreview2").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
+                    }
+                }
+            });
+            
+            $("#imagen3").on("change", function(){
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+                    reader.onloadend = function(){ // set image data as background of div
+                        //$("#imagePreview").css("background-image", "url("+this.result+")");
+                        $("#imagenPreview3").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
                     }
                 }
             });
