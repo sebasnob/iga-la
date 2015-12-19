@@ -26,8 +26,14 @@ jQuery(function($) {
 	$(window).on('scroll', function(){
 		if( $(window).scrollTop()>1 ){
 			$('.main-nav').addClass('navbar-fixed-top');
+                        $('.dropdown-menu').addClass('fondoTransparente');
+                        $('.dropdown-menu').removeClass('fondoSolido');
+                        console.log('if');
 		} else {
 			$('.main-nav').removeClass('navbar-fixed-top');
+                        $('.dropdown-menu').removeClass('fondoTransparente');
+                        $('.dropdown-menu').addClass('fondoSolido');
+                        console.log('else');
 		}
 	});
 	
