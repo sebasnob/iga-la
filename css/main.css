@@ -1260,15 +1260,20 @@ padding-bottom: 50px;
 .navbar-nav li{
     cursor: pointer;
 }
-
+.fondoTransparente{
+    background:  rgba(1, 15, 44, 0.70) !important;
+}
+.fondoSolido{
+    background:  rgba(1, 15, 44, 1) !important;
+}
 .navbar-fixed-top{
    background:  rgba(1, 15, 44, 0.70) !important;
   
 }
 
 .dropdown-menu{
- background:  rgba(1, 15, 44, 0.70) !important;
- min-width: 80px;
+    min-width: 80px;
+    background:  rgba(1, 15, 44, 1)
 }
 
 
@@ -1313,7 +1318,7 @@ padding-bottom: 50px;
     text-align: center;
     text-transform: uppercase;
     font-family: inherit;
-    font-weight: 700;
+    font-weight: 600;
     min-height: 100px;
     font-size: 25px;
     /*padding-top: 2%;*/
