@@ -56,7 +56,7 @@ $lenguaje['titulo_cursos_cortos_ES'] = "Usted está viendo los cursos cortos";
 
 $lenguaje['gastro_ES'] = "Gastronomía y Alta Cocina";
 $lenguaje['certif_gastro_ES'] = "Certificación Avanzada en Gastronomía";
-$lenguaje['paste_avanzada_ES'] = "Pastelería Profesional & Avanzada";
+$lenguaje['paste_avanzada_ES'] = "Pastelería Profesional y Avanzada";
 $lenguaje['paste_profesional_ES'] = "Pastelería Profesional";
 $lenguaje['gastro_intensivo_ES'] = "Gastronomía y Alta Cocina INTENSIVO";
 $lenguaje['cursos_cortos_ES'] = "Cursos Cortos";

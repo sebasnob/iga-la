@@ -215,7 +215,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     <div id="1" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #2B933E;">
                         <table style="height: 100px; width: 100%">
                             <tr>
-                                <td>
+                                <td class="tdPadding">
                                     <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
                                 </td>
                             </tr>
@@ -645,7 +645,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             });
         });
         </script>
-        <script src="http://jquery-ui.googlecode.com/svn/tags/latest/ui/jquery.effects.core.js"></script>
-        <script src="http://jquery-ui.googlecode.com/svn/tags/latest/ui/jquery.effects.slide.js"></script>
+        
     </body>
 </html>

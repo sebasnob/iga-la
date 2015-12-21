@@ -443,7 +443,7 @@ $(document).ready(function(){
 
                 if($('#grilla-' + id).css('display') === 'none')
                 {
-                    $('#grilla-' +id).show('slide', {direction: 'left'}, 400);
+                    $('#grilla-' +id).show('fast');
                 }    
             }, function(){return false});
     }        
