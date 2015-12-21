@@ -426,12 +426,6 @@ $('.arrowTop').click(function(){
 
 $(document).ready(function(){
     
-    if($('#colapseButton').css('display') == 'block')
-    {
-        $('#imagenesGrillaCursos').css('display', 'none');
-    }
-    else
-    {
         $('.textos_grilla').hover(
             function(){
                 var id = $(this).attr('id');    
@@ -446,6 +440,4 @@ $(document).ready(function(){
                     $('#grilla-' +id).show('fast');
                 }    
             }, function(){return false});
-    }        
-    
 });
