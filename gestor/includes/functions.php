@@ -458,6 +458,7 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $habilita
                                 'prioridad'=>$grilla['prioridad'],
                                 'idioma'=>$grilla['idioma'],
                                 'id_pais'=> $arrayPaises,
+                                'titulo'=>$grilla['titulo'],
                                 'desc'=>$grilla['descripcion'],
                                 'habilitado'=>$grilla['habilitado']);
             }
@@ -470,6 +471,7 @@ function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $habilita
                                 'prioridad'=>$grilla['prioridad'],
                                 'idioma'=>$grilla['idioma'],
                                 'id_pais'=> $arrayPaises,
+                                'titulo'=>$grilla['titulo'],
                                 'desc'=>$grilla['descripcion'],
                                 'habilitado'=>$grilla['habilitado']);
             }

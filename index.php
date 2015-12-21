@@ -26,10 +26,8 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $slider = getSlider($mysqli, $_SESSION['pais']['id']);
 $auspiciantes = getAuspiciantes($mysqli);
-
+$arrayCursosCortos = array(29, 13, 15, 40, 3, 89, 96, 23, 14, 38, 8 ,25, 6); 
 $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1);
-//$gridArrayCursosCortos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 2, 1);
-//$gridArrayCocineritos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 3, 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,40 +131,30 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                 </div>
                 <div id="desplegableCursos">
-                    <ul class="nav" style="float: left">
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=1">
-                                <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=63">
-                                <?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=17">
-                                <?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav" style="float: right">
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=31">
-                                <?=$lenguaje['paste_avanzada_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=95">
-                                <?=$lenguaje['gastro_intensivo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                        <li class="menuCursos">
-                            <a href="cursos_cortos.php">
-                                <?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                    </ul>
+                <?php    
+                $i = 0;
+                    foreach ($gridArrayCursos as $imgGrid)
+                    {
+                        if($i < 4)
+                        { ?>
+                            <ul class="nav" style="float: left">
+                                
+                        <?php }else{ ?>
+                            <ul class="nav" style="float: right">
+                        <?php } ?>
+                                <li class="menuCursos">
+                                    <?php 
+                                    if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
+                                    {?>
+                                        <a href="cursos_cortos.php">    
+                                    <?php } else{?>
+                                    <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
+                                    <?php }?>
+                                        <?=$imgGrid['titulo'] ?> 
+                                    </a>
+                                </li>
+                            </ul>
+                    <?php } ?>            
                 </div>
             </div><!--/#main-nav-->
         <?php
@@ -211,73 +199,43 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <section id="grillaCursos" class="portfolio">
             <div class="container">
             <div class="row" style="padding:0">
-                <a href="cursos.php?cod_curso=1">
-                    <div id="1" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #2B933E;">
-                        <table style="height: 100px; width: 100%">
-                            <tr>
-                                <td class="tdPadding">
-                                    <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </a>
-                <a href="cursos.php?cod_curso=2">
-                    <div id="2" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #C40F79;">
-                        <table style="height: 100px; width: 100%">
-                            <tr>
-                                <td>
-                                    <?=$lenguaje['paste_profesional_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </a>
-                <a href="cursos.php?cod_curso=63">
-                    <div id="3" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #246553;">
-                        <table style="height: 100px; width: 100%">
-                            <tr>
-                                <td>
-                                    <?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </a>
-                <a href="cursos.php?cod_curso=17">
-                    <div id="4" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #F5B432;">
-                        <table style="height: 100px; width: 100%">
-                            <tr>
-                                <td>
-                                    <?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </a>
-                <a href="cursos_cortos.php">
-                    <div id="5" class="col-sm-12 col-xs-12 textos_grilla" style="background-color: #264699;">
-                        <table style="height: 100px; width: 100%">
-                            <tr>
-                                <td>
-                                    <?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </a>
+                <?php
+                $arrayColores = array('#2B933E', '#C40F79', '#246553', '#F5B432', '#264699');
+                $i = 0;
+                foreach ($gridArrayCursos as $imgGrid)
+                {
+                        if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
+                        {?>
+                            <a href="cursos_cortos.php">    
+                        <?php } else{?>
+                        <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
+                        <?php }?>
+                            <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: <?=$arrayColores[$i]?>">
+                                <table style="height: 100px; width: 100%">
+                                    <tr>
+                                        <td class="tdPadding">
+                                            <?=$imgGrid['titulo'] ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </a>
+                <?php 
+                    $i++;
+                } ?>
             </div>
             <div id="imagenesGrillaCursos" class="row hidden-xs" style="padding:0; min-height: 350px;">
                 <div class="col-md-12" style="padding: 0">
                     <?php
                         $i = 1;
                         foreach ($gridArrayCursos as $imgGrid){ 
-                            if($i === 5){ ?>
-                                <a href="cursos_cortos.php">
-                            <?php } else { ?>
-                                <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
-                            <?php } ?>    
-                                    <div class="text-right text-uppercase" id="<?= 'grilla-'.$i ?>" <?php if($i > 1) {echo 'style="display:none;"';}?> >
+                            if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
+                        {?>
+                            <a href="cursos_cortos.php">    
+                        <?php } else{?>
+                        <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
+                        <?php }?>
+                                    <div class="text-right text-uppercase imagenGrilla" id="<?= 'grilla-'.$imgGrid['id_curso'] ?>" <?php if($i > 1) {echo 'style="display:none;"';}?> >
                                     <img class='img-responsive' src="<?=$imgGrid['img_url']?>">
                                     <div class="texto-flotante">
                                         <span class="spanFlotante"><?=$imgGrid['desc']?></span>

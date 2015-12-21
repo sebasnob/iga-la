@@ -586,7 +586,7 @@ if(isset($_POST['edicion_grilla']))
                     $ruta = substr($ruta, 3);
                     $ruta_thumb = substr($ruta_thumb, 3);
                     $cod_pais = json_encode($_POST['pais']);
-                    $query = "INSERT INTO grilla (img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, id_pais, descripcion) VALUES ('{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', '{$cod_pais}', '{$_POST['desc']}')";
+                    $query = "INSERT INTO grilla (img_url, thumb_url, prioridad, cod_curso, habilitado, idioma, id_pais, descripcion, titulo) VALUES ('{$ruta}','{$ruta_thumb}', {$_POST['prioridad']},'{$_POST['id_curso']}',{$_POST['habilitado']}, '{$_POST['idioma']}', '{$cod_pais}', '{$_POST['desc']}', '{$_POST['titulo']}')";
                     $mysqli->query($query);
                             
                 }
@@ -674,6 +674,7 @@ if(isset($_POST['edicion_grilla']))
                                 . "habilitado = {$_POST['habilitado']}, "
                                 . "idioma = '{$_POST['idioma']}', "
                                 . "id_pais = '{$arrayPais}', "
+                                . "titulo = '{$_POST['titulo']}', "
                                 . "descripcion = '{$_POST['desc']}' WHERE grilla.id = {$_POST['id_img_grilla']}";
                         $mysqli->query($query);
                     }
@@ -688,6 +689,7 @@ if(isset($_POST['edicion_grilla']))
                                 . "habilitado = {$_POST['habilitado']}, "
                                 . "idioma = '{$_POST['idioma']}', "
                                 . "id_pais = '{$arrayPais}', "
+                                . "titulo = '{$_POST['titulo']}', "
                                 . "descripcion = '{$_POST['desc']}' WHERE grilla.id = {$_POST['id_img_grilla']}";
                                 
                 $mysqli->query($query);

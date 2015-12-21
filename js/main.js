@@ -429,11 +429,8 @@ $(document).ready(function(){
         $('.textos_grilla').hover(
             function(){
                 var id = $(this).attr('id');    
-                for (i = 1; i <= $('.textos_grilla').length; i++) 
-                {
-                    if(i != id)
-                    $('#grilla-'+i).hide();
-                }    
+                    
+                $('.imagenGrilla').hide();
 
                 if($('#grilla-' + id).css('display') === 'none')
                 {

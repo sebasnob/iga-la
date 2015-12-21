@@ -116,6 +116,10 @@ $paises = getPaises($mysqli);
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">T&iacute;tulo: </label>
+                                            <input type="text" class="form-control" required="true" name="titulo" id="titulo">
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Descripci&oacute;n: </label>
                                             <input type="text" class="form-control" required="true" name="desc" id="desc">
                                         </div>
@@ -248,6 +252,10 @@ $paises = getPaises($mysqli);
                                                                 <option value="<?=$j['cod_curso']?>"  <?php if($imgGrid['id_curso'] == $j['cod_curso']){echo 'selected';}?>><?=$j['nombre_es']?></option>
                                                                         <?php }?>
                                                             </select>
+                                                        </td>
+                                                        <td>
+                                                            <span>T&iacute;tulo: </span>
+                                                            <input type="text" class="form-control input-sm" name="titulo" style="display: inline-block" value="<?=$imgGrid['titulo']?>">
                                                         </td>
                                                         <td>
                                                             <span>Descripci&oacute;n: </span>
