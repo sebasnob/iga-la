@@ -31,6 +31,23 @@ left: 96%;
 		font-size: 12px;
 		padding-right: 10px;
 	}
+        .navbar-right li a {
+		font-size: 12px;
+        }
+        .navbar-right li a {
+            font-size: 10px;
+            padding-right: 0px;
+        }
+        .navbar-left li a {
+            font-size: 12px;
+        }
+        .navbar-nav li a{
+            padding-right: 5px !important;
+        }
+        
+        #cursos{
+            font-size: 12px;
+        }
 	.social-icons ul li {
 		margin-bottom: 10px;
 	}
