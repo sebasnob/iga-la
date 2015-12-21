@@ -210,16 +210,64 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         </header><!--/#home--> 
         <section id="grillaCursos" class="portfolio">
             <div class="container">
-                
-            <table>
-                <tr style="height: 100px">
-                <td id="1" class="col-sm-6 col-xs-12 textos_grilla padre" style="background-color: #2B933E;"><span><?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
-                <td id="2" class="col-sm-6 col-xs-12 textos_grilla padre" style="background-color: #C40F79;"><span><?=$lenguaje['paste_avanzada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
-                <td id="3" class="col-sm-6 col-xs-12 textos_grilla padre" style="background-color: #246553;"><span><?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
-                <td id="4" class="col-sm-6 col-xs-12 textos_grilla padre" style="background-color: #F5B432;"><span><?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
-                <td id="5" class="col-sm-12 col-xs-12 textos_grilla padre" style="background-color: #264699;"><span><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span></td>
-                </tr>
-            </table>
+            <div class="row" style="padding:0">
+                <a href="cursos.php?cod_curso=1">
+                    <div id="1" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #2B933E;">
+                        <table style="height: 100px; width: 100%">
+                            <tr>
+                                <td>
+                                    <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </a>
+                <a href="cursos.php?cod_curso=2">
+                    <div id="2" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #C40F79;">
+                        <table style="height: 100px; width: 100%">
+                            <tr>
+                                <td>
+                                    <?=$lenguaje['paste_profesional_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </a>
+                <a href="cursos.php?cod_curso=63">
+                    <div id="3" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #246553;">
+                        <table style="height: 100px; width: 100%">
+                            <tr>
+                                <td>
+                                    <?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </a>
+                <a href="cursos.php?cod_curso=17">
+                    <div id="4" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: #F5B432;">
+                        <table style="height: 100px; width: 100%">
+                            <tr>
+                                <td>
+                                    <?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </a>
+                <a href="cursos_cortos.php">
+                    <div id="5" class="col-sm-12 col-xs-12 textos_grilla" style="background-color: #264699;">
+                        <table style="height: 100px; width: 100%">
+                            <tr>
+                                <td>
+                                    <?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </a>
+            </div>
+            <div id="imagenesGrillaCursos" class="row" style="padding:0">
                 <div class="col-md-12" style="padding: 0">
                     <?php
                         $i = 1;
@@ -239,6 +287,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         <?php $i++;} ?>
                 </div>
             </div>
+            </div>    
         </section>    
         
         <section id="blog">

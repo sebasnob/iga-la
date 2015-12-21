@@ -57,6 +57,7 @@ $lenguaje['titulo_cursos_cortos_ES'] = "Usted está viendo los cursos cortos";
 $lenguaje['gastro_ES'] = "Gastronomía y Alta Cocina";
 $lenguaje['certif_gastro_ES'] = "Certificación Avanzada en Gastronomía";
 $lenguaje['paste_avanzada_ES'] = "Pastelería Profesional & Avanzada";
+$lenguaje['paste_profesional_ES'] = "Pastelería Profesional";
 $lenguaje['gastro_intensivo_ES'] = "Gastronomía y Alta Cocina INTENSIVO";
 $lenguaje['cursos_cortos_ES'] = "Cursos Cortos";
 $lenguaje['cocineritos_ES'] = "Cocineritos";
@@ -151,7 +152,8 @@ $lenguaje['faltan_datos_IN'] = "Missing some data!";
 
 $lenguaje['gastro_IN'] = "Gastronomy and Haute Cuisine";
 $lenguaje['certif_gastro_IN'] = "Advanced Certification Gastronomy";
-$lenguaje['paste_avanzada_IN'] = "Advanced Professional Pastry and";
+$lenguaje['paste_avanzada_IN'] = "Advanced and Professional Pastry";
+$lenguaje['paste_profesional_IN'] = "Professional Pastry";
 $lenguaje['gastro_intensivo_IN'] = "Gastronomy and Haute Cuisine INTENSIVE";
 
 $lenguaje['titulo_cursos_cortos_IN'] = "You are viewing the short courses";
@@ -190,7 +192,8 @@ $lenguaje['tel_valido_IN'] = 'Invalid phone number';
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
 $lenguaje['certif_gastro_POR'] = "Certificado Avançado em Gastronomia";
-$lenguaje['paste_avanzada_POR'] = "Advanced Professional e pastelaria";
+$lenguaje['paste_avanzada_POR'] = "Pastelaria Advanced e Professional";
+$lenguaje['paste_profesional_POR'] = "Pastelaria Advanced";
 $lenguaje['gastro_intensivo_POR'] = "Gastronomia e Haute Cuisine INTENSIVO";
 $lenguaje['titulo_cursos_cortos_POR'] = "Você está visitando os cursos de curta duração";
 $lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
