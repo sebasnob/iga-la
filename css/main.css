@@ -1321,8 +1321,10 @@ padding-bottom: 50px;
     font-weight: 600;
     min-height: 100px;
     font-size: 25px;
-    /*padding-top: 2%;*/
     color: white;
+}
+.textos_grilla:hover{
+    opacity: 0.8;
 }
 
 

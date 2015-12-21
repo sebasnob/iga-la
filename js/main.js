@@ -425,20 +425,27 @@ $('.arrowTop').click(function(){
 });
 
 $(document).ready(function(){
-   
-    $('.textos_grilla').hover(
-        function(){
-            var id = $(this).attr('id');    
-            for (i = 1; i <= $('.textos_grilla').length; i++) 
-            {
-                if(i != id)
-                $('#grilla-'+i).hide();
-            }    
-            
-            if($('#grilla-' + id).css('display') === 'none')
-            {
-                $('#grilla-' +id).show('slide', {direction: 'left'}, 400);
-            }    
-        }, function(){return false});
+    
+    if($('#colapseButton').css('display') == 'block')
+    {
+        $('#imagenesGrillaCursos').css('display', 'none');
+    }
+    else
+    {
+        $('.textos_grilla').hover(
+            function(){
+                var id = $(this).attr('id');    
+                for (i = 1; i <= $('.textos_grilla').length; i++) 
+                {
+                    if(i != id)
+                    $('#grilla-'+i).hide();
+                }    
+
+                if($('#grilla-' + id).css('display') === 'none')
+                {
+                    $('#grilla-' +id).show('slide', {direction: 'left'}, 400);
+                }    
+            }, function(){return false});
+    }        
     
 });
