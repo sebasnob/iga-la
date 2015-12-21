@@ -267,7 +267,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                 </a>
             </div>
-            <div id="imagenesGrillaCursos" class="row hidden-xs" style="padding:0">
+            <div id="imagenesGrillaCursos" class="row hidden-xs" style="padding:0; min-height: 350px;">
                 <div class="col-md-12" style="padding: 0">
                     <?php
                         $i = 1;
