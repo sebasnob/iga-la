@@ -101,7 +101,14 @@ $paises = getPaises($mysqli);
                         <input type="hidden" name="id_novedad" id="id_novedad" value="<?=$id_novedad?>" />
                         <input type="hidden" name="accion" id="accion" value="<?=$accion?>" />
                         <input type="hidden" name="edicion_noticia" id="edicion_noticia" value="true" />
-                        
+                        <?php
+                            if($accion == 'editar'){
+                        ?>
+                                <input type='hidden' name='imagenBorrar2' id='imagenBorrar2' value='' />
+                                <input type='hidden' name='imagenBorrar3' id='imagenBorrar3' value='' />
+                        <?php
+                            }
+                        ?>
                         <div class="row mt">
                             <div class="col-lg-12">
                                 <div class="form-panel">
@@ -162,30 +169,42 @@ $paises = getPaises($mysqli);
                                         
                                         <div class="form-group">
                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen 2:</b></h4>
-                                            <div id="imagenPreview2">
-                                              <?php
-                                                if($accion == 'editar'){
-                                              ?>
-                                                <img class="img-responsive animated fadeInLeftBig" id="imagePreview2" src="../images/novedades/<?=$novedad['imagen1']?>" alt="" width="250px" />
-                                              <?php
-                                                }
-                                              ?>
+                                            <div id='agregarImg2' style="<?php echo (isset($novedad['imagen2']) && $novedad['imagen2'] != '')?"display: none":""?>">
+                                                <button type="button" class="btn btn-primary" onclick="javascript:abrirDiv('2')">Agregar Imagen</button>
                                             </div>
-                                            <input id="imagen2" type="file" name="imagen[]" class="img" />
+                                            <div id='divImg2' style="<?php echo (isset($novedad['imagen2']) && $novedad['imagen2'] != '')?"":"display:none"?>">
+                                                <div id='imagenPreview2'>
+                                                  <?php
+                                                    if($accion == 'editar'){
+                                                  ?>
+                                                    <div id='eliminarFoto2' style='width:250px;text-align:right;<?php echo (isset($novedad['imagen2']) && $novedad['imagen2'] != '')?"":"display:none"?>'><button class='btn btn-danger' onclick="javascript:eliminarFoto('2')"><i class='fa fa-trash-o'></i></button></div>
+                                                    <img class="img-responsive animated fadeInLeftBig" id="imagePreview2" src="../images/novedades/<?=$novedad['imagen2']?>" alt="" width="250px" />
+                                                  <?php
+                                                    }
+                                                  ?>
+                                                </div>
+                                                <input id="imagen2" type="file" name="imagen[]" class="img" />
+                                            </div>
                                         </div>
                                         
                                         <div class="form-group">
                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Imagen 3:</b></h4>
-                                            <div id="imagenPreview3">
-                                              <?php
-                                                if($accion == 'editar'){
-                                              ?>
-                                                <img class="img-responsive animated fadeInLeftBig" id="imagePreview3" src="../images/novedades/<?=$novedad['imagen2']?>" alt="" width="250px" />
-                                              <?php
-                                                }
-                                              ?>
+                                            <div id='agregarImg3' style="<?php echo (isset($novedad['imagen3']) && $novedad['imagen3'] != '')?"display: none":""?>">
+                                                <button type="button" class="btn btn-primary" onclick="javascript:abrirDiv('3')">Agregar Imagen</button>
                                             </div>
-                                            <input id="imagen3" type="file" name="imagen[]" class="img" />
+                                            <div id='divImg3' style="<?php echo (isset($novedad['imagen3']) && $novedad['imagen3'] != '')?"":"display:none"?>">
+                                                <div id="imagenPreview3">
+                                                  <?php
+                                                    if($accion == 'editar'){
+                                                  ?>
+                                                    <div id='eliminarFoto3' style='width:250px;text-align:right;<?php echo (isset($novedad['imagen3']) && $novedad['imagen3'] != '')?"":"display:none"?>'><button class='btn btn-danger' onclick="javascript:eliminarFoto('3')"><i class='fa fa-trash-o'></i></button></div>
+                                                    <img class="img-responsive animated fadeInLeftBig" id="imagePreview3" src="../images/novedades/<?=$novedad['imagen3']?>" alt="" width="250px" />
+                                                  <?php
+                                                    }
+                                                  ?>
+                                                </div>
+                                                <input id="imagen3" type="file" name="imagen[]" class="img" />
+                                            </div>
                                         </div>
                                         
                                         <div class="form-group">
@@ -272,7 +291,7 @@ $paises = getPaises($mysqli);
                     reader.readAsDataURL(files[0]); // read the local file
                     reader.onloadend = function(){ // set image data as background of div
                         //$("#imagePreview").css("background-image", "url("+this.result+")");
-                        $("#imagenPreview2").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
+                        $("#imagenPreview2").html("<div id='eliminarFoto2' style='width:250px;text-align:right'><button type='button' class='btn btn-danger' onclick=\"javascript:eliminarFoto('2')\"><i class='fa fa-trash-o'></i></button></div><img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' width='250px'>");
                     }
                 }
             });
@@ -285,10 +304,31 @@ $paises = getPaises($mysqli);
                     reader.readAsDataURL(files[0]); // read the local file
                     reader.onloadend = function(){ // set image data as background of div
                         //$("#imagePreview").css("background-image", "url("+this.result+")");
-                        $("#imagenPreview3").html("<img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' alt=''>");
+                        $("#imagenPreview3").html("<div id='eliminarFoto3' style='width:250px;text-align:right'><button type='button' class='btn btn-danger' onclick=\"javascript:eliminarFoto('3')\"><i class='fa fa-trash-o'></i></button></div><img class='img-responsive animated fadeInLeftBig' src='"+this.result+"' width='250px'>");
                     }
                 }
             });
+            
+            function eliminarFoto(id_foto){
+                $('#agregarImg'+id_foto).show();
+                $('#divImg'+id_foto).hide();
+                $('#imagen'+id_foto).val('');
+                $('#imagenPreview'+id_foto).html('');
+                
+                if($('#imagenBorrar'+id_foto).length){
+                   $('#imagenBorrar'+id_foto).val('borrar');
+                }
+            }
+            
+            function abrirDiv(id){
+                $('#agregarImg'+id).hide();
+                $('#divImg'+id).show();
+            }
+            
+            $(document).ready(function(){
+                console.log($("#imagePreview2").length);
+            });
+            
         </script>
     </body>
 </html>

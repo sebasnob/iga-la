@@ -965,8 +965,8 @@ function getNovedad($mysqli, $id_novedad, $id_pais=false, $id_idioma=false){
         {
             $novedades = array('id'=>$new['id'],
                               'imagen'=>$new['imagen'],
-                              'imagen1'=>$new['imagen1'],
                               'imagen2'=>$new['imagen2'],
+                              'imagen3'=>$new['imagen3'],
                               'titulo'=>$new['titulo'],
                               'descripcion'=>$new['descripcion'],
                               'fecha'=>$new['fecha'],
@@ -980,8 +980,8 @@ function getNovedad($mysqli, $id_novedad, $id_pais=false, $id_idioma=false){
         {
             $novedades = array('id'=>$new['id'],
                               'imagen'=>$new['imagen'],
-                              'imagen1'=>$new['imagen1'],
                               'imagen2'=>$new['imagen2'],
+                              'imagen3'=>$new['imagen3'],
                               'titulo'=>$new['titulo'],
                               'descripcion'=>$new['descripcion'],
                               'fecha'=>$new['fecha'],
@@ -1002,7 +1002,7 @@ function getNovedadesHome($mysqli, $id_pais=false, $id_idioma='1', $limit='3'){
     $cond = '';
     $novedades = array();
     
-    $resultado = $mysqli->query("SELECT id, imagen, titulo, descripcion, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades WHERE estado=1 AND id_idioma={$id_idioma} ORDER BY id DESC limit {$limit}");
+    $resultado = $mysqli->query("SELECT id, imagen, imagen2, imagen3, titulo, descripcion, DATE_FORMAT(`fecha`,'%d-%m-%Y') as fecha, estado, id_pais, id_idioma FROM novedades WHERE estado=1 AND id_idioma={$id_idioma} ORDER BY id DESC limit {$limit}");
     if($resultado->num_rows > 0){
         while($respuesta = $resultado->fetch_assoc())
         {

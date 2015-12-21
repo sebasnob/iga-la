@@ -981,7 +981,7 @@ if(isset($_POST['edicion_noticia'])){
                     }
                 }
             }
-            $query_ins = "INSERT INTO novedades SET {$insert_images}  titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma}";
+            $query_ins = "INSERT INTO novedades SET {$insert_images} titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma}";
             $res_query = $mysqli->query($query_ins);
             if($res_query){
                 $message .= "La novedad se agrego correctamente";
@@ -998,36 +998,60 @@ if(isset($_POST['edicion_noticia'])){
         //EDITAR
         $message = '';
         $result = 'ok';
+        $edit_image = "";
         if(isset($_POST['id_novedad'])){
-            //Edicion de imagen
-            $edit_image = "";
-            if(isset($_FILES['imagen']['name']) && $_FILES['imagen']['name'] != ''){
-                print_r($_FILES['imagen']['name']);die();
-                if(!$_FILES['imagen']['error']){
-                    $new_filename = str_replace(' ','',trim($_FILES['imagen']['name']));
-                    $new_filename = str_replace(array('(','\'','´','{','}','+','*','¨','[',']','%','&','/','%','\$','#','"','!','?','¡',')'),'',$new_filename);
-                    
-                    if(is_file('../images/novedades/'.$new_filename)){
-                        unlink('../images/novedades/'.$new_filename);
+            if(isset($_POST['imagenBorrar2']) && $_POST['imagenBorrar2'] != ''){
+                $query = $mysqli->query("SELECT imagen2 FROM novedades WHERE id={$_POST['id_novedad']}");
+                $imagen2 = $query->fetch_assoc();
+                $edit_image .= " imagen2='', ";
+                if($imagen2['imagen2'] != ''){
+                    if(file_exists("../images/novedades/".$imagen2['imagen2'])){
+                        unlink("../images/novedades/".$imagen2['imagen2']);
                     }
-                    if(!move_uploaded_file($_FILES['imagen']['tmp_name'], '../images/novedades/'.$new_filename)){
-                        $message .= "Hubo un error al subir la imagen";
-                    }
-                    $edit_image = " , imagen='{$new_filename}'";
                 }
             }
+            if(isset($_POST['imagenBorrar3']) && $_POST['imagenBorrar3'] != ''){
+                $query = $mysqli->query("SELECT imagen3 FROM novedades WHERE id={$_POST['id_novedad']}");
+                $imagen3 = $query->fetch_assoc();
+                $edit_image .= " imagen3='', ";
+                if($imagen3['imagen3'] != ''){
+                    if(file_exists("../images/novedades/".$imagen3['imagen3'])){
+                        unlink("../images/novedades/".$imagen3['imagen3']);
+                    }
+                }
+            }
+            if(isset($_FILES['imagen']['name']) && $_FILES['imagen']['name'] != ''){
+                for($i=0; $i < count($_FILES['imagen']['name']); $i++){
+                    $new_file_name = strtolower($_FILES['imagen']['name'][$i]);
+                    $Length = 12;
+                    $RandomString = substr(str_shuffle(md5(time())), 0, $Length);
+                    $new_file_name = $RandomString . "_" .  str_replace(' ', '-', $new_file_name);
 
-            $query_ins = "UPDATE novedades SET titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma} {$edit_image} WHERE id={$_POST['id_novedad']}";
+                    if(!move_uploaded_file($_FILES['imagen']['tmp_name'][$i], '../images/novedades/'.$new_file_name)){
+                        $message .= "Hubo un error al subir la imagen";
+                        $result = 'error1';
+                    }else{
+                        if($i == 0){
+                            $edit_image .= " imagen='{$new_file_name}', ";
+                        }else{
+                            $j = $i+1;
+                            $edit_image .= " imagen{$j}='{$new_file_name}', ";
+                        }
+                    }
+                }
+            }
+            
+            $query_ins = "UPDATE novedades SET {$edit_image} titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma} WHERE id={$_POST['id_novedad']}";
             $res_query = $mysqli->query($query_ins);
             if($res_query){
                 $message .= "La novedad se edito correctamente";
             }else{
                 $message .= "Hubo un error al editar la novedad";
-                $result = 'error';
+                $result = 'error2';
             }
         }else{
             $message .= "No se encuentra la novedad seleccionada en la base de datos";
-            $result = 'error';
+            $result = 'error3';
         }
         header("Location: news_admin.php?result={$result}&id={$_POST['id_novedad']}");
         exit();
