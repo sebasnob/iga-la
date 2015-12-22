@@ -979,7 +979,8 @@ if(isset($_POST['edicion_noticia'])){
                     if($i == 0){
                         $insert_images .= " imagen='{$new_file_name}', ";
                     }else{
-                        $insert_images .= " imagen{$i}='{$new_file_name}', ";
+                        $indice = $i + 1;
+                        $insert_images .= " imagen{$indice}='{$new_file_name}', ";
                     }
                 }
             }
