@@ -155,7 +155,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 <?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                             </span>
                         </h2>
-                        <img class="img-responsive" src="<?= $slid['url'];?>">
+                        <img class="img-responsive" src="<?= $slid['url'];?>" style="margin: 0 auto;">
                     </div>
                 <?php
                         $i++;
