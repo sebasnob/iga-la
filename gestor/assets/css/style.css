@@ -2535,3 +2535,16 @@ border: 4px solid #ccc;
     padding: 20px;
     background-color: rgba(128, 128, 128, 0.31);
 }
+
+.formularioCursosCortos{
+    background-image: url('http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif');
+    background-position-x: 80%;
+    background-position-y: -10px;
+    background-repeat: no-repeat;
+    background-size: 50px;
+}
+.cupoDisponible
+{
+    font-size: 15px;
+    color: grey;
+}

@@ -195,7 +195,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
 
                     <br/>
-                    <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
+                        <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline formularioCursosCortos">
                             <div class="form-group">
                                 <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
                                 <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
@@ -214,9 +214,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </form>
                         <br/>
                     <?php 
-                        
                         $categoria = '';
-                        foreach ($cursos_cortos as $curso_corto){
+                        foreach ($cursos_cortos as $curso_corto)
+                        {
                         
                     ?>
                     <div>
@@ -230,6 +230,23 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </h3>
                         <h4>
                             <?= '<a href="cursos.php?cod_curso=' . $curso_corto['cod_curso'] .'"> - ' . $curso_corto['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</a>'?>
+                            <?php 
+                                $cupo = false;
+                                $respuesta = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
+                                
+                                foreach ($respuesta as $curso)
+                                {
+                                    if($curso['cupo'] > $curso['inscriptos'])
+                                    {
+                                        $cupo = true;
+                                        break;
+                                    }
+                                }
+                                if($cupo)
+                                {
+                                    echo "<span class='cupoDisponible'> - " . $lenguaje['cupo_disponible_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . "</span>";
+                                }
+                            ?>
                         </h4>
                             <?php 
                                
@@ -428,6 +445,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 }
             }
             
+            $('#form-matricula').removeClass('formularioCursosCortos');
 
         });
         

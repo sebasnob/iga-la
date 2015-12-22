@@ -23,6 +23,7 @@ class webServices{
         curl_setopt($soap_do, CURLOPT_POSTFIELDS,$xml);
         curl_setopt($soap_do, CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded', 'Content-Length: '.strlen($xml)));
         curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, 1);
+        ini_set('max_execution_time', 120);
         $respuesta=curl_exec($soap_do);
         curl_close($soap_do);
         
