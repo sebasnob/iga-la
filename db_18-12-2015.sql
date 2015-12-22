@@ -31,23 +31,12 @@ CREATE TABLE IF NOT EXISTS `grilla` (
   `img_url` text NOT NULL,
   `thumb_url` text NOT NULL,
   `prioridad` int(11) NOT NULL,
-  `cod_curso` int(11) NOT NULL COMMENT 'deberia ser clave foranea de cursos',
+  `cod_curso` int(11) NOT NULL,
   `habilitado` int(11) NOT NULL DEFAULT '1',
   `idioma` varchar(3) NOT NULL,
   `id_pais` text NOT NULL,
   `descripcion` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `grilla`
---
-
-INSERT INTO `grilla` (`id`, `img_url`, `thumb_url`, `prioridad`, `cod_curso`, `habilitado`, `idioma`, `id_pais`, `descripcion`) VALUES
-(3, 'images/grilla/51eafcc15a_home-gastronomia-490x170.jpg', 'images/grilla/thumb/51eafcc15a_home-gastronomia-490x170.jpg', 2, 1, 1, 'es', '["1"]', 'Gastro y alta cocina brinda los conocimientos necesarios para alcanzar la excelencia como profesional de la gastronomía.'),
-(6, 'images/grilla/d77f6cc47f_captura-de-pantalla-de-2015-12-18-15-10-55.png', 'images/grilla/thumb/d77f6cc47f_captura-de-pantalla-de-2015-12-18-15-10-55.png', 2, 102, 1, 'es', '["1"]', 'Gastro y alta cocina brinda los conocimientos necesarios para alcanzar la excelencia como profesional de la gastronomía.'),
-(7, 'images/grilla/750d94c250_7019858-widescreen-wallpapers-3d.jpg', 'images/grilla/thumb/750d94c250_7019858-widescreen-wallpapers-3d.jpg', 3, 67, 1, 'es', '["1"]', 'Gastro y alta cocina brinda los conocimientos necesarios para alcanzar la excelencia como profesional de la gastronomía.'),
-(8, 'images/grilla/46f65160d8_home-gastronomia-490x170.jpg', 'images/grilla/thumb/46f65160d8_home-gastronomia-490x170.jpg', 4, 67, 1, 'es', '["1"]', 'asd sad liasjdlk hjasldj aslkdjlkasjdlk a lkjaslk jd'),
-(9, 'images/grilla/c0c475fef1_captura-de-pantalla-de-2015-12-18-15-10-55.png', 'images/grilla/thumb/c0c475fef1_captura-de-pantalla-de-2015-12-18-15-10-55.png', 3, 67, 1, 'es', '["1"]', 'asd sad liasjdlk hjasldj aslkdjlkasjdlk a lkjaslk jd');
 
 --
 -- Índices para tablas volcadas
