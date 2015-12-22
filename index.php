@@ -78,10 +78,10 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">     
                             <li class="scroll active"><a href="#home"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li id="cursos"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></li>
-                            <li class="scroll"><a href="#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
-                            <li class="scroll"><a href="#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="javascript:scroll('#grillaCursos')"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li>
+                            <li class="scroll"><a href="javascript:scroll('#blog')"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                            <li class="scroll"><a href="javascript:scroll('#institucional')"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
+                            <li class="scroll"><a href="javascript:scroll('#contact')"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                             <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
                         </ul>
                         
@@ -129,32 +129,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             ?>
                         </ul>
                     </div>
-                </div>
-                <div id="desplegableCursos">
-                <?php    
-                $i = 0;
-                    foreach ($gridArrayCursos as $imgGrid)
-                    {
-                        if($i < 4)
-                        { ?>
-                            <ul class="nav" style="float: left">
-                                
-                        <?php }else{ ?>
-                            <ul class="nav" style="float: right">
-                        <?php } ?>
-                                <li class="menuCursos">
-                                    <?php 
-                                    if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
-                                    {?>
-                                        <a href="cursos_cortos.php">    
-                                    <?php } else{?>
-                                    <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
-                                    <?php }?>
-                                        <?=$imgGrid['titulo'] ?> 
-                                    </a>
-                                </li>
-                            </ul>
-                    <?php } ?>            
                 </div>
             </div><!--/#main-nav-->
         <?php
@@ -291,7 +265,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         </section><!--/#blog-->
         
         <!--/#Solo en movil-->
-       <section id="team" class="visible-xs">
+       <section id="institucionalMovil" class="visible-xs">
         <div class="container">
             <div class="row">
                 <div class="accordion-container">
@@ -330,7 +304,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
        </section>
        <!--/#end movil-->
         
-        <section id="team" class="hidden-xs">
+        <section id="institucional" class="hidden-xs">
             <div class="container">
                 <div class="row">&nbsp;&nbsp;</div>
                 <div class="row">

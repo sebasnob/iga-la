@@ -321,7 +321,12 @@ function scroll(to)
 {
     var body = $("html, body");
     $('#desplegableCursos').hide();
-    body.stop().animate({scrollTop:$(to).position().top}, '500', 'swing');
+    var top = $(to).position().top;
+    if(top >= 220)
+    {
+        top -=  130;
+    }
+    body.stop().animate({scrollTop:top}, '500', 'swing');
 }
 
 function iralink(url)

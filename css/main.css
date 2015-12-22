@@ -1316,9 +1316,9 @@ padding-bottom: 50px;
 
 .textos_grilla{
     text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-family: inherit;
-    font-weight: 500;
+    font-weight: 400;
     min-height: 100px;
     font-size: 23px;
     color: white;
