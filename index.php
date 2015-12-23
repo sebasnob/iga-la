@@ -237,11 +237,33 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, 1);
                         foreach ($novedades as $id=>$data){
                         ?>
-                        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+                        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
                             <div class="post-thumb">
-                                <a href="novedades.php?id=<?=$data['id']?>">
-                                    <img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="">
-                                </a>
+                                <div id="post-carousel<?=$data['id']?>"  class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                    <?php 
+                                        for($i=1;$i <= 3;$i++){
+                                            if($i == 1){
+                                                $imagen = 'imagen';
+                                            }else{
+                                                $imagen = 'imagen'.$i;
+                                            }
+                                            
+                                            if($data[$imagen] != ''){
+                                    ?>
+                                            <div class="item <?php echo ($i==1)?'active':''?>">
+                                                <a href="novedades.php?id=<?=$data['id']?>">
+                                                    <img class="img-responsive" src="images/novedades/<?=$data[$imagen]?>" alt="" style="margin: 0 auto;">
+                                                </a>
+                                            </div>
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+                                    </div>
+                                    <a class="blog-left-control" href="#post-carousel<?=$data['id']?>" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                                    <a class="blog-right-control" href="#post-carousel<?=$data['id']?>" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                                </div>
                             </div>
                             <div class="entry-header">
                                 <h3><?=$data['titulo']?></h3>

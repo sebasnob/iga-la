@@ -920,6 +920,8 @@ function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false
         {
             $novedades[] = array('id'=>$new['id'],
                               'imagen'=>$new['imagen'],
+                              'imagen2'=>$new['imagen2'],
+                              'imagen3'=>$new['imagen3'],
                               'titulo'=>$new['titulo'],
                               'descripcion'=>$new['descripcion'],
                               'fecha'=>$new['fecha'],
@@ -933,6 +935,8 @@ function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false
         {
             $novedades[] = array('id'=>$new['id'],
                               'imagen'=>$new['imagen'],
+                              'imagen2'=>$new['imagen2'],
+                              'imagen3'=>$new['imagen3'],
                               'titulo'=>$new['titulo'],
                               'descripcion'=>$new['descripcion'],
                               'fecha'=>$new['fecha'],
