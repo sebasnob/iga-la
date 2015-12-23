@@ -26,7 +26,14 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $auspiciantes = getAuspiciantes($mysqli);
 $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma']);
-   
+$novedad = getNovedad($mysqli, $_GET['id']);
+    
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+     
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -181,19 +188,29 @@ $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_se
         <section id="novedades">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12"><h2>Actualidad</h2></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-8"><img src="images/novedades/30923990bb01_3333.jpg" /></div>
+                    <div class="col-sm-8">
+                        <img src="images/novedades/30923990bb01_3333.jpg" />
+                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent condimentum pharetra elit id ultrices. Donec pellentesque nec enim in tempus. Aliquam molestie varius nisl et laoreet. Pellentesque dignissim id augue at pharetra. Aenean facilisis ipsum sem. Mauris malesuada non neque sed ornare. Vivamus finibus nec sem sit amet interdum. Aenean orci mauris, venenatis ac pulvinar suscipit, porta id quam. Donec feugiat, dolor nec convallis auctor, turpis odio condimentum turpis, id porta augue nibh at mauris. Proin sit amet dictum velit. Donec odio massa, sagittis quis enim at, venenatis porta neque. Quisque accumsan erat ut massa feugiat vulputate. Vivamus non nulla gravida, luctus est non, gravida ligula. Vestibulum euismod turpis ut leo cursus dapibus. Duis nec eros egestas, fermentum velit quis, scelerisque risus. Nullam consequat eleifend tellus sed efficitur.
+
+Praesent iaculis vitae dolor in ultrices. Nulla ullamcorper, sapien eget pretium ultrices, lacus ligula luctus urna, quis tempus nisl erat a turpis. Praesent pellentesque luctus enim vel mattis. Donec in tincidunt neque, ut porta ante. Fusce ex odio, sollicitudin vel nisi non, varius tincidunt erat. Phasellus ut enim ultricies, cursus nulla vitae, hendrerit justo. Maecenas vehicula hendrerit nisl eu suscipit. Vestibulum suscipit metus at tincidunt dignissim.
+
+Sed id lorem ac elit vulputate condimentum. Duis sit amet libero vehicula, pretium massa quis, aliquet tellus. Aliquam efficitur sollicitudin tellus, ut congue tortor ullamcorper ut. Quisque at est sapien. Sed ac dapibus dui, ut porta nisl. Nulla sed iaculis tortor, id porttitor arcu. Sed fermentum purus a lacus viverra, eget mollis lorem condimentum. Sed aliquet mi vel enim imperdiet convallis. Quisque pharetra vulputate eros. Mauris nulla ligula, tincidunt nec maximus at, ultrices sit amet orci. Maecenas eu augue vel turpis varius imperdiet. Donec varius, erat eget eleifend tristique, tellus libero viverra nibh, nec tempus arcu libero vitae lorem. Morbi et posuere turpis, quis mollis tortor. Nullam tincidunt metus ex, et consequat risus pretium sed. Nullam bibendum, neque non sodales congue, erat massa tristique ex, laoreet faucibus arcu dolor ut arcu. Maecenas enim leo, volutpat vitae elementum ac, lacinia eget purus.
+
+Nulla consectetur enim massa, et tristique mi ullamcorper et. Pellentesque iaculis dolor sed enim cursus iaculis. Morbi blandit ornare ornare. Nam finibus nisl sed accumsan fringilla. Nunc bibendum sapien eget condimentum euismod. Sed id odio rhoncus, semper risus ut, sollicitudin lacus. Aliquam rutrum, velit eu consequat gravida, mi mauris vulputate leo, eget viverra felis dui ut dolor. Donec posuere ullamcorper mauris. Nullam viverra metus id dolor egestas, id finibus velit rhoncus. Nunc condimentum, lorem a condimentum laoreet, felis felis eleifend sem, ultricies congue sapien ante sed erat. Duis et nisi molestie, laoreet lorem sit amet, pharetra nulla.</div>
+                    </div>
                     <div class="col-sm-4">
-                        <p><img class="img-responsive" src="images/novedades/4e468045cfd7_3333.jpg" /></p>
-                        <p><img class="img-responsive" src="images/novedades/4e468045cfd7_3333.jpg" /></p>
+                        <h2>Mas de Actualidad</h2>
+                        <div>
+                            <img class="img-responsive" src="images/novedades/4e468045cfd7_3333.jpg" />
+                            <p>Titulo novedades 11</p>
+                        </div>
+                        <div>
+                            <img class="img-responsive" src="images/novedades/4e468045cfd7_3333.jpg" />
+                            <p>Titulo novedades 22</p></div>
                     </div>
                 </div>
-                <hr/>
             </div>
         </section>
-            
             
         <footer id="footer">
             <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">

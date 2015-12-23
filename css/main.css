@@ -1425,3 +1425,11 @@ padding-bottom: 50px;
 .tdPadding{
     padding: 20px;
 }
+
+
+/*************************
+**********Buscador CSS*****
+**************************/
+#buscador{
+    background-color: #d5d7e6;
+}
