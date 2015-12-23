@@ -508,21 +508,44 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 </div>-->
                 <div id="google-map" style="display: none"></div>
         </section><!--/#contact-->
-        <footer id="footer">
+         <footer id="footer">
             <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                <div class="container text-center">
-                    <div class="footer-logo">
-                        <a href="index.php"><img class="img-responsive" src="images/logo-iga_transparent.png" alt=""></a>
-                    </div>
-                    <div class="social-icons">
-                        <ul>
+                <div class="container">
+                   <div class="row">
+                   
+                        <div class="col-md-3 ">
+                            <p class="letterfoot"><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
+                        </div>
+                        
+                        <div class="col-md-3 ">
+                            <p class="letterfoot"><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
+                        </div>
+
+                         <div class="col-md-3 col-sm-offset-3">
+                           
+                        </div>
+
+                        <div class="col-md-6 social-icons">
+                           <ul>
                             <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li> 
                             <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>
                         </ul>
-                    </div>
+                        </div>
+
+                 
+
+                  </div>
+
                 </div>
-                <div class="container text-center">
-                    <?php foreach ($auspiciantes as $auspiciante){ 
+             
+            </div>
+            <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 ">
+                             <?php foreach ($auspiciantes as $auspiciante){ 
                         if(in_array($_SESSION['pais']['id'], $auspiciante['cod_pais']))
                         {
                             $tienQueAparecer = true;
@@ -539,21 +562,12 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     <?php 
                         }
                     } ?>
-                </div>    
-            </div>
-            <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4 text-center">
-                            <p><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
                         </div>
                         
-                        <div class="col-sm-4 text-center">
-                            <p><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
-                        </div>
-                        <div class="col-sm-4 text-center">
-                            <p>&copy; 2015 Designed by <a href="http://www.lifeweb.com.ar/">lifeWEB</a></p>
+                     
+
+                        <div class="col-md-3 ">
+                            <p class="letterblack"><a href="http://www.lifeweb.com.ar/">&copy; 2015 Designed by lifeWEB</a></p>
                         </div>
                     </div>
                 </div>

@@ -726,7 +726,7 @@ section#feature_cursos{
 
 .social-icons {
   margin-top:30px;
-  text-align: center;
+  text-align: right;
 }
 
 .social-icons ul {
@@ -953,7 +953,7 @@ section#feature_cursos{
 #contact-us {
   background:url(../images/contact-bg.jpg) no-repeat;
   padding-bottom: 0px; 
-  border-bottom: 4px solid #036dc0;
+  /*border-bottom: 4px solid #036dc0;*/
   background-size: cover;
 }
 
@@ -1039,7 +1039,7 @@ padding-bottom: 50px;
 }
 
 #footer .social-icons {
-  margin-top: 15px;
+  margin-top: 0px;
 }
 
 #footer .social-icons ul {
@@ -1048,10 +1048,33 @@ padding-bottom: 50px;
   margin: 0;
 }
 
+#footer p.letterfoot a {
+   
+  font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+    color: #fff;
+}
+
+#footer .letterblack{
+
+    text-align: right;
+}
+
+#footer p.letterblack a {
+   
+  font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000;
+ 
+}
+
 #footer .social-icons ul li a {
-  background-color: rgba(0,0,0,.2);
-  border-radius: 4px;
-  line-height: 33px;
+     background-color: rgb(251, 251, 252);
+    border-radius: 50px;
+        text-align: center;
+    color: #036DC0;
 }
 
 #footer .social-icons ul li a:hover {
