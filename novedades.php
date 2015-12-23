@@ -25,8 +25,9 @@ $paises = getPaises($mysqli);
 $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $auspiciantes = getAuspiciantes($mysqli);
-$novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma']);
-   
+//$novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma']);
+
+$categoriasNovedades = getCategoriasNovedades($mysqli);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -166,7 +167,7 @@ $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_se
         
         <section id="head_image_curso">
             <div class="container-fluid">
-                <img class="img-responsive animated fadeInLeftBig" src="images/slider/20-de-descuento.jpg" alt="" style="width: 100%;">
+                <img class="img-responsive animated fadeInLeftBig" src="http://www.m2000364.ferozo.com/ejemplos/IGA/iga-la/images/slider/slyers-home-iga-arg.jpg" alt="" style="width: 100%;">
             </div>
         </section>
         
@@ -180,17 +181,38 @@ $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_se
             
         <section id="novedades">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-12"><h2>Actualidad</h2></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-8"><img src="images/novedades/30923990bb01_3333.jpg" /></div>
-                    <div class="col-sm-4">
-                        <p><img class="img-responsive" src="images/novedades/4e468045cfd7_3333.jpg" /></p>
-                        <p><img class="img-responsive" src="images/novedades/4e468045cfd7_3333.jpg" /></p>
-                    </div>
-                </div>
-                <hr/>
+                <?php
+                    foreach ($categoriasNovedades as $cat)
+                    {
+                        $i=0;
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], false, false, $cat['id']);
+                        ?>
+                                <div class="col-sm-12">
+                                    <h2 style="font-weight: 600"><?=$cat['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></h2>
+                                    <hr>
+                                </div>
+                        <?php
+                        foreach ($novedades as $novedad)
+                        {?>
+                            <?php if($i == 0){
+                                $estiloTextos = 'font-size: 25px;';    
+                                $estiloImagen = 'margin-bottom: 15px;'; ?>
+                                <div class="col-sm-8">
+                            <?php }
+                                else
+                                {
+                                    $estiloTextos = 'font-size: 15px;';
+                                    $estiloImagen = 'margin-bottom: 5px;'; ?>
+                                    <div class="col-sm-4" style="margin-bottom: 10px;">
+                                <?php } ?>
+                                        <img style="<?=$estiloImagen?>" class="img-responsive" src="images/novedades/<?=$novedad['imagen']?>" />
+                                        <span style="<?=$estiloTextos?>"><?=$novedad['titulo']?></span>
+                                    </div>
+                        <?php 
+                        $i++;
+                        }
+                    }?>
+                                    
             </div>
         </section>
             

@@ -22,7 +22,7 @@ if($logged == 'out'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     
-    <title>Listado de Cursos - IGA</title>
+    <title>Noticias - IGA</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">

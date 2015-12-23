@@ -890,7 +890,7 @@ if(isset($_POST['filialSeleccionada']))
     echo json_encode($return);
 }
 
-function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false, $estado = false){
+function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false, $estado = false, $categoria = false){
     $cond = ' WHERE 1 = 1';
     $novedades = array();
     
@@ -901,6 +901,11 @@ function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false
     if($id_idioma)
     {
         $cond .= " AND id_idioma={$id_idioma} ";
+    }
+    
+    if($categoria)
+    {
+        $cond .= " AND categoria = {$categoria} ";
     }
     
     $query = "SELECT * FROM novedades {$cond}";
@@ -929,7 +934,8 @@ function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false
                               'estado'=>$new['estado'],
                               'autor'=>$new['autor'],
                               'id_pais'=>  $arrPaises,
-                              'id_idioma'=>$new['id_idioma']);
+                              'id_idioma'=>$new['id_idioma'],
+                              'categoria'=>$new['categoria']);
         }  
         else if(in_array($id_pais, $arrPaises))
         {
@@ -944,7 +950,8 @@ function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false
                               'estado'=>$new['estado'],
                               'autor'=>$new['autor'],
                               'id_pais'=>  $arrPaises,
-                              'id_idioma'=>$new['id_idioma']);
+                              'id_idioma'=>$new['id_idioma'],
+                              'categoria'=>$new['categoria']);
         }
     }
     
@@ -980,7 +987,8 @@ function getNovedad($mysqli, $id_novedad, $id_pais=false, $id_idioma=false){
                               'estado'=>$new['estado'],
                               'autor'=>$new['autor'],
                               'id_pais'=>  $arrPaises,
-                              'id_idioma'=>$new['id_idioma']);
+                              'id_idioma'=>$new['id_idioma'],
+                              'categoria'=>$new['categoria']);
         }  
         else if(in_array($id_pais, $arrPaises))
         {
@@ -995,7 +1003,8 @@ function getNovedad($mysqli, $id_novedad, $id_pais=false, $id_idioma=false){
                               'estado'=>$new['estado'],
                               'autor'=>$new['autor'],
                               'id_pais'=>  $arrPaises,
-                              'id_idioma'=>$new['id_idioma']);
+                              'id_idioma'=>$new['id_idioma'],
+                              'categoria'=>$new['categoria']);
         }
     }
     
@@ -1248,5 +1257,26 @@ function getCategoriasCursosCortos($mysqli)
     }
     
     return $categoriasCursosCortos;
+}
+
+function getCategoriasNovedades($mysqli, $id = false)
+{
+    $categoriasNovedades = array();
+    $query = "SELECT * FROM novedades_categorias";
+    
+    if($id)
+    {
+        $query .= " WHERE id = " . $id;
+    }
+    
+    $result = $mysqli->query($query);
+    while($categoriaNovedad = $result->fetch_assoc())
+    {
+	$categoriasNovedades[] = array('id'=>$categoriaNovedad['id'],
+                                       'nombre_ES'=>$categoriaNovedad['nombre_ES'],
+                                       'nombre_IN'=>$categoriaNovedad['nombre_IN'],
+                                       'nombre_POR'=>$categoriaNovedad['nombre_POR']); 
+    }
+    return $categoriasNovedades;
 }
 ?>

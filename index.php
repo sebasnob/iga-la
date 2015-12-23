@@ -151,9 +151,15 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         } ?>
                         title='<?= $slid['alt'];?>'>
                         <h2 style="position: absolute;">
+                            <table style="height: 100%; width: 100%">
+                                            <tr style="vertical-align: bottom;">
+                                                <td>
                             <span style="color: white; font: bold 24px/45px Helvetica, Sans-Serif; letter-spacing: -1px;background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.7); padding: 10px; ">
                                 <?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                             </span>
+                            </td>
+                                            </tr>
+                            </table>
                         </h2>
                         <img class="img-responsive" src="<?= $slid['url'];?>" style="margin: 0 auto;">
                     </div>
@@ -212,7 +218,13 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <div class="text-right text-uppercase imagenGrilla" id="<?= 'grilla-'.$imgGrid['id_curso'] ?>" <?php if($i > 1) {echo 'style="display:none;"';}?> >
                                     <img class='img-responsive' src="<?=$imgGrid['img_url']?>">
                                     <div class="texto-flotante">
-                                        <span class="spanFlotante"><?=$imgGrid['desc']?></span>
+                                        <table style="height: 100%; width: 100%">
+                                            <tr style="vertical-align: bottom;">
+                                                <td>
+                                                    <span class="spanFlotante"><?=$imgGrid['desc']?></span>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>    
                             </a>
@@ -397,26 +409,21 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 <div class="container">
                     <div class="row">
                         <div class="heading text-center wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <h2><?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
-                            <br/>
+                            <h2 style="text-transform: uppercase; font-size: 25px; font-weight: 700;">
+                                <?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                            </h2>
                             <div class="col-sm-12 text-center wow fadeIn" id="select_filial">
                                 <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
-                                    <div class="form-group">
-                                        <b><?=$lenguaje['encontra_tu_iga_en_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?><?=$_SESSION['pais']['pais']?></b>&nbsp;
-                                        <!--<label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
-                                        <select id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
+                                        <select style="border-radius: 0px; background-color: white; width: 30%;" id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
                                             <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
                                         <?php foreach ($provincias as $provincia){?>
                                             <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
                                         <?php }?>
                                         </select>    
-                                    </div>
-                                    <div class="form-group">
                                         <!--<label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
-                                        <select id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
+                                        <select style="border-radius: 0px; background-color: white; width: 30%;" id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
                                             <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
                                         </select>
-                                    </div>
                                 </form>
                             </div>
                             <div class="col-md-4" style="display: none" id="direccion_filial">
@@ -513,32 +520,29 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 <div class="container">
                    <div class="row">
                    
-                        <div class="col-md-3 ">
-                            <p class="letterfoot"><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
-                        </div>
-                        
-                        <div class="col-md-3 ">
-                            <p class="letterfoot"><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p>
-                        </div>
-
-                         <div class="col-md-3 col-sm-offset-3">
-                           
-                        </div>
-
-                        <div class="col-md-6 social-icons">
-                           <ul>
-                            <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li> 
-                            <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>
-                        </ul>
-                        </div>
-
-                 
-
+                       <table style="width: 100%">
+                           <tr>
+                               <td><p class="letterfoot"><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p></td>
+                               <td><p class="letterfoot"><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p></td>
+                               <td>
+                                   <table style="width: 100%">
+                                       <tr class="text-right">
+                                           <td class="text-right">
+                                               <div class="col-md-6 social-icons" style="width: 100%;">
+                                       <ul>
+                                           <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>  
+                                           <li>    <a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>  
+                                           <li>    <a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>  
+                                        </ul>       
+                                       </div>
+                                               </td>
+                                       </tr>
+                                   </table>
+                               </td>
+                           </tr>
+                       </table>
                   </div>
-
                 </div>
-             
             </div>
             <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
             <div class="footer-bottom">

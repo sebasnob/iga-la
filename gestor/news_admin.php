@@ -16,6 +16,7 @@ if($logged == 'out'){
 }
 
 $paises = getPaises($mysqli);
+$categoriasNovedades = getCategoriasNovedades($mysqli);
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +28,7 @@ $paises = getPaises($mysqli);
         <meta name="author" content="Dashboard">
         <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
         
-        <title>Administracion de Novedaes - IGA</title>
+        <title>Administracion de Novedades - IGA</title>
         
         <!-- Bootstrap core CSS -->
         <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -130,6 +131,22 @@ $paises = getPaises($mysqli);
                                                 <?= $pais['pais'] ?>
                                                 </option>
                                                 <?php } ?>
+                                            </select>
+                                            <br><br>
+                                            <label>Categoria</label>
+                                            <select name="categoria" id="categoria" class="form-control">
+                                                <option value="0">- Seleccione -</option>
+                                                <?php 
+                                                    foreach ($categoriasNovedades as $categoriaNovedad)
+                                                    {
+                                                        $selected = '';
+                                                        if(isset($novedad['categoria']) && $novedad['categoria'] == $categoriaNovedad['id'])
+                                                        {
+                                                            $selected = "selected = 'selected'";
+                                                        }
+                                                ?>
+                                                <option value="<?=$categoriaNovedad['id']?>" <?=$selected?> ><?=$categoriaNovedad['nombre_ES']?></option>
+                                              <?php } ?>
                                             </select>
                                             <br><br>
                                             <label>Idioma</label>

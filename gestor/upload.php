@@ -956,6 +956,7 @@ if(isset($_POST['edicion_noticia'])){
     $id_pais = json_encode($_POST['pais']);
     $id_idioma = $_POST['idioma'];
     $titulo = $_POST['titulo'];
+    $categoria = $_POST['categoria'];
     $descripcion = trim($_POST['descripcion']);
     $link = $_POST['link'];
     $fecha = date("Y-m-d");
@@ -984,7 +985,7 @@ if(isset($_POST['edicion_noticia'])){
                     }
                 }
             }
-            $query_ins = "INSERT INTO novedades SET {$insert_images} titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma}";
+            $query_ins = "INSERT INTO novedades SET {$insert_images} titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma}, categoria={$categoria}";
             $res_query = $mysqli->query($query_ins);
             if($res_query){
                 $message .= "La novedad se agrego correctamente";
@@ -1044,7 +1045,7 @@ if(isset($_POST['edicion_noticia'])){
                 }
             }
             
-            $query_ins = "UPDATE novedades SET {$edit_image} titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma} WHERE id={$_POST['id_novedad']}";
+            $query_ins = "UPDATE novedades SET {$edit_image} titulo='{$titulo}', descripcion='{$descripcion}', fecha='{$fecha}', link='{$link}', estado='{$estado}', autor='{$autor}', id_pais='{$id_pais}', id_idioma={$id_idioma}, categoria={$categoria} WHERE id={$_POST['id_novedad']}";
             $res_query = $mysqli->query($query_ins);
             if($res_query){
                 $message .= "La novedad se edito correctamente";

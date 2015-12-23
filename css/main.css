@@ -748,11 +748,11 @@ section#feature_cursos{
 .social-icons ul li a {
   color:#fff;
   background-color: #d9d9d9;
-  height: 36px;
-  width: 36px;
-  line-height: 36px;
+  height: 50px;
+    width: 50px;
+    line-height: 50px;
   display: block;
-  font-size: 16px;
+  font-size: 30px;
   opacity: 0.8;
 }
 
@@ -951,15 +951,10 @@ section#feature_cursos{
 }
 
 #contact-us {
-  background:url(../images/contact-bg.jpg) no-repeat;
+  background-color: #E3E3E3;
   padding-bottom: 0px; 
-  /*border-bottom: 4px solid #036dc0;*/
-  background-size: cover;
 }
 
-#contact-us .heading {
-  padding-top: 95px;
-}
 
 .form-control {
   background-color: transparent;
@@ -1071,10 +1066,10 @@ padding-bottom: 50px;
 }
 
 #footer .social-icons ul li a {
-     background-color: rgb(251, 251, 252);
+     background-color: rgb(255, 255, 255);
     border-radius: 50px;
         text-align: center;
-    color: #036DC0;
+    color: #010F2C;
 }
 
 #footer .social-icons ul li a:hover {
