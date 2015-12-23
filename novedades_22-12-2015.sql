@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-12-2015 a las 23:24:44
+-- Tiempo de generación: 23-12-2015 a las 01:18:07
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -38,8 +38,9 @@ CREATE TABLE IF NOT EXISTS `novedades` (
   `estado` int(1) NOT NULL,
   `autor` text COLLATE latin1_spanish_ci NOT NULL,
   `id_pais` text COLLATE latin1_spanish_ci NOT NULL,
-  `id_idioma` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `id_idioma` int(11) NOT NULL,
+  `categoria` text COLLATE latin1_spanish_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
 -- Índices para tablas volcadas
@@ -59,7 +60,7 @@ ALTER TABLE `novedades`
 -- AUTO_INCREMENT de la tabla `novedades`
 --
 ALTER TABLE `novedades`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
