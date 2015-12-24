@@ -908,12 +908,14 @@ function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false
         $cond .= " AND categoria = {$categoria} ";
     }
     
-    $query = "SELECT * FROM novedades {$cond}";
+    $query = "SELECT * FROM novedades {$cond} ORDER BY fecha DESC  ";
     
     if($maximo)
     {
         $query .= " LIMIT {$maximo}";
     }
+    
+    
     
     $resultado = $mysqli->query($query);
     
