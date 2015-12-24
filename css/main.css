@@ -947,7 +947,7 @@ section#feature_cursos{
 }
 
 #google-map {
-  height: 350px;
+  height: 100%;
 }
 
 #contact-us {
@@ -964,17 +964,19 @@ section#feature_cursos{
   
 }
 
-#contact-us .form-inline .form-control {
+#contact-us .form-inline .form-control,  #contact-us input{
     display: inline-block;
     width: 30%;
     vertical-align: middle;
     border-radius: 0px; 
     background-color: white;
+    color: #99999C;
 }
 
 textarea.form-control {
-  min-height: 180px;
-  resize:none;
+    min-height: 98px;
+    resize: none;
+    border-radius: 0px;
 }
 
 .form-group {
@@ -982,8 +984,7 @@ textarea.form-control {
 }
 
 .contact-info {
-  padding-left:70px;
-  font-weight: 300;
+    
 }
 
 ul.address {
@@ -1006,15 +1007,6 @@ padding-bottom: 50px;
 
 }
 
-
-.btn-submit {
-  display: block;
-  padding: 12px;
-  width: 100%;
-  color: #fff;
-  border:0;
-  margin-top: 40px;
-}
 
 #footer {
   color:#fff;
@@ -1074,10 +1066,11 @@ padding-bottom: 50px;
 
 #footer .textleft ul li a {
    
-  font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     color: #fff;
     display: inline-block;
+    padding: 5px;
 }
 
 #footer p.letterblack a {
@@ -1474,4 +1467,32 @@ padding-bottom: 50px;
 **************************/
 #buscador{
     background-color: #d5d7e6;
+}
+
+/*************************
+**********Contacto CSS*****
+**************************/
+
+
+#opciones{
+    width: 100% !important;
+}
+#main-contact-form input{
+    width: 100%;
+}
+
+.btn-submit {
+  display: block;
+  width: 100%;
+  color: #fff;
+  border:0;
+  width: 146px;
+  padding: 4px;
+}
+
+@media (min-width: 767px) {
+    
+    #opciones{
+        width: 70% !important;
+    }
 }

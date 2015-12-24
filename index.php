@@ -60,7 +60,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <!--<div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>-->
         <!--/.preloader-->
         <div class="fullParaCerrarMenu"></div>
-
+        
         <header id="home">
             <div class="main-nav">
                 <div class="container">
@@ -105,7 +105,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <?=substr($lenguaje[$_SESSION['idioma_seleccionado']['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']], 0, 2)?> 
                                     <?php if(count($idiomas) > 1) { ?>
-                                        <span class="caret"></span>
+                                    <span class="caret"></span>
                                     <?php } ?>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -152,13 +152,13 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         title='<?= $slid['alt'];?>'>
                         <h2 style="position: absolute;">
                             <table style="height: 100%; width: 100%">
-                                            <tr style="vertical-align: bottom;">
-                                                <td>
-                            <span style="color: white; font: bold 24px/45px Helvetica, Sans-Serif; letter-spacing: -1px;background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.7); padding: 10px; ">
+                                <tr style="vertical-align: bottom;">
+                                    <td>
+                                        <span style="color: white; font: bold 24px/45px Helvetica, Sans-Serif; letter-spacing: -1px;background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.7); padding: 10px; ">
                                 <?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                            </span>
-                            </td>
-                                            </tr>
+                                        </span>
+                                    </td>
+                                </tr>
                             </table>
                         </h2>
                         <img class="img-responsive" src="<?= $slid['url'];?>" style="margin: 0 auto;">
@@ -178,7 +178,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         </header><!--/#home--> 
         <section id="grillaCursos" class="portfolio">
             <div class="container">
-            <div class="row" style="padding:0">
+                <div class="row" style="padding:0">
                 <?php
                 $arrayColores = array('#2B933E', '#C40F79', '#246553', '#F5B432', '#264699');
                 $i = 0;
@@ -186,7 +186,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 {
                         if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
                         {?>
-                            <a href="cursos_cortos.php">    
+                    <a href="cursos_cortos.php">    
                         <?php } else{?>
                         <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                         <?php }?>
@@ -203,19 +203,19 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 <?php 
                     $i++;
                 } ?>
-            </div>
-            <div id="imagenesGrillaCursos" class="row hidden-xs" style="padding:0; min-height: 350px;">
-                <div class="col-md-12" style="padding: 0">
+                </div>
+                <div id="imagenesGrillaCursos" class="row hidden-xs" style="padding:0; min-height: 350px;">
+                    <div class="col-md-12" style="padding: 0">
                     <?php
                         $i = 1;
                         foreach ($gridArrayCursos as $imgGrid){ 
                             if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
                         {?>
-                            <a href="cursos_cortos.php">    
+                        <a href="cursos_cortos.php">    
                         <?php } else{?>
-                        <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
+                            <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                         <?php }?>
-                                    <div class="text-right text-uppercase imagenGrilla" id="<?= 'grilla-'.$imgGrid['id_curso'] ?>" <?php if($i > 1) {echo 'style="display:none;"';}?> >
+                                <div class="text-right text-uppercase imagenGrilla" id="<?= 'grilla-'.$imgGrid['id_curso'] ?>" <?php if($i > 1) {echo 'style="display:none;"';}?> >
                                     <img class='img-responsive' src="<?=$imgGrid['img_url']?>">
                                     <div class="texto-flotante">
                                         <table style="height: 100%; width: 100%">
@@ -229,8 +229,8 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 </div>    
                             </a>
                         <?php $i++;} ?>
+                    </div>
                 </div>
-            </div>
             </div>    
         </section>    
         
@@ -241,7 +241,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         <h2><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
                     </div>
                 </div>
-
+                
                 <!-- noticias -->
                 <div class="blog-posts">
                     <div class="row">
@@ -263,11 +263,11 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                             
                                             if($data[$imagen] != ''){
                                     ?>
-                                            <div class="item <?php echo ($i==1)?'active':''?>">
-                                                <a href="novedades.php?id=<?=$data['id']?>">
-                                                    <img class="img-responsive" src="images/novedades/<?=$data[$imagen]?>" alt="" style="margin: 0 auto;">
-                                                </a>
-                                            </div>
+                                        <div class="item <?php echo ($i==1)?'active':''?>">
+                                            <a href="novedades.php?id=<?=$data['id']?>">
+                                                <img class="img-responsive" src="images/novedades/<?=$data[$imagen]?>" alt="" style="margin: 0 auto;">
+                                            </a>
+                                        </div>
                                     <?php
                                             }
                                         }
@@ -299,44 +299,44 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         </section><!--/#blog-->
         
         <!--/#Solo en movil-->
-       <section id="institucionalMovil" class="visible-xs">
-        <div class="container">
-            <div class="row">
-                <div class="accordion-container">
-                    <a href="#" class="accordion-toggle"><i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                    <div class="accordion-content">
-                        <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+        <section id="institucionalMovil" class="visible-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="accordion-container">
+                        <a href="#" class="accordion-toggle"><i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                        <div class="accordion-content">
+                            <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        </div>
+                        <!--/.accordion-content-->
                     </div>
-		<!--/.accordion-content-->
-                </div>
-                <!--/.accordion-container-->
-                <div class="accordion-container">
-                    <a href="#" class="accordion-toggle"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                    <div class="accordion-content">
-                        <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    <!--/.accordion-container-->
+                    <div class="accordion-container">
+                        <a href="#" class="accordion-toggle"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                        <div class="accordion-content">
+                            <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        </div>
+                        <!--/.accordion-content-->
                     </div>
-                    <!--/.accordion-content-->
-                </div>
-                <!--/.accordion-container-->
-                <div class="accordion-container">
-                    <a href="#" class="accordion-toggle"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                    <div class="accordion-content">
-                        <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                    <!--/.accordion-container-->
+                    <div class="accordion-container">
+                        <a href="#" class="accordion-toggle"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                        <div class="accordion-content">
+                            <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        </div>
+                        <!--/.accordion-content-->
                     </div>
-                    <!--/.accordion-content-->
-                </div>
-                <!--/.accordion-container-->
-                <div class="accordion-container">
-                    <a href="#" class="accordion-toggle"><i class="fa fa-star-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                    <div class="accordion-content">
+                    <!--/.accordion-container-->
+                    <div class="accordion-container">
+                        <a href="#" class="accordion-toggle"><i class="fa fa-star-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
+                        <div class="accordion-content">
                             <p><?=$lenguaje['valores_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        </div>
+                        <!--/.accordion-content-->
                     </div>
-                    <!--/.accordion-content-->
                 </div>
             </div>
-       </div>
-       </section>
-       <!--/#end movil-->
+        </section>
+        <!--/#end movil-->
         
         <section id="institucional" class="hidden-xs">
             <div class="container">
@@ -412,66 +412,55 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             <h2 style="text-transform: uppercase; font-size: 25px; font-weight: 700;">
                                 <?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                             </h2>
-                            <div class="col-sm-12 text-center wow fadeIn" id="select_filial">
-                                <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
-                                        <select  id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
-                                            <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
+                            <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
+                                <select  id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
+                                    <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
                                         <?php foreach ($provincias as $provincia){?>
-                                            <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
+                                    <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
                                         <?php }?>
-                                        </select>    
-                                        <!--<label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
-                                        <select id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
-                                            <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
-                                        </select>
-                                </form>
-                            </div>
-                            <div class="col-md-4" style="display: none" id="direccion_filial">
-                                <div class="contact-info">
-                                    <ul class="address">
-                                        <li><i class="fa fa-map-marker"></i> <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="direccion"></span> </li>
-                                        <li><i class="fa fa-phone"></i> <span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="telefono"></span></li>
-                                        <li><i class="fa fa-envelope"></i> <span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><span id="mail"></span></li>
-                                    </ul>
-                                </div>                            
-                            </div>
-                        </div>
-                        <br/>
+                                </select>    
+                                <!--<label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
+                                <select id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
+                                    <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
+                                </select>
+                            </form>
+                        </div>    
+                    </div>    
+                    <div class="row">        
                         <div class="container contact-form" style="display: none">
                             <div class="row">
                                 <form id="main-contact-form" name="contact-form">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <input type="hidden" value="" id="correo" name="correo">
                                         
-                                            <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
-                                            </div>
-                                            <div id="mensaje_contacto"></div>
+                                        <div class="form-group">
+                                            <input type="text" name="name" id="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                        </div>
+                                        <div id="mensaje_contacto"></div>
                                         
                                     </div>
-                                    <div class="col-sm-1">&nbsp;</div>
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-6">
                                         
-                                            <div class="form-group form-inline">
-                                                <select id="opciones" class="form-control" name="subject" onchange="javascript:getSelectCursos('opciones','cursos_contacto')">
-                                                    <option value="0"><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
-                                                    <option value="3"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
-                                                    <option value="4"><?=$asunto=$lenguaje['atencion_alumno_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></option>
-                                                </select>
-                                                &nbsp;
-                                                <select class="form-control" name="cursos_contacto" id="cursos_contacto" style="display: none;">
-                                                    <option value=""><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
+                                        <div class="form-group form-inline">
+                                            <select id="opciones" class="form-control" name="subject" onchange="javascript:getSelectCursos('opciones','cursos_contacto')">
+                                                <option value="0"><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
+                                                <option value="3"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
+                                                <option value="4"><?=$asunto=$lenguaje['atencion_alumno_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></option>
+                                            </select>
+                                            &nbsp;
+                                            <select class="form-control" name="cursos_contacto" id="cursos_contacto" style="display: none;">
+                                                <option value=""><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
                                                 <?php
                                                 $cursos = getCursos($mysqli);
                                                 foreach($cursos as $id=>$data){
                                                 ?>
-                                                    <option value="<?=$data['cod_curso']?>">
+                                                <option value="<?=$data['cod_curso']?>">
                                                         <?php
                                                         switch($_SESSION['idioma_seleccionado']['cod_idioma']){
                                                             case "ES":
@@ -487,56 +476,77 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                                             break;
                                                         }
                                                         ?>
-                                                    </option>
+                                                </option>
                                                 <?php
                                                 }
                                                 ?>
-                                                </select>
-                                            </div>
-                                        
-                                        
-                                            <div class="form-group">
-                                                <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
-                                            </div>                        
+                                            </select>
                                             <div class="form-group">
                                                 <button type="button" class="btn-submit" data-loading-text="<?=$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
                                             </div>
+                                        </div>
                                         
+                                        
+                                        <div class="form-group">
+                                            <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
+                                        </div>                        
                                     </div>
                                 </form>
                             </div>
+                            <div class="row" style="min-height: 250px;">
+                                <div class="col-md-6 col-sm-12" style="height: 250px;">
+                                    <div id="google-map"></div>
+                                </div>
+                                <div class="col-md-6 col-sm-12" id="direccion_filial">
+                                    <div class="col-md-6">
+                                        <img class="img-responsive" src="images/sinnombre.png">
+                                    </div>
+                                    <div class="contact-info col-md-6">
+                                        <ul class="address">
+                                            <li>
+                                                <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><br>
+                                                <span id="direccion"></span> 
+                                            </li>
+                                            <li>
+                                                <span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><br>
+                                                <span id="telefono"></span>
+                                            </li>
+                                            <li>
+                                                <span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><br>
+                                                <span id="mail"></span>
+                                            </li>
+                                        </ul>
+                                    </div> 
+                                </div>
+                            </div>    
                         </div>
                     </div>
                 </div>  
-               </div>    
-                <!-- <div id="google-map" data-latitude="52.365629" data-longitude="4.871331" class="hidden"></div>-->
-                <!-- <div id="google-map">
-                    <iframe style="pointer-events:none; width: 100%" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.1441195581438!2d-60.64096080000006!3d-32.94720419999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab0fef47530f%3A0xb7b9732d2220d371!2sIGA+Instituto+Gastron%C3%B3mico+de+las+Am%C3%A9ricas!5e0!3m2!1ses-419!2sar!4v1442353059311" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div>-->
-                <div id="google-map" style="display: none"></div>
+            </div>    
+            
         </section><!--/#contact-->
-         <footer id="footer">
+        <footer id="footer">
             <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                 <div class="container">
-                   <div class="row">
-                   
-                     <div class="col-xs-6 textleft">
-                         <ul>
-                               <li><p class="letterfoot"><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p></li>
-                               <li><p class="letterfoot"><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p></li>
-                         </ul> 
-
-                     </div>
-                      <div class="col-xs-6 social-icons">
-                          <ul>
-                              <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>  
-                              <li> <a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>  
-                              <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>  
-                          </ul>    
-                      </div>
-                       
-                                   
-                  </div>
+                    <div class="row">
+                        
+                        <div class="col-xs-6 textleft">
+                            <ul>
+                                <li><p class="letterfoot"><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p></li>
+                                <li><p class="letterfoot"><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p></li>
+                            </ul> 
+                            
+                        </div>
+                        <div class="col-xs-6 social-icons">
+                            <ul>
+                                <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>  
+                                <li> <a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>  
+                                <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>  
+                            </ul>    
+                        </div>
+                        
+                        
+                    </div>
                 </div>
             </div>
             <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
@@ -549,22 +559,22 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         {
                             $tienQueAparecer = true;
                     ?>
-                        <div class="footer-logo">
-                            <a href="<?= $auspiciante['link']?>">
-                                <img class="img-responsive" 
-                                    src="<?= $auspiciante['url_img']?>" 
-                                    alt="<?= $auspiciante['nombre']?>" 
-                                    style="max-width: 100px;"
-                                />
-                            </a>
-                        </div>
+                            <div class="footer-logo">
+                                <a href="<?= $auspiciante['link']?>">
+                                    <img class="img-responsive" 
+                                         src="<?= $auspiciante['url_img']?>" 
+                                         alt="<?= $auspiciante['nombre']?>" 
+                                         style="max-width: 100px;"
+                                         />
+                                </a>
+                            </div>
                     <?php 
                         }
                     } ?>
                         </div>
                         
-                     
-
+                        
+                        
                         <div class="col-md-3 ">
                             <p class="letterblack"><a href="http://www.lifeweb.com.ar/">&copy; 2015 Designed by lifeWEB</a></p>
                         </div>
@@ -584,33 +594,33 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <script type="text/javascript" src="js/lightbox.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript">
-        $('#filiales').change(function(){
-            $('#direccion_filial').fadeIn("slow");
-            $('#select_filial').removeClass("col-sm-12");
-            $('#select_filial').addClass("col-md-8");
-        });
-        
-        $(document).ready(function () {
-            $('.accordion-toggle').on('click', function(event){
-                event.preventDefault();
-                // create accordion variables
-                var accordion = $(this);
-                var accordionContent = accordion.next('.accordion-content');
-                var accordionToggleIcon = $(this).children('.toggle-icon');
-
-                // toggle accordion link open class
-                accordion.toggleClass("open");
-                // toggle accordion content
-                accordionContent.slideToggle(250);
-
-                // change plus/minus icon
-                if (accordion.hasClass("open")) {
-                        accordionToggleIcon.html("<i class='fa fa-minus-circle'></i>");
-                } else {
-                        accordionToggleIcon.html("<i class='fa fa-plus-circle'></i>");
-                }
+            $('#filiales').change(function(){
+                $('#direccion_filial').fadeIn("slow");
+                $('#select_filial').removeClass("col-sm-12");
+                $('#select_filial').addClass("col-md-8");
             });
-        });
+        
+            $(document).ready(function () {
+                $('.accordion-toggle').on('click', function(event){
+                    event.preventDefault();
+                    // create accordion variables
+                    var accordion = $(this);
+                    var accordionContent = accordion.next('.accordion-content');
+                    var accordionToggleIcon = $(this).children('.toggle-icon');
+
+                    // toggle accordion link open class
+                    accordion.toggleClass("open");
+                    // toggle accordion content
+                    accordionContent.slideToggle(250);
+
+                    // change plus/minus icon
+                    if (accordion.hasClass("open")) {
+                        accordionToggleIcon.html("<i class='fa fa-minus-circle'></i>");
+                    } else {
+                        accordionToggleIcon.html("<i class='fa fa-plus-circle'></i>");
+                    }
+                });
+            });
         </script>
         
     </body>

@@ -167,6 +167,7 @@ function initialize_map(latitude, longitude) {
     var marker = new google.maps.Marker({
             position: myLatlng,
             map: map
+//          icon: icono de iga  
     });
     google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map,marker);
