@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-12-2015 a las 01:18:46
+-- Tiempo de generación: 24-12-2015 a las 17:31:35
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -28,16 +28,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `novedades_categorias` (
 `id` int(11) NOT NULL,
-  `categoria` text COLLATE utf8_spanish2_ci NOT NULL
+  `nombre_ES` text COLLATE utf8_spanish2_ci NOT NULL,
+  `nombre_IN` text COLLATE utf8_spanish2_ci NOT NULL,
+  `nombre_POR` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `novedades_categorias`
 --
 
-INSERT INTO `novedades_categorias` (`id`, `categoria`) VALUES
-(1, 'Actualidad'),
-(2, 'Eventos');
+INSERT INTO `novedades_categorias` (`id`, `nombre_ES`, `nombre_IN`, `nombre_POR`) VALUES
+(1, 'Actualidad', '', 0),
+(2, 'Eventos', '', 0);
 
 --
 -- Índices para tablas volcadas
