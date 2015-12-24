@@ -549,38 +549,35 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                 </div>
             </div>
-            <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-9 ">
-                             <?php foreach ($auspiciantes as $auspiciante){ 
-                        if(in_array($_SESSION['pais']['id'], $auspiciante['cod_pais']))
-                        {
-                            $tienQueAparecer = true;
+            <div class="col-md-12 auspiciantes">
+                <?php 
+                foreach ($auspiciantes as $auspiciante){ 
+                    if(in_array($_SESSION['pais']['id'], $auspiciante['cod_pais']))
+                    {
+                        $tienQueAparecer = true;
                     ?>
-                            <div class="footer-logo">
-                                <a href="<?= $auspiciante['link']?>">
-                                    <img class="img-responsive" 
-                                         src="<?= $auspiciante['url_img']?>" 
-                                         alt="<?= $auspiciante['nombre']?>" 
-                                         style="max-width: 100px;"
-                                         />
-                                </a>
-                            </div>
-                    <?php 
-                        }
-                    } ?>
-                        </div>
-                        
-                        
-                        
-                        <div class="col-md-3 ">
-                            <p class="letterblack"><a href="http://www.lifeweb.com.ar/">&copy; 2015 Designed by lifeWEB</a></p>
-                        </div>
-                    </div>
+                <div class="footer-logo">
+                    <a href="<?= $auspiciante['link']?>">
+                        <img    class="img-responsive" 
+                                src="<?= $auspiciante['url_img']?>" 
+                                alt="<?= $auspiciante['nombre']?>" 
+                                style="max-width: 100px;"
+                                />
+                    </a>
+                </div>
+                <?php 
+                    }
+                } ?>
+            </div>
+            <div class="col-md-12 footer-bottom">
+                <div class="col-md-6">
+                    <span>SPONSORS</span>
+                </div>
+                <div class="col-md-6">
+                    <p class="letterblack"><a href="http://www.lifeweb.com.ar/">&copy; 2015 Designed by lifeWEB</a></p>
                 </div>
             </div>
+            <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
         </footer>
         
         <script type="text/javascript" src="js/jquery.js"></script>

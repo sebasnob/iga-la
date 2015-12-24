@@ -1029,6 +1029,7 @@ padding-bottom: 50px;
 .footer-logo {
   display: inline-block;
   margin-bottom: 5px;
+  margin-right: 20px;
 }
 
 #footer .social-icons {
@@ -1495,4 +1496,14 @@ padding-bottom: 50px;
     #opciones{
         width: 70% !important;
     }
+}
+.auspiciantes{
+    text-align: center;
+    background: #031F58;
+    padding-top: 10px;
+}
+
+.footer-top ul{
+    padding-top: 15px;
+    font-weight: 600;
 }
