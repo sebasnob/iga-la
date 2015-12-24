@@ -43,7 +43,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <link href="css/main.css" rel="stylesheet">
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
-        
+        <link href="css/flexslider.css" rel="stylesheet" />
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
@@ -242,59 +242,28 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                 </div>
                 
-                <!-- noticias -->
-                <div class="blog-posts">
-                    <div class="row">
-                        <?php
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, 1);
-                        foreach ($novedades as $id=>$data){
-                        ?>
-                        <div class="col-sm-4 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
-                            <div class="post-thumb">
-                                <div id="post-carousel<?=$data['id']?>"  class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                    <?php 
-                                        for($i=1;$i <= 3;$i++){
-                                            if($i == 1){
-                                                $imagen = 'imagen';
-                                            }else{
-                                                $imagen = 'imagen'.$i;
-                                            }
-                                            
-                                            if($data[$imagen] != ''){
-                                    ?>
-                                        <div class="item <?php echo ($i==1)?'active':''?>">
-                                            <a href="novedades.php?id=<?=$data['id']?>">
-                                                <img class="img-responsive" src="images/novedades/<?=$data[$imagen]?>" alt="" style="margin: 0 auto;">
-                                            </a>
-                                        </div>
-                                    <?php
-                                            }
-                                        }
-                                    ?>
-                                    </div>
-                                    <a class="blog-left-control" href="#post-carousel<?=$data['id']?>" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                                    <a class="blog-right-control" href="#post-carousel<?=$data['id']?>" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="entry-header">
-                                <h3><?=$data['titulo']?></h3>
-                            </div>
-                            <div class="entry-content">
-                                <span>
-                                    <a href="novedades.php?id=<?=$data['id']?>">
-                                        <?=$lenguaje['ver_mas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                                    </a>
-                                </span>
-                                
-                            </div>
-                        </div>
-                        <?php
-                        }
-                        ?>
+                <div class="row">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <?php
+                                $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 12, 1);
+                                foreach ($novedades as $id=>$data){
+                            ?>
+                                <li>
+                                    <a href="novedad.php?id=<?=$data['id']?>"><img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="" style="margin: 0 auto;"></a>
+                                    <h3><?=$data['titulo']?></h3>
+                                    <span>
+                                        <a href="novedad.php?id=<?=$data['id']?>">
+                                            <?=$lenguaje['ver_mas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                                        </a>
+                                    </span>
+                                </li>
+                            <?php
+                                }
+                            ?>
+                        </ul>
                     </div>
                 </div>
-                <!-- fin noticias -->
             </div>
         </section><!--/#blog-->
         
@@ -589,7 +558,9 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <script type="text/javascript" src="js/smoothscroll.js"></script>
         <script type="text/javascript" src="js/jquery.countTo.js"></script>
         <script type="text/javascript" src="js/lightbox.min.js"></script>
+        <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
+        
         <script type="text/javascript">
             $('#filiales').change(function(){
                 $('#direccion_filial').fadeIn("slow");
@@ -618,6 +589,20 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     }
                 });
             });
+            
+            $(window).load(function(){
+                $('.flexslider').flexslider({
+                  animation: "slide",
+                  animationLoop: false,
+                  itemWidth: 210,
+                  itemMargin: 30,
+                  minItems: 2,
+                  maxItems: 3,
+                  start: function(slider){
+                    $('body').removeClass('loading');
+                  }
+                });
+              });
         </script>
         
     </body>
