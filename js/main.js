@@ -160,20 +160,11 @@ function initialize_map(latitude, longitude) {
             center: myLatlng
     };
     var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
-    var contentString = '';
-    var infowindow = new google.maps.InfoWindow({
-            content: '<div class="map-content"><ul class="address">' + $('.address').html() + '</ul></div>'
-    });
     var marker = new google.maps.Marker({
             position: myLatlng,
             map: map
 //          icon: icono de iga  
     });
-    google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map,marker);
-    });
-
-    google.maps.event.addDomListener(window, 'load', initialize_map);
 }
 
 function descripcionCurso(id_curso)
@@ -296,16 +287,14 @@ function filialSeleccionada()
             $('#telefono').html(data.telefono);
             $('#mail').html(data.email);
             $('#correo').val(data.email);
-            
-            initialize_map(data.latitud, data.longitud);
-            $('#google-map').show();
+            $('.contact-form').show('slow',function(){initialize_map(data.latitud, data.longitud);});
       },
       error: function(data)
       {
             console.log(data);
       }
     });
-    $('.contact-form').show('slow');
+//    $('.contact-form').show('slow');
 }
 
 function filialModalSeleccionada(filial, cod_curso){

@@ -493,7 +493,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     </div>
                                 </form>
                             </div>
-                            <div class="row" style="min-height: 250px;">
+                            <div class="row">
                                 <div class="col-md-6 col-sm-12" style="height: 250px;">
                                     <div id="google-map"></div>
                                 </div>
