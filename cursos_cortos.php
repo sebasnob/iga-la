@@ -234,14 +234,17 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 $cupo = false;
                                 $respuesta = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
                                 
-                                foreach ($respuesta as $curso)
+                                if($respuesta)
                                 {
-                                    if($curso['cupo'] > $curso['inscriptos'])
+                                    foreach ($respuesta as $curso)
                                     {
-                                        $cupo = true;
-                                        break;
+                                        if($curso['cupo'] > $curso['inscriptos'])
+                                        {
+                                            $cupo = true;
+                                            break;
+                                        }
                                     }
-                                }
+                                }    
                                 if($cupo)
                                 {
                                     echo "<span class='cupoDisponible'> - " . $lenguaje['cupo_disponible_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . "</span>";

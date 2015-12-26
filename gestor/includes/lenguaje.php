@@ -96,7 +96,10 @@ $lenguaje['mail_valido_ES'] = 'Email no válido';
 $lenguaje['tel_valido_ES'] = 'Número de teléfono inválido';
 $lenguaje['cupo_disponible_ES'] = 'Cupo Disponible';
 
+$lenguaje['comparte_novedad_ES'] = 'Comparte esta novedad';
+
 //ingles
+$lenguaje['comparte_novedad_IN'] = 'Share this news';
 $lenguaje['cupo_disponible_IN'] = 'Seats available';
 $lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
 $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
@@ -283,3 +286,4 @@ $lenguaje['enviando_POR'] = 'Envio..';
 $lenguaje['mail_valido__POR'] = 'E-mail inválido';
 $lenguaje['tel_valido_POR'] = 'Invalid phone number';
 $lenguaje['cupo_disponible_POR'] = 'Assentos Disponíveis';
+$lenguaje['comparte_novedad_POR'] = 'Compartilhe esta notícia';
