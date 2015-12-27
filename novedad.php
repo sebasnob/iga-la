@@ -104,7 +104,7 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                     <div class="col-sm-4" style="margin-bottom: 10px;">
                         <h2><?=$categoria[0]['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></h2>
                     <?php
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], false, false, $novedad['categoria']);
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, false, $novedad['categoria'], $_GET['id']);
                         foreach ($novedades as $nov)
                         {
                             $estiloTextos = 'font-size: 15px;';

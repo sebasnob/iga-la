@@ -890,7 +890,7 @@ if(isset($_POST['filialSeleccionada']))
     echo json_encode($return);
 }
 
-function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false, $estado = false, $categoria = false){
+function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false, $estado = false, $categoria = false, $id_novedad=false){
     $cond = ' WHERE 1 = 1';
     $novedades = array();
     
@@ -906,6 +906,11 @@ function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false
     if($categoria)
     {
         $cond .= " AND categoria = {$categoria} ";
+    }
+    
+    if($id_novedad)
+    {
+        $cond .= " AND id <> {$id_novedad} ";
     }
     
     $query = "SELECT * FROM novedades {$cond} ORDER BY fecha DESC  ";
