@@ -63,15 +63,34 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         ?>
         
         <section id="head_image_curso">
-            <div class="container-fluid">
-                <img class="img-responsive animated fadeInLeftBig" src="http://www.m2000364.ferozo.com/ejemplos/IGA/iga-la/images/slider/slyers-home-iga-arg.jpg" alt="" style="width: 100%;">
+            <div class="container-fluid" style="position: relative">
+                <img class="img-responsive animated fadeInLeftBig" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
             </div>
         </section>
         
         <section id="buscador">
             <div class="container">
-                <div class="row">
-                    
+                <div class="col-sm-12">
+                    <h2 style="font-size: 20px; font-weight: 500;">
+                        Buscador de Noticias
+                    </h2>
+                </div>
+                <div class="heading wow fadeInUp col-sm-12" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <form name="filter-form" method="post" action="#" class="form-inline">
+                        <div class="col-sm-4">
+                            <input type="text" name="palabra" id="palabra" placeholder="Por palabra clave" />
+                        </div>
+                        <div class="col-sm-4">
+                            <select  id="categorias" class="form-control">
+                                <option value="0"><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="fecha" class="form-control" >
+                                <option value="0"><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>

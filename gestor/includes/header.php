@@ -114,7 +114,7 @@
                 </div>
             </div><!--/#main-nav-->
         <?php
-        if(count($slider) > 0){
+        if(isset($slider) && count($slider) > 0){
         ?>
             <div id="slider" class="carousel slide carousel-fade" data-ride="carousel">
                 

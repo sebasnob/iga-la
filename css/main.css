@@ -1467,7 +1467,28 @@ padding-bottom: 50px;
 **********Buscador CSS*****
 **************************/
 #buscador{
+    padding:20px;
     background-color: #d5d7e6;
+}
+
+#buscador form{
+    padding-bottom: 10px;
+}
+
+#buscador .col-sm-4{
+    padding-left: 0px;
+}
+
+#buscador .col-sm-12{
+    padding-right: 0px;
+}
+
+#buscador input{
+    width:100%;
+}
+
+#buscador select{
+    width:100%;
 }
 
 /*************************
