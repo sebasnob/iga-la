@@ -416,7 +416,7 @@ function detectCountry($mysqli){
     }
     else
     {
-        $_SESSION['pais'] = array('pais'=>'Argentina','cod_pais'=>"AR", 'idioma'=>'ES', 'flag'=>'images/flags/ar.png', 'id_idioma'=>'1');
+        $_SESSION['pais'] = array('pais'=>'Argentina','cod_pais'=>"AR", 'idioma'=>'ES', 'flag'=>'images/flags/ar.png', 'id_idioma'=>'1', 'cod_idioma'=>'ES', 'id'=>'1');
         $_SESSION['ciudad'] = 'Rosario';
     }
     curl_close($ch);

@@ -69,37 +69,42 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             <div class="container">
                 <div class="row" style="padding:0">
                 <?php
-                $arrayColores = array('#2B933E', '#C40F79', '#246553', '#F5B432', '#264699');
-                $i = 0;
-                foreach ($gridArrayCursos as $imgGrid)
-                {
-                        if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
-                        {?>
-                    <a href="cursos_cortos.php">    
-                        <?php } else{?>
-                        <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
-                        <?php }?>
-                            <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: <?=$arrayColores[$i]?>">
-                                <table style="height: 100px; width: 100%">
-                                    <tr>
-                                        <td class="tdPadding">
-                                            <?=$imgGrid['titulo'] ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </a>
+                if(is_array($gridArrayCursos) && count($gridArrayCursos) > 0){
+                    $arrayColores = array('#2B933E', '#C40F79', '#246553', '#F5B432', '#264699');
+                    $i = 0;
+                    foreach ($gridArrayCursos as $imgGrid)
+                    {
+                            if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
+                            {?>
+                        <a href="cursos_cortos.php">    
+                            <?php } else{?>
+                            <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
+                            <?php }?>
+                                <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: <?=$arrayColores[$i]?>">
+                                    <table style="height: 100px; width: 100%">
+                                        <tr>
+                                            <td class="tdPadding">
+                                                <?=$imgGrid['titulo'] ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </a>
                 <?php 
-                    $i++;
-                } ?>
+                        $i++;
+                    }
+                }
+                ?>
                 </div>
                 <div id="imagenesGrillaCursos" class="row hidden-xs" style="padding:0; min-height: 350px;">
                     <div class="col-md-12" style="padding: 0">
                     <?php
+                    if(is_array($imgGrid) && count($imgGrid) > 0){
                         $i = 1;
                         foreach ($gridArrayCursos as $imgGrid){ 
                             if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
-                        {?>
+                            {
+                    ?>
                         <a href="cursos_cortos.php">    
                         <?php } else{?>
                             <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
@@ -117,7 +122,11 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     </div>
                                 </div>    
                             </a>
-                        <?php $i++;} ?>
+                    <?php 
+                            $i++;
+                        }
+                    }
+                    ?>
                     </div>
                 </div>
             </div>    
