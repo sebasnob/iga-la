@@ -1,4 +1,3 @@
-<?php ?>
         <div class="fullParaCerrarMenu"></div>
         <header id="home">
             <div class="main-nav">
