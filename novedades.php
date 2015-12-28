@@ -46,6 +46,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         <link href="css/main.css" rel="stylesheet">
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
+        <link href="css/jquery.filthypillow.css" rel="stylesheet">
             
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
@@ -72,23 +73,21 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
             <div class="container">
                 <div class="col-sm-12">
                     <h2 style="font-size: 20px; font-weight: 500;">
-                        Buscador de Noticias
+                        <?=$lenguaje['buscador_de_noticias_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                     </h2>
                 </div>
                 <div class="heading wow fadeInUp col-sm-12" data-wow-duration="1000ms" data-wow-delay="300ms">
                     <form name="filter-form" method="post" action="#" class="form-inline">
                         <div class="col-sm-4">
-                            <input type="text" name="palabra" id="palabra" placeholder="Por palabra clave" />
+                            <input class="form-control" type="text" name="palabra" id="palabra" placeholder="<?=$lenguaje['palabra_clave_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" />
                         </div>
                         <div class="col-sm-4">
                             <select  id="categorias" class="form-control">
-                                <option value="0"><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
+                                <option value="0"><?=$lenguaje['por_categoria_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <select id="fecha" class="form-control" >
-                                <option value="0"><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
-                            </select>
+                            <input class="form-control filthypillow-1" type="text" name="fecha" id="fecha" placeholder="<?=$lenguaje['por_fecha_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" />
                         </div>
                     </form>
                 </div>
@@ -139,7 +138,8 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
             
         <?php
             include_once 'gestor/includes/footer.php';
-        ?>
+        ?>    
+            
             
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -151,6 +151,21 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         <script type="text/javascript" src="js/jquery.countTo.js"></script>
         <script type="text/javascript" src="js/lightbox.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-            
+        <script type="text/javascript" src="js/moment.js"></script>
+        <script type="text/javascript" src="js/jquery.filthypillow.min.js"></script>
+        
+        <script>
+        var $fp = $( ".filthypillow-1" );
+        
+        $fp.filthypillow();
+        $fp.on( "focus", function( ) {
+          $fp.filthypillow( "show" );
+        } );
+        $fp.on( "fp:save", function( e, dateObj ) {
+          $fp.val( dateObj.format( "DD/MM/YYYY" ) );
+          $fp.filthypillow( "hide" );
+        } );
+        
+        </script>
     </body>
 </html>    

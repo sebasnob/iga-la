@@ -97,8 +97,16 @@ $lenguaje['tel_valido_ES'] = 'Número de teléfono inválido';
 $lenguaje['cupo_disponible_ES'] = 'Cupo Disponible';
 
 $lenguaje['comparte_novedad_ES'] = 'Comparte esta novedad';
+$lenguaje['buscador_de_noticias_ES'] = 'Buscador de Noticias';
+$lenguaje['palabra_clave_ES'] = 'Por palabra clave';
+$lenguaje['por_categoria_ES'] = 'Por Categoria';
+$lenguaje['por_fecha_ES'] = 'Por Fecha';
+
 
 //ingles
+$lenguaje['por_categoria_IN'] = 'By Category';
+$lenguaje['palabra_clave_IN'] = 'By keyword';
+$lenguaje['buscador_de_noticias_IN'] = 'Search for news';
 $lenguaje['comparte_novedad_IN'] = 'Share this news';
 $lenguaje['cupo_disponible_IN'] = 'Seats available';
 $lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
@@ -193,6 +201,7 @@ $lenguaje['malla_boton_consulta_IN'] = 'Check';
 $lenguaje['enviando_IN'] = 'Sending..';
 $lenguaje['mail_valido_IN'] = 'Invalid email';
 $lenguaje['tel_valido_IN'] = 'Invalid phone number';
+$lenguaje['por_fecha_IN'] = 'By Date';
 
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
@@ -287,3 +296,7 @@ $lenguaje['mail_valido__POR'] = 'E-mail inválido';
 $lenguaje['tel_valido_POR'] = 'Invalid phone number';
 $lenguaje['cupo_disponible_POR'] = 'Assentos Disponíveis';
 $lenguaje['comparte_novedad_POR'] = 'Compartilhe esta notícia';
+$lenguaje['buscador_de_noticias_POR'] = 'Outras Notícias';
+$lenguaje['palabra_clave_POR'] = 'Por palavra-chave';
+$lenguaje['por_categoria_POR'] = 'Por Categoria';
+$lenguaje['por_fecha_POR'] = 'Por Data';
