@@ -4,7 +4,9 @@ include_once 'gestor/includes/functions.php';
 include_once 'gestor/includes/lenguaje.php';
 
 $pagina = 'novedades';
-
+$palabra = '';
+$fecha = '';
+$categoria = '';
 //unset($_SESSION);
 if(!isset($_SESSION['pais']))
 {
@@ -21,6 +23,18 @@ if(!isset($_SESSION['idioma_seleccionado']['idioma']))
 if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 {
     $_SESSION['idioma_seleccionado']['id_idioma'] = $_SESSION['pais']['id_idioma'];
+}
+if(isset($_GET['palabra']) && $_GET['palabra'] != '')
+{
+    $palabra = $_GET['palabra'];
+}
+if(isset($_GET['categoria']) && $_GET['categoria'] != '')
+{
+    $categoria = $_GET['categoria'];
+}
+if(isset($_GET['fecha']) && $_GET['fecha'] != '')
+{
+    $fecha = $_GET['fecha'];
 }
     
 $paises = getPaises($mysqli);
@@ -76,20 +90,27 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                         <?=$lenguaje['buscador_de_noticias_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                     </h2>
                 </div>
-                <div class="heading wow fadeInUp col-sm-12" data-wow-duration="1000ms" data-wow-delay="300ms">
-                    <form name="filter-form" method="post" action="#" class="form-inline">
+                <div class="col-sm-12">
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" name="palabra" id="palabra" placeholder="<?=$lenguaje['palabra_clave_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" />
+                            <input class="form-control" type="text" name="palabra" id="palabra" placeholder="<?=$lenguaje['palabra_clave_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" value="<?=$palabra?>"/>
                         </div>
                         <div class="col-sm-4">
                             <select  id="categorias" class="form-control">
                                 <option value="0"><?=$lenguaje['por_categoria_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
+                                <?php
+                                        foreach ($categoriasNovedades as $cat)
+                                        {?>
+                                            <option value="<?=$cat['id']?>" <?php if($cat['id'] == $categoria){echo 'selected';}?>><?=$cat['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></option>
+                                <?php   }?>
+                                ?>
                             </select>
                         </div>
-                        <div class="col-sm-4">
-                            <input class="form-control filthypillow-1" type="text" name="fecha" id="fecha" placeholder="<?=$lenguaje['por_fecha_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" />
+                        <div class="col-sm-3">
+                            <input class="form-control filthypillow-1" type="text" name="fecha" id="fecha" placeholder="<?=$lenguaje['por_fecha_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" value='<?=$fecha?>'/>
                         </div>
-                    </form>
+                        <div class="col-sm-1">
+                            <button class="btn btn-default" onclick="javascript:buscarNoticias();"><?=$lenguaje['buscar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
+                        </div>    
                 </div>
             </div>
         </section>
@@ -162,7 +183,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
           $fp.filthypillow( "show" );
         } );
         $fp.on( "fp:save", function( e, dateObj ) {
-          $fp.val( dateObj.format( "DD/MM/YYYY" ) );
+          $fp.val( dateObj.format( "YYYY-MM-DD" ) );
           $fp.filthypillow( "hide" );
         } );
         

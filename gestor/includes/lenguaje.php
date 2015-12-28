@@ -101,9 +101,10 @@ $lenguaje['buscador_de_noticias_ES'] = 'Buscador de Noticias';
 $lenguaje['palabra_clave_ES'] = 'Por palabra clave';
 $lenguaje['por_categoria_ES'] = 'Por Categoria';
 $lenguaje['por_fecha_ES'] = 'Por Fecha';
-
+$lenguaje['buscar_ES'] = 'Buscar';
 
 //ingles
+$lenguaje['buscar_IN'] = 'Search';
 $lenguaje['por_categoria_IN'] = 'By Category';
 $lenguaje['palabra_clave_IN'] = 'By keyword';
 $lenguaje['buscador_de_noticias_IN'] = 'Search for news';
@@ -300,3 +301,4 @@ $lenguaje['buscador_de_noticias_POR'] = 'Outras Notícias';
 $lenguaje['palabra_clave_POR'] = 'Por palavra-chave';
 $lenguaje['por_categoria_POR'] = 'Por Categoria';
 $lenguaje['por_fecha_POR'] = 'Por Data';
+$lenguaje['buscar_POR'] = 'Pesquisar';
