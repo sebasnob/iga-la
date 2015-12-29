@@ -4,9 +4,9 @@ include_once 'gestor/includes/functions.php';
 include_once 'gestor/includes/lenguaje.php';
 
 $pagina = 'novedades';
-$palabra = '';
-$fecha = '';
-$categoria = '';
+$palabra = false;
+$fecha = false;
+$categoria = false;
 //unset($_SESSION);
 if(!isset($_SESSION['pais']))
 {
@@ -42,7 +42,6 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $auspiciantes = getAuspiciantes($mysqli);
 //$novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma']);
-
 $categoriasNovedades = getCategoriasNovedades($mysqli);
 ?>
 <!DOCTYPE html>
@@ -118,10 +117,50 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         <section id="novedades">
             <div class="container">
                 <?php
+                if($categoria)
+                {
+                        $i=0;
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], false, false, $categoria, $palabra, $fecha);
+                        foreach ($categoriasNovedades as $cat){
+                            if($cat['id'] == $categoria){
+                        ?>
+                                
+                                <div class="col-sm-12">
+                                    <h2 style="font-weight: 600"><?=$cat['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></h2>
+                                    <hr>
+                                </div>
+                        <?php
+                            }
+                        }
+                        foreach ($novedades as $novedad)
+                        {
+                        ?>
+                        <?php if($i == 0){
+                            $estiloTextos = 'font-size: 25px;';    
+                            $estiloImagen = 'margin-bottom: 15px;'; ?>
+                            <div class="col-sm-8">
+                        <?php }
+                            else
+                            {
+                                $estiloTextos = 'font-size: 15px;';
+                                $estiloImagen = 'margin-bottom: 5px;'; ?>
+                                <div class="col-sm-4" style="margin-bottom: 10px;">
+                            <?php 
+                            }
+                            ?>
+                                    <a href="novedad.php?id=<?=$novedad['id']?>"><img style="<?=$estiloImagen?>" class="img-responsive" src="images/novedades/<?=$novedad['imagen']?>" /></a>
+                                    <a href="novedad.php?id=<?=$novedad['id']?>"><span style="<?=$estiloTextos?>"><?=$novedad['titulo']?></span></a>
+                                </div>
+                        <?php 
+                            $i++;
+                        }
+                }
+                else
+                {
                     foreach ($categoriasNovedades as $cat)
                     {
                         $i=0;
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, false, $cat['id']);
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], false, false, $cat['id'], $palabra, $fecha);
                         ?>
                                 <div class="col-sm-12">
                                     <h2 style="font-weight: 600"><?=$cat['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></h2>
@@ -151,9 +190,13 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                             $i++;
                         }
                     }
+                }    
                     ?>
+                                <div class="col-sm-8"><?=$lenguaje['sin_novedad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></div>
                     </div>
+                                
             </div>
+                
         </section>
             
             

@@ -102,8 +102,10 @@ $lenguaje['palabra_clave_ES'] = 'Por palabra clave';
 $lenguaje['por_categoria_ES'] = 'Por Categoria';
 $lenguaje['por_fecha_ES'] = 'Por Fecha';
 $lenguaje['buscar_ES'] = 'Buscar';
+$lenguaje['sin_novedad_ES'] = 'Sin Novedad';
 
 //ingles
+$lenguaje['sin_novedad_IN'] = 'No news';
 $lenguaje['buscar_IN'] = 'Search';
 $lenguaje['por_categoria_IN'] = 'By Category';
 $lenguaje['palabra_clave_IN'] = 'By keyword';
@@ -302,3 +304,4 @@ $lenguaje['palabra_clave_POR'] = 'Por palavra-chave';
 $lenguaje['por_categoria_POR'] = 'Por Categoria';
 $lenguaje['por_fecha_POR'] = 'Por Data';
 $lenguaje['buscar_POR'] = 'Pesquisar';
+$lenguaje['sin_novedad_POR'] = 'Todo o silêncio';

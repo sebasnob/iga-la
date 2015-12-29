@@ -890,7 +890,7 @@ if(isset($_POST['filialSeleccionada']))
     echo json_encode($return);
 }
 
-function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false, $estado = false, $categoria = false, $id_novedad=false){
+function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false, $estado = false, $categoria = false, $palabra = false, $fecha = false, $id_novedad=false){
     $cond = ' WHERE 1 = 1';
     $novedades = array();
     
@@ -907,20 +907,26 @@ function getNovedades($mysqli, $id_pais=false, $id_idioma=false, $maximo = false
     {
         $cond .= " AND categoria = {$categoria} ";
     }
+    if($palabra)
+    {
+        $cond .= " AND (descripcion like '%{$palabra}%' or titulo like '%{$palabra}%')";
+    }
+    if($fecha)
+    {
+        $cond .= " AND fecha BETWEEN DATE_SUB('{$fecha}',INTERVAL 5 DAY) AND DATE_ADD('{$fecha}',INTERVAL 5 DAY)";
+    }
     
     if($id_novedad)
     {
         $cond .= " AND id <> {$id_novedad} ";
     }
     
-    $query = "SELECT * FROM novedades {$cond} ORDER BY fecha DESC  ";
+    $query = "SELECT * FROM novedades {$cond} ORDER BY categoria ASC, fecha DESC";
     
     if($maximo)
     {
         $query .= " LIMIT {$maximo}";
     }
-    
-    
     
     $resultado = $mysqli->query($query);
     
