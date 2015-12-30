@@ -433,3 +433,25 @@ $(document).ready(function(){
                 }    
             }, function(){return false});
 });
+function buscarNoticias()
+{
+    var url = "novedades.php?buscar=1";
+    var palabra = $('#palabra').val();
+    var categoria = $('#categorias').val();
+    var fecha = $('#fecha').val();
+    
+    if(palabra.length > 0)
+    {
+        url += '&palabra=' + palabra;
+    }
+    if(categoria != 0)
+    {
+        url += '&categoria=' + categoria;
+    }
+    if(fecha.length > 0)
+    {
+        url += '&fecha=' + fecha;
+    }
+    
+    window.location.href = url;
+}
