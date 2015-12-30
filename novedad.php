@@ -65,6 +65,24 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
+        <style>
+            .social-icons-a{
+                background-color: rgb(255, 255, 255);
+                border-radius: 50px;
+                text-align: center;
+                color: #010F2C;
+            }
+            .social-icons-a{
+                color:#fff;
+                background-color: #d9d9d9;
+                height: 50px;
+                width: 50px;
+                line-height: 50px;
+                display: block;
+                font-size: 30px;
+                opacity: 0.8;
+            }
+        </style>
     </head><!--/head-->
         
     <body>
@@ -104,6 +122,7 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                                                 <li>
                                                     <!--<a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a>-->
                                                     <div class="fb-share-button" data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"></div>
+                                                    <!--div class="fb-share-button social-icons-a"  data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"><i class="fa fa-facebook"></i></div>-->
                                                 </li>
                                                 <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>
                                                 <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>
