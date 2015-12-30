@@ -35,17 +35,16 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
 <html lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="lifeweb.com.ar">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Blog de Gastronomía en Argentina y el mundo" />
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/animate.min.css" rel="stylesheet"> 
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/lightbox.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/animate.min.css" rel="stylesheet" />
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/lightbox.css" rel="stylesheet" />
+        <link href="css/main.css" rel="stylesheet" />
+        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
+        <link href="css/responsive.css" rel="stylesheet" />
             
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
@@ -53,8 +52,19 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
           <script src="js/respond.min.js"></script>
         <![endif]-->
             
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+        <link rel="shortcut icon" href="images/favicon.ico" />
+        
+        <div id="fb-root"></div>
+        <script>
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
     </head><!--/head-->
         
     <body>
@@ -91,7 +101,10 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                                     <td>
                                         <div class="col-md-6 social-icons" style="width: 100%;">
                                             <ul>
-                                                <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>  
+                                                <li>
+                                                    <!--<a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a>-->
+                                                    <div class="fb-share-button" data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"></div>
+                                                </li>
                                                 <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>
                                                 <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>
                                             </ul>
