@@ -82,15 +82,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: <?=$arrayColores[$i]?>">
                                     <table style="height: 100px; width: 100%">
                                         <tr>
-                                            <?php 
-                                                $font = '';
-                                                if(strlen($imgGrid['titulo']) > 43)
-                                                {
-                                                    $font = 'font20';
-                                                }
-                                                if(strlen($imgGrid['titulo']) > 42)
-                                            ?>
-                                            <td class="tdPadding <?= $font ?>">
+                                            <td class="tdPadding">
                                                 <?=$imgGrid['titulo'] ?>
                                             </td>
                                         </tr>
