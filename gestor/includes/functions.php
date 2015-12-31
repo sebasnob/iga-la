@@ -840,7 +840,7 @@ function getFilial($id_filial, $mysqli)
     return $filial;
 }
 
-function getSlider($mysqli, $id_pais = false)
+function getSlider($mysqli, $id_pais = false, $cod_idioma = false)
 {
     $query = "SELECT * FROM slider";
     
@@ -852,16 +852,37 @@ function getSlider($mysqli, $id_pais = false)
         while($slider = $result->fetch_assoc())
         {
             $arrayPais = json_decode($slider['id_pais']);
+            $arrayIdioma = json_decode($slider['cod_idioma']);
             if($id_pais)
             {
                 if(in_array($id_pais, $arrayPais))
                 {
-                    $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais);
+                    if($cod_idioma)
+                    {
+                        if(in_array($cod_idioma, $arrayIdioma))
+                        {
+                            $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
+                        }
+                    }
+                    else
+                    {
+                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
+                    }
                 }
             }
             else
             {
-                $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais);
+                if($cod_idioma)
+                {
+                    if(in_array($cod_idioma, $arrayIdioma))
+                    {
+                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
+                    }
+                }
+                else
+                {
+                    $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
+                }
             }
         }
     }

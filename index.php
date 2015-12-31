@@ -26,7 +26,7 @@ if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 $paises = getPaises($mysqli);
 $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
-$slider = getSlider($mysqli, $_SESSION['pais']['id']);
+$slider = getSlider($mysqli, $_SESSION['pais']['id'],$_SESSION['idioma_seleccionado']['cod_idioma']);
 $arrayCursosCortos = array(29, 13, 15, 40, 3, 89, 96, 23, 14, 38, 8 ,25, 6); 
 $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1);
 ?>
@@ -82,7 +82,15 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: <?=$arrayColores[$i]?>">
                                     <table style="height: 100px; width: 100%">
                                         <tr>
-                                            <td class="tdPadding">
+                                            <?php 
+                                                $font = '';
+                                                if(strlen($imgGrid['titulo']) > 43)
+                                                {
+                                                    $font = 'font20';
+                                                }
+                                                if(strlen($imgGrid['titulo']) > 42)
+                                            ?>
+                                            <td class="tdPadding <?= $font ?>">
                                                 <?=$imgGrid['titulo'] ?>
                                             </td>
                                         </tr>

@@ -19,7 +19,6 @@ $sliderArray = getSlider($mysqli);
 $paises = getPaises($mysqli);
 $idiomas = getIdiomas($mysqli);
 
-
 ?>
 <!DOCTYPE html>
 
@@ -82,10 +81,22 @@ $idiomas = getIdiomas($mysqli);
                                             <input type="text" id="alt" name="alt" class="form-control">
                                         </div>
                                         <div class="form-inline">
+                                            <label class="col-sm-2 col-sm-2 control-label">Color de fondo: </label>
+                                            <input type="text" id="background" name="background" class="form-control" value="#FFFFFF">
+                                        </div>
+                                        <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Pais: </label>
-                                            <select name="pais[]" multiple="true">
+                                            <select name="pais[]" multiple="true" required="true">
                                             <?php foreach ($paises as $pais){?>
                                                 <option value="<?= $pais['id'] ?>"><?= $pais['pais'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        </div>
+                                        <div class="form-inline">
+                                            <label class="col-sm-2 col-sm-2 control-label">Idioma: </label>
+                                            <select name="idioma[]" multiple="true" required="true">
+                                            <?php foreach ($idiomas as $idioma){?>
+                                                <option value="<?= $idioma['cod_idioma'] ?>"><?= $idioma['idioma'] ?></option>
                                             <?php } ?>
                                         </select>
                                         </div>
@@ -124,6 +135,10 @@ $idiomas = getIdiomas($mysqli);
                                                 <input type="text" id="link" name="link" class="form-control" value="<?=$imgSlider['link']?>">
                                             </div>
                                             <div class="form-group">
+                                                <label>Background:</label>
+                                                <input type="text" id="background" name="background" class="form-control" value="<?=$imgSlider['background']?>">
+                                            </div>
+                                            <div class="form-group">
                                                 <label>Alt:</label>
                                                 <input type="text" id="alt" name="alt" class="form-control" value="<?=$imgSlider['alt']?>">
                                             </div>
@@ -141,6 +156,22 @@ $idiomas = getIdiomas($mysqli);
                                                     <?php } ?>
                                                 </select>
                                             </div>
+                                            <div class="form-group">
+                                                <label>Idioma:</label>
+                                                <select name="idioma[]" multiple="true" required>
+                                                    <?php foreach ($idiomas as $idioma){?>
+                                                        <option value="<?= $idioma['cod_idioma'] ?>"
+                                                            <?php if(in_array($idioma['cod_idioma'], $imgSlider['cod_idioma']))
+                                                            {
+                                                                echo 'selected';
+                                                            }?>>
+                                                            <?= $idioma['idioma'] ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            
+                                            
                                             <h4 class="mb"><i class="fa fa-angle-right"></i> <b>Que desea realizar?</b></h4>
                                             <div class="row mt">
                                                 <div class="col-lg-12">

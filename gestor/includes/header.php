@@ -123,7 +123,7 @@
                     $i=0; 
                     foreach($slider as $slid){
                 ?>
-                    <div 
+                    <div  style="background-color: <?= $slid['background']?>" 
                         class="item <?php if($i == 0){echo 'active';}?>" 
                         <?php if(isset($slid['link']) && $slid['link'] != '')
                         {
