@@ -111,13 +111,14 @@ html[xmlns] .flexslider .slides {
   *height: 0;
 }
 .flex-direction-nav a {
+  padding-top: 10px;
   text-decoration: none;
   display: block;
   width: 40px;
   height: 40px;
-  margin: -20px 0 0;
+  margin: 0;
   position: absolute;
-  top: 50%;
+  top: 30%;
   z-index: 10;
   overflow: hidden;
   opacity: 0;
@@ -135,7 +136,7 @@ html[xmlns] .flexslider .slides {
   font-size: 40px;
   display: inline-block;
   content: '\f001';
-  color: rgba(0, 0, 0, 0.8);
+  color: #337ab7;
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 .flex-direction-nav a.flex-next:before {

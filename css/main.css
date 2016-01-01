@@ -831,7 +831,8 @@ section#feature_cursos{
 **************************/
 #blog{
     background-color: #d5d7e6;
-    padding-top:0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .post-thumb {
@@ -1460,9 +1461,12 @@ padding-bottom: 50px;
     font-weight: 700;
 }
 .tdPadding{
-    padding: 20px;
+    padding: 10px;
 }
 
+.font20{
+    font-size: 20px;
+}
 
 /*************************
 **********Buscador CSS*****
@@ -1528,4 +1532,20 @@ padding-bottom: 50px;
 .footer-top ul{
     padding-top: 15px;
     font-weight: 600;
+}
+
+.compartir{
+    cursor: pointer;
+}
+
+#facebook:hover{
+    background-color: #3b5998;
+}
+
+#twitter:hover{
+    background-color: #55acee;
+}
+
+#google:hover{
+    background-color: #F44336;
 }

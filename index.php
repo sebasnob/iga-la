@@ -26,7 +26,7 @@ if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 $paises = getPaises($mysqli);
 $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
-$slider = getSlider($mysqli, $_SESSION['pais']['id']);
+$slider = getSlider($mysqli, $_SESSION['pais']['id'],$_SESSION['idioma_seleccionado']['cod_idioma']);
 $arrayCursosCortos = array(29, 13, 15, 40, 3, 89, 96, 23, 14, 38, 8 ,25, 6); 
 $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1);
 ?>
@@ -147,7 +147,9 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 foreach ($novedades as $id=>$data){
                             ?>
                                 <li>
+                                    <div style="min-height: 197px">
                                     <a href="novedad.php?id=<?=$data['id']?>"><img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="" style="margin: 0 auto;"></a>
+                                    </div>
                                     <h3><?=$data['titulo']?></h3>
                                     <span>
                                         <a href="novedad.php?id=<?=$data['id']?>">
@@ -163,6 +165,13 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 </div>
             </div>
         </section><!--/#blog-->
+        <div class="row" style="background-color: #337ab7">
+                <div class="col-md-12 text-center text-uppercase">
+                    <a href="novedades.php" style="color: white">
+                        <?=$lenguaje['ver_todas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                    </a>
+                </div>
+                    </div>
         
         <!--/#Solo en movil-->
         <section id="institucionalMovil" class="visible-xs">
