@@ -36,13 +36,6 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
-        <meta property="og:url"                content="http://www.m2000364.ferozo.com/ejemplos/IGA/iga-la/novedad.php?id=<?=$_GET['id']?>" />
-        <meta property="og:type"               content="article" />
-        <meta property="og:title"              content="<?=$novedad['titulo']?>" />
-        <meta property="og:description"        content="<?=$novedad['descripcion']?>" />
-        <meta property="og:image"              content="http://www.m2000364.ferozo.com/ejemplos/IGA/iga-la/images/novedades/<?=$novedad['imagen']?>" />
-        
         <meta property="og:type" content="article" />
         <meta property="og:url" content="<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>" />
         <meta property="og:title" content="<?=$novedad['titulo']?>" />
@@ -70,25 +63,6 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
         <link rel="shortcut icon" href="images/favicon.ico" />
         
         <div id="fb-root"></div>
-        
-        <script>
-            window.fbAsyncInit = function() {
-              FB.init({
-                appId      : '1043650382373771',
-                xfbml      : true,
-                version    : 'v2.5'
-              });
-            };
-
-            (function(d, s, id){
-               var js, fjs = d.getElementsByTagName(s)[0];
-               if (d.getElementById(id)) {return;}
-               js = d.createElement(s); js.id = id;
-               js.src = "//connect.facebook.net/en_US/sdk.js";
-               fjs.parentNode.insertBefore(js, fjs);
-             }(document, 'script', 'facebook-jssdk'));
-        </script>
-        
         <style>
             .social-icons-a{
                 background-color: rgb(255, 255, 255);
@@ -153,13 +127,6 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                                     <td>
                                         <div class="col-md-6 social-icons" style="width: 100%;">
                                             <ul>
-                                                <li></li>
-                                                 <!--<a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a>-->
-                                                <!--<div class="fb-share-button" data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"></div>-->
-                                                <!--<div class="fb-share-button"  data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"><i class="fa fa-facebook"></i></div>-->
-                                                <li><a class="facebook" href="https://www.facebook.com/dialog/share?app_id=1043650382373771&amp;display=popup&amp;href=http%3A%2F%2Fm2000364.ferozo.com%2Fejemplos%2FIGA%2Figa-la%2Fnovedad.php?id=<?=$_GET['id']?>&amp;redirect_uri=http%3A%2F%2Fm2000364.ferozo.com%2Fejemplos%2FIGA%2Figa-la%2Fnovedad.php?id=<?=$_GET['id']?>" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>
                                                 <li>
                                                     <a id="facebook" class="facebook compartir" data-href="https://www.facebook.com/sharer/sharer.php?u=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>">
                                                         <i class="fa fa-facebook"></i>
