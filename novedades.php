@@ -189,10 +189,13 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                         <?php 
                             $i++;
                         }
+                        if($i == 0)
+                        { ?>
+                            <div class="col-sm-8"><?=$lenguaje['sin_novedad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></div>  
+                        <?php } 
                     }
                 }    
                     ?>
-                                <div class="col-sm-8"><?=$lenguaje['sin_novedad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></div>
                     </div>
                                 
             </div>

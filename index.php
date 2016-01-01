@@ -147,7 +147,9 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 foreach ($novedades as $id=>$data){
                             ?>
                                 <li>
+                                    <div style="min-height: 197px">
                                     <a href="novedad.php?id=<?=$data['id']?>"><img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="" style="margin: 0 auto;"></a>
+                                    </div>
                                     <h3><?=$data['titulo']?></h3>
                                     <span>
                                         <a href="novedad.php?id=<?=$data['id']?>">
@@ -163,6 +165,13 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 </div>
             </div>
         </section><!--/#blog-->
+        <div class="row" style="background-color: #337ab7">
+                <div class="col-md-12 text-center text-uppercase">
+                    <a href="novedades.php" style="color: white">
+                        <?=$lenguaje['ver_todas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                    </a>
+                </div>
+                    </div>
         
         <!--/#Solo en movil-->
         <section id="institucionalMovil" class="visible-xs">
