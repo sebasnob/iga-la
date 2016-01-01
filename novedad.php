@@ -36,7 +36,13 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Blog de Gastronomía en Argentina y el mundo" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>" />
+        <meta property="og:title" content="<?=$novedad['titulo']?>" />
+        <meta property="og:description" content="<?=$novedad['descripcion']?>" />
+        <meta property="og:image" content="images/novedades/<?=$novedad['imagen']?>" />
+        <meta property="og:image:width" content="250" />
+        <meta property="og:image:height" content="140" />
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
         <link href="css/bootstrap.min.css" rel="stylesheet" />
         <link href="css/animate.min.css" rel="stylesheet" />
@@ -56,15 +62,6 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
         <link rel="shortcut icon" href="images/favicon.ico" />
         
         <div id="fb-root"></div>
-        <script>
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
         <style>
             .social-icons-a{
                 background-color: rgb(255, 255, 255);
@@ -107,11 +104,21 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
         <section id="novedades">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-8">
-                        <img class="img-responsive" src="images/novedades/<?=$novedad['imagen']?>" />
-                        <h3><?=$novedad['titulo']?></h3>
+                    <div class="col-sm-8" itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <img itemprop="image" class="img-responsive" src="images/novedades/<?=$novedad['imagen']?>" />
+                        <span itemprop="name">
+                            <h3><?=$novedad['titulo']?></h3>
+                        </span>
+                        <span itemprop="author" style="display:none">
+                            iga-la.net
+                        </span>
+                        <span itemprop="about"  style="display:none">
+                            <?= $categoria[0]['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                        </span>
                         <div style="text-align: justify">
-                            <?=$novedad['descripcion']?>
+                            <span itemprop="description">
+                                <?=$novedad['descripcion']?>
+                            </span>    
                         </div>
                         <div class="row">
                             <table style="width: 100%">
@@ -120,12 +127,22 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                                         <div class="col-md-6 social-icons" style="width: 100%;">
                                             <ul>
                                                 <li>
-                                                    <!--<a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a>-->
-                                                    <div class="fb-share-button" data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"></div>
+                                                    <a id="facebook" class="facebook compartir" data-href="https://www.facebook.com/sharer/sharer.php?u=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>">
+                                                        <i class="fa fa-facebook"></i>
+                                                    </a>
+                                                    <!--<div class="fb-share-button" data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"></div>-->
                                                     <!--div class="fb-share-button social-icons-a"  data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"><i class="fa fa-facebook"></i></div>-->
                                                 </li>
-                                                <li><a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>
+                                                <li>
+                                                    <a id="twitter" class="compartir" data-href="http://twitter.com/share?text=<?=$novedad['titulo']?>&url=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>&via=IGA_LA" target="_blank">
+                                                        <i class="fa fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a id="google" class="envelope compartir" data-href="https://plus.google.com/share?url=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>">
+                                                        <i class="fa fa-google"></i>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -169,6 +186,11 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
         <script type="text/javascript" src="js/jquery.countTo.js"></script>
         <script type="text/javascript" src="js/lightbox.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-            
+        <script>
+            $('.compartir').click(function (){
+                window.open($(this).data('href'), '_blank', "width=850, height=400, resizable=no, left=100, top=100");
+                return false;
+            });
+        </script>    
     </body>
 </html>    

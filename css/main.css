@@ -1533,3 +1533,19 @@ padding-bottom: 50px;
     padding-top: 15px;
     font-weight: 600;
 }
+
+.compartir{
+    cursor: pointer;
+}
+
+#facebook:hover{
+    background-color: #3b5998;
+}
+
+#twitter:hover{
+    background-color: #55acee;
+}
+
+#google:hover{
+    background-color: #F44336;
+}
