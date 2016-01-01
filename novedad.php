@@ -57,30 +57,9 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
         <![endif]-->
-        
             
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
         <link rel="shortcut icon" href="images/favicon.ico" />
-        
-        <div id="fb-root"></div>
-        <style>
-            .social-icons-a{
-                background-color: rgb(255, 255, 255);
-                border-radius: 50px;
-                text-align: center;
-                color: #010F2C;
-            }
-            .social-icons-a{
-                color:#fff;
-                background-color: #d9d9d9;
-                height: 50px;
-                width: 50px;
-                line-height: 50px;
-                display: block;
-                font-size: 30px;
-                opacity: 0.8;
-            }
-        </style>
     </head><!--/head-->
         
     <body>
