@@ -39,18 +39,17 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/animate.min.css" rel="stylesheet"> 
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/lightbox.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/animate.min.css" rel="stylesheet" /> 
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/lightbox.css" rel="stylesheet" />
+        <link href="css/main.css" rel="stylesheet" />
+        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
+        <link href="css/responsive.css" rel="stylesheet" />
         
         <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php?cod_curso=<?=$_GET['cod_curso']?>" />
         <!--[if lt IE 9]>
@@ -58,8 +57,8 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
           <script src="js/respond.min.js"></script>
         <![endif]-->
         
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+        <link rel="shortcut icon" href="images/favicon.ico" />
     </head><!--/head-->
     <body>
 <?php
@@ -457,7 +456,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             });
         }
     
-        function consultarCurso(formid, boton){
+        function consultarCurso(formid, boton, coursecontact){
             if($("#"+formid+" input[name=name]").val() == '')
             {
                 alert('Por favor, ingrese su nombre');
@@ -490,7 +489,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 phone: $("#"+formid+" input[name=phone]").val(),
                 message: $("#"+formid+" textarea[name=mensaje]").val(),
                 filial: $("#"+formid+" input[name=id_filial]").val(),
-                coursecontact: true,
+                coursecontact: coursecontact,
                 id_comision: $("#"+formid+" input[name=id_comision]").val(),
                 id_plan: $("#"+formid+" input[name=id_plan]").val(),
                 cod_curso: $("#"+formid+" input[name=cod_curso]").val(),
