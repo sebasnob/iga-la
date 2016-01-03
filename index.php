@@ -53,6 +53,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" href="images/favicon.ico">
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head><!--/head-->
     
     <body>
@@ -365,6 +366,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                         <div class="form-group">
                                             <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
                                         </div>                        
+                                        <div class="g-recaptcha" data-sitekey="6LfcUBQTAAAAAA6cg2CaCnnZzxbxNnIOawZwo2KJ"></div>
                                     </div>
                                 </form>
                             </div>
