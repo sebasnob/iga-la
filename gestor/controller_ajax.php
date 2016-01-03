@@ -348,7 +348,7 @@ switch($_POST['option']){
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this)" data-loading-text="...">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this)" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm">'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                     </div>
                                     <div class="error text-center text-reserva-error"></div>
@@ -380,7 +380,7 @@ switch($_POST['option']){
                                         <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
                                     </div>                        
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this)" data-loading-text="...">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this, true)" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         <button type="button" data-toggle="collapse" data-target="#consulta-'.$datos_curso['codigo'].'" class="btn btn-sm" >'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                     </div>
                                     <div class="error text-center text-consulta-error"></div>
@@ -417,7 +417,7 @@ switch($_POST['option']){
                                         <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
                                     </div>                        
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-\', this)" data-loading-text="...">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto\', this, false)" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                     </div>
                                     <div class="error text-center text-consulta-error"></div>
                                 </form>
