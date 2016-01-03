@@ -104,8 +104,10 @@ $lenguaje['por_fecha_ES'] = 'Por Fecha';
 $lenguaje['buscar_ES'] = 'Buscar';
 $lenguaje['sin_novedad_ES'] = 'Sin Novedad';
 $lenguaje['ver_todas_ES'] = 'ver todas';
+$lenguaje['boton_cerrar_ES'] = 'Cerrar';
 
 //ingles
+$lenguaje['boton_cerrar_IN'] = 'Close';
 $lenguaje['ver_todas_IN'] = 'see all';
 $lenguaje['sin_novedad_IN'] = 'No news';
 $lenguaje['buscar_IN'] = 'Search';
@@ -308,3 +310,4 @@ $lenguaje['por_fecha_POR'] = 'Por Data';
 $lenguaje['buscar_POR'] = 'Pesquisar';
 $lenguaje['sin_novedad_POR'] = 'Todo o silêncio';
 $lenguaje['ver_todas_POR'] = 'ver todos';
+$lenguaje['boton_cerrar_POR'] = 'Fechar';

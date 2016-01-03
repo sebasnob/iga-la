@@ -284,110 +284,145 @@ switch($_POST['option']){
     
     case "get_cursos_con_cupo":
         if(isset($_POST['id_filial']) && $_POST['id_filial'] != '' && isset($_POST['cod_curso']) && $_POST['cod_curso'] != ''){
-            $retorno = "<tr>
-                            <td>".$lenguaje['malla_comision_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-                            <td>".$lenguaje['malla_fecha_in_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-                            <td>".$lenguaje['malla_horarios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-                            <td>".$lenguaje['malla_matricula_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-                            <td>".$lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-                            <td>".$lenguaje['malla_vigencia_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-                            <td>".$lenguaje['malla_cupos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-                            <td>&nbsp;</td>
-                        <tr>";
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
-            foreach($curso_cupo as $id=>$datos_curso){
-                $retorno .="<tr>
-                    <td>{$datos_curso['codigo']}</td>
-                    <td>{$datos_curso['inicio_clases']}</td>";
-                if(isset($datos_curso['horarios']) && is_array($datos_curso['horarios'])){
-                    $dias = array("1"=>"Lunes", "2"=>"Martes", "3"=>"Miércoles", "4"=>"Jueves", "5"=>"Viernes", "6"=>"Sábado", "7"=>"Domingo");
-                    $retorno .= "<td>";
-                    foreach($datos_curso['horarios'] as $horarios){
-                        $retorno .= $dias[$horarios['dia']]." de ".substr($horarios['horadesde'], 0, 5)." a ".substr($horarios['horahasta'], 0, 5)." hs.<br/>";
-                    }
-                    $retorno .= "</td>";
-                }
-                $retorno .= "<td>\${$datos_curso['valormatricula']}</td>";
-                    if(isset($datos_curso['detalle_cuotas']) && is_array($datos_curso['detalle_cuotas'])){
+            if(count($curso_cupo) > 0){
+                $retorno = "<tr>
+                                <td>".$lenguaje['malla_comision_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <td>".$lenguaje['malla_fecha_in_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <td>".$lenguaje['malla_horarios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <td>".$lenguaje['malla_matricula_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <td>".$lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <td>".$lenguaje['malla_vigencia_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <td>".$lenguaje['malla_cupos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <td>&nbsp;</td>
+                            <tr>";
+                foreach($curso_cupo as $id=>$datos_curso){
+                    $retorno .="<tr>
+                        <td>{$datos_curso['codigo']}</td>
+                        <td>{$datos_curso['inicio_clases']}</td>";
+                    if(isset($datos_curso['horarios']) && is_array($datos_curso['horarios'])){
+                        $dias = array("1"=>"Lunes", "2"=>"Martes", "3"=>"Miércoles", "4"=>"Jueves", "5"=>"Viernes", "6"=>"Sábado", "7"=>"Domingo");
                         $retorno .= "<td>";
-                        foreach($datos_curso['detalle_cuotas'] as $cuotas){
-                            $retorno .= "Cuotas ".$cuotas['cuota_inicio']." a ".$cuotas['cuota_fin']."&nbsp;&nbsp;<b>$".$cuotas['valor']."</b><br/>";
+                        foreach($datos_curso['horarios'] as $horarios){
+                            $retorno .= $dias[$horarios['dia']]." de ".substr($horarios['horadesde'], 0, 5)." a ".substr($horarios['horahasta'], 0, 5)." hs.<br/>";
                         }
                         $retorno .= "</td>";
                     }
-                $retorno .= "<td>{$datos_curso['fechavigencia']}</td>
-                    <td>{$datos_curso['cupo']}</td>
-                    <td>
-                        <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>".$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
-                        <br/><br/>
-                        <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn btn-sm accordion-toggle' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>".$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan='9' class='hiddenRow'>
-                    <div class='accordian-body collapse' id='reserva-{$datos_curso['codigo']}'>";
-                $retorno .= '<form id="form-reserva-'.$datos_curso['codigo'].'" name="form-reserva-'.$datos_curso['codigo'].'" method="post" action="#">
-                                <input type="hidden" name="id_comision" value="'.$datos_curso['codigo'].'" />
-                                <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
-                                <input type="hidden" name="id_plan" value="'.$datos_curso['id_plan'].'" />
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" required="required">
+                    $retorno .= "<td>\${$datos_curso['valormatricula']}</td>";
+                        if(isset($datos_curso['detalle_cuotas']) && is_array($datos_curso['detalle_cuotas'])){
+                            $retorno .= "<td>";
+                            foreach($datos_curso['detalle_cuotas'] as $cuotas){
+                                $retorno .= "Cuotas ".$cuotas['cuota_inicio']." a ".$cuotas['cuota_fin']."&nbsp;&nbsp;<b>$".$cuotas['valor']."</b><br/>";
+                            }
+                            $retorno .= "</td>";
+                        }
+                    $retorno .= "<td>{$datos_curso['fechavigencia']}</td>
+                        <td>{$datos_curso['cupo']}</td>
+                        <td>
+                            <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn btn-sm' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>".$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
+                            <br/><br/>
+                            <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn btn-sm' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>".$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='9' class='hiddenRow'>
+                        <div class='accordian-body collapse' id='reserva-{$datos_curso['codigo']}'>";
+                    $retorno .= '<form id="form-reserva-'.$datos_curso['codigo'].'" name="form-reserva-'.$datos_curso['codigo'].'" method="post" action="#">
+                                    <input type="hidden" name="id_comision" value="'.$datos_curso['codigo'].'" />
+                                    <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
+                                    <input type="hidden" name="id_plan" value="'.$datos_curso['id_plan'].'" />
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" name="email" id="email" class="form-control" placeholder="Dirección de Email" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required="required">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="email" name="email" id="email" class="form-control" placeholder="Dirección de Email" required="required">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        *Su reserva caduca 48 horas después de haber realizado esta operación.
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this)" data-loading-text="Reservando...">Reservar Lugar</button>
-                                    <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm accordion-toggle">Cerrar</button>
-                                </div>
-                                <div class="error text-center text-reserva-error"></div>
-                            </form>';
-                
-                $retorno .="</div>
-                    <div class='accordian-body collapse' id='consulta-{$datos_curso['codigo']}'>";
-                $retorno .= '<form id="form-contacto-'.$datos_curso['codigo'].'" name="form-contacto-'.$datos_curso['codigo'].'" method="post" action="#">
-                                <input type="hidden" name="id_comision" value="'.$datos_curso['codigo'].'" />
-                                <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
-                                <input type="hidden" name="id_plan" value="'.$datos_curso['id_plan'].'" />
-                                <input type="hidden" name="cod_curso" value="'.$_POST['cod_curso'].'" />
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="Nombre" required="required" />
+                                        <div class="col-sm-6">
+                                            *Su reserva caduca 48 horas después de haber realizado esta operación.
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="text" name="email" class="form-control" placeholder="Dirección de Email" required="required" />
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this)" data-loading-text="...">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm">'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                    </div>
+                                    <div class="error text-center text-reserva-error"></div>
+                                </form>';
+
+                    $retorno .="</div>
+                        <div class='accordian-body collapse' id='consulta-{$datos_curso['codigo']}'>";
+                    $retorno .= '<form id="form-contacto-'.$datos_curso['codigo'].'" name="form-contacto-'.$datos_curso['codigo'].'" method="post" action="#">
+                                    <input type="hidden" name="id_comision" value="'.$datos_curso['codigo'].'" />
+                                    <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
+                                    <input type="hidden" name="id_plan" value="'.$datos_curso['id_plan'].'" />
+                                    <input type="hidden" name="cod_curso" value="'.$_POST['cod_curso'].'" />
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" name="name" class="form-control" placeholder="Nombre" required="required" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" name="email" class="form-control" placeholder="Dirección de Email" required="required" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="phone" class="form-control" placeholder="Teléfono" required="required">
-                                </div>
-                                <div class="form-group">
-                                    <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
-                                </div>                        
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this)" data-loading-text="Consultando...">Consultar</button>
-                                    <button type="button" data-toggle="collapse" data-target="#consulta-'.$datos_curso['codigo'].'" class="btn btn-sm accordion-toggle" >Cerrar</button>
-                                </div>
-                                <div class="error text-center text-consulta-error"></div>
-                            </form>';
-                
-                $retorno .="</div>
-                    </td>
-                </tr>";
+                                    <div class="form-group">
+                                        <input type="text" name="phone" class="form-control" placeholder="Teléfono" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
+                                    </div>                        
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this)" data-loading-text="...">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" data-toggle="collapse" data-target="#consulta-'.$datos_curso['codigo'].'" class="btn btn-sm" >'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                    </div>
+                                    <div class="error text-center text-consulta-error"></div>
+                                </form>';
+
+                    $retorno .="</div>
+                        </td>
+                    </tr>";
+                }
+            }else{
+                $retorno .= '<tr>
+                            <td>
+                            <form id="form-contacto" name="form-contacto" method="post" action="#">
+                                    <input type="hidden" name="id_comision" value="0" />
+                                    <input type="hidden" name="id_filial" value="'.$_POST['id_filial'].'" />
+                                    <input type="hidden" name="id_plan" value="0" />
+                                    <input type="hidden" name="cod_curso" value="'.$_POST['cod_curso'].'" />
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" name="name" class="form-control" placeholder="Nombre" required="required" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" name="email" class="form-control" placeholder="Dirección de Email" required="required" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="phone" class="form-control" placeholder="Teléfono" required="required" />
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
+                                    </div>                        
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-\', this)" data-loading-text="...">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                    </div>
+                                    <div class="error text-center text-consulta-error"></div>
+                                </form>
+                            </td>
+                        </tr>';
             }
         }else{
             
