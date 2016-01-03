@@ -166,12 +166,12 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             </div>
         </section><!--/#blog-->
         <div class="row" style="background-color: #337ab7">
-                <div class="col-md-12 text-center text-uppercase">
-                    <a href="novedades.php" style="color: white">
-                        <?=$lenguaje['ver_todas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                    </a>
-                </div>
-                    </div>
+            <div class="col-md-12 text-center text-uppercase">
+                <a href="novedades.php" style="color: white">
+                    <?=$lenguaje['ver_todas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                </a>
+            </div>
+        </div>
         
         <!--/#Solo en movil-->
         <section id="institucionalMovil" class="visible-xs">
@@ -222,56 +222,9 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         <p><?=$lenguaje['capacitamos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                     </div>
                 </div>
-                <div class="team-members">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
-                                <div class="member-image">
-                                    <img class="img-responsive" src="images/team/1.jpg" alt="">
-                                </div>
-                                <div class="member-info">
-                                    <h3><?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    
-                                    <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="500ms">
-                                <div class="member-image">
-                                    <img class="img-responsive" src="images/team/2.jpg" alt="">
-                                </div>
-                                <div class="member-info">
-                                    <h3><?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="800ms">
-                                <div class="member-image">
-                                    <img class="img-responsive" src="images/team/3.jpg" alt="">
-                                </div>
-                                <div class="member-info">
-                                    <h3><?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="1100ms">
-                                <div class="member-image">
-                                    <img class="img-responsive" src="images/team/4.jpg" alt="">
-                                </div>
-                                <div class="member-info">
-                                    <h3><?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
-                                    <p><?=$lenguaje['valores_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="images/Slyers-Home-IGA-Arg.jpg" class="img-responsive">
                     </div>
                 </div>
             </div>
