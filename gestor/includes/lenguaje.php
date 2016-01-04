@@ -94,6 +94,8 @@ $lenguaje['malla_boton_consulta_ES'] = 'Consultar';
 $lenguaje['enviando_ES'] = 'Enviando..';
 $lenguaje['mail_valido_ES'] = 'Email no válido';
 $lenguaje['tel_valido_ES'] = 'Número de teléfono inválido';
+$lenguaje['captcha_no_valido_ES'] = 'Captcha no válido, por favor, verifiquelo.';
+$lenguaje['captcha_vacio_ES'] = 'Verfique el Captcha.';
 $lenguaje['cupo_disponible_ES'] = 'Cupo Disponible';
 
 $lenguaje['comparte_novedad_ES'] = 'Comparte esta novedad';
@@ -105,6 +107,8 @@ $lenguaje['buscar_ES'] = 'Buscar';
 $lenguaje['sin_novedad_ES'] = 'Sin Novedad';
 $lenguaje['ver_todas_ES'] = 'ver todas';
 $lenguaje['boton_cerrar_ES'] = 'Cerrar';
+
+$lenguaje['reserva_curso_ES'] = '*Su reserva caduca 48 horas después de haber realizado esta operación.';
 
 //ingles
 $lenguaje['boton_cerrar_IN'] = 'Close';
@@ -208,7 +212,11 @@ $lenguaje['malla_boton_consulta_IN'] = 'Check';
 $lenguaje['enviando_IN'] = 'Sending..';
 $lenguaje['mail_valido_IN'] = 'Invalid email';
 $lenguaje['tel_valido_IN'] = 'Invalid phone number';
+$lenguaje['captcha_no_valido_IN'] = 'Invalid Captcha.';
+$lenguaje['captcha_vacio_IN'] = 'Empty Captcha.';
 $lenguaje['por_fecha_IN'] = 'By Date';
+
+$lenguaje['reserva_curso_IN'] = '*Your reservation is cancelled 48 hs after this operation.';
 
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
@@ -301,6 +309,8 @@ $lenguaje['malla_boton_consulta_POR'] = 'Consultar';
 $lenguaje['enviando_POR'] = 'Envio..';
 $lenguaje['mail_valido__POR'] = 'E-mail inválido';
 $lenguaje['tel_valido_POR'] = 'Invalid phone number';
+$lenguaje['captcha_no_valido_POR'] = 'Captcha não é válido.';
+$lenguaje['captcha_vacio_POR'] = 'O Captcha está vazio.';
 $lenguaje['cupo_disponible_POR'] = 'Assentos Disponíveis';
 $lenguaje['comparte_novedad_POR'] = 'Compartilhe esta notícia';
 $lenguaje['buscador_de_noticias_POR'] = 'Outras Notícias';
@@ -311,3 +321,5 @@ $lenguaje['buscar_POR'] = 'Pesquisar';
 $lenguaje['sin_novedad_POR'] = 'Todo o silêncio';
 $lenguaje['ver_todas_POR'] = 'ver todos';
 $lenguaje['boton_cerrar_POR'] = 'Fechar';
+
+$lenguaje['reserva_curso_POR'] = '*Sua reserva expira 48 horas depois de ter realizada esta operação.';

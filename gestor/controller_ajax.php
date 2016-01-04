@@ -212,8 +212,19 @@ switch($_POST['option']){
             if(isset($_POST['filial']) && isset($_POST['nombre']) && $_POST['nombre'] != '' && isset($_POST['email']) && $_POST['email'] != '' && isset($_POST['phone']) && $_POST['phone'] != '' && isset($_POST['message']) && $_POST['message'] != ''){
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                     if(filter_var($_POST['phone'], FILTER_VALIDATE_INT)){
-                        guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
-                        $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                        if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response'] != ''){
+                            $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfcUBQTAAAAAFSH6B9p7l8p6-rm2aJO4Ij-PqhJ&response=".$_POST['g-recaptcha-response']);
+                            $response = json_decode($response, true);
+                            if($response["success"] === true){
+                                guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
+                                $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                            }else{
+                                $retorno = array("success" => false, "mensaje" => $lenguaje['captcha_no_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                            }
+                        }else{
+                            guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
+                            $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                        }
                     }else{
                         $retorno = array("success" => false, "mensaje" => $lenguaje['tel_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
                     }    
@@ -334,17 +345,17 @@ switch($_POST['option']){
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" required="required">
+                                                <input type="text" name="name" id="name" class="form-control" placeholder="'.$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" name="email" id="email" class="form-control" placeholder="Dirección de Email" required="required">
+                                                <input type="email" name="email" id="email" class="form-control" placeholder="'.$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required="required">
+                                                <input type="text" name="telefono" id="telefono" class="form-control" placeholder="'.$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            *Su reserva caduca 48 horas después de haber realizado esta operación.
+                                            '.$lenguaje['reserva_curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -364,26 +375,26 @@ switch($_POST['option']){
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text" name="name" class="form-control" placeholder="Nombre" required="required" />
+                                                <input type="text" name="name" class="form-control" placeholder="'.$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text" name="email" class="form-control" placeholder="Dirección de Email" required="required" />
+                                                <input type="text" name="email" class="form-control" placeholder="'.$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="phone" class="form-control" placeholder="Teléfono" required="required">
+                                        <input type="text" name="phone" class="form-control" placeholder="'.$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
+                                        <textarea name="mensaje" class="form-control" rows="4" placeholder="'.$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required"></textarea>
                                     </div>                        
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this, true)" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this, true, \'error-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         <button type="button" data-toggle="collapse" data-target="#consulta-'.$datos_curso['codigo'].'" class="btn btn-sm" >'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        &nbsp;&nbsp;<span id="error-'.$datos_curso['codigo'].'" class="error text-center text-consulta-error"></span>
                                     </div>
-                                    <div class="error text-center text-consulta-error"></div>
                                 </form>';
 
                     $retorno .="</div>
@@ -401,25 +412,25 @@ switch($_POST['option']){
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text" name="name" class="form-control" placeholder="Nombre" required="required" />
+                                                <input type="text" name="name" class="form-control" placeholder="'.$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <input type="text" name="email" class="form-control" placeholder="Dirección de Email" required="required" />
+                                                <input type="text" name="email" class="form-control" placeholder="'.$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="phone" class="form-control" placeholder="Teléfono" required="required" />
+                                        <input type="text" name="phone" class="form-control" placeholder="'.$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="mensaje" class="form-control" rows="4" placeholder="Ingrese su mensaje" required="required"></textarea>
+                                        <textarea name="mensaje" class="form-control" rows="4" placeholder="'.$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required"></textarea>
                                     </div>                        
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto\', this, false)" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto\', this, false, \'error\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        &nbsp;&nbsp;<span id="error" class="error text-center text-consulta-error"></span>
                                     </div>
-                                    <div class="error text-center text-consulta-error"></div>
                                 </form>
                             </td>
                         </tr>';

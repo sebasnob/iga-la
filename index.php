@@ -231,16 +231,12 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             </div>
         </section><!--/#team-->
         
-        
         <section id="contact">
-            
             <div id="contact-us" >
                 <div class="container">
                     <div class="row">
                         <div class="heading text-center wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <h2 style="text-transform: uppercase; font-size: 25px; font-weight: 700;">
-                                <?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                            </h2>
+                            <h2><?=$lenguaje['contactate_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
                             <form id="filter-form" name="filter-form" method="post" action="#" class="form-inline">
                                 <select  id="provincias" class="form-control" onchange="javascript:cambiarProvincia('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
                                     <option value="0"><?=$lenguaje['seleccione_provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>  
@@ -248,7 +244,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <option value="<?=$provincia['id']?>"><?=$provincia['nombre']?></option>    
                                         <?php }?>
                                 </select>    
-                                <!--<label for="option"><?=$lenguaje['filiales_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>-->
                                 <select id="filiales" class="form-control" onchange="javascript:filialSeleccionada()">
                                     <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
                                 </select>
@@ -260,22 +255,19 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             <div class="row">
                                 <form id="main-contact-form" name="contact-form">
                                     <div class="col-sm-6">
-                                        <input type="hidden" value="" id="correo" name="correo">
-                                        
+                                        <input type="hidden" value="" id="correo" name="correo" />
                                         <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            <input type="text" name="name" id="name" class="form-control" placeholder="<?=$lenguaje['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required">
+                                            <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required" />
                                         </div>
                                         <div id="mensaje_contacto"></div>
-                                        
                                     </div>
                                     <div class="col-sm-6">
-                                        
                                         <div class="form-group form-inline">
                                             <select id="opciones" class="form-control" name="subject" onchange="javascript:getSelectCursos('opciones','cursos_contacto')">
                                                 <option value="0"><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
@@ -314,12 +306,11 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                                 <button type="button" class="btn-submit" data-loading-text="<?=$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>"><?=$lenguaje['enviar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></button>
                                             </div>
                                         </div>
-                                        
-                                        
                                         <div class="form-group">
                                             <textarea name="message" id="message" class="form-control" rows="2" placeholder="<?=$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required"></textarea>
                                         </div>                        
                                         <div class="g-recaptcha" data-sitekey="6LfcUBQTAAAAAA6cg2CaCnnZzxbxNnIOawZwo2KJ"></div>
+                                        <br/>
                                     </div>
                                 </form>
                             </div>

@@ -456,8 +456,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             });
         }
     
-        function consultarCurso(formid, boton, coursecontact){
-            if($("#"+formid+" input[name=name]").val() == '')
+        function consultarCurso(formid, boton, coursecontact, errorid){
+            /*if($("#"+formid+" input[name=name]").val() == '')
             {
                 alert('Por favor, ingrese su nombre');
                 return 0;
@@ -476,7 +476,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             {
                 alert('Por favor, ingrese su consulta.');
                 return 0;
-            }
+            }*/
             
             $(boton).button('loading');
             $.ajax({
@@ -502,7 +502,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     if(data.success){
                         $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.mensaje+"</div>");
                     }else{
-                        $('#'+formid+' > div.error').html(data.mensaje);
+                        $('#'+errorid).html(data.mensaje);
                     }
               }
             });

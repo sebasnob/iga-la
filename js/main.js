@@ -390,7 +390,8 @@ $('.btn-submit').click(function(){
           "phone": $('#phone').val(),
           "tipo": $('#opciones').val(),
           "message": $('#message').val(),
-          "cod_curso": $('#cursos_contacto').val()
+          "cod_curso": $('#cursos_contacto').val(),
+          "g-recaptcha-response": $('#g-recaptcha-response').val()
       },
       dataType:'json',
       success: function(data)

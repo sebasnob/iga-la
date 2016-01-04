@@ -956,6 +956,12 @@ section#feature_cursos{
   padding-bottom: 0px; 
 }
 
+#contact-us h2{
+    text-transform: uppercase;
+    font-size: 25px;
+    font-weight: 700;
+}
+
 
 .form-control {
   background-color: white;
@@ -1548,4 +1554,9 @@ padding-bottom: 50px;
 
 #google:hover{
     background-color: #F44336;
+}
+
+.text-consulta-error {
+    font-size: 15px;
+    color:red;
 }
