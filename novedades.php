@@ -120,7 +120,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                 if($categoria)
                 {
                         $i=0;
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], false, false, $categoria, $palabra, $fecha);
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, false, $categoria, $palabra, $fecha);
                         foreach ($categoriasNovedades as $cat){
                             if($cat['id'] == $categoria){
                         ?>
@@ -160,7 +160,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                     foreach ($categoriasNovedades as $cat)
                     {
                         $i=0;
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], false, false, $cat['id'], $palabra, $fecha);
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, false, $cat['id'], $palabra, $fecha);
                         ?>
                                 <div class="col-sm-12">
                                     <h2 style="font-weight: 600"><?=$cat['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></h2>
