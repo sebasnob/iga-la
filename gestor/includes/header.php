@@ -123,8 +123,26 @@
                     $i=0; 
                     foreach($slider as $slid){
                 ?>
-                    <div  style="background-color: <?= $slid['background']?>" 
-                        class="item <?php if($i == 0){echo 'active';}?>" 
+                    <!--/#Solo en movil-->
+                    <div id="sliderMovil" class="visible-xs item <?php if($i == 0){echo 'active';}?>"
+                         <?php if(isset($slid['link']) && $slid['link'] != '')
+                        {
+                            echo "onclick=";
+                            echo "javascript:iralink('{$slid['link']}')";
+                                    
+                        } ?>
+                        title='<?= $slid['alt'];?>'>
+                        <div class="container">
+                            <div class="row">
+                                <img class="img-responsive" src="<?= $slid['url'];?>" style="margin: 0 auto;">
+                            </div>
+                        </div>
+                    </div>
+                    <!--/#end movil-->
+                    
+                    
+                    <div style="background-color: <?= $slid['background']?>" 
+                        class="hidden-xs item <?php if($i == 0){echo 'active';}?>" 
                         <?php if(isset($slid['link']) && $slid['link'] != '')
                         {
                             echo "onclick=";
@@ -132,17 +150,26 @@
                                     
                         } ?>
                         title='<?= $slid['alt'];?>'>
-                        <h2 style="position: absolute;">
-                            <table style="height: 100%; width: 100%">
-                                <tr style="vertical-align: bottom;">
-                                    <td>
-                                        <span style="color: white; font: bold 24px/45px Helvetica, Sans-Serif; letter-spacing: -1px;background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.7); padding: 10px; ">
-                                <?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </h2>
+                        <!--<div class="container">
+                            <h2 style="position:absolute;padding-top:10%">
+                                <table style="height: 100%; width: 100%">
+                                    <tr style="vertical-align: bottom;">
+                                        <td>
+                                            <span style="color: white; font: bold 24px/45px Helvetica, Sans-Serif; letter-spacing: -1px;background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.7); padding: 10px; ">
+                                    
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h2>
+                        </div>-->
+                        <div class="container">
+                            <h2 style="position:absolute;padding-top:4%">
+                                <span style="color: white;">
+                                  <?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                                </span>
+                            </h2>
+                        </div>
                         <img class="img-responsive" src="<?= $slid['url'];?>" style="margin: 0 auto;">
                     </div>
                 <?php
@@ -157,5 +184,12 @@
         <?php
         }
         ?>
-        </header><!--/#home--> 
+            <div class="container visible-xs" >
+                <br/>
+                <div class="row col-md-12 text-center">
+                    <?=$lenguaje['pasion_movil_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                </div>
+            </div>
+        </header>
+        <!--/#home-->
 

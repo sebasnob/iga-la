@@ -165,14 +165,14 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                 </div>
             </div>
-        </section><!--/#blog-->
-        <div class="row" style="background-color: #337ab7">
-            <div class="col-md-12 text-center text-uppercase">
-                <a href="novedades.php" style="color: white">
-                    <?=$lenguaje['ver_todas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                </a>
+            <div class="row" style="background-color: #337ab7">
+        	<div class="col-sm-12 text-center text-uppercase">
+            	    <a href="novedades.php" style="color: white">
+                	<?=$lenguaje['ver_todas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                    </a>
+                </div>
             </div>
-        </div>
+        </section><!--/#blog-->
         
         <!--/#Solo en movil-->
         <section id="institucionalMovil" class="visible-xs">

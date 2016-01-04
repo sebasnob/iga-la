@@ -84,7 +84,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         
         <section id="buscador">
             <div class="container">
-                <div class="col-sm-12">
+                <div class="col-sm-12 text-center">
                     <h2 style="font-size: 20px; font-weight: 500;">
                         <?=$lenguaje['buscador_de_noticias_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                     </h2>

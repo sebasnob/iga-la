@@ -154,7 +154,8 @@ section {
 #slider {
   overflow: hidden;
   position: relative;
-  max-width: 1360px;
+  //max-width: 1360px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -1538,6 +1539,7 @@ padding-bottom: 50px;
 .footer-top ul{
     padding-top: 15px;
     font-weight: 600;
+    padding-left: 0px;
 }
 
 .compartir{
