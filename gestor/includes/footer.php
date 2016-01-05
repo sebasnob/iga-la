@@ -3,14 +3,14 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-xs-6 textleft">
+                <div class="col-md-6 col-sm-12 textleft">
                     <ul>
                         <li><p class="letterfoot"><a href="http://www.iga-la.com/empleos/" target="_blank"><?=$lenguaje['quiero_trabajar_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p></li>
                         <li><p class="letterfoot"><a href="http://igafranchising.com/" target="_blank"><?=$lenguaje['quiero_una_franquicia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></p></li>
                     </ul> 
 
                 </div>
-                <div class="col-xs-6 social-icons">
+                <div class="col-md-6 col-sm-12 social-icons">
                     <ul>
                         <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>  
                         <li> <a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>  
