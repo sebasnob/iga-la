@@ -85,8 +85,18 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         ?>
         
         <section id="head_image_curso">
-            <div class="container-fluid">
+            <!--<div class="container-fluid">
                     <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="" style="width: 100%;">
+            </div>-->
+            <div class="hidden-xs">
+                <div class="container">
+                    <h2 style="position:absolute;padding-top:4%">
+                        <span>
+                            <p style="font-size:60px;color:white;width:450px;font-weight:600;"><?=$datos_curso['nombre']?></p>
+                        </span>
+                    </h2>
+                </div>
+                <img style="margin: 0 auto;" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive" />
             </div>
         </section> 
         
@@ -95,7 +105,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 
                 <div class="col-sm-8">
                     <section id="curso">
-                        <h2><?=$datos_curso['nombre']?></h2>
                         <div class="entry-meta">
                             <span>
                                 <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>:
@@ -104,9 +113,10 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." {$lenguaje['anios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
                             </span>
                         </div>
+                        <br/>
                     <?=$datos_curso['descripcion']?>
                     </section>
-                    <hr>
+                    <hr />
                     <section id="cursado_planes">
                         <h3><?=$lenguaje['cursado_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <p><?=$lenguaje['desc_cursado_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>

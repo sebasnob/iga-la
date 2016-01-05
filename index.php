@@ -215,12 +215,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             <div class="container">
                 <div class="row">&nbsp;&nbsp;</div>
                 <div class="row">
-                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
-                        <h2>IGA</h2>
-                        <p><?=$lenguaje['capacitamos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-12">
                         <img src="images/Slyers-Home-IGA-Arg.jpg" class="img-responsive">
                     </div>
