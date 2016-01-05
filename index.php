@@ -109,7 +109,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         <?php } else{?>
                             <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                         <?php }?>
-                                <div class="text-right text-uppercase imagenGrilla" id="<?= 'grilla-'.$imgGrid['id_curso'] ?>" <?php if($i > 1) {echo 'style="display:none;"';}?> >
+                                <div class="text-right imagenGrilla" id="<?= 'grilla-'.$imgGrid['id_curso'] ?>" <?php if($i > 1) {echo 'style="display:none;"';}?> >
                                     <img class='img-responsive' src="<?=$imgGrid['img_url']?>">
                                     <div class="texto-flotante">
                                         <table style="height: 100%; width: 100%">

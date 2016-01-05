@@ -1465,10 +1465,15 @@ padding-bottom: 50px;
 .spanFlotante{
     width: 45%;
     display: inline-block;
-    margin-right: 10px;
-    margin-top: 10px;
-    font-size: 30px;
-    font-weight: 700;
+    margin-right: 40px;
+    margin-bottom: 25px;
+    text-align: right;
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 23px;
+    color: white;
+    line-height: 1.2;
 }
 .tdPadding{
     padding: 10px;
