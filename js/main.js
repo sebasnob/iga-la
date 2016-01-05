@@ -309,6 +309,7 @@ function filialModalSeleccionadaCC(filial){
 }
 function scroll(to)
 {
+    $('.in').removeClass('in')
     var body = $("html, body");
     $('#desplegableCursos').hide();
     var top = $(to).position().top;
