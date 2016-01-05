@@ -27,7 +27,6 @@ $paises = getPaises($mysqli);
 $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
 $provincias = getProvincias($mysqli, $_SESSION['pais']['id']);
 $slider = getSlider($mysqli, $_SESSION['pais']['id'],$_SESSION['idioma_seleccionado']['cod_idioma']);
-$arrayCursosCortos = array(29, 13, 15, 40, 3, 89, 96, 23, 14, 38, 8 ,25, 6); 
 $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['cod_idioma'], $_SESSION['pais']['id'], 1);
 ?>
 <!DOCTYPE html>
@@ -74,9 +73,9 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     $i = 0;
                     foreach ($gridArrayCursos as $imgGrid)
                     {
-                            if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
+                            if($imgGrid['id_curso'] == 0)
                             {?>
-                        <a href="cursos_cortos.php">    
+                            <a href="cursos_cortos.php">    
                             <?php } else{?>
                             <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                             <?php }?>
@@ -102,7 +101,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     if(is_array($imgGrid) && count($imgGrid) > 0){
                         $i = 1;
                         foreach ($gridArrayCursos as $imgGrid){ 
-                            if(in_array($imgGrid['id_curso'], $arrayCursosCortos))
+                            if($imgGrid['id_curso'] == 0)
                             {
                     ?>
                         <a href="cursos_cortos.php">    
@@ -165,13 +164,11 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>
                 </div>
             </div>
-            <div class="row" style="background-color: #337ab7">
-        	<div class="col-sm-12 text-center text-uppercase">
+        	<div class="col-sm-12 text-center text-uppercase " style="background-color: #337ab7">
             	    <a href="novedades.php" style="color: white">
                 	<?=$lenguaje['ver_todas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                     </a>
                 </div>
-            </div>
         </section><!--/#blog-->
         
         <!--/#Solo en movil-->

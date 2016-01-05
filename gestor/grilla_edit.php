@@ -126,6 +126,7 @@ $paises = getPaises($mysqli);
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Curso: </label>
                                             <select class="form-control" name="id_curso">
+                                                <option value="0">Curso Corto</option>
                                                 <?php foreach($cursos as $i=>$j){?>
                                                 <option value="<?=$j['cod_curso']?>"><?=$j['nombre_es']?></option>
                                                 <?php }?>
@@ -248,6 +249,7 @@ $paises = getPaises($mysqli);
                                                         <td>
                                                             <span>Curso: </span>
                                                             <select class="form-control input-sm" name="id_curso" style="display: inline-block">
+                                                                <option value="0" <?php if($imgGrid['id_curso'] == 0){echo 'selected';}?>>Curso Corto</option>
                                                                         <?php foreach($cursos as $i=>$j){?>
                                                                 <option value="<?=$j['cod_curso']?>"  <?php if($imgGrid['id_curso'] == $j['cod_curso']){echo 'selected';}?>><?=$j['nombre_es']?></option>
                                                                         <?php }?>
