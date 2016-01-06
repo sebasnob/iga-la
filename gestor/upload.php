@@ -966,7 +966,7 @@ if(isset($_POST['edicion_noticia'])){
     $categoria = $_POST['categoria'];
     $descripcion = trim($_POST['descripcion']);
     $link = $_POST['link'];
-    $fecha = date("Y-m-d");
+    $fecha = date("Y-m-d",strtotime($_POST['fecha']));
     $estado = 1;
     $autor = $_SESSION['username'];
     if($_POST['accion'] == 'agregar'){
