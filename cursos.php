@@ -84,11 +84,11 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             include_once 'gestor/includes/header.php';
         ?>
         
-        <section id="head_image_curso" style="background-color: <?=$datos_curso['color']?>">
+        <section id="head_image_curso">
             <!--<div class="container-fluid">
                     <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="" style="width: 100%;">
             </div>-->
-            <div class="hidden-xs">
+            <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
                 <div class="container">
                     <h2 style="position:absolute;padding-top:4%">
                         <span>
@@ -98,11 +98,17 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 </div>
                 <img style="margin: 0 auto;" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive" />
             </div>
+            
+            <div class="visible-xs" >
+                <img style="margin: 0 auto;" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive" />
+                <div class="row col-md-12 text-center">
+                    <h2 style="color:<?=$datos_curso['color']?>"><?=$datos_curso['nombre']?></h2>
+                </div>
+            </div>
         </section> 
         
         <section id="single_curso" class="container">
             <div class="row">
-                
                 <div class="col-sm-8">
                     <section id="curso">
                         <div class="entry-meta">

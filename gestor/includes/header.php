@@ -181,15 +181,17 @@
                 <a class="left-control" href="#slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
                 <a class="right-control" href="#slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
             </div><!--/#home-slider-->
-        <?php
-        }
-        ?>
+            
             <div class="container visible-xs" >
                 <br/>
                 <div class="row col-md-12 text-center">
                     <?=$lenguaje['pasion_movil_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                 </div>
             </div>
+        <?php
+        }
+        ?>
+            
         </header>
         <!--/#home-->
 
