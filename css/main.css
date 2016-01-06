@@ -726,7 +726,7 @@ section#feature_cursos{
 }
 
 .social-icons {
-  margin-top:30px;
+  margin-top: 10px;
   text-align: right;
 }
 
@@ -1042,10 +1042,6 @@ padding-bottom: 50px;
   display: inline-block;
   margin-bottom: 5px;
   margin-right: 20px;
-}
-
-#footer .social-icons {
-  margin-top: 0px;
 }
 
 #footer .social-icons ul {

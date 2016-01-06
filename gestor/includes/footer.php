@@ -14,13 +14,13 @@
                     <ul>
                         <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>  
                         <li> <a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>  
-                        <li><a class="envelope" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-google"></i></a></li>  
+                        <li><a class="envelope" href="https://google.com/+Igalatinoamerica" target="_blank"><i class="fa fa-google"></i></a></li>  
                     </ul>    
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-12 auspiciantes">
+    <!--<div class="col-md-12 auspiciantes">
         <?php 
         $auspiciantes = getAuspiciantes($mysqli);
         foreach ($auspiciantes as $auspiciante){ 
@@ -36,13 +36,29 @@
         <?php 
             }
         } ?>
-    </div>
+    </div>-->
     <div class="col-md-12 footer-bottom">
-        <div class="col-md-6">
-            <span>SPONSORS</span>
-        </div>
-        <div class="col-md-6">
-            <p class="letterblack"><a target="_blank" href="http://www.lifeweb.com.ar/">&copy; 2015 Designed by lifeWEB</a></p>
+        <div class="container">
+            <div class="col-md-6">
+                <?php 
+                $auspiciantes = getAuspiciantes($mysqli);
+                foreach ($auspiciantes as $auspiciante){ 
+                    if(in_array($_SESSION['pais']['id'], $auspiciante['cod_pais']))
+                    {
+                        $tienQueAparecer = true;
+                    ?>
+                    <div class="footer-logo">
+                        <a href="<?= $auspiciante['link']?>">
+                            <img class="img-responsive" src="<?= $auspiciante['url_img']?>" alt="<?= $auspiciante['nombre']?>" style="max-width: 100px;"/>
+                        </a>
+                    </div>
+                <?php 
+                    }
+                } ?>
+            </div>
+            <div class="col-md-6">
+                <p class="letterblack"><a target="_blank" href="http://www.lifeweb.com.ar/">&copy; 2016 Designed by lifeWEB</a></p>
+            </div>
         </div>
     </div>
     <div class="arrowTop"><i class="fa fa-arrow-circle-o-up"></i></div>
