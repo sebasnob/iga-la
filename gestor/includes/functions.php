@@ -31,6 +31,12 @@ function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
         }
         if($qry_malla)$qry_malla->free();
         
+        $query4 = "SELECT color FROM cursos WHERE cod_curso = ".$cod_curso;
+        $qry_color = $mysqli->query($query4);
+        $color = $qry_color->fetch_assoc();
+        $datos_curso['color'] = $color['color'];
+        if($qry_color)$qry_color->free();
+        
         return $datos_curso;
     }else{
         return "No existen datos para la filial e idiomas seleccionados.";

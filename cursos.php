@@ -84,7 +84,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             include_once 'gestor/includes/header.php';
         ?>
         
-        <section id="head_image_curso">
+        <section id="head_image_curso" style="background-color: <?=$datos_curso['color']?>">
             <!--<div class="container-fluid">
                     <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="" style="width: 100%;">
             </div>-->
