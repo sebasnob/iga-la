@@ -57,7 +57,7 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
           <script src="js/respond.min.js"></script>
         <![endif]-->
         
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head><!--/head-->
     <body>

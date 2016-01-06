@@ -48,18 +48,18 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
 <html lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="lifeweb.com.ar">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
+        <meta name="author" content="lifeweb.com.ar" />
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/animate.min.css" rel="stylesheet"> 
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/lightbox.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
-        <link href="css/jquery.filthypillow.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/animate.min.css" rel="stylesheet" /> 
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/lightbox.css" rel="stylesheet" />
+        <link href="css/main.css" rel="stylesheet" />
+        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
+        <link href="css/responsive.css" rel="stylesheet" />
+        <link href="css/jquery.filthypillow.css" rel="stylesheet" />
             
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
@@ -67,8 +67,8 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
           <script src="js/respond.min.js"></script>
         <![endif]-->
             
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+        <link rel="shortcut icon" href="images/favicon.ico" />
     </head><!--/head-->
         
     <body>
