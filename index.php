@@ -147,7 +147,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 foreach ($novedades as $id=>$data){
                             ?>
                                 <li>
-                                    <div style="min-height: 197px">
+                                    <div style="min-height: 100px">
                                     <a href="novedad.php?id=<?=$data['id']?>"><img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="" style="margin: 0 auto;"></a>
                                     </div>
                                     <h3><?=$data['titulo']?></h3>
