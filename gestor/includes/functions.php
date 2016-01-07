@@ -388,18 +388,23 @@ function esc_url($url) {
 }
 
 function detectCountry($mysqli){
-    $url = "http://ipinfo.io/";
+    /*$url = "http://ipinfo.io/";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-
+    curl_setopt($ch, CURLOPT_HEADER, 0);*/
+    
     //Con esta opcion almaceno el resultado en una variable
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     //session_start();
-    if(curl_exec($ch))
+    
+    // Usamos la API de GEO plugin + mas el header TTP_X_FORWARDED_FOR
+    $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['HTTP_X_FORWARDED_FOR']));
+    $pais = $data['geoplugin_countryCode'];
+    
+    if($pais)
     {
-        $resp = json_decode(curl_exec($ch));
-        $cod_pais = $resp->country;
+        //$resp = json_decode(curl_exec($ch));
+        $cod_pais = $pais; //$resp->country;
         $query = "SELECT id, pais, flag FROM paises WHERE cod_pais='{$cod_pais}'";
         
         $result = $mysqli->query($query);
@@ -425,7 +430,7 @@ function detectCountry($mysqli){
         $_SESSION['pais'] = array('pais'=>'Argentina','cod_pais'=>"AR", 'idioma'=>'ES', 'flag'=>'images/flags/ar.png', 'id_idioma'=>'1', 'cod_idioma'=>'ES', 'id'=>'1');
         $_SESSION['ciudad'] = 'Rosario';
     }
-    curl_close($ch);
+    //curl_close($ch);
 }
 
 function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $habilitado_filtro = 3, $id_curso_filtro = false)
