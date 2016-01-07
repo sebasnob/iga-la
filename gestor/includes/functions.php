@@ -1262,24 +1262,38 @@ function getCursoConCupo($id_filial, $cod_curso){
     return $curso_cupo;
 }
 
-function getCursosCortos($mysqli, $cod_curso = false)
+function getCursosCortos($mysqli, $cod_curso = false, $pais = false)
 {
     $cursosCortos = array();
-    $query = "SELECT * FROM cursos_cortos order by categoria";
+    $query = "SELECT * FROM cursos_cortos WHERE 1 = 1 ";
     
     if($cod_curso)
     {
-        $query .= " WHERE cod_curso = " . $cod_curso;
+        $query .= " AND cod_curso = " . $cod_curso;
     }
+    
+    $query .= " ORDER BY categoria";
     
     $result = $mysqli->query($query);
     while($curso_corto = $result->fetch_assoc())
     {
-	$cursosCortos[] = array('cod_curso'=>$curso_corto['cod_curso'],
+        $arrPaises = json_decode($curso_corto['pais']);
+        
+        if(!$pais){
+        $cursosCortos[] = array('cod_curso'=>$curso_corto['cod_curso'],
                                 'nombre_ES'=>$curso_corto['nombre_ES'], 
                                 'nombre_IN'=>$curso_corto['nombre_IN'], 
                                 'nombre_POR'=>$curso_corto['nombre_POR'], 
-                                'categoria'=>$curso_corto['categoria']); 
+                                'categoria'=>$curso_corto['categoria'],
+                                'pais'=>$arrPaises); 
+        }else if(in_array($pais, $arrPaises)){
+            $cursosCortos[] = array('cod_curso'=>$curso_corto['cod_curso'],
+                                'nombre_ES'=>$curso_corto['nombre_ES'], 
+                                'nombre_IN'=>$curso_corto['nombre_IN'], 
+                                'nombre_POR'=>$curso_corto['nombre_POR'], 
+                                'categoria'=>$curso_corto['categoria'],
+                                'pais'=>$arrPaises);
+        }
     }
     return $cursosCortos;
 }
