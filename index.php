@@ -171,52 +171,52 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 </div>
         </section><!--/#blog-->
         
-        <!--/#Solo en movil-->
-        <section id="institucionalMovil" class="visible-xs">
+        <section id="institucional">
             <div class="container">
                 <div class="row">
-                    <div class="accordion-container">
-                        <a href="#" class="accordion-toggle"><i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                        <div class="accordion-content">
-                            <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                        </div>
-                        <!--/.accordion-content-->
-                    </div>
-                    <!--/.accordion-container-->
-                    <div class="accordion-container">
-                        <a href="#" class="accordion-toggle"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                        <div class="accordion-content">
-                            <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                        </div>
-                        <!--/.accordion-content-->
-                    </div>
-                    <!--/.accordion-container-->
-                    <div class="accordion-container">
-                        <a href="#" class="accordion-toggle"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                        <div class="accordion-content">
-                            <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                        </div>
-                        <!--/.accordion-content-->
-                    </div>
-                    <!--/.accordion-container-->
-                    <div class="accordion-container">
-                        <a href="#" class="accordion-toggle"><i class="fa fa-star-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                        <div class="accordion-content">
-                            <p><?=$lenguaje['valores_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                        </div>
-                        <!--/.accordion-content-->
+                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+                        <h2><?=strtoupper($lenguaje['red_capacitacion_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                        <br/>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!--/#end movil-->
-        
-        <section id="institucional" class="hidden-xs">
-            <div class="container">
-                <div class="row">&nbsp;&nbsp;</div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="images/Slyers-Home-IGA-Arg.jpg" class="img-responsive">
+                <div class="team-members">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="member-image" align="center">
+                                    <img class="img-responsive" src="images/mision.png" alt="" width="100px" />
+                                </div>
+                                <br/>
+                                <div class="member-info">
+                                    <h2><?=strtoupper($lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                                    <?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="member-image" align="center">
+                                    <img class="img-responsive" src="images/Valores.png" alt="" width="100px" />
+                                </div>
+                                <br/>
+                                <div class="member-info">
+                                        <h2><?=strtoupper($lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                                    <?=$lenguaje['valores_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="member-image" align="center">
+                                    <img class="img-responsive" src="images/Vision.png" alt="" width="100px" />
+                                </div>
+                                <br/>
+                                <div class="member-info">
+                                        <h2><?=strtoupper($lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                                    <?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

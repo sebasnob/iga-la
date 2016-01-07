@@ -789,6 +789,12 @@ section#feature_cursos{
   width: 100%;
 }
 
+.member-info h2 {
+  margin-top: 35px;
+  padding-bottom: 0px;
+  font-weight: 600;
+}
+
 .member-info h3 {
   margin-top: 35px;
 }

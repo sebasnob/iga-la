@@ -9,15 +9,16 @@ $lenguaje['pasion_movil_ES'] = '<p style="font-size:30px">Hace de tu pasión</p>
 $lenguaje['cursos_destacados_ES'] = 'Estos son Nuestros cursos Destacados';
 $lenguaje['uniformes_ES'] = 'Uniformes';
 $lenguaje['materiales_ES'] = 'Materiales';
+$lenguaje['red_capacitacion_ES'] = 'RED DE CAPACITACION IGA';
 $lenguaje['capacitamos_ES'] = "Capacitamos a nuestros alumnos con una especialización en el arte culinario, desarrollando las actitudes y valores que requiere la formación de personas responsables, reflexivas, críticas, con conciencia ética y solidaria, para poder cubrir así la demanda laboral nacional e internacional.";
 $lenguaje['lared_ES'] = "La Red";
 $lenguaje['lared_desc_ES'] = "Nuestra red de capacitación, la más importante de Latinoamérica en su tipo, gracias a su sistema de gestión ofrece la misma calidad en la enseñanza otorgada en todos los establecimientos, brindando así a los alumnos la posibilidad de obtenter la mejor enseñanza en gastronomía, cualquiera sea su localidad de residencia.";
-$lenguaje['mision_ES'] = "Misión";
+$lenguaje['mision_ES'] = "Mision";
 $lenguaje['mision_desc_ES'] = "Nos orientamos a empleadores interesados en forjar un negocio seguro y sustentable, que les permita lograr una independencia económica, manteniendo el compromiso social de formar profesionales íntegros.";
-$lenguaje['vision_ES'] = "Visión";
+$lenguaje['vision_ES'] = "Vision";
 $lenguaje['vision_desc_ES'] = "Potenciar el liderazgo en Latinoamérica y posicionar nuestra marca en puntos estratégicos a nivel internacional, expandiéndonos a través de la apertura de nuevas unidades de negocios e incorporando tecnologías de vanguardia aplicadas a la educación.";
 $lenguaje['valores_ES'] = "Valores";
-$lenguaje['valores_desc_ES'] = "<p>Responsabilidad</p><p>Liderazgo</p><p>Compromiso</p><p>Innovación</p><p>Eficiencia</p>";
+$lenguaje['valores_desc_ES'] = "Responsabilidad<br/>Liderazgo<br/>Compromiso<br/>Innovación<br/>Eficiencia<br/>";
 $lenguaje['alumnos_felices_ES'] = "Alumnos Felices :)";
 $lenguaje['filiales_ES'] = "Filiales";
 $lenguaje['cursos_disponibles_ES'] = "Cursos Disponibles";
@@ -133,6 +134,7 @@ $lenguaje['pasion_movil_IN'] = '<p style="font-size:30px">Make of your passion</
 $lenguaje['cursos_destacados_IN'] = 'These are our distinguished courses';
 $lenguaje['uniformes_IN'] = 'Uniforms';
 $lenguaje['materiales_IN'] = 'Materials';
+$lenguaje['red_capacitacion_IN'] = 'IGA TRAINING NETWORK';
 $lenguaje['capacitamos_IN'] = "We train our students with a specialization in culinary arts, developing attitudes and values it requires the formation of responsible, thoughtful, critical, ethical and public conscience, and to meet domestic and international demand for labor.";
 $lenguaje['lared_IN'] = "The Network";
 $lenguaje['lared_desc_IN'] = "Our training network, the largest of its kind in Latin America, thanks to its management system provides the same quality of education given in all establishments, providing students with the possibility of obtenter the best education in gastronomy, whatever their place of residence.";
@@ -242,6 +244,7 @@ $lenguaje['pasion_movil_POR'] = '<p style="font-size:35px">Faz sua paixão</p>
 $lenguaje['cursos_destacados_POR'] = 'Estes são os nossos cursos caracterizados';
 $lenguaje['uniformes_POR'] = 'Uniformes';
 $lenguaje['materiales_POR'] = 'Materiais';
+$lenguaje['red_capacitacion_POR'] = 'Rede de Formação IGA';
 $lenguaje['capacitamos_POR'] = "Nós treinamos nossos alunos com especialização em artes culinárias, desenvolvimento de atitudes e valores que exige a formação da consciência responsável, atencioso, crítico, ético e público, e para atender à demanda nacional e internacional para o trabalho.";
 $lenguaje['lared_POR'] = "A rede";
 $lenguaje['lared_desc_POR'] = "A nossa rede de formação, o maior de seu tipo na América Latina, graças ao seu sistema de gestão fornece a mesma qualidade da educação dada em todos os estabelecimentos, proporcionando aos estudantes a possibilidade de obtenter a melhor educação em gastronomia, seja qual for seu local de residência.";
