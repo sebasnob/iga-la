@@ -211,13 +211,17 @@ switch($_POST['option']){
             
             if(isset($_POST['filial']) && isset($_POST['nombre']) && $_POST['nombre'] != '' && isset($_POST['email']) && $_POST['email'] != '' && isset($_POST['phone']) && $_POST['phone'] != '' && isset($_POST['message']) && $_POST['message'] != ''){
                 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                    if(filter_var($_POST['phone'], FILTER_VALIDATE_INT)){
-                        if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response'] != ''){
-                            $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfcUBQTAAAAAFSH6B9p7l8p6-rm2aJO4Ij-PqhJ&response=".$_POST['g-recaptcha-response']);
-                            $response = json_decode($response, true);
-                            if($response["success"] === true){
-                                guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
-                                $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                    //if(filter_var($_POST['phone'], FILTER_VALIDATE_INT)){
+                        if(isset($_POST['g-recaptcha-response'])){
+                            if($_POST['g-recaptcha-response'] != ''){
+                                $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfcUBQTAAAAAFSH6B9p7l8p6-rm2aJO4Ij-PqhJ&response=".$_POST['g-recaptcha-response']);
+                                $response = json_decode($response, true);
+                                if($response["success"] === true){
+                                    guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
+                                    $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                                }else{
+                                    $retorno = array("success" => false, "mensaje" => $lenguaje['captcha_no_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                                }
                             }else{
                                 $retorno = array("success" => false, "mensaje" => $lenguaje['captcha_no_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
                             }
@@ -225,9 +229,9 @@ switch($_POST['option']){
                             guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
                             $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
                         }
-                    }else{
+                    /*}else{
                         $retorno = array("success" => false, "mensaje" => $lenguaje['tel_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
-                    }    
+                    } */   
                 }else{
                     $retorno = array("success" => false, "mensaje" => $lenguaje['mail_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
                 }
@@ -359,10 +363,10 @@ switch($_POST['option']){
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this)" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this, \'error-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm">'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        &nbsp;&nbsp;<span id="error-'.$datos_curso['codigo'].'" class="error text-center text-consulta-error"></span>
                                     </div>
-                                    <div class="error text-center text-reserva-error"></div>
                                 </form>';
 
                     $retorno .="</div>
@@ -444,14 +448,22 @@ switch($_POST['option']){
     
     case "reserva_cupo":
         $result = array();
-        if(isset($_POST['nombre']) && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['id_comision']) && isset($_POST['id_filial']) && isset($_POST['id_plan'])){
-            $result = reservaInscripcion($_POST['nombre'], $_POST['email'], $_POST['telefono'], $_POST['id_comision'], $_POST['id_filial'], $_POST['id_plan']);
+        if(isset($_POST['nombre']) && $_POST['nombre'] != '' && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['id_comision']) && isset($_POST['id_filial']) && isset($_POST['id_plan'])){
+            if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+                if(filter_var($_POST['telefono'], FILTER_VALIDATE_INT)){
+                    reservaInscripcion($_POST['nombre'], $_POST['email'], $_POST['telefono'], $_POST['id_comision'], $_POST['id_filial'], $_POST['id_plan']);
+                    $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                }else{
+                    $retorno = array("success" => false, "mensaje" => $lenguaje['tel_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                }
+            }else{
+                $retorno = array("success" => false, "mensaje" => $lenguaje['mail_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+            }
         }else{
-            $result = array("success"=>false, "error"=>"Faltan datos.");
+            $retorno = array("success" => false, "mensaje" => $lenguaje['faltan_datos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
         }
         
-        print(json_encode($result));
-        
+        print(json_encode($retorno));
     break;
 }
 

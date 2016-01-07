@@ -44,6 +44,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
         <link href="css/responsive.css" rel="stylesheet" />
         <link href="css/flexslider.css" rel="stylesheet" />
+        <link href="css/intlTelInput.scss" rel="stylesheet" />
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
@@ -254,7 +255,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                             <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required" />
+                                            <input type="tel" name="phone" id="phone" class="form-control" required="required" />
                                         </div>
                                         <div id="mensaje_contacto"></div>
                                     </div>
@@ -339,6 +340,27 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         
         <?php
             include_once 'gestor/includes/footer.php';
+            $cod_pais = "ar";
+            switch($_SESSION['pais']['cod_pais']){
+                case "BR":
+                    $cod_pais = "br";
+                break;
+                case "UR":
+                    $cod_pais = "uy";
+                break;
+                case "PR":
+                    $cod_pais = "py";
+                break;
+                case "BO":
+                    $cod_pais = "bo";
+                break;
+                case "PA":
+                    $cod_pais = "pa";
+                break;
+                case "US":
+                    $cod_pais = "us";
+                break;
+            }
         ?>
         
         <script type="text/javascript" src="js/jquery.js"></script>
@@ -351,6 +373,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <script type="text/javascript" src="js/jquery.countTo.js"></script>
         <script type="text/javascript" src="js/lightbox.min.js"></script>
         <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+        <script type="text/javascript" src="js/phoneValidation/intlTelInput.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         
         <script type="text/javascript">
@@ -360,7 +383,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 $('#select_filial').addClass("col-md-8");
             });
         
-            $(document).ready(function () {
+            /*$(document).ready(function () {
                 $('.accordion-toggle').on('click', function(event){
                     event.preventDefault();
                     // create accordion variables
@@ -380,7 +403,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         accordionToggleIcon.html("<i class='fa fa-plus-circle'></i>");
                     }
                 });
-            });
+            });*/
             
             $(window).load(function(){
                 $('.flexslider').flexslider({
@@ -395,6 +418,12 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                   }
                 });
               });
+              
+            $("#phone").intlTelInput({
+                onlyCountries: ['ar', 'br', 'uy', 'py', 'bo', 'pa', 'us'],
+                preferredCountries: ['<?=$cod_pais?>'],
+                utilsScript: "js/phoneValidation/utils.js"
+            });
         </script>
         
     </body>

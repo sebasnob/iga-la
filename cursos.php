@@ -429,8 +429,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 
         });
         
-        function reservarCupo(formid, boton){
-            if($("#"+formid+" input[name=name]").val() == '')
+        function reservarCupo(formid, boton, errorid){
+            /*if($("#"+formid+" input[name=name]").val() == '')
             {
                 alert('Por favor, ingrese su nombre');
                 return 0;
@@ -444,7 +444,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             {
                 alert('Por favor, ingrese su telefono');
                 return 0;
-            }
+            }*/
             
             var btn = $(boton).button('loading');
             $.ajax({
@@ -464,9 +464,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     console.log(data);
                     btn.button('reset');
                     if(data.success){
-                        $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.error+"</div>");
+                        $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.mensaje+"</div>");
                     }else{
-                        $('#'+formid+' > div.error').html(data.error)
+                        $('#'+errorid).html(data.mensaje);
                     }
                 }
             });
