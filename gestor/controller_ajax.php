@@ -355,7 +355,7 @@ switch($_POST['option']){
                                                 <input type="email" name="email" id="email" class="form-control" placeholder="'.$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="telefono" id="telefono" class="form-control" placeholder="'.$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
+                                                <input type="tel" id="telefono-'.$datos_curso['codigo'].'" name="telefono" class="form-control" required="required" />
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -389,17 +389,29 @@ switch($_POST['option']){
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="phone" class="form-control" placeholder="'.$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
+                                        <input type="tel" name="phone" id="phone-'.$datos_curso['codigo'].'" class="form-control" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <textarea name="mensaje" class="form-control" rows="4" placeholder="'.$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required"></textarea>
                                     </div>                        
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this, true, \'error-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this, true, \'error-cons-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         <button type="button" data-toggle="collapse" data-target="#consulta-'.$datos_curso['codigo'].'" class="btn btn-sm" >'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
-                                        &nbsp;&nbsp;<span id="error-'.$datos_curso['codigo'].'" class="error text-center text-consulta-error"></span>
+                                        &nbsp;&nbsp;<span id="error-cons-'.$datos_curso['codigo'].'" class="error text-center text-consulta-error"></span>
                                     </div>
-                                </form>';
+                                </form>
+                                <script>
+                                    $("#telefono-'.$datos_curso['codigo'].'").intlTelInput({
+                                        onlyCountries: ["ar", "br", "uy", "py", "bo", "pa", "us"],
+                                        preferredCountries: [],
+                                        utilsScript: "js/phoneValidation/utils.js"
+                                    });
+                                    $("#phone-'.$datos_curso['codigo'].'").intlTelInput({
+                                        onlyCountries: ["ar", "br", "uy", "py", "bo", "pa", "us"],
+                                        preferredCountries: [],
+                                        utilsScript: "js/phoneValidation/utils.js"
+                                    });
+                                </script>';
 
                     $retorno .="</div>
                         </td>
@@ -448,14 +460,14 @@ switch($_POST['option']){
     
     case "reserva_cupo":
         $result = array();
-        if(isset($_POST['nombre']) && $_POST['nombre'] != '' && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['id_comision']) && isset($_POST['id_filial']) && isset($_POST['id_plan'])){
+        if(isset($_POST['nombre']) && $_POST['nombre'] != '' && isset($_POST['email']) && isset($_POST['telefono']) && $_POST['telefono'] != '' && isset($_POST['id_comision']) && isset($_POST['id_filial']) && isset($_POST['id_plan'])){
             if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                if(filter_var($_POST['telefono'], FILTER_VALIDATE_INT)){
+                //if(filter_var($_POST['telefono'], FILTER_VALIDATE_INT)){
                     reservaInscripcion($_POST['nombre'], $_POST['email'], $_POST['telefono'], $_POST['id_comision'], $_POST['id_filial'], $_POST['id_plan']);
                     $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
-                }else{
+                /*}else{
                     $retorno = array("success" => false, "mensaje" => $lenguaje['tel_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
-                }
+                }*/
             }else{
                 $retorno = array("success" => false, "mensaje" => $lenguaje['mail_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
             }

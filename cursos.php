@@ -50,6 +50,7 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
         <link href="css/main.css" rel="stylesheet" />
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
         <link href="css/responsive.css" rel="stylesheet" />
+        <link href="css/intlTelInput.css" rel="stylesheet" />
         
         <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php?cod_curso=<?=$_GET['cod_curso']?>" />
         <!--[if lt IE 9]>
@@ -327,6 +328,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         <script type="text/javascript" src="js/smoothscroll.js"></script>
         <script type="text/javascript" src="js/jquery.countTo.js"></script>
         <script type="text/javascript" src="js/lightbox.min.js"></script>
+        <script type="text/javascript" src="js/phoneValidation/intlTelInput.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <!-- Plugins Facebook -->
         <script>(function(d, s, id) {
