@@ -44,7 +44,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
         <link href="css/responsive.css" rel="stylesheet" />
         <link href="css/flexslider.css" rel="stylesheet" />
-        <link href="css/intlTelInput.scss" rel="stylesheet" />
+        <link href="css/intlTelInput.css" rel="stylesheet" />
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
@@ -421,7 +421,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
               
             $("#phone").intlTelInput({
                 onlyCountries: ['ar', 'br', 'uy', 'py', 'bo', 'pa', 'us'],
-                preferredCountries: ['<?=$cod_pais?>'],
+                preferredCountries: [],
                 utilsScript: "js/phoneValidation/utils.js"
             });
         </script>
