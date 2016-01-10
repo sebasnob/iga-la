@@ -188,9 +188,9 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <img class="img-responsive" src="images/mision.png" alt="" width="100px" />
                                 </div>
                                 <br/>
-                                <div class="member-info">
+                                <div class="member-info justify">
                                     <h2><?=strtoupper($lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
-                                    <?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                    <span class="justify"><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span>
                                 </div>
                             </div>
                         </div>
@@ -212,8 +212,8 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <img class="img-responsive" src="images/Vision.png" alt="" width="100px" />
                                 </div>
                                 <br/>
-                                <div class="member-info">
-                                        <h2><?=strtoupper($lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                                <div class="member-info justify">
+                                    <h2><?=strtoupper($lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
                                     <?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
                                 </div>
                             </div>

@@ -112,6 +112,8 @@ $lenguaje['boton_cerrar_ES'] = 'Cerrar';
 
 $lenguaje['reserva_curso_ES'] = '*Su reserva caduca 48 horas después de haber realizado esta operación.';
 
+$lenguaje['mas_de_ES'] = 'Mas de ';
+
 //ingles
 $lenguaje['boton_cerrar_IN'] = 'Close';
 $lenguaje['ver_todas_IN'] = 'see all';
@@ -224,6 +226,8 @@ $lenguaje['por_fecha_IN'] = 'By Date';
 
 $lenguaje['reserva_curso_IN'] = '*Your reservation is cancelled 48 hs after this operation.';
 
+$lenguaje['mas_de_IN'] = 'More of ';
+
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
 $lenguaje['certif_gastro_POR'] = "Certificado Avançado em Gastronomia";
@@ -335,3 +339,5 @@ $lenguaje['ver_todas_POR'] = 'ver todos';
 $lenguaje['boton_cerrar_POR'] = 'Fechar';
 
 $lenguaje['reserva_curso_POR'] = '*Sua reserva expira 48 horas depois de ter realizada esta operação.';
+
+$lenguaje['mas_de_POR'] = 'Mais de ';

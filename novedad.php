@@ -73,35 +73,22 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
             </div>
         </section>
         
-        <section id="buscador">
-            <div class="container">
-                <div class="row">
-                    
-                </div>
-            </div>
-        </section>
-            
         <section id="novedades">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-8" itemscope itemtype="http://schema.org/ScholarlyArticle">
+                    <div class="col-sm-7" itemscope itemtype="http://schema.org/ScholarlyArticle">
                         <img itemprop="image" class="img-responsive" src="images/novedades/<?=$novedad['imagen']?>" />
+                        <br/>
                         <span itemprop="name">
-                            <h3><?=$novedad['titulo']?></h3>
+                            <h2><?=$novedad['titulo']?></h2>
                         </span>
-                        <span itemprop="author" style="display:none">
-                            iga-la.net
-                        </span>
-                        <span itemprop="about"  style="display:none">
-                            <?= $categoria[0]['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                        </span>
-                        <div style="text-align: justify">
+                        <div style="text-align: justify;">
                             <span itemprop="description">
                                 <?=$novedad['descripcion']?>
                             </span>    
                         </div>
                         <div class="row">
-                            <table style="width: 100%">
+                            <table style="width: 100%;">
                                 <tr>
                                     <td>
                                         <div class="col-md-6 social-icons" style="width: 100%;">
@@ -110,8 +97,6 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                                                     <a id="facebook" class="facebook compartir" data-href="https://www.facebook.com/sharer/sharer.php?u=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
-                                                    <!--<div class="fb-share-button" data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"></div>-->
-                                                    <!--div class="fb-share-button social-icons-a"  data-href="http://localhost/demosLifeWeb/iga/iga-la/novedad.php?id=2" data-layout="icon"><i class="fa fa-facebook"></i></div>-->
                                                 </li>
                                                 <li>
                                                     <a id="twitter" class="compartir" data-href="http://twitter.com/share?text=<?=$novedad['titulo']?>&url=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>&via=IGA_LA" target="_blank">
@@ -130,20 +115,19 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                             </table>
                         </div>
                     </div>
-                    <div class="col-sm-4" style="margin-bottom: 10px;">
-                        <h2><?=$categoria[0]['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></h2>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4">
+                        <h2><?=$lenguaje['mas_de_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?><?=$categoria[0]['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></h2>
                     <?php
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, false, $novedad['categoria'], $_GET['id']);
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 4, false, $novedad['categoria'], false, false, $_GET['id']);
                         foreach ($novedades as $nov)
                         {
                             $estiloTextos = 'font-size: 15px;';
                             $estiloImagen = 'margin-bottom: 5px;'; ?>
-                            <div class="row">
                                 <a href="novedad.php?id=<?=$nov['id']?>"><img style="<?=$estiloImagen?>" class="img-responsive" src="images/novedades/<?=$nov['imagen']?>" /></a>
                                 <a href="novedad.php?id=<?=$nov['id']?>"><span style="<?=$estiloTextos?>"><?=$nov['titulo']?></span></a>
                                 <br/>
                                 <br/>
-                            </div>
                     <?php 
                         }
                     ?>

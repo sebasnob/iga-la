@@ -116,6 +116,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
             
         <section id="novedades">
             <div class="container">
+                <div class="row">
                 <?php
                 if($categoria)
                 {
@@ -197,9 +198,8 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                 }    
                     ?>
                     </div>
-                                
+                </div>
             </div>
-                
         </section>
             
             
