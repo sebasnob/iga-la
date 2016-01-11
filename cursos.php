@@ -174,7 +174,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </div><!--/.author-->
                     </section>
-                    <hr>
+                    <hr />
                     <section id="uniformes" >
                         <h3><?=$lenguaje['uniforme_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <div class="well">
@@ -188,7 +188,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </div><!--/.author-->
                     </section>
-                    <hr>
+                    <hr />
+                    <!--<hr>
                     <section id="malla_curricular" >
                         <h3><?=$lenguaje['malla_curricular_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <div class="well">
@@ -224,7 +225,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 ?>
                             </div>
                         </div>
-                    </section>
+                    </section>-->
+                    <br/><br/>
                     <section id="objetivo">
                         <h2><?=$lenguaje['objetivos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
                         <div class="entry-meta">
