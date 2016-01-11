@@ -84,7 +84,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         
         <section id="single_curso" class="container">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-7">
 <!--                    <br>
                     <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>-->
                     <br/>
@@ -145,7 +145,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </h4>
                     </div>
                     <?php } ?>
-                </div><!--/.col-md-8-->
+                </div><!--/.col-md-7-->
+                <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                     <br>
                     <?php

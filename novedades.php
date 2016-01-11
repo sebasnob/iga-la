@@ -191,13 +191,13 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                         <?php if($i == 0){
                             $estiloTextos = 'font-size: 25px;';    
                             $estiloImagen = 'margin-bottom: 15px;'; ?>
-                            <div class="col-sm-8">
+                            <div class="col-sm-7">
                         <?php }
                             else
                             {
                                 $estiloTextos = 'font-size: 15px;';
                                 $estiloImagen = 'margin-bottom: 5px;'; ?>
-                                <div class="col-sm-4" style="margin-bottom: 10px;">
+                                <div class="col-sm-4 col-sm-push-1" style="margin-bottom: 10px;">
                             <?php 
                             }
                             ?>
@@ -209,7 +209,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                         }
                         if($i == 0)
                         { ?>
-                            <div class="col-sm-8"><?=$lenguaje['sin_novedad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></div>  
+                            <div class="col-sm-7"><?=$lenguaje['sin_novedad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></div>  
                         <?php } 
                     }
                 }    
