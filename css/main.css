@@ -1115,7 +1115,7 @@ padding-bottom: 50px;
 }
 
 #footer .social-icons ul li a.envelope:hover {
-  background-color: #CECB26;
+  background-color: #F44336;
 }
 
 #footer .social-icons ul li a.facebook:hover {
@@ -1560,20 +1560,42 @@ padding-bottom: 50px;
     padding-left: 0px;
 }
 
+.compartir .fa{
+    padding-top: 7px;
+}
 .compartir{
     cursor: pointer;
+    background-color: #001C54;
+    color:#fff;
+    height: 35px;
+    width: 35px;
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    padding: 0;
+    margin-left: 10px;
+    border-radius: 100%;
+}
+.social ul{
+    list-style: none;
+    display: -webkit-inline-box;
+    display: -moz-box;
+    padding-left: 5px;
 }
 
 #facebook:hover{
     background-color: #3b5998;
+    color: #fff !important;
 }
 
 #twitter:hover{
     background-color: #55acee;
+    color: #fff !important;
 }
 
 #google:hover{
     background-color: #F44336;
+    color: #fff !important;
 }
 
 .text-consulta-error {

@@ -14,7 +14,7 @@
                     <ul>
                         <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>  
                         <li> <a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>  
-                        <li><a class="envelope" href="https://google.com/+Igalatinoamerica" target="_blank"><i class="fa fa-google"></i></a></li>  
+                        <li><a class="envelope" href="https://google.com/+Igalatinoamerica" target="_blank"><i class="fa fa-google-plus"></i></a></li>  
                     </ul>    
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     }
                 } ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" style="padding-right: 5px;">
                 <p class="letterblack"><a target="_blank" href="http://www.lifeweb.com.ar/">&copy; 2016 Designed by lifeWEB</a></p>
             </div>
         </div>

@@ -398,7 +398,7 @@ function detectCountry($mysqli){
     //session_start();
     
     // Usamos la API de GEO plugin + mas el header TTP_X_FORWARDED_FOR
-    $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['HTTP_X_FORWARDED_FOR']));
+    $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.getClientIP()));
     $pais = $data['geoplugin_countryCode'];
     
     if($pais)
@@ -432,6 +432,20 @@ function detectCountry($mysqli){
     }
     //curl_close($ch);
 }
+
+function getClientIP(){
+
+     if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
+            return  $_SERVER["HTTP_X_FORWARDED_FOR"];  
+        }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
+            return $_SERVER["REMOTE_ADDR"]; 
+        }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
+            return $_SERVER["HTTP_CLIENT_IP"]; 
+        } 
+
+        return '';
+
+    }
 
 function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $habilitado_filtro = 3, $id_curso_filtro = false)
 {

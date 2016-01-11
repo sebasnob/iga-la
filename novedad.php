@@ -51,17 +51,17 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
         <link href="css/main.css" rel="stylesheet" />
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
         <link href="css/responsive.css" rel="stylesheet" />
-            
+        
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
         <![endif]-->
-            
+        
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head><!--/head-->
-        
+    
     <body>
         <?php 
             include_once 'gestor/includes/header.php';
@@ -88,31 +88,26 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                             </span>    
                         </div>
                         <div class="row">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td>
-                                        <div class="col-md-6 social-icons" style="width: 100%;">
-                                            <ul>
-                                                <li>
-                                                    <a id="facebook" class="facebook compartir" data-href="https://www.facebook.com/sharer/sharer.php?u=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>">
-                                                        <i class="fa fa-facebook"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a id="twitter" class="compartir" data-href="http://twitter.com/share?text=<?=$novedad['titulo']?>&url=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>&via=IGA_LA" target="_blank">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a id="google" class="envelope compartir" data-href="https://plus.google.com/share?url=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>">
-                                                        <i class="fa fa-google"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div class="col-md-12 social text-right">
+                                <span>Compart&iacute; esta noticia </span>
+                                <ul>
+                                    <li>
+                                        <a id="facebook" class="facebook compartir" data-href="https://www.facebook.com/sharer/sharer.php?u=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a id="twitter" class="compartir" data-href="http://twitter.com/share?text=<?=$novedad['titulo']?>&url=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>&via=IGA_LA" target="_blank">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a id="google" class="envelope compartir" data-href="https://plus.google.com/share?url=<?= 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]?>">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-1"></div>
@@ -124,10 +119,10 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                         {
                             $estiloTextos = 'font-size: 15px;';
                             $estiloImagen = 'margin-bottom: 5px;'; ?>
-                                <a href="novedad.php?id=<?=$nov['id']?>"><img style="<?=$estiloImagen?>" class="img-responsive" src="images/novedades/<?=$nov['imagen']?>" /></a>
-                                <a href="novedad.php?id=<?=$nov['id']?>"><span style="<?=$estiloTextos?>"><?=$nov['titulo']?></span></a>
-                                <br/>
-                                <br/>
+                        <a href="novedad.php?id=<?=$nov['id']?>"><img style="<?=$estiloImagen?>" class="img-responsive" src="images/novedades/<?=$nov['imagen']?>" /></a>
+                        <a href="novedad.php?id=<?=$nov['id']?>"><span style="<?=$estiloTextos?>"><?=$nov['titulo']?></span></a>
+                        <br/>
+                        <br/>
                     <?php 
                         }
                     ?>
@@ -135,11 +130,11 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                 </div>
             </div>
         </section>
-            
+        
         <?php
             include_once 'gestor/includes/footer.php';
         ?>
-            
+        
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
