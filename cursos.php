@@ -124,7 +124,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <?=$datos_curso['descripcion']?>
                     </section>
                     <hr />
-                    <section id="cursado_planes">
+                    <div id="cursado_planes">
                         <h3><?=$lenguaje['cursado_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <p><?=$lenguaje['desc_cursado_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                         <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline">
@@ -159,9 +159,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 </tbody>
                             </table>
                         </div>
-                    </section>
+                    </div>
                     <hr>
-                    <section id="meterial_curso" >
+                    <div id="meterial_curso" >
                         <h3><?=$lenguaje['material_estudio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <div class="well">
                             <div class="media">
@@ -173,9 +173,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 </div>
                             </div>
                         </div><!--/.author-->
-                    </section>
+                    </div>
                     <hr>
-                    <section id="uniformes" >
+                    <div id="uniformes" >
                         <h3><?=$lenguaje['uniforme_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <div class="well">
                             <div class="media">
@@ -187,9 +187,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 </div>
                             </div>
                         </div><!--/.author-->
-                    </section>
+                    </div>
                     <hr>
-                    <section id="malla_curricular" >
+<!--                    <section id="malla_curricular" >
                         <h3><?=$lenguaje['malla_curricular_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <div class="well">
                             <div class="table">
@@ -224,7 +224,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 ?>
                             </div>
                         </div>
-                    </section>
+                    </section>-->
                     <section id="objetivo">
                         <h2><?=$lenguaje['objetivos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
                         <div class="entry-meta">
