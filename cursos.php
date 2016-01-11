@@ -50,6 +50,7 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
         <link href="css/main.css" rel="stylesheet" />
         <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
         <link href="css/responsive.css" rel="stylesheet" />
+        <link href="css/intlTelInput.css" rel="stylesheet" />
         
         <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php?cod_curso=<?=$_GET['cod_curso']?>" />
         <!--[if lt IE 9]>
@@ -57,7 +58,7 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
           <script src="js/respond.min.js"></script>
         <![endif]-->
         
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head><!--/head-->
     <body>
@@ -85,17 +86,32 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         ?>
         
         <section id="head_image_curso">
-            <div class="container-fluid">
+            <!--<div class="container-fluid">
                     <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="" style="width: 100%;">
+            </div>-->
+            <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
+                <div class="container">
+                    <h2 style="position:absolute;padding-top:4%">
+                        <span>
+                            <p style="font-size:60px;color:white;width:450px;font-weight:600;"><?=$datos_curso['nombre']?></p>
+                        </span>
+                    </h2>
+                </div>
+                <img style="margin: 0 auto;" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive" />
+            </div>
+            
+            <div class="visible-xs" >
+                <img style="margin: 0 auto;" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive" />
+                <div class="row col-md-12 text-center">
+                    <h2 style="color:<?=$datos_curso['color']?>"><?=$datos_curso['nombre']?></h2>
+                </div>
             </div>
         </section> 
         
         <section id="single_curso" class="container">
             <div class="row">
-                
                 <div class="col-sm-8">
                     <section id="curso">
-                        <h2><?=$datos_curso['nombre']?></h2>
                         <div class="entry-meta">
                             <span>
                                 <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>:
@@ -104,9 +120,10 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." {$lenguaje['anios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
                             </span>
                         </div>
-                    <?=$datos_curso['descripcion']?>
+                        <br/>
+                        <?=$datos_curso['descripcion']?>
                     </section>
-                    <hr>
+                    <hr />
                     <section id="cursado_planes">
                         <h3><?=$lenguaje['cursado_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <p><?=$lenguaje['desc_cursado_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
@@ -152,10 +169,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     <img class="avatar img-thumbnail" src="<?=$datos_curso['url_material']?>" alt="">
                                 </div>
                                 <div class="media-body">
-                                    <div class="media-heading">
-                                        
-                                    </div>
-                                <?=$datos_curso['desc_material']?>
+                                    <?=$datos_curso['desc_material']?>
                                 </div>
                             </div>
                         </div><!--/.author-->
@@ -169,10 +183,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     <img class="avatar img-thumbnail" src="<?=$datos_curso['url_uniforme']?>" alt="">
                                 </div>
                                 <div class="media-body">
-                                    <div class="media-heading">
-                                        
-                                    </div>
-                                <?=$datos_curso['desc_uniforme']?>
+                                    <?=$datos_curso['desc_uniforme']?>
                                 </div>
                             </div>
                         </div><!--/.author-->
@@ -214,40 +225,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </div>
                     </section>
-                </div><!--/.col-md-8-->
-                <div class="col-sm-4">
-                    <br>
-                    <?php
-                    $novedad = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
-                    if(count($novedad) > 0){
-                    ?>
-                    <div class="widget ads">
-                        <div class="row">
-                            <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
-                                
-                                <div class="post-thumb">
-                                    <a href="index.php#blog"><img class="img-responsive" src="images/novedades/<?=$novedad[0]['imagen']?>" alt=""></a>
-                                </div>
-                                <div class="entry-header">
-                                    <h3><a href="index.php#blog"><?=$novedad[0]['titulo']?></a></h3>
-                                </div>
-                                <div class="entry-content">
-                                    <p><?=substr($novedad[0]['descripcion'],0,250) . '...'?></p>
-                                    <br>
-                                    <span>
-                                        <a href="novedades.php?id=<?=$novedad[0]['id']?>">
-                                            <?=$lenguaje['ver_mas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--/.categories-->
-                    <?php
-                    }
-                    ?>
-                </div>        
-                <div class="col-sm-12">
                     <section id="objetivo">
                         <h2><?=$lenguaje['objetivos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
                         <div class="entry-meta">
@@ -260,7 +237,35 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </div>
                     <?=$datos_curso['objetivos']?>
                     </section>
-                </div>
+                </div><!--/.col-md-8-->
+                <div class="col-sm-4">
+                    <br>
+                    <?php
+                    $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3);
+                    if(count($novedades) > 0){
+                    ?>
+                    <div class="widget ads">
+                        <div class="row">
+                            <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
+                            <?php
+                                foreach ($novedades as $nov)
+                                {
+                                $estiloTextos = 'font-size: 15px;';
+                                $estiloImagen = 'margin-bottom: 5px;'; ?>
+                                <a href="novedad.php?id=<?=$nov['id']?>"><img style="<?=$estiloImagen?>" class="img-responsive" src="images/novedades/<?=$nov['imagen']?>" /></a>
+                                <a href="novedad.php?id=<?=$nov['id']?>"><span style="<?=$estiloTextos?>"><?=$nov['titulo']?></span></a>
+                                <br/>
+                                <br/>
+                            <?php 
+                                }
+                            ?>
+                            </div>
+                        </div>
+                    </div><!--/.categories-->
+                    <?php
+                    }
+                    ?>
+                </div>        
             </div><!--/.row-->
         </section><!--/#single_cursos-->
         <?php
@@ -311,6 +316,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         <script type="text/javascript" src="js/smoothscroll.js"></script>
         <script type="text/javascript" src="js/jquery.countTo.js"></script>
         <script type="text/javascript" src="js/lightbox.min.js"></script>
+        <script type="text/javascript" src="js/phoneValidation/intlTelInput.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <!-- Plugins Facebook -->
         <script>(function(d, s, id) {
@@ -413,8 +419,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 
         });
         
-        function reservarCupo(formid, boton){
-            if($("#"+formid+" input[name=name]").val() == '')
+        function reservarCupo(formid, boton, errorid){
+            /*if($("#"+formid+" input[name=name]").val() == '')
             {
                 alert('Por favor, ingrese su nombre');
                 return 0;
@@ -428,7 +434,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             {
                 alert('Por favor, ingrese su telefono');
                 return 0;
-            }
+            }*/
             
             var btn = $(boton).button('loading');
             $.ajax({
@@ -448,9 +454,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     console.log(data);
                     btn.button('reset');
                     if(data.success){
-                        $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.error+"</div>");
+                        $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.mensaje+"</div>");
                     }else{
-                        $('#'+formid+' > div.error').html(data.error)
+                        $('#'+errorid).html(data.mensaje);
                     }
                 }
             });

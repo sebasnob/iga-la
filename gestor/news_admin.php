@@ -37,9 +37,9 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         
         <!-- Custom styles for this template -->
         <link href="assets/css/style.css" rel="stylesheet">
-        <link href="assets/css/style-responsive.css" rel="stylesheet">
-        <link href="assets/css/table-responsive.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">  
+        <link href="assets/css/style-responsive.css" rel="stylesheet" />
+        <link href="assets/css/table-responsive.css" rel="stylesheet" />
+        <link href="../css/jquery.filthypillow.css" rel="stylesheet" />
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -132,6 +132,9 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                                                 </option>
                                                 <?php } ?>
                                             </select>
+                                            <br><br>
+                                            <label>Fecha</label>
+                                            <input type="text" name="fecha" id="fecha" class="form-control filthypillow-1" value="<?=date("d-m-Y", strtotime($novedad['fecha']))?>" />
                                             <br><br>
                                             <label>Categoria</label>
                                             <select name="categoria" id="categoria" class="form-control">
@@ -263,6 +266,8 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
         <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../js/moment.js"></script>
+        <script type="text/javascript" src="../js/jquery.filthypillow.min.js"></script>
         
         <!--common script for all pages-->
         <script src="assets/js/common-scripts.js"></script>
@@ -346,6 +351,15 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                 console.log($("#imagePreview2").length);
             });
             
+            var $fp = $(".filthypillow-1");
+            $fp.filthypillow();
+            $fp.on("focus", function(){
+                $fp.filthypillow("show");
+            });
+            $fp.on( "fp:save", function(e,dateObj){
+                $fp.val( dateObj.format("DD-MM-YYYY"));
+                $fp.filthypillow( "hide" );
+            });
         </script>
     </body>
 </html>

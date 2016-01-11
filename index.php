@@ -33,25 +33,26 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
 <html lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Instituto Gastronómico de las Américas">
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/animate.min.css" rel="stylesheet"> 
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/lightbox.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/animate.min.css" rel="stylesheet" /> 
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/lightbox.css" rel="stylesheet" />
+        <link href="css/main.css" rel="stylesheet" />
+        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
+        <link href="css/responsive.css" rel="stylesheet" />
         <link href="css/flexslider.css" rel="stylesheet" />
+        <link href="css/intlTelInput.css" rel="stylesheet" />
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
         <![endif]-->
         
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+        <link rel="shortcut icon" href="images/favicon.ico" />
         <script src='https://www.google.com/recaptcha/api.js'></script>
     </head><!--/head-->
     
@@ -147,7 +148,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                 foreach ($novedades as $id=>$data){
                             ?>
                                 <li>
-                                    <div style="min-height: 197px">
+                                    <div style="min-height: 100px">
                                     <a href="novedad.php?id=<?=$data['id']?>"><img class="img-responsive" src="images/novedades/<?=$data['imagen']?>" alt="" style="margin: 0 auto;"></a>
                                     </div>
                                     <h3><?=$data['titulo']?></h3>
@@ -171,58 +172,52 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 </div>
         </section><!--/#blog-->
         
-        <!--/#Solo en movil-->
-        <section id="institucionalMovil" class="visible-xs">
+        <section id="institucional">
             <div class="container">
-                <div class="row">
-                    <div class="accordion-container">
-                        <a href="#" class="accordion-toggle"><i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['lared_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                        <div class="accordion-content">
-                            <p><?=$lenguaje['lared_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                        </div>
-                        <!--/.accordion-content-->
-                    </div>
-                    <!--/.accordion-container-->
-                    <div class="accordion-container">
-                        <a href="#" class="accordion-toggle"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                        <div class="accordion-content">
-                            <p><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                        </div>
-                        <!--/.accordion-content-->
-                    </div>
-                    <!--/.accordion-container-->
-                    <div class="accordion-container">
-                        <a href="#" class="accordion-toggle"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                        <div class="accordion-content">
-                            <p><?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                        </div>
-                        <!--/.accordion-content-->
-                    </div>
-                    <!--/.accordion-container-->
-                    <div class="accordion-container">
-                        <a href="#" class="accordion-toggle"><i class="fa fa-star-o"></i>&nbsp;&nbsp;&nbsp;<?=$lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></a>
-                        <div class="accordion-content">
-                            <p><?=$lenguaje['valores_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
-                        </div>
-                        <!--/.accordion-content-->
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--/#end movil-->
-        
-        <section id="institucional" class="hidden-xs">
-            <div class="container">
-                <div class="row">&nbsp;&nbsp;</div>
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
-                        <h2>IGA</h2>
-                        <p><?=$lenguaje['capacitamos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        <h2><?=strtoupper($lenguaje['red_capacitacion_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                        <br/>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="images/Slyers-Home-IGA-Arg.jpg" class="img-responsive">
+                <div class="team-members">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="member-image" align="center">
+                                    <img class="img-responsive" src="images/mision.png" alt="" width="100px" />
+                                </div>
+                                <br/>
+                                <div class="member-info justify">
+                                    <h2><?=strtoupper($lenguaje['mision_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                                    <span class="justify"><?=$lenguaje['mision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="member-image" align="center">
+                                    <img class="img-responsive" src="images/Valores.png" alt="" width="100px" />
+                                </div>
+                                <br/>
+                                <div class="member-info">
+                                        <h2><?=strtoupper($lenguaje['valores_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                                    <?=$lenguaje['valores_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="team-member wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="member-image" align="center">
+                                    <img class="img-responsive" src="images/Vision.png" alt="" width="100px" />
+                                </div>
+                                <br/>
+                                <div class="member-info justify">
+                                    <h2><?=strtoupper($lenguaje['vision_'.$_SESSION['idioma_seleccionado']['cod_idioma']])?></h2>
+                                    <?=$lenguaje['vision_desc_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -260,7 +255,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                             <input type="email" name="email" id="email" class="form-control" placeholder="<?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="phone" id="phone" class="form-control" placeholder="<?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>" required="required" />
+                                            <input type="tel" name="phone" id="phone" class="form-control" required="required" />
                                         </div>
                                         <div id="mensaje_contacto"></div>
                                     </div>
@@ -345,11 +340,32 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         
         <?php
             include_once 'gestor/includes/footer.php';
+            $cod_pais = "ar";
+            switch($_SESSION['pais']['cod_pais']){
+                case "BR":
+                    $cod_pais = "br";
+                break;
+                case "UR":
+                    $cod_pais = "uy";
+                break;
+                case "PR":
+                    $cod_pais = "py";
+                break;
+                case "BO":
+                    $cod_pais = "bo";
+                break;
+                case "PA":
+                    $cod_pais = "pa";
+                break;
+                case "US":
+                    $cod_pais = "us";
+                break;
+            }
         ?>
         
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript" src="js/jquery.inview.min.js"></script>
         <script type="text/javascript" src="js/wow.min.js"></script>
         <script type="text/javascript" src="js/mousescroll.js"></script>
@@ -357,6 +373,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <script type="text/javascript" src="js/jquery.countTo.js"></script>
         <script type="text/javascript" src="js/lightbox.min.js"></script>
         <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+        <script type="text/javascript" src="js/phoneValidation/intlTelInput.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         
         <script type="text/javascript">
@@ -366,7 +383,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 $('#select_filial').addClass("col-md-8");
             });
         
-            $(document).ready(function () {
+            /*$(document).ready(function () {
                 $('.accordion-toggle').on('click', function(event){
                     event.preventDefault();
                     // create accordion variables
@@ -386,7 +403,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                         accordionToggleIcon.html("<i class='fa fa-plus-circle'></i>");
                     }
                 });
-            });
+            });*/
             
             $(window).load(function(){
                 $('.flexslider').flexslider({
@@ -401,6 +418,12 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                   }
                 });
               });
+              
+            $("#phone").intlTelInput({
+                onlyCountries: ['ar', 'br', 'uy', 'py', 'bo', 'pa', 'us'],
+                preferredCountries: [],
+                utilsScript: "js/phoneValidation/utils.js"
+            });
         </script>
         
     </body>

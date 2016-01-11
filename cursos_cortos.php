@@ -4,6 +4,8 @@ session_start();
 include_once 'gestor/includes/functions.php';
 include_once 'gestor/includes/lenguaje.php';
 
+$pagina = 'cursos_cortos';
+
 //unset($_SESSION);
 if(!isset($_SESSION['pais']))
 {
@@ -37,20 +39,20 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
         <meta name="description" content="">
         <meta name="author" content="">
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/animate.min.css" rel="stylesheet"> 
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/lightbox.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/animate.min.css" rel="stylesheet" /> 
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/lightbox.css" rel="stylesheet" />
+        <link href="css/main.css" rel="stylesheet" />
+        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
+        <link href="css/responsive.css" rel="stylesheet" />
         
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
         <![endif]-->
         
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" href="images/favicon.ico">
     </head><!--/head-->
     <body>
@@ -66,119 +68,13 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
     
     $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
     
-    $cursos_cortos = getCursosCortos($mysqli);
+    $cursos_cortos = getCursosCortos($mysqli,false,$_SESSION['pais']['id']);
     $categorias_cursos_cortos = getCategoriasCursosCortos($mysqli);
 ?>
         <div id="fb-root"></div>
-        <header id="home">
-            <div class="fullParaCerrarMenu"></div>
-        <header id="home">
-            <div class="main-nav">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" id="colapseButton" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.php">
-                            <h1><img class="img-responsive" src="images/logo-iga_transparent.png" alt="logo"></h1>
-                        </a>                    
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-left">     
-                            <li class="scroll active"><a href="index.php"><?=$lenguaje['inicio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li id="cursos"><?=$lenguaje['curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></li>
-                            <li class="scroll"><a href="index.php#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li class="scroll"><a href="index.php#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  
-                            <li class="scroll"><a href="index.php#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
-                            <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
-                        </ul>
-                        
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?=$_SESSION['pais']['flag']?>" /><span style="margin-left: 5px;"><?=substr($_SESSION['pais']['pais'], 0, 3)?></span><span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                <?php
-                                foreach($paises as $i=>$d){
-                                    if($_SESSION['pais']['cod_pais'] != $d['cod_pais']){
-                                ?>
-                                    <li><a href="javascript:cambiarPais('<?=$d['cod_pais']?>')" ><img src="<?=$d['flag']?>" /><span style="margin-left: 5px;"> <?=substr($d['pais'], 0, 3)?></span></a></li>
-                                <?php
-                                    }
-                                }
-                                ?>
-                                </ul>
-                            </li>
-                            <?php if(count($idiomas) > 1) { ?>
-                            <li style="padding: 5px;">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <?=substr($lenguaje[$_SESSION['idioma_seleccionado']['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']], 0, 2)?> 
-                                    <?php if(count($idiomas) > 1) { ?>
-                                        <span class="caret"></span>
-                                    <?php } ?>
-                                </a>
-                                <ul class="dropdown-menu">
-                                <?php
-                                    foreach($idiomas as $i=>$d){
-                                        if($_SESSION['idioma_seleccionado']['cod_idioma'] != $d['cod_idioma']){
-                                    ?>
-                                    <li>
-                                        <a href="javascript:cambiarIdioma('<?=$d['cod_idioma']?>')" >
-                                                <?=substr($lenguaje[$d['idioma'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']], 0, 2)?> 
-                                        </a>
-                                    </li>
-                                    <?php
-                                        }
-                                    }
-                                ?>  
-                                </ul>
-                            </li>
-                            <?php
-                                }
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-                <div id="desplegableCursos">
-                    <ul class="nav" style="float: left">
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=1">
-                                <?=$lenguaje['gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=63">
-                                <?=$lenguaje['certif_gastro_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=17">
-                                <?=$lenguaje['cocineritos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav" style="float: right">
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=31">
-                                <?=$lenguaje['paste_avanzada_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                        <li class="menuCursos">
-                            <a href="cursos.php?cod_curso=95">
-                                <?=$lenguaje['gastro_intensivo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                        <li class="menuCursos">
-                            <a href="cursos_cortos.php">
-                                <?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> 
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div><!--/#main-nav-->
-        </header>    
+        <?php 
+            include_once 'gestor/includes/header.php';
+        ?>  
         
         <section id="head_image_curso">
             <div class="container-fluid">
@@ -191,9 +87,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 <div class="col-sm-8">
                     <br>
                     <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
-
                     <br/>
-                        <form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline formularioCursosCortos">
+                        <!--<form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline formularioCursosCortos">
                             <div class="form-group">
                                 <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>
                                 <select id="provincias" class="form-control" onchange="javascript:cambiarProvinciaMatricula('<option><?=$lenguaje["seleccione_filial_".$_SESSION["idioma_seleccionado"]["cod_idioma"]] ?></option>')">
@@ -209,8 +104,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     <option><?=$lenguaje['seleccione_filial_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></option>
                                 </select>
                             </div>
-                        </form>
-                        <br/>
+                        </form>-->
                     <?php 
                         $categoria = '';
                         foreach ($cursos_cortos as $curso_corto)
@@ -230,7 +124,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             <?= '<a href="cursos.php?cod_curso=' . $curso_corto['cod_curso'] .'"> - ' . $curso_corto['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</a>'?>
                             <?php 
                                 $cupo = false;
-                                $respuesta = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
+                                /*$respuesta = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
                                 
                                 if($respuesta)
                                 {
@@ -246,20 +140,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 if($cupo)
                                 {
                                     echo "<span class='cupoDisponible'> - " . $lenguaje['cupo_disponible_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . "</span>";
-                                }
+                                }*/
                             ?>
                         </h4>
-                            <?php 
-                               
-                                /*
-                                 * $datosCurso = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
-                                if(isset($datosCurso[0]['cupo']) && $datosCurso[0]['cupo'] != '' && $datosCurso[0]['cupo'] !== '0' && $datosCurso[0]['cupo'] !== 0)
-                                {
-                                    echo '<span>' . $lenguaje['inscripcion_abierta_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</span>';
-                                }
-                                 * 
-                                 */
-                            ?>
                     </div>
                     <?php } ?>
                 </div><!--/.col-md-8-->

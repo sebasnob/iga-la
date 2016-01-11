@@ -31,6 +31,12 @@ function getDatosCurso($mysqli, $cod_curso, $id_idioma='', $id_filial=''){
         }
         if($qry_malla)$qry_malla->free();
         
+        $query4 = "SELECT color FROM cursos WHERE cod_curso = ".$cod_curso;
+        $qry_color = $mysqli->query($query4);
+        $color = $qry_color->fetch_assoc();
+        $datos_curso['color'] = $color['color'];
+        if($qry_color)$qry_color->free();
+        
         return $datos_curso;
     }else{
         return "No existen datos para la filial e idiomas seleccionados.";
@@ -382,18 +388,23 @@ function esc_url($url) {
 }
 
 function detectCountry($mysqli){
-    $url = "http://ipinfo.io/";
+    /*$url = "http://ipinfo.io/";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-
+    curl_setopt($ch, CURLOPT_HEADER, 0);*/
+    
     //Con esta opcion almaceno el resultado en una variable
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     //session_start();
-    if(curl_exec($ch))
+    
+    // Usamos la API de GEO plugin + mas el header TTP_X_FORWARDED_FOR
+    $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['HTTP_X_FORWARDED_FOR']));
+    $pais = $data['geoplugin_countryCode'];
+    
+    if($pais)
     {
-        $resp = json_decode(curl_exec($ch));
-        $cod_pais = $resp->country;
+        //$resp = json_decode(curl_exec($ch));
+        $cod_pais = $pais; //$resp->country;
         $query = "SELECT id, pais, flag FROM paises WHERE cod_pais='{$cod_pais}'";
         
         $result = $mysqli->query($query);
@@ -419,7 +430,7 @@ function detectCountry($mysqli){
         $_SESSION['pais'] = array('pais'=>'Argentina','cod_pais'=>"AR", 'idioma'=>'ES', 'flag'=>'images/flags/ar.png', 'id_idioma'=>'1', 'cod_idioma'=>'ES', 'id'=>'1');
         $_SESSION['ciudad'] = 'Rosario';
     }
-    curl_close($ch);
+    //curl_close($ch);
 }
 
 function getImagenesGrilla($mysqli, $idioma = false, $id_pais = false, $habilitado_filtro = 3, $id_curso_filtro = false)
@@ -1256,24 +1267,38 @@ function getCursoConCupo($id_filial, $cod_curso){
     return $curso_cupo;
 }
 
-function getCursosCortos($mysqli, $cod_curso = false)
+function getCursosCortos($mysqli, $cod_curso = false, $pais = false)
 {
     $cursosCortos = array();
-    $query = "SELECT * FROM cursos_cortos order by categoria";
+    $query = "SELECT * FROM cursos_cortos WHERE 1 = 1 ";
     
     if($cod_curso)
     {
-        $query .= " WHERE cod_curso = " . $cod_curso;
+        $query .= " AND cod_curso = " . $cod_curso;
     }
+    
+    $query .= " ORDER BY categoria";
     
     $result = $mysqli->query($query);
     while($curso_corto = $result->fetch_assoc())
     {
-	$cursosCortos[] = array('cod_curso'=>$curso_corto['cod_curso'],
+        $arrPaises = json_decode($curso_corto['pais']);
+        
+        if(!$pais){
+        $cursosCortos[] = array('cod_curso'=>$curso_corto['cod_curso'],
                                 'nombre_ES'=>$curso_corto['nombre_ES'], 
                                 'nombre_IN'=>$curso_corto['nombre_IN'], 
                                 'nombre_POR'=>$curso_corto['nombre_POR'], 
-                                'categoria'=>$curso_corto['categoria']); 
+                                'categoria'=>$curso_corto['categoria'],
+                                'pais'=>$arrPaises); 
+        }else if(in_array($pais, $arrPaises)){
+            $cursosCortos[] = array('cod_curso'=>$curso_corto['cod_curso'],
+                                'nombre_ES'=>$curso_corto['nombre_ES'], 
+                                'nombre_IN'=>$curso_corto['nombre_IN'], 
+                                'nombre_POR'=>$curso_corto['nombre_POR'], 
+                                'categoria'=>$curso_corto['categoria'],
+                                'pais'=>$arrPaises);
+        }
     }
     return $cursosCortos;
 }

@@ -48,18 +48,18 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
 <html lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="lifeweb.com.ar">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
+        <meta name="author" content="lifeweb.com.ar" />
         <title><?=$lenguaje['titulo_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/animate.min.css" rel="stylesheet"> 
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/lightbox.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
-        <link href="css/jquery.filthypillow.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/animate.min.css" rel="stylesheet" /> 
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/lightbox.css" rel="stylesheet" />
+        <link href="css/main.css" rel="stylesheet" />
+        <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet" />
+        <link href="css/responsive.css" rel="stylesheet" />
+        <link href="css/jquery.filthypillow.css" rel="stylesheet" />
             
         <!-- <link rel="stylesheet" type="text/css" media="screen" href="styles_home.php" />-->
         <!--[if lt IE 9]>
@@ -67,8 +67,8 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
           <script src="js/respond.min.js"></script>
         <![endif]-->
             
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+        <link rel="shortcut icon" href="images/favicon.ico" />
     </head><!--/head-->
         
     <body>
@@ -76,10 +76,27 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
             include_once 'gestor/includes/header.php';
         ?>
         
-        <section id="head_image_curso">
-            <div class="container-fluid" style="position: relative">
-                <img class="img-responsive animated fadeInLeftBig" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
+        <section id="head_novedades">
+            <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
+                <div class="container">
+                    <h2 style="position:absolute;padding-top:4%">
+                        <span>
+                            <p style="font-size:70px;color:white;width:450px;font-weight:600;"><?=$lenguaje['blog_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                            <p style="font-size:50px;color:white;width:450px;font-weight:600;"><?=$lenguaje['actualidad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        </span>
+                    </h2>
+                </div>
+                <img class="img-responsive animated" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
             </div>
+            
+            <div class="visible-xs" >
+                <img class="img-responsive animated fadeInLeftBig" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
+                <div class="row col-md-12 text-center">
+                    <h3><?=$lenguaje['blog_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                    <?=$lenguaje['actualidad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                </div>
+            </div>
+            
         </section>
         
         <section id="buscador">
@@ -116,6 +133,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
             
         <section id="novedades">
             <div class="container">
+                <div class="row">
                 <?php
                 if($categoria)
                 {
@@ -197,9 +215,8 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                 }    
                     ?>
                     </div>
-                                
+                </div>
             </div>
-                
         </section>
             
             

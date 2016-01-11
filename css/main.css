@@ -711,7 +711,7 @@ section#feature_cursos{
 
 .text-reserva-error{
     color: #DD3131;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 /*************************
@@ -726,7 +726,7 @@ section#feature_cursos{
 }
 
 .social-icons {
-  margin-top:30px;
+  margin-top: 10px;
   text-align: right;
 }
 
@@ -789,16 +789,28 @@ section#feature_cursos{
   width: 100%;
 }
 
+.member-info h2 {
+  margin-top: 35px;
+  padding-bottom: 0px;
+  font-weight: 600;
+  text-align: center;
+}
+
 .member-info h3 {
   margin-top: 35px;
+  text-align: center;
 }
 
 .member-info h4 {
   font-size: 14px;
   margin-bottom: 15px;
   color: #999;
+  text-align: center;
 }
 
+.justify {
+    text-align: justify;
+}
 
 /*************************
 *******Features CSS*******
@@ -1042,10 +1054,6 @@ padding-bottom: 50px;
   display: inline-block;
   margin-bottom: 5px;
   margin-right: 20px;
-}
-
-#footer .social-icons {
-  margin-top: 0px;
 }
 
 #footer .social-icons ul {
@@ -1324,6 +1332,9 @@ padding-bottom: 50px;
     background:  rgba(1, 15, 44, 1)
 }
 
+#single_curso {
+    text-align:justify;
+}
 
 #single_curso h4 {
     color: #337ab7;
@@ -1468,7 +1479,6 @@ padding-bottom: 50px;
     margin-right: 40px;
     margin-bottom: 25px;
     text-align: right;
-    text-transform: capitalize;
     font-family: inherit;
     font-weight: 400;
     font-size: 23px;
@@ -1569,4 +1579,16 @@ padding-bottom: 50px;
 .text-consulta-error {
     font-size: 15px;
     color:red;
+}
+
+/***************************
+**********Novedades CSS*****
+****************************/
+#head_novedades{
+    padding: 0px;
+}
+
+#novedades h2 {
+    margin-top:0px;
+    padding-top:0px;
 }
