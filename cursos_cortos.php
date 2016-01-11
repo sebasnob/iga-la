@@ -85,8 +85,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         <section id="single_curso" class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <br>
-                    <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>
+<!--                    <br>
+                    <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>-->
                     <br/>
                         <!--<form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline formularioCursosCortos">
                             <div class="form-group">
@@ -149,33 +149,17 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 <div class="col-sm-4">
                     <br>
                     <?php
-                    $novedad = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
-                    if(count($novedad) > 0){
-                    ?>
-                    <div class="widget ads">
-                        <div class="row">
-                            <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
-                                
-                                <div class="post-thumb">
-                                    <a href="index.php#blog"><img class="img-responsive" src="images/novedades/<?=$novedad[0]['imagen']?>" alt=""></a>
-                                </div>
-                                <div class="entry-header">
-                                    <h3><a href="index.php#blog"><?=$novedad[0]['titulo']?></a></h3>
-                                </div>
-                                <div class="entry-content">
-                                    <p><?=substr($novedad[0]['descripcion'],0,250) . '...'?></p>
-                                    <br>
-                                    <span>
-                                        <a href="novedades.php?id=<?=$novedad[0]['id']?>">
-                                            <?=$lenguaje['ver_mas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--/.categories-->
-                    <?php
-                    }
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 4);
+                        foreach ($novedades as $nov)
+                        {
+                            $estiloTextos = 'font-size: 15px;';
+                            $estiloImagen = 'margin-bottom: 5px;'; ?>
+                        <a href="novedad.php?id=<?=$nov['id']?>"><img style="<?=$estiloImagen?>" class="img-responsive" src="images/novedades/<?=$nov['imagen']?>" /></a>
+                        <a href="novedad.php?id=<?=$nov['id']?>"><span style="<?=$estiloTextos?>"><?=$nov['titulo']?></span></a>
+                        <br/>
+                        <br/>
+                    <?php 
+                        }
                     ?>
                 </div>
 
