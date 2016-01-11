@@ -1621,3 +1621,7 @@ padding-bottom: 50px;
 .curso-corto h4 a:hover{
     color: #396CC8;
 }
+
+.media-body p{
+    margin: 10px;
+}
