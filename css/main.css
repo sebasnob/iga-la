@@ -1337,7 +1337,6 @@ padding-bottom: 50px;
 }
 
 #single_curso h4 {
-    color: #337ab7;
     font-size: 18px;
 }
 
@@ -1613,4 +1612,12 @@ padding-bottom: 50px;
 #novedades h2 {
     margin-top:0px;
     padding-top:0px;
+}
+
+.curso-corto h4 a{
+    color: black;
+    font-weight: 100
+}
+.curso-corto h4 a:hover{
+    color: #396CC8;
 }

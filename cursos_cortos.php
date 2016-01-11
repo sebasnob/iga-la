@@ -111,7 +111,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         {
                         
                     ?>
-                    <div>
+                    <div class="curso-corto">
                         <h3>
                         <?php if($categoria !== $curso_corto['categoria'])
                         {
@@ -121,7 +121,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         ?>
                         </h3>
                         <h4>
-                            <?= '<a href="cursos.php?cod_curso=' . $curso_corto['cod_curso'] .'"> - ' . $curso_corto['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</a>'?>
+                            <?= '<a href="cursos.php?cod_curso=' . $curso_corto['cod_curso'] .'"> &nbsp;' . $curso_corto['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']] . '</a>'?>
                             <?php 
                                 $cupo = false;
                                 /*$respuesta = getCursoConCupo($id_filial, $curso_corto['cod_curso']);
