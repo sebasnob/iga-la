@@ -423,22 +423,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         });
         
         function reservarCupo(formid, boton, errorid){
-            /*if($("#"+formid+" input[name=name]").val() == '')
-            {
-                alert('Por favor, ingrese su nombre');
-                return 0;
-            }
-            if($("#"+formid+" input[name=email]").val() == '')
-            {
-                alert('Por favor, ingrese su email');
-                return 0;
-            }
-            if($("#"+formid+" input[name=telefono]").val() == '')
-            {
-                alert('Por favor, ingrese su telefono');
-                return 0;
-            }*/
-            
             var btn = $(boton).button('loading');
             $.ajax({
                 url: "gestor/controller_ajax.php",
@@ -450,7 +434,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     telefono: $("#"+formid+" input[name=telefono]").val(),
                     id_comision: $("#"+formid+" input[name=id_comision]").val(),
                     id_filial: $("#"+formid+" input[name=id_filial]").val(),
-                    id_plan: $("#"+formid+" input[name=id_plan]").val()
+                    id_plan: $("#"+formid+" input[name=id_plan]").val(),
+                    recaptcha: $("#"+formid+" textarea[name=g-recaptcha-response]").val()
                 },
                 dataType: 'json',
                 success: function(data){
@@ -466,27 +451,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         }
     
         function consultarCurso(formid, boton, coursecontact, errorid){
-            /*if($("#"+formid+" input[name=name]").val() == '')
-            {
-                alert('Por favor, ingrese su nombre');
-                return 0;
-            }
-            if($("#"+formid+" input[name=email]").val() == '')
-            {
-                alert('Por favor, ingrese su email');
-                return 0;
-            }
-            if($("#"+formid+" input[name=phone]").val() == '')
-            {
-                alert('Por favor, ingrese su telefono');
-                return 0;
-            }
-            if($("#"+formid+" textarea[name=message]").val() == '')
-            {
-                alert('Por favor, ingrese su consulta.');
-                return 0;
-            }*/
-            
             $(boton).button('loading');
             $.ajax({
               type: "POST",
@@ -502,7 +466,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 id_comision: $("#"+formid+" input[name=id_comision]").val(),
                 id_plan: $("#"+formid+" input[name=id_plan]").val(),
                 cod_curso: $("#"+formid+" input[name=cod_curso]").val(),
-                tipo: "3"
+                tipo: "3",
+                recaptcha: $("#"+formid+" textarea[name=g-recaptcha-response]").val()
               },
               dataType:'json',
               success: function(data)

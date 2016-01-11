@@ -6,6 +6,10 @@ include_once 'gestor/includes/lenguaje.php';
 $pagina = 'home';
 
 //unset($_SESSION);
+if(isset($_GET['pais']) && $_GET['pais'] != ''){
+    detectCountry($mysqli, $_GET['pais']);
+}
+
 if(!isset($_SESSION['pais']))
 {
     detectCountry($mysqli);
@@ -311,9 +315,9 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <div id="google-map"></div>
                                 </div>
                                 <div class="col-md-6 col-sm-12" id="direccion_filial">
-                                    <div class="col-md-6">
+                                    <!--<div class="col-md-6">
                                         <img class="img-responsive" src="images/sinnombre.png">
-                                    </div>
+                                    </div>-->
                                     <div class="contact-info col-md-6">
                                         <ul class="address">
                                             <li>
@@ -424,6 +428,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 preferredCountries: [],
                 utilsScript: "js/phoneValidation/utils.js"
             });
+            $("#phone").intlTelInput("setCountry", "<?=$cod_pais?>");
         </script>
         
     </body>

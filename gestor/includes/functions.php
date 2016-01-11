@@ -387,7 +387,7 @@ function esc_url($url) {
     }
 }
 
-function detectCountry($mysqli){
+function detectCountry($mysqli, $cod_pais=''){
     /*$url = "http://ipinfo.io/";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -397,9 +397,13 @@ function detectCountry($mysqli){
     //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     //session_start();
     
-    // Usamos la API de GEO plugin + mas el header TTP_X_FORWARDED_FOR
-    $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.getClientIP()));
-    $pais = $data['geoplugin_countryCode'];
+    if(isset($cod_pais) && $cod_pais != ''){
+        $pais = $cod_pais;
+    }else{
+        // Usamos la API de GEO plugin + mas el header TTP_X_FORWARDED_FOR
+        $data = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.getClientIP()));
+        $pais = $data['geoplugin_countryCode'];
+    }
     
     if($pais)
     {

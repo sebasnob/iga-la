@@ -226,8 +226,18 @@ switch($_POST['option']){
                                 $retorno = array("success" => false, "mensaje" => $lenguaje['captcha_no_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
                             }
                         }else{
-                            guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
-                            $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                            if(isset($_POST['recaptcha']) && $_POST['recaptcha'] != ''){
+                                $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfcUBQTAAAAAFSH6B9p7l8p6-rm2aJO4Ij-PqhJ&response=".$_POST['recaptcha']);
+                                $response = json_decode($response, true);
+                                if($response["success"] === true){
+                                    guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
+                                    $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                                }else{
+                                    $retorno = array("success" => false, "mensaje" => $lenguaje['captcha_no_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                                }
+                            }else{
+                                $retorno = array("success" => false, "mensaje" => $lenguaje['captcha_no_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                            }
                         }
                     /*}else{
                         $retorno = array("success" => false, "mensaje" => $lenguaje['tel_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
@@ -299,6 +309,28 @@ switch($_POST['option']){
     
     case "get_cursos_con_cupo":
         if(isset($_POST['id_filial']) && $_POST['id_filial'] != '' && isset($_POST['cod_curso']) && $_POST['cod_curso'] != ''){
+            $cod_pais = "ar";
+            switch($_SESSION['pais']['cod_pais']){
+                case "BR":
+                    $cod_pais = "br";
+                break;
+                case "UR":
+                    $cod_pais = "uy";
+                break;
+                case "PR":
+                    $cod_pais = "py";
+                break;
+                case "BO":
+                    $cod_pais = "bo";
+                break;
+                case "PA":
+                    $cod_pais = "pa";
+                break;
+                case "US":
+                    $cod_pais = "us";
+                break;
+            }
+            
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
             if(count($curso_cupo) > 0){
                 $retorno = "<tr>
@@ -360,12 +392,16 @@ switch($_POST['option']){
                                         </div>
                                         <div class="col-sm-6">
                                             '.$lenguaje['reserva_curso_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'
+                                            <br/>
+                                            <br/>
+                                            <div class="recaptcha" id="captcha-reserva-'.$datos_curso['codigo'].'"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this, \'error-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm">'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         &nbsp;&nbsp;<span id="error-'.$datos_curso['codigo'].'" class="error text-center text-consulta-error"></span>
+                                        <br/>
                                     </div>
                                 </form>';
 
@@ -395,6 +431,7 @@ switch($_POST['option']){
                                         <textarea name="mensaje" class="form-control" rows="4" placeholder="'.$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required"></textarea>
                                     </div>                        
                                     <div class="form-group">
+                                        <div class="recaptcha" id="captcha-consulta-'.$datos_curso['codigo'].'"></div><br/><br/>
                                         <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto-'.$datos_curso['codigo'].'\', this, true, \'error-cons-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         <button type="button" data-toggle="collapse" data-target="#consulta-'.$datos_curso['codigo'].'" class="btn btn-sm" >'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         &nbsp;&nbsp;<span id="error-cons-'.$datos_curso['codigo'].'" class="error text-center text-consulta-error"></span>
@@ -406,17 +443,29 @@ switch($_POST['option']){
                                         preferredCountries: [],
                                         utilsScript: "js/phoneValidation/utils.js"
                                     });
+                                    $("#telefono-'.$datos_curso['codigo'].'").intlTelInput("setCountry", "'.$cod_pais.'");
+                                        
                                     $("#phone-'.$datos_curso['codigo'].'").intlTelInput({
                                         onlyCountries: ["ar", "br", "uy", "py", "bo", "pa", "us"],
                                         preferredCountries: [],
                                         utilsScript: "js/phoneValidation/utils.js"
                                     });
+                                    $("#phone-'.$datos_curso['codigo'].'").intlTelInput("setCountry", "'.$cod_pais.'");
                                 </script>';
 
                     $retorno .="</div>
                         </td>
                     </tr>";
                 }
+                $retorno .= '<script>
+                    var CaptchaCallback = function(){
+                        $(".recaptcha").each(function(index, val) {
+                            grecaptcha.render(val.id, {"sitekey" : "6LfcUBQTAAAAAA6cg2CaCnnZzxbxNnIOawZwo2KJ"});
+                        });
+                    };
+                </script>
+                <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
+                ';
             }else{
                 $retorno .= '<tr>
                             <td>
@@ -438,18 +487,34 @@ switch($_POST['option']){
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="phone" class="form-control" placeholder="'.$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required" />
+                                        <input type="tel" name="phone" id="phone" class="form-control" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <textarea name="mensaje" class="form-control" rows="4" placeholder="'.$lenguaje['mensaje_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'" required="required"></textarea>
                                     </div>                        
                                     <div class="form-group">
+                                        <div class="recaptcha" id="captcha-consulta-sin-cupo"></div><br/><br/>
                                         <button type="button" class="btn btn-sm" onclick="consultarCurso(\'form-contacto\', this, false, \'error\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
                                         &nbsp;&nbsp;<span id="error" class="error text-center text-consulta-error"></span>
                                     </div>
                                 </form>
                             </td>
-                        </tr>';
+                        </tr>
+                        <script>
+                            $("#phone").intlTelInput({
+                                onlyCountries: ["ar", "br", "uy", "py", "bo", "pa", "us"],
+                                preferredCountries: [],
+                                utilsScript: "js/phoneValidation/utils.js"
+                            });
+                            
+                            $("#phone").intlTelInput("setCountry", "'.$cod_pais.'");
+                        
+                            var CaptchaCallback = function(){
+                                grecaptcha.render("captcha-consulta-sin-cupo", {"sitekey" : "6LfcUBQTAAAAAA6cg2CaCnnZzxbxNnIOawZwo2KJ"});
+                            };
+                        </script>
+                        <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
+                        ';
             }
         }else{
             
@@ -462,12 +527,18 @@ switch($_POST['option']){
         $result = array();
         if(isset($_POST['nombre']) && $_POST['nombre'] != '' && isset($_POST['email']) && isset($_POST['telefono']) && $_POST['telefono'] != '' && isset($_POST['id_comision']) && isset($_POST['id_filial']) && isset($_POST['id_plan'])){
             if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                //if(filter_var($_POST['telefono'], FILTER_VALIDATE_INT)){
-                    reservaInscripcion($_POST['nombre'], $_POST['email'], $_POST['telefono'], $_POST['id_comision'], $_POST['id_filial'], $_POST['id_plan']);
-                    $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
-                /*}else{
-                    $retorno = array("success" => false, "mensaje" => $lenguaje['tel_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
-                }*/
+                if(isset($_POST['recaptcha']) && $_POST['recaptcha'] != ''){
+                    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfcUBQTAAAAAFSH6B9p7l8p6-rm2aJO4Ij-PqhJ&response=".$_POST['recaptcha']);
+                    $response = json_decode($response, true);
+                    if($response["success"] === true){
+                        reservaInscripcion($_POST['nombre'], $_POST['email'], $_POST['telefono'], $_POST['id_comision'], $_POST['id_filial'], $_POST['id_plan']);
+                        $retorno = array("success" => true, "mensaje" => $lenguaje['consulta_enviada_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                    }else{
+                        $retorno = array("success" => false, "mensaje" => $lenguaje['captcha_no_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                    }
+                }else{
+                    $retorno = array("success" => false, "mensaje" => $lenguaje['captcha_no_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+                }
             }else{
                 $retorno = array("success" => false, "mensaje" => $lenguaje['mail_valido_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
             }
