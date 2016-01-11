@@ -76,7 +76,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
             include_once 'gestor/includes/header.php';
         ?>
         
-        <section id="head_image_curso">
+        <section id="head_novedades">
             <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
                 <div class="container">
                     <h2 style="position:absolute;padding-top:4%">

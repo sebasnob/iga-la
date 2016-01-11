@@ -1584,6 +1584,9 @@ padding-bottom: 50px;
 /***************************
 **********Novedades CSS*****
 ****************************/
+#head_novedades{
+    padding: 0px;
+}
 
 #novedades h2 {
     margin-top:0px;
