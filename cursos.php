@@ -173,7 +173,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                 </div>
                             </div>
                         </div><!--/.author-->
-                    </section>
+                    </section>    
                     <hr />
                     <section id="uniformes" >
                         <h3><?=$lenguaje['uniforme_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
@@ -189,8 +189,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </div><!--/.author-->
                     </section>
                     <hr />
-                    <!--<hr>
-                    <section id="malla_curricular" >
+                    <!--
+                        <section id="malla_curricular" >
                         <h3><?=$lenguaje['malla_curricular_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
                         <div class="well">
                             <div class="table">
