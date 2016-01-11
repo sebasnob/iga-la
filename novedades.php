@@ -77,9 +77,26 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         ?>
         
         <section id="head_image_curso">
-            <div class="container-fluid" style="position: relative">
-                <img class="img-responsive animated fadeInLeftBig" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
+            <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
+                <div class="container">
+                    <h2 style="position:absolute;padding-top:4%">
+                        <span>
+                            <p style="font-size:70px;color:white;width:450px;font-weight:600;"><?=$lenguaje['blog_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                            <p style="font-size:50px;color:white;width:450px;font-weight:600;"><?=$lenguaje['actualidad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        </span>
+                    </h2>
+                </div>
+                <img class="img-responsive animated" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
             </div>
+            
+            <div class="visible-xs" >
+                <img class="img-responsive animated fadeInLeftBig" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
+                <div class="row col-md-12 text-center">
+                    <h3><?=$lenguaje['blog_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                    <?=$lenguaje['actualidad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                </div>
+            </div>
+            
         </section>
         
         <section id="buscador">

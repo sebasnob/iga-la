@@ -121,7 +121,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </span>
                         </div>
                         <br/>
-                    <?=$datos_curso['descripcion']?>
+                        <?=$datos_curso['descripcion']?>
                     </section>
                     <hr />
                     <section id="cursado_planes">
@@ -169,10 +169,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     <img class="avatar img-thumbnail" src="<?=$datos_curso['url_material']?>" alt="">
                                 </div>
                                 <div class="media-body">
-                                    <div class="media-heading">
-                                        
-                                    </div>
-                                <?=$datos_curso['desc_material']?>
+                                    <?=$datos_curso['desc_material']?>
                                 </div>
                             </div>
                         </div><!--/.author-->
@@ -186,10 +183,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     <img class="avatar img-thumbnail" src="<?=$datos_curso['url_uniforme']?>" alt="">
                                 </div>
                                 <div class="media-body">
-                                    <div class="media-heading">
-                                        
-                                    </div>
-                                <?=$datos_curso['desc_uniforme']?>
+                                    <?=$datos_curso['desc_uniforme']?>
                                 </div>
                             </div>
                         </div><!--/.author-->
@@ -247,28 +241,24 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 <div class="col-sm-4">
                     <br>
                     <?php
-                    $novedad = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 1);
-                    if(count($novedad) > 0){
+                    $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3);
+                    if(count($novedades) > 0){
                     ?>
                     <div class="widget ads">
                         <div class="row">
                             <div class="col-sm-12 wow fadeInUp text-center" data-wow-duration="1000ms" data-wow-delay="400ms">
-                                
-                                <div class="post-thumb">
-                                    <a href="index.php#blog"><img class="img-responsive" src="images/novedades/<?=$novedad[0]['imagen']?>" alt=""></a>
-                                </div>
-                                <div class="entry-header">
-                                    <h3><a href="index.php#blog"><?=$novedad[0]['titulo']?></a></h3>
-                                </div>
-                                <div class="entry-content">
-                                    <p><?=substr($novedad[0]['descripcion'],0,250) . '...'?></p>
-                                    <br>
-                                    <span>
-                                        <a href="novedades.php?id=<?=$novedad[0]['id']?>">
-                                            <?=$lenguaje['ver_mas_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
-                                        </a>
-                                    </span>
-                                </div>
+                            <?php
+                                foreach ($novedades as $nov)
+                                {
+                                $estiloTextos = 'font-size: 15px;';
+                                $estiloImagen = 'margin-bottom: 5px;'; ?>
+                                <a href="novedad.php?id=<?=$nov['id']?>"><img style="<?=$estiloImagen?>" class="img-responsive" src="images/novedades/<?=$nov['imagen']?>" /></a>
+                                <a href="novedad.php?id=<?=$nov['id']?>"><span style="<?=$estiloTextos?>"><?=$nov['titulo']?></span></a>
+                                <br/>
+                                <br/>
+                            <?php 
+                                }
+                            ?>
                             </div>
                         </div>
                     </div><!--/.categories-->

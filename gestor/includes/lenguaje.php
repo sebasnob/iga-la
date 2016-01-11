@@ -114,6 +114,9 @@ $lenguaje['reserva_curso_ES'] = '*Su reserva caduca 48 horas después de haber r
 
 $lenguaje['mas_de_ES'] = 'Mas de ';
 
+$lenguaje['blog_ES'] = 'Blog IGA';
+$lenguaje['actualidad_ES'] = 'Toda la actualidad en gastronomía';
+
 //ingles
 $lenguaje['boton_cerrar_IN'] = 'Close';
 $lenguaje['ver_todas_IN'] = 'see all';
@@ -228,6 +231,9 @@ $lenguaje['reserva_curso_IN'] = '*Your reservation is cancelled 48 hs after this
 
 $lenguaje['mas_de_IN'] = 'More of ';
 
+$lenguaje['blog_IN'] = 'Blog IGA';
+$lenguaje['actualidad_IN'] = 'All the news in gastronomy';
+
 //portugues
 $lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
 $lenguaje['certif_gastro_POR'] = "Certificado Avançado em Gastronomia";
@@ -341,3 +347,6 @@ $lenguaje['boton_cerrar_POR'] = 'Fechar';
 $lenguaje['reserva_curso_POR'] = '*Sua reserva expira 48 horas depois de ter realizada esta operação.';
 
 $lenguaje['mas_de_POR'] = 'Mais de ';
+
+$lenguaje['blog_POR'] = 'Blog IGA';
+$lenguaje['actualidad_POR'] = 'Todas as notícias na gastronomia';
