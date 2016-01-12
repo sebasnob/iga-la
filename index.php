@@ -348,21 +348,27 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             $cod_pais = "ar";
             switch($_SESSION['pais']['cod_pais']){
                 case "BR":
+                case "br":
                     $cod_pais = "br";
                 break;
                 case "UR":
+                case "ur":    
                     $cod_pais = "uy";
                 break;
                 case "PR":
+                case "pr":
                     $cod_pais = "py";
                 break;
                 case "BO":
+                case "bo":
                     $cod_pais = "bo";
                 break;
                 case "PA":
+                case "pa":
                     $cod_pais = "pa";
                 break;
                 case "US":
+                case "us":
                     $cod_pais = "us";
                 break;
             }
