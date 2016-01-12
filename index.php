@@ -7,6 +7,7 @@ $pagina = 'home';
 
 //unset($_SESSION);
 if(isset($_GET['pais']) && $_GET['pais'] != ''){
+    session_destroy();
     detectCountry($mysqli, $_GET['pais']);
 }
 

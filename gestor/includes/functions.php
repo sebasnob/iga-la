@@ -80,10 +80,10 @@ function getIdiomas($mysqli, $id_idioma = false, $id_pais = false)
 
 function getCursos($mysqli, $cod_curso = '')
 {
-    $cond = '';
+    $cond = ' WHERE activo=1 ';
     
     if(isset($cod_curso) && $cod_curso != ''){
-        $cond = ' WHERE cod_curso = '.$cod_curso.' ';
+        $cond .= ' AND cod_curso = '.$cod_curso.' ';
     }
 
     $resultado = $mysqli->query("SELECT * FROM cursos {$cond} ORDER BY nombre_es");
@@ -416,10 +416,15 @@ function detectCountry($mysqli, $cod_pais=''){
         
         $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$cod_pais, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
-        $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
-        $result2 = $mysqli->query($query2);
-        $idioma = $result2->fetch_assoc();
-        $idioma_sel = $idioma['idioma'];
+        if($cod_pais != 'us'){
+            $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
+            $result2 = $mysqli->query($query2);
+            $idioma = $result2->fetch_assoc();
+            $idioma_sel = $idioma['idioma'];
+        }else{
+            $idioma = array("id"=>"2", "idioma"=>"Ingles", "cod_idioma"=>"IN");
+            $idioma_sel = "Ingles";
+        }
         
         $_SESSION['pais'] = array('id'=>$tablaPais['id'],
                                   'cod_pais'=>$tablaPais['cod_pais'], 
