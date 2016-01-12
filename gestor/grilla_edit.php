@@ -150,9 +150,11 @@ $paises = getPaises($mysqli);
                                         <div class="form-group">
                                             <label class="col-sm-2 col-sm-2 control-label">Idioma: </label>
                                             <select class="form-control" name="idioma">
-                                                <option value="es">Espa&ntilde;ol</option>
-                                                <option value="en">Ingles</option>
-                                                <option value="pt">Portugues</option>
+                                            <?php
+                                            $idiomas = getIdiomas($mysqli);
+                                            foreach ($idiomas as $idioma){?>
+                                                <option value="<?=$idioma['cod_idioma'] ?>"><?= $idioma['idioma'] ?></option>
+                                            <?php } ?>
                                             </select>
                                         </div>
                                         <button onclick="enviar(this.form)" class="btn btn-success">Agregar Imagen</button>
@@ -203,9 +205,12 @@ $paises = getPaises($mysqli);
                                                 <label for="curso">Idioma: </label>
                                                 <select class="form-control input-sm" id="idioma_filtro">
                                                     <option value="0" <?php if (0 === $idioma_filtro){ echo 'selected';}?>>Seleccione</option>
-                                                    <option value="es" <?php if("es" === $idioma_filtro){ echo 'selected';}?>>Espa&ntilde;ol</option>
-                                                    <option value="in" <?php if("in" === $idioma_filtro){ echo 'selected';}?>>Ingles</option>
-                                                    <option value="pt" <?php if("pt" === $idioma_filtro){ echo 'selected';}?>>Portugues</option>
+                                                    <?php
+                                                    $idiomas = getIdiomas($mysqli);
+                                                    foreach ($idiomas as $idioma){?>
+                                                        <option value="<?=$idioma['cod_idioma'] ?>" <?php if($idioma['cod_idioma'] === $idioma_filtro){ echo 'selected';}?> ><?= $idioma['idioma'] ?></option>
+                                                    <?php } 
+                                                    ?>
                                                 </select>
                                             </span>  
                                             <span class="td">
@@ -289,9 +294,9 @@ $paises = getPaises($mysqli);
                                                         <td>
                                                             <span>Idioma: </span>
                                                             <select class="form-control input-sm" name="idioma" style="display: inline-block">
-                                                                <option value="es" <?php if($imgGrid['idioma'] == 'es'){echo 'selected';}?>>Espa&ntilde;ol</option>
-                                                                <option value="in" <?php if($imgGrid['idioma'] == 'in'){echo 'selected';}?>>Ingles</option>
-                                                                <option value="pt" <?php if($imgGrid['idioma'] == 'pt'){echo 'selected';}?>>Portugues</option>
+                                                                <option value="ES" <?php if($imgGrid['idioma'] == 'ES'){echo 'selected';}?>>Espa&ntilde;ol</option>
+                                                                <option value="IN" <?php if($imgGrid['idioma'] == 'IN'){echo 'selected';}?>>Ingles</option>
+                                                                <option value="POR" <?php if($imgGrid['idioma'] == 'POR'){echo 'selected';}?>>Portugues</option>
                                                             </select>
                                                         </td>
                                                         <td>
