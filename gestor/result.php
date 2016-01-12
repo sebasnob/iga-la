@@ -30,7 +30,6 @@ if(isset($_GET['id_idioma']) && isset($_GET['id_filial'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="Dashboard">
-        <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
         
         <title>IGA</title>
         
@@ -44,8 +43,6 @@ if(isset($_GET['id_idioma']) && isset($_GET['id_filial'])){
         <link href="assets/css/style-responsive.css" rel="stylesheet">
         <link href="assets/css/table-responsive.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css"> 
-
-        <link rel="stylesheet" type="text/css" media="screen" href="styles.php?id_curso=<?=$_GET['cod_curso']?>">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
