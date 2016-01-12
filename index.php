@@ -177,7 +177,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 </div>
         </section><!--/#blog-->
         
-        <section id="institucional">
+        <!--<section id="institucional">
             <div class="container">
                 <div class="row">
                     <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
@@ -227,7 +227,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 </div>
             </div>
         </section><!--/#team-->
-        
+        <br/>
         <section id="contact">
             <div id="contact-us" >
                 <div class="container">
