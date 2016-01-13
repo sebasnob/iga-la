@@ -85,19 +85,22 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             include_once 'gestor/includes/header.php';
         ?>
         
+        <?php
+        if($datos_curso['url_cabecera'] != ''){
+        ?>
         <section id="head_image_curso">
             <!--<div class="container-fluid">
                     <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="" style="width: 100%;">
             </div>-->
             <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
                 <div class="container">
-                    <h2 style="position:absolute;padding-top:4%">
+                    <h2 style="position:absolute;padding-top:4%;left:10%">
                         <span>
                             <p style="font-size:60px;color:white;width:450px;font-weight:600;"><?=$datos_curso['nombre']?></p>
                         </span>
                     </h2>
                 </div>
-                <img style="margin: 0 auto;" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive" />
+                <img style="margin: 0 auto;width: 100%" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive" />
             </div>
             
             <div class="visible-xs" >
@@ -106,12 +109,22 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     <h2 style="color:<?=$datos_curso['color']?>"><?=$datos_curso['nombre']?></h2>
                 </div>
             </div>
-        </section> 
+        </section>
+        <?php
+        }
+        ?>
         
         <section id="single_curso" class="container">
             <div class="row">
                 <div class="col-sm-7">
                     <section id="curso">
+                        <?php
+                        if($datos_curso['url_cabecera'] == ''){
+                        ?>
+                        <h2><?=$datos_curso['nombre']?></h2>
+                        <?php
+                        }
+                        ?>
                         <div class="entry-meta">
                             <span>
                                 <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>:
