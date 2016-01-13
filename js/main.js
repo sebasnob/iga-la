@@ -434,8 +434,8 @@ $(document).ready(function(){
                     $('#grilla-' +id).show('fast');
                 }    
             }, function(){return false});
-        
-        $('.textos_grilla25').hover(
+            
+            $('.textos_grilla25').hover(
             function(){
                 var id = $(this).attr('id');    
                     

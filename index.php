@@ -109,7 +109,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             ?>
                             <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                             <?php }?>
-                                <!--<div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 <?=$texto_grilla?>" style="background-color: <?=$arrayColores[$i]?>">-->
+                                <!--<div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: <?=$arrayColores[$i]?>">-->
                                 <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 <?=$texto_grilla?>" style="background-color: <?=$back_color?>">
                                     <table style="height: 100px; width: 100%">
                                         <tr>
