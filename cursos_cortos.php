@@ -77,8 +77,15 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         ?>  
         
         <section id="head_image_curso">
+            <div class="container">
+                <h2 style="position:absolute;padding-top:10%;left:10%">
+                    <span style="color: white;">
+                        <p style="font-size:58px"><b><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></b></p>
+                    </span>
+                </h2>
+            </div>
             <div class="container-fluid">
-                <img class="img-responsive animated fadeInLeftBig" src="images/Cabecera-Cursos-Cortos-Mayo-2015.jpg" alt="" style="width: 100%;">
+                <img class="img-responsive" src="images/Cabecera-Cursos-Cortos-Mayo-2015.jpg" alt="" style="width: 100%;">
             </div>
         </section> 
         
