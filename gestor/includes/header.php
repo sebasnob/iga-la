@@ -164,13 +164,13 @@
                             </h2>
                         </div>-->
                         <div class="container">
-                            <h2 style="position:absolute;padding-top:4%">
+                            <h2 style="position:absolute;padding-top:4%;left:10%">
                                 <span style="color: white;">
                                   <?=$lenguaje['pasion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                                 </span>
                             </h2>
                         </div>
-                        <img class="img-responsive" src="<?= $slid['url'];?>" style="margin: 0 auto;">
+                        <img class="img-responsive" src="<?= $slid['url'];?>" style="margin: 0 auto;width: 100%">
                     </div>
                 <?php
                         $i++;
