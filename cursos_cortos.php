@@ -77,15 +77,21 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         ?>  
         
         <section id="head_image_curso">
-            <div class="container">
-                <h2 style="position:absolute;padding-top:10%;left:10%">
-                    <span style="color: white;">
-                        <p style="font-size:58px"><b><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></b></p>
-                    </span>
-                </h2>
+            <div class="hidden-xs" style="background-color: #516BAD">
+                <div class="container">
+                    <h2 style="position:absolute;padding-top:9%;left:10%">
+                        <span>
+                            <p style="font-size:60px;color:white;width:450px;font-weight:600;"><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        </span>
+                    </h2>
+                </div>
+                <img style="margin: 0 auto;width: 100%" src="images/curso_cortos_es.png" class="img-responsive">
             </div>
-            <div class="container-fluid">
-                <img class="img-responsive" src="images/Cabecera-Cursos-Cortos-Mayo-2015.jpg" alt="" style="width: 100%;">
+            <div class="visible-xs">
+                <img style="margin: 0 auto;" src="images/curso_cortos_es.png" class="img-responsive">
+                <div class="row col-md-12 text-center">
+                    <h2 style="color:#516BAD"><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </h2>
+                </div>
             </div>
         </section> 
         
@@ -94,7 +100,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 <div class="col-sm-7">
 <!--                    <br>
                     <h2><?=$lenguaje['titulo_cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h2>-->
-                    <br/>
+
                         <!--<form id="form-matricula" name="form-matricula" method="post" action="#" class="form-inline formularioCursosCortos">
                             <div class="form-group">
                                 <label for="option"><?=$lenguaje['provincia_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></label>

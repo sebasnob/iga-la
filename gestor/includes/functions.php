@@ -1299,7 +1299,7 @@ function getCursoConCupo($id_filial, $cod_curso) {
     } else {
         $webservice = new webServices();
         $str_cupos = $webservice->send("JSON_getCursosConCupo");
-        if (file_put_contents('cache/cupos.json', $str_cupos)) {
+        if (file_put_contents($cfile, $str_cupos)) {
             error_log("¡Se escribio el cache de comision con cupo!", 0);
         } else {
             error_log("¡Error al escribir el cache de comisiones con cupo!", 0);
