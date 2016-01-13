@@ -37,13 +37,13 @@ jQuery(function($) {
 	
 	// Navigation Scroll
 	$(window).scroll(function(event) {
-		Scroll();
+//		Scroll();
 	});
 
-	$('.navbar-collapse ul li a').on('click', function() {  
-		$('html, body').animate({scrollTop: $(this.hash).offset().top - 5}, 1000);
-		return false;
-	});
+//	$('.navbar-collapse ul li a').on('click', function() {  
+//		$('html, body').animate({scrollTop: $(this.hash).offset().top - 5}, 1000);
+//		return false;
+//	});
 
 	// User define function
 	function Scroll() {
@@ -309,14 +309,20 @@ function filialModalSeleccionadaCC(filial){
 }
 function scroll(to)
 {
-    $('.in').removeClass('in')
-    var body = $("html, body");
+    $('.in').removeClass('in');
     $('#desplegableCursos').hide();
-    var top = $(to).position().top;
-    if(top >= 220)
+    var body = $("html, body");
+    var top = $('#'+to).position().top;
+    
+    if(($('.navbar-fixed-top').length))
     {
-        top -=  130;
+        top -=  112;
     }
+    else
+    {
+        top -=  228;
+    }
+
     body.stop().animate({scrollTop:top}, '500', 'swing');
 }
 
