@@ -1385,6 +1385,57 @@ padding-bottom: 50px;
     opacity: 0.8;
 }
 
+.textos_grilla25{
+    text-align: center;
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 400;
+    min-height: 100px;
+    font-size: 23px;
+    color: white;
+}
+.textos_grilla25:hover{
+    opacity: 0.8;
+}
+
+.textos_grilla33{
+    text-align: center;
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 400;
+    min-height: 100px;
+    font-size: 23px;
+    color: white;
+}
+.textos_grilla33:hover{
+    opacity: 0.8;
+}
+
+.textos_grilla50{
+    text-align: center;
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 400;
+    min-height: 100px;
+    font-size: 23px;
+    color: white;
+}
+.textos_grilla50:hover{
+    opacity: 0.8;
+}
+
+.textos_grilla100{
+    text-align: center;
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 400;
+    min-height: 100px;
+    font-size: 23px;
+    color: white;
+}
+.textos_grilla100:hover{
+    opacity: 0.8;
+}
 
 //ACCORDION
 

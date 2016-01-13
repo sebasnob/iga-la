@@ -434,6 +434,42 @@ $(document).ready(function(){
                     $('#grilla-' +id).show('fast');
                 }    
             }, function(){return false});
+        
+        $('.textos_grilla25').hover(
+            function(){
+                var id = $(this).attr('id');    
+                    
+                $('.imagenGrilla').hide();
+
+                if($('#grilla-' + id).css('display') === 'none')
+                {
+                    $('#grilla-' +id).show('fast');
+                }    
+            }, function(){return false});
+        
+        $('.textos_grilla33').hover(
+            function(){
+                var id = $(this).attr('id');    
+                    
+                $('.imagenGrilla').hide();
+
+                if($('#grilla-' + id).css('display') === 'none')
+                {
+                    $('#grilla-' +id).show('fast');
+                }    
+            }, function(){return false});
+        
+        $('.textos_grilla50').hover(
+            function(){
+                var id = $(this).attr('id');    
+                    
+                $('.imagenGrilla').hide();
+
+                if($('#grilla-' + id).css('display') === 'none')
+                {
+                    $('#grilla-' +id).show('fast');
+                }    
+            }, function(){return false});
 });
 function buscarNoticias()
 {

@@ -75,17 +75,42 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 <div class="row" style="padding:0">
                 <?php
                 if(is_array($gridArrayCursos) && count($gridArrayCursos) > 0){
+                    $texto_grilla = "textos_grilla";
+                    switch (count($gridArrayCursos)){
+                        case "4":
+                            $texto_grilla = "textos_grilla25";
+                        break;
+                        
+                        case "3":
+                            $texto_grilla = "textos_grilla33";
+                        break;
+                    
+                        case "2":
+                            $texto_grilla = "textos_grilla50";
+                        break;
+                    
+                        case "1":
+                            $texto_grilla = "textos_grilla100";
+                        break;
+                    }
                     $arrayColores = array('#2B933E', '#C40F79', '#246553', '#F5B432', '#264699');
                     $i = 0;
                     foreach ($gridArrayCursos as $imgGrid)
                     {
+                            $datos_curso = getCursos($mysqli, $imgGrid['id_curso']);
                             if($imgGrid['id_curso'] == 0)
-                            {?>
+                            {
+                                $back_color = "#516BAD";
+                            ?>
                             <a href="cursos_cortos.php">    
-                            <?php } else{?>
+                            <?php 
+                            }else{
+                                $back_color = $datos_curso[0]['color'];
+                            ?>
                             <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                             <?php }?>
-                                <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: <?=$arrayColores[$i]?>">
+                                <!--<div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 <?=$texto_grilla?>" style="background-color: <?=$arrayColores[$i]?>">-->
+                                <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 <?=$texto_grilla?>" style="background-color: <?=$back_color?>">
                                     <table style="height: 100px; width: 100%">
                                         <tr>
                                             <td class="tdPadding">

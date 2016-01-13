@@ -14,7 +14,21 @@ left: 96%;
     width: 20%;
 }
 
+.textos_grilla25{
+    width: 25%;
+}
 
+.textos_grilla33{
+    width: 33.3333333333%;
+}
+
+.textos_grilla50{
+    width: 50%;
+}
+
+.textos_grilla100{
+    width: 100%;
+}
 
 }
 /* md */
