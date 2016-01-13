@@ -100,6 +100,10 @@ text-align: center;
   opacity: 0.8;
 }
 
+#google-map{
+    margin-top: 0px;
+}
+
 }
 
 /* xs */
@@ -313,6 +317,10 @@ text-align: center;
     font-weight: 600;
 }
 
+#google-map{
+    margin-top: 0px;
+}
+
 }
 
 /* XS Portrait */
@@ -357,6 +365,10 @@ text-align: center;
   display: block;
   font-size: 30px;
   opacity: 0.8;
+}
+
+#google-map{
+    margin-top: 0px;
 }
 
 }
