@@ -341,10 +341,10 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <div id="google-map"></div>
                                 </div>
                                 <div class="col-md-6 col-sm-12" id="direccion_filial">
-                                    <!--<div class="col-md-6">
-                                        <img class="img-responsive" src="images/sinnombre.png">
-                                    </div>-->
-                                    <div class="contact-info col-md-6">
+                                    <div class="col-md-8">
+                                        <div id="pano"></div>
+                                    </div>
+                                    <div class="contact-info col-md-4">
                                         <ul class="address">
                                             <li>
                                                 <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><br>
