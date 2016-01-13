@@ -1274,7 +1274,7 @@ function getMallaCurricular($mysqli, $id_cfi)
     return $malla;
 }
 
-function getCursoConCupo($id_filial, $cod_curso){
+/*function getCursoConCupo($id_filial, $cod_curso){
     $webservice = new webServices();
     $str_cupos = $webservice->send("JSON_getCursosConCupo");
     $cupos = json_decode($str_cupos,true);
@@ -1288,7 +1288,41 @@ function getCursoConCupo($id_filial, $cod_curso){
         }
     }
     return $curso_cupo;
+}*/
+
+function getCursoConCupo($id_filial, $cod_curso) {
+    $cfile = 'cache/cupos.json';
+    // si ya esta el cache revisamos | agregar check de fecha y luego leemos
+    if (file_exists($cfile)) {
+        error_log("La última modificación de $cfile fue: ".date("F d Y H:i:s.", filectime($cfile)), 0);
+        $str_cupos = file_get_contents($cfile);
+    } else {
+        $webservice = new webServices();
+        $str_cupos = $webservice->send("JSON_getCursosConCupo");
+        if (file_put_contents('cache/cupos.json', $str_cupos)) {
+            error_log("¡Se escribio el cache de comision con cupo!", 0);
+        } else {
+            error_log("¡Error al escribir el cache de comisiones con cupo!", 0);
+        }
+    }
+
+    $cupos = json_decode($str_cupos, true);
+    $curso_cupo = array();
+
+    if (count($cupos) > 0) {
+        if (is_array($cupos[$id_filial])) {
+            foreach($cupos[$id_filial] as $id => $datos) {
+                if ($datos['codigocurso'] == $cod_curso) {
+                    $curso_cupo[] = $datos;
+                }
+            }
+        } else {
+            echo "No hay comisiones con Cupos Disponibles para esta filial";
+        }
+    }
+    return $curso_cupo;
 }
+
 
 function getCursosCortos($mysqli, $cod_curso = false, $pais = false)
 {
