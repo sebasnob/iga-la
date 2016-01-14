@@ -100,7 +100,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </span>
                     </h2>
                 </div>
-                <img style="margin: 0 auto;width: 100%" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive animated fadeInLeftBig" />
+                <img style="margin: 0 auto;width: 100%" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive" />
             </div>
             
             <div class="visible-xs" >

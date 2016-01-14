@@ -85,7 +85,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </span>
                     </h2>
                 </div>
-                <img style="margin: 0 auto;width: 100%" src="images/curso_cortos_es.png" class="img-responsive animated fadeInLeftBig">
+                <img style="margin: 0 auto;width: 100%" src="images/curso_cortos_es.png" class="img-responsive" />
             </div>
             <div class="visible-xs">
                 <img style="margin: 0 auto;" src="images/curso_cortos_es.png" class="img-responsive">
