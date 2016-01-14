@@ -131,13 +131,6 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             <div class="row">
                 <div class="col-sm-7">
                     <div id="curso">
-                        <?php
-                        if($datos_curso['url_cabecera'] == ''){
-                        ?>
-                        <h2><?=$datos_curso['nombre']?></h2>
-                        <?php
-                        }
-                        ?>
                         <div class="entry-meta">
                             <span>
                                 <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>:
