@@ -1679,6 +1679,19 @@ padding-bottom: 50px;
     color: #396CC8;
 }
 
-.media-body p{
-    margin: 10px;
+.media-body {
+    padding: 0px 20px;
+}
+#mail {
+font-size: 13px;
+}
+.contact-info {
+padding-right: 0;
+}
+
+#meterial_curso{
+margin-top: 40px;
+}
+#uniformes{
+margin-top: 45px;
 }
