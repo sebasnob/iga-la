@@ -57,7 +57,7 @@
                 } ?>
             </div>
             <div class="col-md-6" style="padding-right: 5px;">
-                <p class="letterblack"><a target="_blank" href="http://www.lifeweb.com.ar/">&copy; 2016 Designed by lifeWEB</a></p>
+                <p class="letterblack"><a target="_blank" href="http://www.lifeweb.com.ar/">&copy; <?=date("Y")?> Designed by lifeWEB</a></p>
             </div>
         </div>
     </div>
