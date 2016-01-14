@@ -58,7 +58,7 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
           <script src="js/respond.min.js"></script>
         <![endif]-->
         
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head><!--/head-->
     
@@ -137,7 +137,6 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
         
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript" src="js/jquery.inview.min.js"></script>
         <script type="text/javascript" src="js/wow.min.js"></script>
         <script type="text/javascript" src="js/mousescroll.js"></script>
