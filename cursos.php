@@ -78,6 +78,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
     $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
     
     $malla_curricular = getMallaCurricular($mysqli, $datos_curso['id_cfi']);
+    
+    $es_curso_corto = esCursosCortos($mysqli, $cod_curso, $_SESSION['pais']['id']);
 ?>
         <div id="fb-root"></div>
         
@@ -86,12 +88,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         ?>
         
         <?php
-        if($datos_curso['url_cabecera'] != ''){
+        if($datos_curso['url_cabecera'] != '' && !$es_curso_corto){
         ?>
         <section id="head_image_curso">
-            <!--<div class="container-fluid">
-                    <img class="img-responsive animated fadeInLeftBig" src="<?=$datos_curso['url_cabecera']?>" alt="" style="width: 100%;">
-            </div>-->
             <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
                 <div class="container">
                     <h2 style="position:absolute;padding-top:4%;left:10%">
@@ -110,10 +109,24 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 </div>
             </div>
         </section>
-        <?php
-        }
-        ?>
-        
+        <?php } else { ?>
+        <section id="head_image_curso">
+            <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
+                <div class="container">
+                    <h2 style="padding-top:4%;left:10%">
+                        <span>
+                            <p style="font-size:60px;color:<?=$datos_curso['color']?>;width:450px;font-weight:600;"><?=$datos_curso['nombre']?></p>
+                        </span>
+                    </h2>
+                </div>
+            </div>
+            <div class="visible-xs" >
+                <div class="row col-md-12 text-center">
+                    <h2 style="color:<?=$datos_curso['color']?>"><?=$datos_curso['nombre']?></h2>
+                </div>
+            </div>
+        </section>
+        <?php } ?>
         <section id="single_curso" class="container">
             <div class="row">
                 <div class="col-sm-7">
