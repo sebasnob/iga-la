@@ -77,7 +77,56 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
             <div class="container">
                 <div class="row">
                     <div class="col-sm-7" itemscope itemtype="http://schema.org/ScholarlyArticle">
-                        <img itemprop="image" class="img-responsive" src="images/novedades/<?=$novedad['imagen']?>" />
+                        <div id="post-carousel"  class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                              <?php
+                              if($novedad['imagen'] != ''){
+                              ?>
+                              <li data-target="#post-carousel" data-slide-to="0" class="active"></li>
+                              <?php
+                              }
+                              if($novedad['imagen2'] != ''){
+                              ?>
+                              <li data-target="#post-carousel" data-slide-to="1"></li>
+                              <?php
+                              }
+                              if($novedad['imagen3'] != ''){
+                              ?>
+                              <li data-target="#post-carousel" data-slide-to="2"></li>
+                              <?php
+                              }
+                              ?>
+                            </ol>
+                            <div class="carousel-inner">
+                              <?php
+                              if($novedad['imagen'] != ''){
+                              ?>
+                              <div class="item active">
+                                  <a href="#"><img class="img-responsive" src="images/novedades/<?=$novedad['imagen']?>" width="100%" alt=""></a>
+                              </div>
+                              <?php
+                              }
+                              if($novedad['imagen2'] != ''){
+                              ?>
+                              <div class="item">
+                                  <a href="#"><img class="img-responsive" src="images/novedades/<?=$novedad['imagen2']?>" width="100%" alt=""></a>
+                              </div>
+                              <?php
+                              }
+                              if($novedad['imagen3'] != ''){
+                              ?>
+                              <div class="item">
+                                  <a href="#"><img class="img-responsive" src="images/novedades/<?=$novedad['imagen3']?>" width="100%" alt=""></a>
+                              </div>
+                              <?php
+                              }
+                              ?>
+                                <a class="blog-left-control" href="#post-carousel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                                <a class="blog-right-control" href="#post-carousel" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                            </div>                               
+                        </div>
+                        
+                        <!--<img itemprop="image" class="img-responsive" src="images/novedades/<?=$novedad['imagen']?>" />-->
                         <br/>
                         <span itemprop="name">
                             <h2><?=$novedad['titulo']?></h2>
