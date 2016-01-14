@@ -235,44 +235,44 @@ $lenguaje['blog_IN'] = 'Blog IGA';
 $lenguaje['actualidad_IN'] = 'All the news in gastronomy';
 
 //portugues
-$lenguaje['gastro_POR'] = "Gastronomia e Haute Cuisine";
+$lenguaje['gastro_POR'] = "Gastronomia e Alta Cozinha";
 $lenguaje['certif_gastro_POR'] = "Certificado Avançado em Gastronomia";
-$lenguaje['paste_avanzada_POR'] = "Pastelaria Advanced e Professional";
-$lenguaje['paste_profesional_POR'] = "Pastelaria Advanced";
-$lenguaje['gastro_intensivo_POR'] = "Gastronomia e Haute Cuisine INTENSIVO";
+$lenguaje['paste_avanzada_POR'] = "Pastelaria Avançada e Professional";
+$lenguaje['paste_profesional_POR'] = "Pastelaria Avançada";
+$lenguaje['gastro_intensivo_POR'] = "Gastronomia e Alta Cozinha INTENSIVO";
 $lenguaje['titulo_cursos_cortos_POR'] = "Você está visitando os cursos de curta duração";
-$lenguaje['titulo_POR'] = 'CULINARY INSTITUTE DAS AMÉRICAS';
+$lenguaje['titulo_POR'] = 'INSTITUTO CULINARIO DAS AMÉRICAS';
 $lenguaje['inicio_POR'] = 'Home';
 $lenguaje['curso_POR'] = 'Cursos';
 $lenguaje['institucional_POR'] = 'Institucional';
-$lenguaje['pasion_POR'] = '<p style="font-size:62px">Faz sua paixão</p>
+$lenguaje['pasion_POR'] = '<p style="font-size:62px">Faça da sua paixão</p>
   <p style="font-size:63px"><b>Sua profissão</b></p>
   <p style="font-size:61px">Estudo em IGA</p>';
-$lenguaje['pasion_movil_POR'] = '<p style="font-size:35px">Faz sua paixão</p>
+$lenguaje['pasion_movil_POR'] = '<p style="font-size:35px">Faça da sua paixão</p>
   <p style="font-size:36px"><b>Sua profissão</b></p>
-  <p style="font-size:34px">Estudo em IGA</p>';
+  <p style="font-size:34px">Estude em IGA</p>';
 $lenguaje['cursos_destacados_POR'] = 'Estes são os nossos cursos caracterizados';
 $lenguaje['uniformes_POR'] = 'Uniformes';
 $lenguaje['materiales_POR'] = 'Materiais';
 $lenguaje['red_capacitacion_POR'] = 'Rede de FormaÇÃo IGA';
-$lenguaje['capacitamos_POR'] = "Nós treinamos nossos alunos com especialização em artes culinárias, desenvolvimento de atitudes e valores que exige a formação da consciência responsável, atencioso, crítico, ético e público, e para atender à demanda nacional e internacional para o trabalho.";
+$lenguaje['capacitamos_POR'] = "Nós treinamos nossos alunos com especialização em artes culinárias, desenvolvimento de atitudes e valores que exigem a formação da consciência responsável, atenciosa, crítica, ética e pública, e para atender à demanda nacional e internacional para o trabalho.";
 $lenguaje['lared_POR'] = "A rede";
-$lenguaje['lared_desc_POR'] = "A nossa rede de formação, o maior de seu tipo na América Latina, graças ao seu sistema de gestão fornece a mesma qualidade da educação dada em todos os estabelecimentos, proporcionando aos estudantes a possibilidade de obtenter a melhor educação em gastronomia, seja qual for seu local de residência.";
+$lenguaje['lared_desc_POR'] = "A nossa rede de formação, a maior do seu tipo na América Latina, graças ao seu sistema de gestão fornece a mesma qualidade da educação dada em todos os estabelecimentos, proporcionando aos estudantes a possibilidade de obtenter a melhor educação em gastronomia, seja qual for seu local de residência.";
 $lenguaje['mision_POR'] = "MISSÃO";
-$lenguaje['mision_desc_POR'] = "Nós nos concentramos em empregadores interessados em criar um negócio seguro e sustentável, permitindo-lhes alcançar a independência econômica, mantendo seu compromisso de treinar integridade profissional.";
+$lenguaje['mision_desc_POR'] = "Nós nos concentramos em empregadores interessados em ter um negócio seguro e sustentável, permitindo-lhes alcançar a independência econômica, mantendo o compromisso social de formar profissionais íntegros.";
 $lenguaje['vision_POR'] = "VisÃo";
 $lenguaje['vision_desc_POR'] = "Reforçar a liderança na América Latina e posicionar nossa marca em locais estratégicos em todo o mundo, a nossa expansão através da abertura de novas unidades de negócios e incorporando tecnologias de ponta aplicadas à educação.";
 $lenguaje['valores_POR'] = "Valores";
 $lenguaje['valores_desc_POR'] = "Responsabilidade<br/>Liderança<br/>Compromisso<br/>Inovação<br/>Eficiência<br/>";
 $lenguaje['alumnos_felices_POR'] = "Estudantes Felizes :)";
-$lenguaje['filiales_POR'] = "Subsidiárias";
+$lenguaje['filiales_POR'] = "Filial";
 $lenguaje['cursos_disponibles_POR'] = "Cursos Disponíveis";
 $lenguaje['consultas_POR'] = "Consultas";
 $lenguaje['novedades_POR'] = "NOVIDADES";
 $lenguaje['encontranos_POR'] = "Encontre-nos e siga-nos em nossas redes sociais";
 $lenguaje['contactate_POR'] = "Entre em contato conosco";
 $lenguaje['encontra_tu_iga_en_POR'] = "Encontre seu IGA em ";
-$lenguaje['provincia_POR'] = "Província";
+$lenguaje['provincia_POR'] = "Estado";
 $lenguaje['seleccione_provincia_POR'] = "Selecione um estado";
 $lenguaje['seleccione_filial_POR'] = "Selecione uma filial";
 $lenguaje['nombre_POR'] = "Nome";
@@ -303,7 +303,7 @@ $lenguaje['ver_mas_POR'] = "Ver Mais";
 $lenguaje['mas_novedades_POR'] = "Mais Notícias";
 $lenguaje['Español_POR'] = "Espanhol";
 $lenguaje['Ingles_POR'] = "Inglês";
-$lenguaje['Portugues_POR'] = 'Portugues';
+$lenguaje['Portugues_POR'] = 'Português';
 $lenguaje['inscripcion_abierta_POR'] = ' - INSCRIÇÕES ABERTAS';
 
 $lenguaje['duracion_POR'] = 'Duração';
@@ -320,7 +320,7 @@ $lenguaje['planilla_POR'] = 'Grade de horários';
 
 $lenguaje['malla_comision_POR'] = 'Turma';
 $lenguaje['malla_fecha_in_POR'] = 'Início';
-$lenguaje['malla_horarios_POR'] = 'Dias y Horário';
+$lenguaje['malla_horarios_POR'] = 'Dias e Horário';
 $lenguaje['malla_matricula_POR'] = 'Matrícula';
 $lenguaje['malla_cuotas_POR'] = 'Parcelas';
 $lenguaje['malla_vigencia_POR'] = 'Vigência do Plano';
@@ -330,10 +330,10 @@ $lenguaje['malla_boton_consulta_POR'] = 'Consultar';
 
 $lenguaje['enviando_POR'] = 'Envio..';
 $lenguaje['mail_valido__POR'] = 'E-mail inválido';
-$lenguaje['tel_valido_POR'] = 'Invalid phone number';
+$lenguaje['tel_valido_POR'] = 'Número de telefone inválido';
 $lenguaje['captcha_no_valido_POR'] = 'Captcha não é válido.';
 $lenguaje['captcha_vacio_POR'] = 'O Captcha está vazio.';
-$lenguaje['cupo_disponible_POR'] = 'Assentos Disponíveis';
+$lenguaje['cupo_disponible_POR'] = 'Vagas Disponíveis';
 $lenguaje['comparte_novedad_POR'] = 'Compartilhe esta notícia';
 $lenguaje['buscador_de_noticias_POR'] = 'Outras Notícias';
 $lenguaje['palabra_clave_POR'] = 'Por palavra-chave';
