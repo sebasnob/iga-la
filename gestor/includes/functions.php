@@ -1398,4 +1398,18 @@ function getCategoriasNovedades($mysqli, $id = false)
     }
     return $categoriasNovedades;
 }
+
+function esCursosCortos($mysqli, $cod_curso, $id_pais)
+{
+    $curso = getCursosCortos($mysqli, $cod_curso, $id_pais);
+    
+    if(!empty($curso))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 ?>
