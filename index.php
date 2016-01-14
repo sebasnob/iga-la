@@ -341,7 +341,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <div id="google-map"></div>
                                 </div>
                                 <div class="col-md-6 col-sm-12" id="direccion_filial">
-                                    <div class="col-md-8">
+                                    <div class="col-md-8" style="padding: 0;">
                                         <div id="pano"></div>
                                     </div>
                                     <div class="contact-info col-md-4">
