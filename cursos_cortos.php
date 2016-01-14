@@ -81,11 +81,11 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 <div class="container">
                     <h2 style="position:absolute;padding-top:9%;left:10%">
                         <span>
-                            <p style="font-size:60px;color:white;width:450px;font-weight:600;"><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                            <p style="font-size:60px;color:white;width:450px;font-weight:600;z-index: 99;"><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                         </span>
                     </h2>
                 </div>
-                <img style="margin: 0 auto;width: 100%" src="images/curso_cortos_es.png" class="img-responsive">
+                <img style="margin: 0 auto;width: 100%" src="images/curso_cortos_es.png" class="img-responsive animated fadeInLeftBig">
             </div>
             <div class="visible-xs">
                 <img style="margin: 0 auto;" src="images/curso_cortos_es.png" class="img-responsive">
