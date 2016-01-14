@@ -816,11 +816,14 @@ function cambiarPais($cod_pais, $mysqli){
     $tablaPaisdatos = $result->fetch_assoc();
         
     $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$tablaPaisdatos['cod_pais'], 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
-        
-    $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select min(id_idioma) from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
-        
-    $result2 = $mysqli->query($query2);
-    $idioma = $result2->fetch_assoc();
+    
+    if($tablaPaisdatos['cod_pais'] != 'US'){
+        $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select min(id_idioma) from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
+        $result2 = $mysqli->query($query2);
+        $idioma = $result2->fetch_assoc();
+    }else{
+        $idioma = array("id"=>"2", "idioma"=>"Ingles", "cod_idioma"=>"IN");
+    }
     
     session_start();
     $_SESSION['pais'] = array('id'=>$tablaPais['id'], 
