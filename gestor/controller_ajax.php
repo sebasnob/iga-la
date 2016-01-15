@@ -348,7 +348,15 @@ switch($_POST['option']){
                         <td>{$datos_curso['codigo']}</td>
                         <td>{$datos_curso['inicio_clases']}</td>";
                     if(isset($datos_curso['horarios']) && is_array($datos_curso['horarios'])){
-                        $dias = array("1"=>"Lunes", "2"=>"Martes", "3"=>"Miércoles", "4"=>"Jueves", "5"=>"Viernes", "6"=>"Sábado", "7"=>"Domingo");
+                        $dias = array(
+                            "1"=>$lenguaje['lunes_'.$_SESSION['idioma_seleccionado']['cod_idioma']],
+                            "2"=>$lenguaje['martes_'.$_SESSION['idioma_seleccionado']['cod_idioma']],
+                            "3"=>$lenguaje['miercoles_'.$_SESSION['idioma_seleccionado']['cod_idioma']],
+                            "4"=>$lenguaje['jueves_'.$_SESSION['idioma_seleccionado']['cod_idioma']],
+                            "5"=>$lenguaje['viernes_'.$_SESSION['idioma_seleccionado']['cod_idioma']],
+                            "6"=>$lenguaje['sabado_'.$_SESSION['idioma_seleccionado']['cod_idioma']],
+                            "7"=>$lenguaje['domingo_'.$_SESSION['idioma_seleccionado']['cod_idioma']]);
+
                         $retorno .= "<td>";
                         foreach($datos_curso['horarios'] as $horarios){
                             $retorno .= $dias[$horarios['dia']]." de ".substr($horarios['horadesde'], 0, 5)." a ".substr($horarios['horahasta'], 0, 5)." hs.<br/>";
@@ -359,7 +367,7 @@ switch($_POST['option']){
                         if(isset($datos_curso['detalle_cuotas']) && is_array($datos_curso['detalle_cuotas'])){
                             $retorno .= "<td>";
                             foreach($datos_curso['detalle_cuotas'] as $cuotas){
-                                $retorno .= "Cuotas ".$cuotas['cuota_inicio']." a ".$cuotas['cuota_fin']."&nbsp;&nbsp;<b>$".$cuotas['valor']."</b><br/>";
+                                $retorno .= $lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]." ".$cuotas['cuota_inicio']." a ".$cuotas['cuota_fin']."&nbsp;&nbsp;<b>$".$cuotas['valor']."</b><br/>";
                             }
                             $retorno .= "</td>";
                         }
@@ -551,3 +559,4 @@ switch($_POST['option']){
 }
 
 ?>
+

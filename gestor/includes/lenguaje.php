@@ -4,7 +4,6 @@ $lenguaje['titulo_ES'] = 'IGA - INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS';
 $lenguaje['inicio_ES'] = 'Inicio';
 $lenguaje['curso_ES'] = 'Cursos';
 $lenguaje['institucional_ES'] = 'Institucional';
-
 $lenguaje['pasion_AR_ES'] = '<p style="font-size:50px">Hace de tu pasión</p><p style="font-size:58px"><b>TU PROFESION</b></p><p style="font-size:62px">Estudiá en IGA</p>';
 $lenguaje['pasion_AR_movil_ES'] = '<p style="font-size:30px">Hace de tu pasión</p><p style="font-size:35px"><b>TU PROFESION</b></p><p style="font-size:37px">Estudiá en IGA</p>';
 
@@ -25,7 +24,7 @@ $lenguaje['capacitamos_ES'] = "Capacitamos a nuestros alumnos con una especializ
 $lenguaje['lared_ES'] = "La Red";
 $lenguaje['lared_desc_ES'] = "Nuestra red de capacitación, la más importante de Latinoamérica en su tipo, gracias a su sistema de gestión ofrece la misma calidad en la enseñanza otorgada en todos los establecimientos, brindando así a los alumnos la posibilidad de obtenter la mejor enseñanza en gastronomía, cualquiera sea su localidad de residencia.";
 $lenguaje['mision_ES'] = "Mision";
-$lenguaje['mision_desc_ES'] = "Nos orientamos a empleadores interesados en forjar un negocio seguro y sustentable, que les permita lograr una independencia económica, manteniendo el compromiso social de formar profesionales íntegros.";
+$lenguaje['mision_desc_ES'] = "ustentable, que les permita lograr una independencia económica, manteniendo el compromiso social de formar profesionales íntegros.";
 $lenguaje['vision_ES'] = "Vision";
 $lenguaje['vision_desc_ES'] = "Potenciar el liderazgo en Latinoamérica y posicionar nuestra marca en puntos estratégicos a nivel internacional, expandiéndonos a través de la apertura de nuevas unidades de negocios e incorporando tecnologías de vanguardia aplicadas a la educación.";
 $lenguaje['valores_ES'] = "Valores";
@@ -103,6 +102,14 @@ $lenguaje['malla_vigencia_ES'] = 'Vigencia';
 $lenguaje['malla_cupos_ES'] = 'Cupos';
 $lenguaje['malla_boton_reserva_ES'] = 'Reservar';
 $lenguaje['malla_boton_consulta_ES'] = 'Consultar';
+
+$lenguaje['domingo_ES'] = 'Domingo';
+$lenguaje['lunes_ES'] = "Lunes";
+$lenguaje['martes_ES'] = "Martes";
+$lenguaje['miercoles_ES'] = "Miércoles";
+$lenguaje['jueves_ES'] = "Jueves";
+$lenguaje['viernes_ES'] = "Viernes";
+$lenguaje['sabado_ES'] = "Sabado";
 
 $lenguaje['enviando_ES'] = 'Enviando..';
 $lenguaje['mail_valido_ES'] = 'Email no válido';
@@ -231,6 +238,14 @@ $lenguaje['malla_cupos_IN'] = 'Available Programs';
 $lenguaje['malla_boton_reserva_IN'] = 'Books Place';
 $lenguaje['malla_boton_consulta_IN'] = 'Check';
 
+$lenguaje['domingo_IN'] = 'Sunday';
+$lenguaje['lunes_IN'] = "Monday";
+$lenguaje['martes_IN'] = "Tuesday";
+$lenguaje['miercoles_IN'] = "Wednesday";
+$lenguaje['jueves_IN'] = "Thursday";
+$lenguaje['viernes_IN'] = "Friday";
+$lenguaje['sabado_IN'] = "Saturday";
+
 $lenguaje['enviando_IN'] = 'Sending..';
 $lenguaje['mail_valido_IN'] = 'Invalid email';
 $lenguaje['tel_valido_IN'] = 'Invalid phone number';
@@ -246,6 +261,7 @@ $lenguaje['blog_IN'] = 'Blog IGA';
 $lenguaje['actualidad_IN'] = 'All the news in gastronomy';
 
 //portugues
+
 $lenguaje['gastro_POR'] = "Gastronomia e Alta Cozinha";
 $lenguaje['certif_gastro_POR'] = "Certificado Avançado em Gastronomia";
 $lenguaje['paste_avanzada_POR'] = "Pastelaria Avançada e Professional";
@@ -253,15 +269,17 @@ $lenguaje['paste_profesional_POR'] = "Pastelaria Avançada";
 $lenguaje['gastro_intensivo_POR'] = "Gastronomia e Alta Cozinha INTENSIVO";
 $lenguaje['titulo_cursos_cortos_POR'] = "Você está visitando os cursos de curta duração";
 $lenguaje['titulo_POR'] = 'INSTITUTO CULINARIO DAS AMÉRICAS';
-$lenguaje['inicio_POR'] = 'Home';
+$lenguaje['inicio_POR'] = 'Início';
 $lenguaje['curso_POR'] = 'Cursos';
 $lenguaje['institucional_POR'] = 'Institucional';
+
 $lenguaje['pasion_BR_POR'] = '<p style="font-size:62px">Faça da sua paixão</p>
   <p style="font-size:63px"><b>Sua profissão</b></p>
   <p style="font-size:61px">Estudo em IGA</p>';
 $lenguaje['pasion_BR_movil_POR'] = '<p style="font-size:35px">Faça da sua paixão</p>
   <p style="font-size:36px"><b>Sua profissão</b></p>
   <p style="font-size:34px">Estude em IGA</p>';
+
 $lenguaje['cursos_destacados_POR'] = 'Estes são os nossos cursos caracterizados';
 $lenguaje['uniformes_POR'] = 'Uniformes';
 $lenguaje['materiales_POR'] = 'Materiais';
@@ -295,8 +313,8 @@ $lenguaje['direccion_POR'] = "Endereço";
 $lenguaje['telefono_POR'] = "Telefone";
 $lenguaje['quiero_trabajar_POR'] = "Trabalhar em IGA";
 $lenguaje['quiero_una_franquicia_POR'] = "Franquias";
-$lenguaje['contacto_POR'] = "Contato";
-$lenguaje['campus_POR'] = "Campus";
+$lenguaje['contacto_POR'] = "Fala Conosco";
+$lenguaje['campus_POR'] = "Alunos";
 $lenguaje['nombre_defecto_POR'] = "Claro que não Disponível";
 $lenguaje['duracion_defecto_POR'] = "";
 $lenguaje['descripcion_defecto_POR'] = "Atualmente este curso não está disponível no país";
@@ -307,7 +325,7 @@ $lenguaje['no_existen_cursos_cortos_POR'] = "";
 $lenguaje['no_existen_cursos_cocineritos_POR'] = "";
 $lenguaje['malla_curricular_POR'] = "Curriculum";
 $lenguaje['atencion_alumno_POR'] = "Atendimento ao aluno";
-$lenguaje['seleccion_opcion_POR'] = "Escolha uma opÇão";
+$lenguaje['seleccion_opcion_POR'] = "Escolha uma opção";
 $lenguaje['consulta_enviada_POR'] = "Suas exigências corretamente.";
 $lenguaje['faltan_datos_POR'] = "Dados em falta!";
 $lenguaje['ver_mas_POR'] = "Mais Novidades";
@@ -339,6 +357,15 @@ $lenguaje['malla_cupos_POR'] = 'Vagas Disponíveis';
 $lenguaje['malla_boton_reserva_POR'] = 'Reservar uma Vaga';
 $lenguaje['malla_boton_consulta_POR'] = 'Consultar';
 
+$lenguaje['domingo_POR'] = 'Domingo';
+$lenguaje['lunes_POR'] = "Segunda-feira";
+$lenguaje['martes_POR'] = "Terça-Feira";
+$lenguaje['miercoles_POR'] = "Quarta-Feira";
+$lenguaje['jueves_POR'] = "Quinta-Feira";
+$lenguaje['viernes_POR'] = "Sexta-Feira";
+$lenguaje['sabado_POR'] = "Sábado";
+
+
 $lenguaje['enviando_POR'] = 'Envio..';
 $lenguaje['mail_valido__POR'] = 'E-mail inválido';
 $lenguaje['tel_valido_POR'] = 'Número de telefone inválido';
@@ -361,3 +388,4 @@ $lenguaje['mas_de_POR'] = 'Mais de ';
 
 $lenguaje['blog_POR'] = 'Blog IGA';
 $lenguaje['actualidad_POR'] = 'Todas as notícias na gastronomia';
+
