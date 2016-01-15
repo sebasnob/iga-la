@@ -77,8 +77,14 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                 <div class="row" style="padding:0">
                 <?php
                 if(is_array($gridArrayCursos) && count($gridArrayCursos) > 0){
-                    $texto_grilla = "textos_grilla";
                     switch (count($gridArrayCursos)){
+                        case "6":
+                            $texto_grilla = "textos_grilla16";
+                        break;
+                        case "5":
+                            $texto_grilla = "textos_grilla20";
+                        break;
+                        
                         case "4":
                             $texto_grilla = "textos_grilla25";
                         break;
@@ -112,7 +118,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                             <a href="cursos.php?cod_curso=<?php echo $imgGrid['id_curso']?>">
                             <?php }?>
                                 <!--<div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla" style="background-color: <?=$arrayColores[$i]?>">-->
-                                <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 <?=$texto_grilla?>" style="background-color: <?=$back_color?>">
+                                <div id="<?= $imgGrid['id_curso'] ?>" class="col-sm-6 col-xs-12 textos_grilla <?=$texto_grilla?>" style="background-color: <?=$back_color?>">
                                     <table style="height: 100px; width: 100%">
                                         <tr>
                                             <td class="tdPadding">

@@ -145,7 +145,7 @@
                         </div>-->
                         <div class="container">
                             <h2 style="position:absolute;padding-top:4%;left:10%">
-                                <span style="color: white;">
+                                <span style="color: white;text-shadow: 1px 1px #333;">
                                   <?=$lenguaje['pasion_'.$_SESSION['pais']['cod_pais'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                                 </span>
                             </h2>
