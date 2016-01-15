@@ -4,8 +4,19 @@ $lenguaje['titulo_ES'] = 'IGA - INSTITUTO GASTRONÓMICO DE LAS AMÉRICAS';
 $lenguaje['inicio_ES'] = 'Inicio';
 $lenguaje['curso_ES'] = 'Cursos';
 $lenguaje['institucional_ES'] = 'Institucional';
-$lenguaje['pasion_ES'] = '<p style="font-size:50px">Hace de tu pasión</p><p style="font-size:58px"><b>TU PROFESION</b></p><p style="font-size:62px">Estudiá en IGA</p>';
-$lenguaje['pasion_movil_ES'] = '<p style="font-size:30px">Hace de tu pasión</p><p style="font-size:35px"><b>TU PROFESION</b></p><p style="font-size:37px">Estudiá en IGA</p>';
+
+$lenguaje['pasion_AR_ES'] = '<p style="font-size:50px">Hace de tu pasión</p><p style="font-size:58px"><b>TU PROFESION</b></p><p style="font-size:62px">Estudiá en IGA</p>';
+$lenguaje['pasion_AR_movil_ES'] = '<p style="font-size:30px">Hace de tu pasión</p><p style="font-size:35px"><b>TU PROFESION</b></p><p style="font-size:37px">Estudiá en IGA</p>';
+
+$lenguaje['pasion_UR_ES'] = '<p style="font-size:50px">Hace de tu pasión</p><p style="font-size:58px"><b>TU PROFESION</b></p><p style="font-size:62px">Estudiá en IGA</p>';
+$lenguaje['pasion_UR_movil_ES'] = '<p style="font-size:30px">Hace de tu pasión</p><p style="font-size:35px"><b>TU PROFESION</b></p><p style="font-size:37px">Estudiá en IGA</p>';
+
+$lenguaje['pasion_BO_ES'] = '<p style="font-size:50px">Haz de tu pasión</p><p style="font-size:58px"><b>TU PROFESION</b></p><p style="font-size:62px">Estudiá en IGA</p>';
+$lenguaje['pasion_BO_movil_ES'] = '<p style="font-size:30px">Haz de tu pasión</p><p style="font-size:35px"><b>TU PROFESION</b></p><p style="font-size:37px">Estudiá en IGA</p>';
+
+$lenguaje['pasion_PR_ES'] = '<p style="font-size:50px">Haga de su pasión</p><p style="font-size:58px"><b>SU PROFESION</b></p><p style="font-size:62px">Estudie en IGA</p>';
+$lenguaje['pasion_PR_movil_ES'] = '<p style="font-size:30px">Haga de su pasión</p><p style="font-size:35px"><b>SU PROFESION</b></p><p style="font-size:37px">Estudie en IGA</p>';
+
 $lenguaje['cursos_destacados_ES'] = 'Estos son Nuestros cursos Destacados';
 $lenguaje['uniformes_ES'] = 'Uniformes';
 $lenguaje['materiales_ES'] = 'Materiales';
@@ -132,10 +143,10 @@ $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
 $lenguaje['inicio_IN'] = 'Home';
 $lenguaje['curso_IN'] = 'Courses';
 $lenguaje['institucional_IN'] = 'Institutional';
-$lenguaje['pasion_IN'] = '<p style="font-size:42px">Make of your passion</p>
+$lenguaje['pasion_US_IN'] = '<p style="font-size:42px">Make of your passion</p>
                           <p style="font-size:54px"><b>Your Profession</b></p>
                           <p class="text-center" style="font-size:63px">Study at IGA</p>';
-$lenguaje['pasion_movil_IN'] = '<p style="font-size:30px">Make of your passion</p><p style="font-size:35px"><b>Your Profession</b></p><p style="font-size:37px">Study at IGA</p>';
+$lenguaje['pasion_US_movil_IN'] = '<p style="font-size:30px">Make of your passion</p><p style="font-size:35px"><b>Your Profession</b></p><p style="font-size:37px">Study at IGA</p>';
 $lenguaje['cursos_destacados_IN'] = 'These are our distinguished courses';
 $lenguaje['uniformes_IN'] = 'Uniforms';
 $lenguaje['materiales_IN'] = 'Materials';
@@ -245,10 +256,10 @@ $lenguaje['titulo_POR'] = 'INSTITUTO CULINARIO DAS AMÉRICAS';
 $lenguaje['inicio_POR'] = 'Home';
 $lenguaje['curso_POR'] = 'Cursos';
 $lenguaje['institucional_POR'] = 'Institucional';
-$lenguaje['pasion_POR'] = '<p style="font-size:62px">Faça da sua paixão</p>
+$lenguaje['pasion_BR_POR'] = '<p style="font-size:62px">Faça da sua paixão</p>
   <p style="font-size:63px"><b>Sua profissão</b></p>
   <p style="font-size:61px">Estudo em IGA</p>';
-$lenguaje['pasion_movil_POR'] = '<p style="font-size:35px">Faça da sua paixão</p>
+$lenguaje['pasion_BR_movil_POR'] = '<p style="font-size:35px">Faça da sua paixão</p>
   <p style="font-size:36px"><b>Sua profissão</b></p>
   <p style="font-size:34px">Estude em IGA</p>';
 $lenguaje['cursos_destacados_POR'] = 'Estes são os nossos cursos caracterizados';

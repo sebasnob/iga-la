@@ -15,6 +15,8 @@ if(!isset($_SESSION['pais']))
 {
     detectCountry($mysqli);
 }
+
+
 if(!isset($_SESSION['idioma_seleccionado']['cod_idioma']))
 {
     $_SESSION['idioma_seleccionado']['cod_idioma'] = $_SESSION['pais']['cod_idioma'];
