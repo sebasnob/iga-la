@@ -92,6 +92,10 @@ $lenguaje['horas_ES'] = 'Horas';
 $lenguaje['meses_ES'] = 'Meses';
 $lenguaje['anios_ES'] = 'Años';
 
+$lenguaje['hora_ES'] = 'Hora';
+$lenguaje['mes_ES'] = 'Mes';
+$lenguaje['anio_ES'] = 'Año';
+
 $lenguaje['planilla_ES'] = 'Planilla de horarios';
 $lenguaje['malla_comision_ES'] = 'Comisión';
 $lenguaje['malla_fecha_in_ES'] = 'Inicio';
@@ -150,8 +154,8 @@ $lenguaje['titulo_IN'] = 'CULINARY INSTITUTE OF THE AMERICAS';
 $lenguaje['inicio_IN'] = 'Home';
 $lenguaje['curso_IN'] = 'Courses';
 $lenguaje['institucional_IN'] = 'Institutional';
-$lenguaje['pasion_US_IN'] = '<p style="font-size:42px">Make of your passion</p>
-                          <p style="font-size:54px"><b>Your Profession</b></p>
+$lenguaje['pasion_US_IN'] = '<p style="font-size:42px">Follow your passion</p>
+                          <p style="font-size:54px"><b>with us</b></p>
                           <p class="text-center" style="font-size:63px">Study at IGA</p>';
 $lenguaje['pasion_US_movil_IN'] = '<p style="font-size:30px">Make of your passion</p><p style="font-size:35px"><b>Your Profession</b></p><p style="font-size:37px">Study at IGA</p>';
 $lenguaje['cursos_destacados_IN'] = 'These are our distinguished courses';
@@ -173,7 +177,7 @@ $lenguaje['cursos_disponibles_IN'] = "Available Courses";
 $lenguaje['consultas_IN'] = "Support";
 $lenguaje['novedades_IN'] = "NEWS";
 $lenguaje['encontranos_IN'] = "Follow and find us on our social networks";
-$lenguaje['contactate_IN'] = "Get in touch with us";
+$lenguaje['contactate_IN'] = "Contact us";
 $lenguaje['encontra_tu_iga_en_IN'] = "Find Your IGA in ";
 $lenguaje['provincia_IN'] = "State";
 $lenguaje['seleccione_provincia_IN'] = "Select State";
@@ -226,6 +230,11 @@ $lenguaje['objetivos_IN'] = 'Our goals';
 $lenguaje['horas_IN'] = 'Hours';
 $lenguaje['meses_IN'] = 'Months';
 $lenguaje['anios_IN'] = 'Years';
+
+$lenguaje['hora_IN'] = 'Hour';
+$lenguaje['mes_IN'] = 'Month';
+$lenguaje['anio_IN'] = 'Year';
+
 $lenguaje['planilla_IN'] = 'Timetable';
 
 $lenguaje['malla_comision_IN'] = 'Group';
@@ -275,7 +284,7 @@ $lenguaje['institucional_POR'] = 'Institucional';
 
 $lenguaje['pasion_BR_POR'] = '<p style="font-size:50px">Faça da sua paixão</p>
   <p style="font-size:51px"><b>Sua profissão</b></p>
-  <p style="font-size:54px">Estudo em IGA</p>';
+  <p style="font-size:54px">Estude no IGA</p>';
 $lenguaje['pasion_BR_movil_POR'] = '<p style="font-size:35px">Faça da sua paixão</p>
   <p style="font-size:36px"><b>Sua profissão</b></p>
   <p style="font-size:34px">Estude em IGA</p>';
@@ -345,6 +354,11 @@ $lenguaje['objetivos_POR'] = 'Nossos objetivos';
 $lenguaje['horas_POR'] = 'Horas';
 $lenguaje['meses_POR'] = 'Meses';
 $lenguaje['anios_POR'] = 'Anos';
+
+$lenguaje['hora_POR'] = 'Hora';
+$lenguaje['mes_POR'] = 'Mês';
+$lenguaje['anio_POR'] = 'Ano';
+
 $lenguaje['planilla_POR'] = 'Grade de horários';
 
 $lenguaje['malla_comision_POR'] = 'Turma';

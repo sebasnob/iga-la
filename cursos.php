@@ -60,6 +60,73 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
         
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
         <link rel="shortcut icon" href="images/favicon.ico" />
+        
+        <?php
+            
+            function imprimirDuracion($datos_curso, $lenguaje)
+            {
+                                    $alguno = false;
+                                    
+                                    if(isset($datos_curso['horas']) && $datos_curso['horas'] != 0)
+                                    {
+                                        $alguno = true;
+                                        if($datos_curso['horas'] > 1)
+                                        {
+                                            echo $datos_curso['horas']. ' ' . $lenguaje['horas_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                                        }
+                                        else
+                                        {
+                                            echo $datos_curso['horas']. ' ' . $lenguaje['hora_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                                        }
+                                    }
+                                    
+                                    if(isset($datos_curso['meses']) && $datos_curso['meses'] != '0')
+                                    {
+                                        if($alguno)
+                                        {
+                                            echo ', ';
+                                        }
+                                        else
+                                        {
+                                            $alguno = true;
+                                        }
+                                        
+                                        if($datos_curso['meses'] == '1')
+                                        {
+                                            echo $datos_curso['meses']. ' ' . $lenguaje['mes_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                                        }
+                                        else
+                                        {
+                                            echo $datos_curso['meses']. ' ' . $lenguaje['meses_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                                        }
+                                        
+                                    }
+                                    
+                                    if(isset($datos_curso['anios']) && $datos_curso['anios'] != 0)
+                                    {
+                                        if($alguno)
+                                        {
+                                            echo ', ';
+                                        }
+                                        else
+                                        {
+                                            $alguno = true;
+                                        }
+                                        
+                                        if($datos_curso['anios'] > 1)
+                                        {
+                                            echo $datos_curso['anios']. ' ' . $lenguaje['anios_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                                        }
+                                        else
+                                        {
+                                            echo $datos_curso['anios']. ' ' . $lenguaje['anio_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                                        }
+                                        
+                                    }
+            }
+            
+        ?>
+        
     </head><!--/head-->
     <body>
 <?php
@@ -141,9 +208,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <div class="entry-meta">
                             <span>
                                 <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>:
-                    	    <?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." {$lenguaje['horas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
-                            <?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." {$lenguaje['meses_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
-                            <?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." {$lenguaje['anios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
+                                <?php 
+                                    imprimirDuracion($datos_curso, $lenguaje);
+                                ?>
                             </span>
                         </div>
                         <br/>
@@ -212,7 +279,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                             </div>
                         </div><!--/.author-->
                     </div>
-                  <? endif; ?>
+                    <? endif; ?>
                     <!--
                         <div id="malla_curricular" >
                         <h3><?=$lenguaje['malla_curricular_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
@@ -256,9 +323,13 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <div class="entry-meta">
                             <span>
                                 <i class="fa fa-calendar"></i>&nbsp;<?=$lenguaje['duracion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>:
-                	<?php echo ($datos_curso['horas'] != '' && $datos_curso['horas'] != 0)? $datos_curso['horas']." {$lenguaje['horas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
-                	<?php echo ($datos_curso['meses'] != '' && $datos_curso['meses'] != 0)? ", ".$datos_curso['meses']." {$lenguaje['meses_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
-                	<?php echo ($datos_curso['anios'] != '' && $datos_curso['anios'] != 0)? ", ".$datos_curso['anios']." {$lenguaje['anios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]}": ''; ?>
+                                
+                                <?php 
+                                    imprimirDuracion($datos_curso, $lenguaje);
+                                ?>
+                                
+                                
+                                
                             </span>
                         </div>
                     <?=$datos_curso['objetivos']?>
@@ -477,37 +548,35 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         function consultarCurso(formid, boton, coursecontact, errorid){
             $(boton).button('loading');
             $.ajax({
-              type: "POST",
-              url: "gestor/controller_ajax.php",
-              data: {
-                option:"enviar_consulta",
-                nombre: $("#"+formid+" input[name=name]").val(),
-                email: $("#"+formid+" input[name=email]").val(),
-                phone: $("#"+formid+" input[name=phone]").val(),
-                message: $("#"+formid+" textarea[name=mensaje]").val(),
-                filial: $("#"+formid+" input[name=id_filial]").val(),
-                coursecontact: coursecontact,
-                id_comision: $("#"+formid+" input[name=id_comision]").val(),
-                id_plan: $("#"+formid+" input[name=id_plan]").val(),
-                cod_curso: $("#"+formid+" input[name=cod_curso]").val(),
-                tipo: "3",
-                recaptcha: $("#"+formid+" textarea[name=g-recaptcha-response]").val()
-              },
-              dataType:'json',
-              success: function(data)
-              {
+                type: "POST",
+                url: "gestor/controller_ajax.php",
+                data: {
+                    option:"enviar_consulta",
+                    nombre: $("#"+formid+" input[name=name]").val(),
+                    email: $("#"+formid+" input[name=email]").val(),
+                    phone: $("#"+formid+" input[name=phone]").val(),
+                    message: $("#"+formid+" textarea[name=mensaje]").val(),
+                    filial: $("#"+formid+" input[name=id_filial]").val(),
+                    coursecontact: coursecontact,
+                    id_comision: $("#"+formid+" input[name=id_comision]").val(),
+                    id_plan: $("#"+formid+" input[name=id_plan]").val(),
+                    cod_curso: $("#"+formid+" input[name=cod_curso]").val(),
+                    tipo: "3",
+                    recaptcha: $("#"+formid+" textarea[name=g-recaptcha-response]").val()
+                },
+                dataType:'json',
+                success: function(data)
+                {
                     $(boton).button('reset');
                     if(data.success){
                         $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.mensaje+"</div>");
                     }else{
                         $('#'+errorid).html(data.mensaje);
                     }
-              }
+                }
             });
         }
         </script>
     </body>
 </html>
-
-
 

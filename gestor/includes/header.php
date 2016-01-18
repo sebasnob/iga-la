@@ -26,8 +26,9 @@
                                         <li class="scroll"><a href="javascript:scroll('blog')"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                                         <!--<li class="scroll"><a href="javascript:scroll('institucional')"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  -->
                                         <li class="scroll"><a href="javascript:scroll('contact')"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                                    <?php if($_SESSION['pais']['cod_pais'] != 'US'){ ?>
                                         <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
-                            <?php 
+                                    <?php }
                                     break;
                                     
                                     case 'novedades':
@@ -39,8 +40,9 @@
                                         <li class="scroll"><a href="index.php#blog"><?=$lenguaje['novedades_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
                                         <!-- <li class="scroll"><a href="index.php#team"><?=$lenguaje['institucional_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>  -->
                                         <li class="scroll"><a href="index.php#contact"><?=$lenguaje['contacto_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </a></li>
+                                        <?php if($_SESSION['pais']['cod_pais'] != 'US'){ ?>
                                         <li><a href="http://campus.igacloud.net/" target="_blank"><?=$lenguaje['campus_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></a></li> 
-                            <?php 
+                                    <?php }
                                     break;
                                 }
                             ?>
