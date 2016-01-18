@@ -234,7 +234,7 @@ $lenguaje['malla_horarios_IN'] = 'Days and Timetable';
 $lenguaje['malla_matricula_IN'] = 'Enrolment';
 $lenguaje['malla_cuotas_IN'] = 'Installments';
 $lenguaje['malla_vigencia_IN'] = 'Due data';
-$lenguaje['malla_cupos_IN'] = 'Available Programs';
+$lenguaje['malla_cupos_IN'] = 'Capacity';
 $lenguaje['malla_boton_reserva_IN'] = 'Books Place';
 $lenguaje['malla_boton_consulta_IN'] = 'Check';
 
@@ -273,9 +273,9 @@ $lenguaje['inicio_POR'] = 'Início';
 $lenguaje['curso_POR'] = 'Cursos';
 $lenguaje['institucional_POR'] = 'Institucional';
 
-$lenguaje['pasion_BR_POR'] = '<p style="font-size:62px">Faça da sua paixão</p>
-  <p style="font-size:63px"><b>Sua profissão</b></p>
-  <p style="font-size:61px">Estudo em IGA</p>';
+$lenguaje['pasion_BR_POR'] = '<p style="font-size:50px">Faça da sua paixão</p>
+  <p style="font-size:51px"><b>Sua profissão</b></p>
+  <p style="font-size:54px">Estudo em IGA</p>';
 $lenguaje['pasion_BR_movil_POR'] = '<p style="font-size:35px">Faça da sua paixão</p>
   <p style="font-size:36px"><b>Sua profissão</b></p>
   <p style="font-size:34px">Estude em IGA</p>';
@@ -311,8 +311,8 @@ $lenguaje['mensaje_POR'] = "Mensagem";
 $lenguaje['enviar_POR'] = "Enviar";
 $lenguaje['direccion_POR'] = "Endereço";
 $lenguaje['telefono_POR'] = "Telefone";
-$lenguaje['quiero_trabajar_POR'] = "Trabalhe conosco";
-$lenguaje['quiero_una_franquicia_POR'] = "Seja un franqueado";
+$lenguaje['quiero_trabajar_POR'] = "Fale conosco";
+$lenguaje['quiero_una_franquicia_POR'] = "Seja um fraqueado";
 $lenguaje['contacto_POR'] = "Fala Conosco";
 $lenguaje['campus_POR'] = "Alunos";
 $lenguaje['nombre_defecto_POR'] = "Claro que não Disponível";
