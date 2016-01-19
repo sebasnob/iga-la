@@ -79,7 +79,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         <section id="head_image_curso">
             <div class="hidden-xs" style="background-color: #516BAD">
                 <div class="container">
-                    <h2 style="position:absolute;padding-top:9%;left:10%">
+                    <h2 style="position:absolute;padding-top:9%;left:10%;z-index: 99;">
                         <span>
                             <p style="font-size:60px;color:white;width:450px;font-weight:600;z-index: 99;"><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                         </span>
