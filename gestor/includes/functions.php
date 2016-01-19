@@ -844,7 +844,7 @@ function cambiarPais($cod_pais, $mysqli){
 
 
 function cambiarProvincia($cod_provincia, $mysqli){
-    $query = "SELECT id, nombre FROM filiales WHERE id_provincia='{$cod_provincia}'";
+    $query = "SELECT id, nombre FROM filiales WHERE id_provincia='{$cod_provincia}' ORDER BY nombre ASC";
     $result = $mysqli->query($query);
     
     while($tablaFiliales = $result->fetch_assoc())
