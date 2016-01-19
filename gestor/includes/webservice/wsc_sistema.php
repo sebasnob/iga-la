@@ -21,7 +21,9 @@ class wsc_sistema{
     
     function __construct($metodo = null, array $parametros = null){
         //$this->base_url = $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '192.168.1.106'  ? 'http://192.168.1.106/igacloud/' : 'http://sistema.igacloud.net/';
-		$this->base_url = 'http://dev.igacloud.net/';
+
+//$this->base_url = 'http://dev.igacloud.net/';
+		$this->base_url = 'http://sistema.igacloud.net/';
         if($metodo != null){
             $this->metodo = $metodo;
             $this->parametros = $parametros;    
