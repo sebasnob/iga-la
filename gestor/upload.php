@@ -1110,7 +1110,6 @@ if(isset($_POST['nuevoAuspiciante']))
                     
                 $ruta = substr($ruta, 3);
                 $query_ins = "INSERT INTO auspiciantes (nombre, url_img, cod_pais, link) value ('{$nombre}', '{$ruta}', '{$cod_pais}', '{$link}')";
-                die($query_ins);
                 $respuesta = $mysqli->query($query_ins);
                 
                 if($respuesta)
