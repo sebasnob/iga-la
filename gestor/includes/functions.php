@@ -1180,7 +1180,7 @@ function guardarConsultaCurso($mysqli,$filial,$email,$nombre,$phone,$asunto,$cod
 	"codigo" => -1,
 	"asunto" => $asunto,
 	"tipo_asunto" => $tipo_asunto,
-	"cod_curso_asunto" => $cod_tipo_asunto,
+	"cod_curso_asunto" => $cod_curso,
 	"cod_filial" => $filial,
 	"destacar" => 0,
 	"estado" => "pendiente",
