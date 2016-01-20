@@ -693,12 +693,16 @@ switch($_POST['option']){
                     // Obtenemos las vacantes reales de la comision
 
                     $vacante = $datos_curso['cupo'] - $datos_curso['inscriptos'];
-
+                    $fechaInicio = $datos_curso['inicio_clases'];
+                    if($cod_pais != "us")
+                    {
+                        $fechaInicio = date("d/m/Y", strtotime($datos_curso['inicio_clases']));
+                    }
                     $retorno .="<tr>
 
                         <td>{$datos_curso['codigo']}</td>
 
-                        <td>{$datos_curso['inicio_clases']}</td>";
+                        <td>{$fechaInicio}</td>";
 
                     if(isset($datos_curso['horarios']) && is_array($datos_curso['horarios'])){
 
@@ -747,8 +751,13 @@ switch($_POST['option']){
                             $retorno .= "</td>";
 
                         }
-
-                    $retorno .= "<td>{$datos_curso['fechavigencia']}</td>
+                    
+                    $fechaVigencia = $datos_curso['fechavigencia'];
+                    if($cod_pais != "us")
+                    {
+                        $fechaVigencia = date("d/m/Y", strtotime($datos_curso['fechavigencia']));
+                    }
+                    $retorno .= "<td>{$fechaVigencia}</td>
 
                         <td>{$vacante}</td>
 
