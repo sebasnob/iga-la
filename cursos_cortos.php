@@ -77,7 +77,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         ?>  
         
         <section id="head_image_curso">
-            <div class="hidden-xs" style="background-color: #516BAD">
+            <div class="hidden-xs">
                 <div class="container">
                     <h2 style="position:absolute;padding-top:9%;left:10%;z-index: 99;">
                         <span>

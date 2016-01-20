@@ -79,7 +79,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         <section id="head_novedades">
             <div class="hidden-xs">
                 <div class="container">
-                    <h2 style="position:absolute;padding-top:4%">
+                    <h2 style="position:absolute;padding-top:4%;z-index: 99;">
                         <span>
                             <p style="font-size:70px;color:white;width:450px;font-weight:600;"><?=$lenguaje['blog_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
                             <p style="font-size:50px;color:white;width:450px;font-weight:600;"><?=$lenguaje['actualidad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
