@@ -470,6 +470,8 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
             });
             $("#phone").intlTelInput("setCountry", "<?=$cod_pais?>");
         </script>
-        
+        <noscript>
+            <img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6027258627986&amp;cd[value]=0.00&amp;cd[currency]=ARS&amp;noscript=1" />
+        </noscript>';
     </body>
 </html>
