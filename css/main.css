@@ -1381,7 +1381,6 @@ padding-bottom: 50px;
 
 .textos_grilla{
     text-align: center;
-    text-transform: capitalize;
     font-family: inherit;
     font-weight: 400;
     min-height: 100px;
@@ -1642,4 +1641,9 @@ margin-top: 40px;
 }
 #uniformes{
 margin-top: 45px;
+}
+
+#selectFilialModal{
+    background-image: url('../images/fondo.jpg');
+    background-size: cover;
 }
