@@ -39,7 +39,7 @@
     </div>-->
     <div class="col-md-12 footer-bottom">
         <div class="container">
-            <div class="col-md-6">
+            <div class="col-md-9">
                 <?php 
                 $auspiciantes = getAuspiciantes($mysqli);
                 foreach ($auspiciantes as $auspiciante){ 
@@ -56,7 +56,7 @@
                     }
                 } ?>
             </div>
-            <div class="col-md-6" style="padding-right: 5px;">
+            <div class="col-md-3 col-xs-12 col-sm-12" style="padding-right: 5px;">
                 <p class="letterblack"><a target="_blank" href="http://www.lifeweb.com.ar/">&copy; <?=date("Y")?> Designed by lifeWEB</a></p>
             </div>
         </div>

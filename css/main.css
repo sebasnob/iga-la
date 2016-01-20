@@ -1060,7 +1060,7 @@ padding-bottom: 50px;
 .footer-logo {
   display: inline-block;
   margin-bottom: 5px;
-  margin-right: 20px;
+  margin-right: 15px;
 }
 
 #footer .social-icons ul {
@@ -1087,10 +1087,6 @@ padding-bottom: 50px;
     
 }
 
-#footer .letterblack{
-
-    text-align: right;
-}
 
 #footer .textleft ul li a {
    
