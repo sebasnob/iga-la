@@ -77,7 +77,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
         ?>
         
         <section id="head_novedades">
-            <div class="hidden-xs"  style="background-color: <?=$datos_curso['color']?>">
+            <div class="hidden-xs">
                 <div class="container">
                     <h2 style="position:absolute;padding-top:4%">
                         <span>
@@ -86,7 +86,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                         </span>
                     </h2>
                 </div>
-                <img class="img-responsive animated" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
+                <img class="img-responsive animated fadeInLeftBig" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
             </div>
             
             <div class="visible-xs" >
