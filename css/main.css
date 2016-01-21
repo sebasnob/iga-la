@@ -1643,3 +1643,7 @@ margin-top: 45px;
     background-image: url('../images/fondo.jpg');
     background-size: cover;
 }
+
+#cursos_contacto{
+    width: 41.5%!important;
+}

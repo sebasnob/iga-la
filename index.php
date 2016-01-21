@@ -309,7 +309,103 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                                 <option value=""><?=$lenguaje['seleccion_opcion_'.$_SESSION['idioma_seleccionado']['cod_idioma']]?></option>
                                                 <?php
                                                 $cursos = getCursos($mysqli);
-                                                foreach($cursos as $id=>$data){
+                                                switch ($_SESSION['pais']['id'])
+                                                {
+                                                    case 1:
+                                                    case 3:
+                                                    case 9:
+                                                        //cursos a mostrar para Argentina, Uruguay y Panamá
+                                                        $cursosMostrar = array(
+                                                                                 //cursos largos
+                                                                                 1,  //Gastronimía y alta cocina
+                                                                                 17, //Cocineritos nivel I
+                                                                                 18, //Cocineritos nivel II
+                                                                                 19, //Cocineritos nivel III
+                                                                                 31, //Pastelería profesional y avanzada
+                                                                                 63, //Certificación avanzada en gastronomía
+                                                                                 95,  //Gastronomía y alta cocina -Intensivo-
+                                                                                 //cursos cortos
+                                                                                 3,  //Chef express
+                                                                                 6,  //Cocina diet
+                                                                                 8,  //Panadería y pastelería
+                                                                                 13, //Sommelier
+                                                                                 14, //Sushi
+                                                                                 15, //Chocolatería
+                                                                                 23, //Chef express II
+                                                                                 25, //Pastelería para eventos
+                                                                                 29, //Bartender
+                                                                                 38, //Decoración de tortas
+                                                                                 40, //Cocina para eventos
+                                                                                 89, //Cocina española e italiana
+                                                                                 96,  //Cocina japonesa y Sushi
+                                                                                131 //Decoración de tortas avanzado
+                                                                                );
+                                                        break;
+                                                    case 4:
+                                                    case 6:
+                                                        //cursos a mostrar para Bolivia y Paraguay
+                                                        $cursosMostrar = array(
+                                                                                //cursos largos
+                                                                                1,  //Gastronimía y alta cocina
+                                                                                17, //Cocineritos nivel I
+                                                                                18, //Cocineritos nivel II
+                                                                                19, //Cocineritos nivel III
+                                                                                22, //Cocinero profesional * debe decir chef profesional para bolivia y paraguay
+                                                                                31, //Pastelería profesional y avanzada
+                                                                                57,  //Tecnicatura superior en gastronomía
+                                                                                //cursos cortos
+                                                                                3,  //Chef express
+                                                                                13, //Sommelier
+                                                                                14, //Sushi
+                                                                                15, //Chocolatería
+                                                                                23, //Chef express II
+                                                                                25, //Pastelería para eventos
+                                                                                29, //Bartender
+                                                                                38, //Decoración de tortas
+                                                                                40, //Cocina para eventos
+                                                                                89, //Cocina española e italiana
+                                                                                96,  //Cocina japonesa y Sushi
+                                                                                131 //Decoración de tortas avanzado
+                                                                              );
+                                                        break;
+                                                    case 2:
+                                                        //cursos a mostrar para Brasil
+                                                        $cursosMostrar = array(
+                                                                            //cursos largos
+                                                                            1,  //Gastronimía y alta cocina
+                                                                            2, //Pastelería profesional
+                                                                            17, //Cocineritos nivel I
+                                                                            18, //Cocineritos nivel II
+                                                                            19, //Cocineritos nivel III
+                                                                            31, //Pastelería profesional y avanzada
+                                                                            63, //Certificación avanzada en gastronomía
+                                                                            95,  //Gastronomía y alta cocina -Intensivo-
+                                                                            //cursos cortos
+                                                                            3,  //Chef express
+                                                                            6,  //Cocina diet
+                                                                            8,  //Panadería y pastelería
+                                                                            14, //Sushi
+                                                                            15, //Chocolatería
+                                                                            23, //Chef express II
+                                                                            29, //Bartender
+                                                                            38, //Decoración de tortas
+                                                                            89, //Cocina española e italiana
+                                                                            131 //Decoración de tortas avanzado
+                                                                           );
+                                                        break;
+                                                    case 10:
+                                                           $cursosMostrar = array(17, 29, 3, 26, 8, 25);
+                                                       break;
+                                                    default:
+                                                        $cursosMostrar = false;
+                                                        break;
+                                                }
+                                                
+                                                
+                                                foreach($cursos as $id=>$data)
+                                                {
+                                                    if(in_array($data['cod_curso'], $cursosMostrar))
+                                                    {
                                                 ?>
                                                 <option value="<?=$data['cod_curso']?>">
                                                         <?php
@@ -329,6 +425,8 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                                         ?>
                                                 </option>
                                                 <?php
+                                                    }
+                                                
                                                 }
                                                 ?>
                                             </select>
