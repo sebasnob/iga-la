@@ -254,12 +254,12 @@ $lenguaje['anio_IN'] = 'Year';
 $lenguaje['planilla_IN'] = 'Timetable';
 
 $lenguaje['malla_comision_IN'] = 'Group';
-$lenguaje['malla_fecha_in_IN'] = 'Home';
+$lenguaje['malla_fecha_in_IN'] = 'Start';
 $lenguaje['malla_horarios_IN'] = 'Days and Timetable';
-$lenguaje['malla_matricula_IN'] = 'Enrolment';
-$lenguaje['malla_cuotas_IN'] = 'Installments';
-$lenguaje['malla_vigencia_IN'] = 'Due data';
-$lenguaje['malla_cupos_IN'] = 'Capacity';
+$lenguaje['malla_matricula_IN'] = 'Enrollment';
+$lenguaje['malla_cuotas_IN'] = 'Monthly fee';
+$lenguaje['malla_vigencia_IN'] = 'Valid until';
+$lenguaje['malla_cupos_IN'] = 'Places available';
 $lenguaje['malla_boton_reserva_IN'] = 'Books Place';
 $lenguaje['malla_boton_consulta_IN'] = 'Check';
 

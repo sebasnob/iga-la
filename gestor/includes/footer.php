@@ -10,11 +10,28 @@
                     </ul> 
 
                 </div>
+                <?php 
+                $facebook = "https://www.facebook.com/IGA.GASTRONOMIA";
+                $twitter = "https://twitter.com/IGA_LA";
+                $google = "https://google.com/+Igalatinoamerica";
+                    if($_SESSION['pais']['id'] == 2)
+                    {
+                        $facebook = "https://www.facebook.com/IGABRASIL";
+                        $twitter = "https://twitter.com/IGA_BRASIL";
+                        $google = "https://google.com/+IGABRASILGASTRONOMIA";
+                    }
+                    if($_SESSION['pais']['id'] == 10)
+                    {
+                        $facebook = "https://www.facebook.com/IGA.US";
+                        $twitter = "#";
+                        $google = "https://plus.google.com/116894700549987766068/about";
+                    }
+                ?>
                 <div class="col-md-6 col-sm-12 social-icons">
                     <ul>
-                        <li><a class="facebook" href="https://www.facebook.com/IGA.GASTRONOMIA" target="_blank"><i class="fa fa-facebook"></i></a></li>  
-                        <li> <a class="twitter" href="https://twitter.com/IGA_LA" target="_blank"><i class="fa fa-twitter"></i></a></li>  
-                        <li><a class="envelope" href="https://google.com/+Igalatinoamerica" target="_blank"><i class="fa fa-google-plus"></i></a></li>  
+                        <li><a class="facebook" href="<?=$facebook?>" target="_blank"><i class="fa fa-facebook"></i></a></li>  
+                        <li> <a class="twitter" href="<?=$twitter?>" target="_blank"><i class="fa fa-twitter"></i></a></li>  
+                        <li><a class="envelope" href="<?=$google?>" target="_blank"><i class="fa fa-google-plus"></i></a></li>  
                     </ul>    
                 </div>
             </div>
