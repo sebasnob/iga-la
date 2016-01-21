@@ -138,12 +138,12 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                 if($categoria)
                 {
                         $i=0;
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, false, $categoria, $palabra, $fecha);
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], false, false, $categoria, $palabra, $fecha);
                         foreach ($categoriasNovedades as $cat){
                             if($cat['id'] == $categoria){
                         ?>
                                 
-                                <div class="col-sm-12">
+                                <div class="col-md-12">
                                     <h2 style="font-weight: 600"><?=$cat['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></h2>
                                     <hr>
                                 </div>
@@ -156,13 +156,13 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                         <?php if($i == 0){
                             $estiloTextos = 'font-size: 25px;';    
                             $estiloImagen = 'margin-bottom: 15px;'; ?>
-                            <div class="col-sm-8">
+                            <div class="col-md-8">
                         <?php }
                             else
                             {
                                 $estiloTextos = 'font-size: 15px;';
                                 $estiloImagen = 'margin-bottom: 5px;'; ?>
-                                <div class="col-sm-4" style="margin-bottom: 10px;">
+                                <div class="col-md-4 <?php if($i < 3 ) {echo 'col-md-push-1';}?>" style="margin-bottom: 10px;">
                             <?php 
                             }
                             ?>
@@ -178,9 +178,10 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                     foreach ($categoriasNovedades as $cat)
                     {
                         $i=0;
-                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], 3, false, $cat['id'], $palabra, $fecha);
+                        $e=-1;
+                        $novedades = getNovedades($mysqli, $_SESSION['pais']['id'], $_SESSION['idioma_seleccionado']['id_idioma'], false, false, $cat['id'], $palabra, $fecha);
                         ?>
-                                <div class="col-sm-12">
+                                <div class="col-md-12">
                                     <h2 style="font-weight: 600"><?=$cat['nombre_'.$_SESSION['idioma_seleccionado']['cod_idioma']];?></h2>
                                     <hr>
                                 </div>
@@ -191,13 +192,19 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                         <?php if($i == 0){
                             $estiloTextos = 'font-size: 25px;';    
                             $estiloImagen = 'margin-bottom: 15px;'; ?>
-                            <div class="col-sm-7">
+                            <div class="col-md-7">
                         <?php }
                             else
                             {
+                                if($e == 2)
+                                {
+                                    echo '</div>';
+                                    echo '<div class="row">';
+                                    $e = -1;
+                                }
                                 $estiloTextos = 'font-size: 15px;';
                                 $estiloImagen = 'margin-bottom: 5px;'; ?>
-                                <div class="col-sm-4 col-sm-push-1" style="margin-bottom: 10px;">
+                                <div class="col-md-4 <?php if($i < 3 ) {echo 'col-md-push-1';}?>" style="margin-bottom: 10px;">
                             <?php 
                             }
                             ?>
@@ -206,6 +213,7 @@ $categoriasNovedades = getCategoriasNovedades($mysqli);
                                 </div>
                         <?php 
                             $i++;
+                            $e++;
                         }
                         if($i == 0)
                         { ?>

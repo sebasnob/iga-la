@@ -670,7 +670,7 @@ switch($_POST['option']){
 
                 $retorno = "<tr>
 
-                                <td>".$lenguaje['malla_comision_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                
 
                                 <td>".$lenguaje['malla_fecha_in_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
 
@@ -693,14 +693,17 @@ switch($_POST['option']){
                     // Obtenemos las vacantes reales de la comision
 
                     $vacante = $datos_curso['cupo'] - $datos_curso['inscriptos'];
-                    $fechaInicio = $datos_curso['inicio_clases'];
-                    if($cod_pais != "us")
+                    $fechaInicio = ' - ';
+                    if($datos_curso['inicio_clases'] != '' && $datos_curso['inicio_clases'] != '1969-12-31')
                     {
-                        $fechaInicio = date("d/m/Y", strtotime($datos_curso['inicio_clases']));
+                        $fechaInicio = $datos_curso['inicio_clases'];
+                        if($cod_pais != "us")
+                        {
+                            $fechaInicio = date("d/m/Y", strtotime($datos_curso['inicio_clases']));
+                        }
                     }
                     $retorno .="<tr>
 
-                        <td>{$datos_curso['codigo']}</td>
 
                         <td>{$fechaInicio}</td>";
 
@@ -751,12 +754,15 @@ switch($_POST['option']){
                             $retorno .= "</td>";
 
                         }
-                    
-                    $fechaVigencia = $datos_curso['fechavigencia'];
-                    if($cod_pais != "us")
+                    $fechaVigencia = ' - ';
+                    if($datos_curso['fechavigencia'] != '' && $datos_curso['fechavigencia'] != '1969-12-31')
                     {
-                        $fechaVigencia = date("d/m/Y", strtotime($datos_curso['fechavigencia']));
-                    }
+                        $fechaVigencia = $datos_curso['fechavigencia'];
+                        if($cod_pais != "us")
+                        {
+                            $fechaVigencia = date("d/m/Y", strtotime($datos_curso['fechavigencia']));
+                        }
+                    }    
                     $retorno .= "<td>{$fechaVigencia}</td>
 
                         <td>{$vacante}</td>

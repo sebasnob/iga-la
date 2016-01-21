@@ -98,7 +98,7 @@ $lenguaje['anio_ES'] = 'Año';
 
 $lenguaje['planilla_ES'] = 'Planilla de horarios';
 $lenguaje['malla_comision_ES'] = 'Comisión';
-$lenguaje['malla_fecha_in_ES'] = 'Inicio';
+$lenguaje['malla_fecha_in_ES'] = 'Inicio de Clases';
 $lenguaje['malla_horarios_ES'] = 'Dias y Horarios';
 $lenguaje['malla_matricula_ES'] = 'Matrícula';
 $lenguaje['malla_cuotas_ES'] = 'Cuotas';
@@ -334,7 +334,7 @@ $lenguaje['no_existen_cursos_cocineritos_POR'] = "";
 $lenguaje['malla_curricular_POR'] = "Curriculum";
 $lenguaje['atencion_alumno_POR'] = "Atendimento ao aluno";
 $lenguaje['seleccion_opcion_POR'] = "Escolha uma opção";
-$lenguaje['consulta_enviada_POR'] = "Suas exigências corretamente.";
+$lenguaje['consulta_enviada_POR'] = "Mensagem enviada corretamente.";
 $lenguaje['faltan_datos_POR'] = "Dados em falta!";
 $lenguaje['ver_mas_POR'] = "Mais Novidades";
 $lenguaje['mas_novedades_POR'] = "Mais Notícias";
@@ -361,7 +361,7 @@ $lenguaje['anio_POR'] = 'Ano';
 $lenguaje['planilla_POR'] = 'Grade de horários';
 
 $lenguaje['malla_comision_POR'] = 'Turma';
-$lenguaje['malla_fecha_in_POR'] = 'Início';
+$lenguaje['malla_fecha_in_POR'] = 'Início das Aulas';
 $lenguaje['malla_horarios_POR'] = 'Dias e Horário';
 $lenguaje['malla_matricula_POR'] = 'Matrícula';
 $lenguaje['malla_cuotas_POR'] = 'Parcelas';
