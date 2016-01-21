@@ -159,7 +159,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         ?>
         <section id="head_image_curso">
             <!--style="background-color: <?=$datos_curso['color']?>"-->
-            <div class="hidden-xs"  >
+            <div class="hidden-xs"  <?php if($cod_curso == 17){echo 'style="background-color:#FFD501';}?>>
                 <div class="container">
                     <h2 style="position:absolute;padding-top:8%;left:10%;z-index: 99;">
                         <span>
@@ -167,7 +167,9 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         </span>
                     </h2>
                 </div>
-                <img style="margin: 0 auto;width: 100%" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive animated fadeInLeftBig" />
+                <?php if($cod_curso != 17){?>
+                    <img style="margin: 0 auto;width: 100%" src="<?=$datos_curso['url_cabecera']?>" class="img-responsive animated fadeInLeftBig" />
+                <?php } ?>
             </div>
             
             <div class="visible-xs" >

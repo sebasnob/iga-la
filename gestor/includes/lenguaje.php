@@ -60,7 +60,15 @@ $lenguaje['mensaje_ES'] = "Mensaje";
 $lenguaje['enviar_ES'] = "Enviar";
 $lenguaje['direccion_ES'] = "Dirección";
 $lenguaje['telefono_ES'] = "Teléfono";
-$lenguaje['quiero_trabajar_ES'] = "Trabajá en IGA";
+
+$lenguaje['quiero_trabajar_AR_ES'] = "Trabajá en IGA";
+$lenguaje['quiero_trabajar_UY_ES'] = 'Trabajá en IGA';
+$lenguaje['quiero_trabajar_BO_ES'] = 'Trabajá en IGA';
+$lenguaje['quiero_trabajar_PY_ES'] = 'Trabaje en IGA';
+$lenguaje['quiero_trabajar_PA_ES'] = 'Trabaje en IGA';
+$lenguaje['quiero_trabajar_US_ES'] = 'Trabaje en IGA';
+
+
 $lenguaje['quiero_una_franquicia_ES'] = "Franquicias";
 $lenguaje['contacto_ES'] = "Contacto";
 $lenguaje['campus_ES'] = "Campus";
@@ -205,7 +213,7 @@ $lenguaje['mensaje_IN'] = "Message";
 $lenguaje['enviar_IN'] = "Send";
 $lenguaje['direccion_IN'] = "Address";
 $lenguaje['telefono_IN'] = "Phone";
-$lenguaje['quiero_trabajar_IN'] = "Work in IGA";
+$lenguaje['quiero_trabajar_US_IN'] = "Work in IGA";
 $lenguaje['quiero_una_franquicia_IN'] = "Franchises";
 $lenguaje['contacto_IN'] = "Contact";
 $lenguaje['campus_IN'] = "Campus";
