@@ -152,6 +152,8 @@ $lenguaje['mas_de_ES'] = 'Mas de ';
 $lenguaje['blog_ES'] = 'Blog IGA';
 $lenguaje['actualidad_ES'] = 'Toda la actualidad en gastronomía';
 
+$lenguaje['a_ES'] = ' a ';
+
 //ingles
 $lenguaje['boton_cerrar_IN'] = 'Close';
 $lenguaje['ver_todas_IN'] = 'see all';
@@ -283,6 +285,7 @@ $lenguaje['mas_de_IN'] = 'More of ';
 $lenguaje['blog_IN'] = 'Blog IGA';
 $lenguaje['actualidad_IN'] = 'All the news in gastronomy';
 
+$lenguaje['a_IN'] = ' to ';
 //portugues
 
 $lenguaje['gastro_POR'] = "Gastronomia e Alta Cozinha";
@@ -418,4 +421,6 @@ $lenguaje['mas_de_POR'] = 'Mais de ';
 
 $lenguaje['blog_POR'] = 'Blog IGA';
 $lenguaje['actualidad_POR'] = 'Todas as notícias na gastronomia';
+
+$lenguaje['a_POR'] = ' para';
 

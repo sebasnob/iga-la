@@ -750,7 +750,7 @@ switch($_POST['option']){
 
                             foreach($datos_curso['detalle_cuotas'] as $cuotas){
 
-                                $retorno .= $lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]." ".$cuotas['cuota_inicio']." a ".$cuotas['cuota_fin']."&nbsp;&nbsp;<b>$".$cuotas['valor']."</b><br/>";
+                                $retorno .= $lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]." ".$cuotas['cuota_inicio'].$lenguaje['a_'.$_SESSION['idioma_seleccionado']['cod_idioma']].$cuotas['cuota_fin']." <b> $".$cuotas['valor']."</b><br/><br/>";
 
                             }
 

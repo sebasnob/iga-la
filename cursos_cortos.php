@@ -76,7 +76,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             include_once 'gestor/includes/header.php';
         ?>  
         
-        <section id="head_image_curso">
+<!--        <section id="head_image_curso">
             <div class="hidden-xs">
                 <div class="container">
                     <h2 style="position:absolute;padding-top:9%;left:10%;z-index: 99;">
@@ -93,7 +93,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     <h2 style="color:#516BAD"><?=$lenguaje['cursos_cortos_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?> </h2>
                 </div>
             </div>
-        </section> 
+        </section> -->
         
         <section id="single_curso" class="container">
             <div class="row">
