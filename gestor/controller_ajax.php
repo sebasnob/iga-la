@@ -926,7 +926,7 @@ switch($_POST['option']){
 
                                     });
 
-                                    $("#telefono-'.$datos_curso['codigo'].'").intlTelInput("setCountry", "'.$cod_pais.'");
+                                    $("#telefono-'.$datos_curso['codigo'].'").intlTelInput("setCountry", "'.$_SESSION['pais']['cod_pais'].'");
 
 
 
@@ -940,7 +940,7 @@ switch($_POST['option']){
 
                                     });
 
-                                    $("#phone-'.$datos_curso['codigo'].'").intlTelInput("setCountry", "'.$cod_pais.'");
+                                    $("#phone-'.$datos_curso['codigo'].'").intlTelInput("setCountry", "'.$_SESSION['pais']['cod_pais'].'");
 
                                 </script>';
 
@@ -1057,7 +1057,7 @@ switch($_POST['option']){
 
 
 
-                            $("#phone").intlTelInput("setCountry", "'.$cod_pais.'");
+                            $("#phone").intlTelInput("setCountry", "'.$_SESSION['pais']['cod_pais'].'");
 
 
 
