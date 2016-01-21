@@ -1319,9 +1319,10 @@ function getCursoConCupo($id_filial, $cod_curso) {
                     $curso_cupo[] = $datos;
                 }
             }
-        } else {
-            echo "No hay comisiones con Cupos Disponibles para esta filial";
         }
+//        else {
+//            echo "No hay comisiones con Cupos Disponibles para esta filial";
+//        }
     }
     return $curso_cupo;
 }

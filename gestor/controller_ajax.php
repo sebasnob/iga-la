@@ -666,8 +666,11 @@ switch($_POST['option']){
 
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
 
-            if(count($curso_cupo) > 0){
-
+            if(count($curso_cupo) > 0)
+            {
+                $texto = $lenguaje['planilla_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                $head = "<tr><th colspan='9' class='text-center'>{$texto}</th></tr>";
+                
                 $retorno = "<tr>
 
                                 
@@ -970,7 +973,10 @@ switch($_POST['option']){
                 ';
 
             }else{
-
+                
+                $texto = $lenguaje['contacto_'.$_SESSION['pais']['cod_pais'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
+                $head = "<tr><th colspan='9' class='text-center'>{$texto}</th></tr>";
+                
                 $retorno .= '<tr>
 
                             <td>
@@ -1069,15 +1075,10 @@ switch($_POST['option']){
 
             }
 
-        }else{
-
-
-
         }
 
-
-
-        print($retorno);
+        $respuesta = array("tabla"=>$retorno, "head"=>$head);
+        echo(json_encode($respuesta));
 
     break;
 

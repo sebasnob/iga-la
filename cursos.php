@@ -242,9 +242,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                         <div class="table-responsive" id="matricula_curso" style="display: none">
                             <table class="table table-bordered">
                                 <thead>
-                                    <tr>
-                                        <th colspan="9" class="text-center"><?=$lenguaje['planilla_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></th>
-                                    </tr>
+                                    
                                 </thead>
                                 
                                 <tbody  style="font-size:11px">
@@ -486,13 +484,16 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                 $.ajax({
                     url: "gestor/controller_ajax.php",
                     method: "POST",
+                    dataType: "json",
                     data: {
                         option : 'get_cursos_con_cupo', 
                         cod_curso : cod_curso, 
                         id_filial : id_filial
                     },
                     success: function(data){
-                        $('.table-bordered > tbody').html(data);
+                        console.log(data);
+                        $('.table-bordered > tbody').html(data.tabla);
+                        $('.table-bordered > thead').html(data.head);
                     }
                 });
             }

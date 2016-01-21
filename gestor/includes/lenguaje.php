@@ -16,6 +16,19 @@ $lenguaje['pasion_BO_movil_ES'] = '<p style="font-size:30px">Haz de tu pasión</
 $lenguaje['pasion_PY_ES'] = '<p style="font-size:50px">Haga de su pasión</p><p style="font-size:58px"><b>SU PROFESION</b></p><p style="font-size:62px">Estudie en IGA</p>';
 $lenguaje['pasion_PY_movil_ES'] = '<p style="font-size:30px">Haga de su pasión</p><p style="font-size:35px"><b>SU PROFESION</b></p><p style="font-size:37px">Estudie en IGA</p>';
 
+$lenguaje['pasion_PA_ES'] = '<p style="font-size:50px">Haga de su pasión</p><p style="font-size:58px"><b>SU PROFESION</b></p><p style="font-size:62px">Estudie en IGA</p>';
+$lenguaje['pasion_PA_movil_ES'] = '<p style="font-size:30px">Haga de su pasión</p><p style="font-size:35px"><b>SU PROFESION</b></p><p style="font-size:37px">Estudie en IGA</p>';
+
+$lenguaje['pasion_US_ES'] = '<p style="font-size:50px">Haga de su pasión</p><p style="font-size:58px"><b>SU PROFESION</b></p><p style="font-size:62px">Estudie en IGA</p>';
+$lenguaje['pasion_US_movil_ES'] = '<p style="font-size:30px">Haga de su pasión</p><p style="font-size:35px"><b>SU PROFESION</b></p><p style="font-size:37px">Estudie en IGA</p>';
+
+$lenguaje['contacto_AR_ES'] = 'Envianos tu consulta';
+$lenguaje['contacto_UY_ES'] = 'Envianos tu consulta';
+$lenguaje['contacto_BO_ES'] = 'Envíanos tu consulta';
+$lenguaje['contacto_PY_ES'] = 'Envíenos su consulta';
+$lenguaje['contacto_PA_ES'] = 'Envíenos su consulta';
+$lenguaje['contacto_US_ES'] = 'Envíenos su consulta';
+
 $lenguaje['cursos_destacados_ES'] = 'Estos son Nuestros cursos Destacados';
 $lenguaje['uniformes_ES'] = 'Uniformes';
 $lenguaje['materiales_ES'] = 'Materiales';
@@ -157,6 +170,8 @@ $lenguaje['institucional_IN'] = 'Institutional';
 $lenguaje['pasion_US_IN'] = '<p style="font-size:42px">Follow your passion with us</p>
                           <p style="font-size:56px;font-weight:600">Study at IGA</p>';
 $lenguaje['pasion_US_movil_IN'] = '<p style="font-size:30px">Make of your passion</p><p style="font-size:35px"><b>Your Profession</b></p><p style="font-size:37px">Study at IGA</p>';
+$lenguaje['contacto_US_IN'] = 'Send us your request';
+
 $lenguaje['cursos_destacados_IN'] = 'These are our distinguished courses';
 $lenguaje['uniformes_IN'] = 'Uniforms';
 $lenguaje['materiales_IN'] = 'Materials';
@@ -287,6 +302,8 @@ $lenguaje['pasion_BR_POR'] = '<p style="font-size:50px">Faça da sua paixão</p>
 $lenguaje['pasion_BR_movil_POR'] = '<p style="font-size:35px">Faça da sua paixão</p>
   <p style="font-size:36px"><b>Sua profissão</b></p>
   <p style="font-size:34px">Estude em IGA</p>';
+
+$lenguaje['contacto_BR_POR'] = 'Envie sua pergunta';
 
 $lenguaje['cursos_destacados_POR'] = 'Estes são os nossos cursos caracterizados';
 $lenguaje['uniformes_POR'] = 'Uniformes';
