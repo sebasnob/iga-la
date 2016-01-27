@@ -673,23 +673,13 @@ switch($_POST['option']){
                 
                 $retorno = "<tr>
 
-                                
+                                <th>".$lenguaje['malla_fecha_in_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
 
-                                <td>".$lenguaje['malla_fecha_in_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <th>".$lenguaje['malla_horarios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
 
-                                <td>".$lenguaje['malla_horarios_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
+                                <th>".$lenguaje['malla_matricula_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
 
-                                <td>".$lenguaje['malla_matricula_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-
-                                <td>".$lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-
-                                <td>".$lenguaje['malla_vigencia_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-
-                                <td>".$lenguaje['malla_cupos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</td>
-
-                                <td>&nbsp;</td>
-
-                            <tr>";
+                            </tr>";
 
                 foreach($curso_cupo as $id=>$datos_curso){
 
@@ -743,6 +733,15 @@ switch($_POST['option']){
                     }
 
                     $retorno .= "<td>\${$datos_curso['valormatricula']}</td>";
+                    
+                    $retorno .= "<tr>
+                                    <th>".$lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
+
+                                    <th>".$lenguaje['malla_vigencia_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
+
+                                    <th>".$lenguaje['malla_cupos_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
+
+                                <tr>";
 
                         if(isset($datos_curso['detalle_cuotas']) && is_array($datos_curso['detalle_cuotas'])){
 
@@ -770,18 +769,16 @@ switch($_POST['option']){
 
                         <td>{$vacante}</td>
 
-                        <td>
+                    </tr>
+                    <tr>
+                        <td colspan=3>
 
-                            <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn btn-sm' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>".$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
+                            <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn-success' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>".$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
 
-                            <br/><br/>
-
-                            <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn btn-sm' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>".$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
+                            <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn-primary' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>".$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
 
                         </td>
-
                     </tr>
-
                     <tr>
 
                         <td colspan='9' class='hiddenRow'>

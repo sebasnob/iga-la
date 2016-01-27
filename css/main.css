@@ -1647,3 +1647,6 @@ margin-top: 45px;
 #cursos_contacto{
     width: 41.5%!important;
 }
+.hiddenRow{
+    background-color: beige;
+}
