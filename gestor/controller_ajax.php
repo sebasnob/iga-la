@@ -724,7 +724,7 @@ switch($_POST['option']){
 
                         foreach($datos_curso['horarios'] as $horarios){
 
-                            $retorno .= $dias[$horarios['dia']]." de ".substr($horarios['horadesde'], 0, 5)." a ".substr($horarios['horahasta'], 0, 5)." hs.<br/>";
+                            $retorno .= $dias[$horarios['dia']]." ".$lenguaje['de_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ." ".substr($horarios['horadesde'], 0, 5)." ".$lenguaje['a_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ." ".substr($horarios['horahasta'], 0, 5)." hs.<br/>";
 
                         }
 

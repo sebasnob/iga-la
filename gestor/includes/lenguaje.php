@@ -165,6 +165,8 @@ $lenguaje['a_ES'] = ' a ';
 $lenguaje['enviar_reserva_ES'] = 'Complete los datos de su reserva';
 $lenguaje['enviar_consulta_ES'] = 'Envíe su consulta';
 
+$lenguaje['de_ES'] = "de";
+
 //ingles
 $lenguaje['boton_cerrar_IN'] = 'Close';
 $lenguaje['ver_todas_IN'] = 'see all';
@@ -300,6 +302,7 @@ $lenguaje['a_IN'] = ' to ';
 
 $lenguaje['enviar_reserva_IN'] = 'Send information for your registration';
 $lenguaje['enviar_consulta_IN'] = 'Send information for your inquiry';
+$lenguaje['de_IN'] = "from";
 
 //portugues
 
@@ -441,3 +444,4 @@ $lenguaje['a_POR'] = ' para';
 
 $lenguaje['enviar_reserva_POR'] = 'Conclua los datos de su reserva';
 $lenguaje['enviar_consulta_POR'] = 'Envie su consulta';
+$lenguaje['de_POR'] = "de";
