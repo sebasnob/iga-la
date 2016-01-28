@@ -723,8 +723,16 @@ switch($_POST['option']){
                         $retorno .= "<td>";
 
                         foreach($datos_curso['horarios'] as $horarios){
-
-                            $retorno .= $dias[$horarios['dia']]." ".$lenguaje['de_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ." ".substr($horarios['horadesde'], 0, 5)." ".$lenguaje['a_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ." ".substr($horarios['horahasta'], 0, 5)." hs.<br/>";
+                            
+                            $horaDesde = substr($horarios['horadesde'], 0, 5);
+                            $horaHasta = substr($horarios['horahasta'], 0, 5);
+                            if($cod_pais == 'us'){
+                                $horaDesde = date('h:i a',strtotime($horaDesde));
+                                $horaHasta = date('h:i a',strtotime($horaHasta));
+                            }
+                            $retorno .= $dias[$horarios['dia']]." ".$lenguaje['de_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ." ". $horaDesde ." ".$lenguaje['a_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ." ".$horaHasta;
+                            if($cod_pais != 'us'){$retorno .= 'hs.';}
+                            $retorno .= '<br>';
 
                         }
 
