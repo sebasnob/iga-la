@@ -416,7 +416,7 @@ function detectCountry($mysqli, $cod_pais=''){
         
         $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$cod_pais, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
-        if($cod_pais != 'us'){
+        if($cod_pais != 'US'){
             $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
             $result2 = $mysqli->query($query2);
             $idioma = $result2->fetch_assoc();

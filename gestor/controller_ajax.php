@@ -773,17 +773,19 @@ switch($_POST['option']){
                     <tr>
                         <td colspan=3>
 
-                            <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn-success' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>".$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
+                            <button type='button' data-toggle='collapse' data-target='#reserva-{$datos_curso['codigo']}' class='btn btn-success' onclick='javascript:ocultarDivConsulta({$datos_curso['codigo']})'>".$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
 
-                            <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn-primary' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>".$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
+                            <button type='button' data-toggle='collapse' data-target='#consulta-{$datos_curso['codigo']}' class='btn btn-info' onclick='javascript:ocultarDivReserva({$datos_curso['codigo']})'>".$lenguaje['malla_boton_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</button>
 
                         </td>
                     </tr>
                     <tr>
 
                         <td colspan='9' class='hiddenRow'>
-
-                        <div class='accordian-body collapse' id='reserva-{$datos_curso['codigo']}'>";
+                        
+                        <div class='accordian-body collapse' id='reserva-{$datos_curso['codigo']}'>
+                        <div class='text-center'><h4>".$lenguaje['enviar_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</h4><br></div>";
+                        
 
                     $retorno .= '<form id="form-reserva-'.$datos_curso['codigo'].'" name="form-reserva-'.$datos_curso['codigo'].'" method="post" action="#">
 
@@ -849,8 +851,8 @@ switch($_POST['option']){
 
                     $retorno .="</div>
 
-                        <div class='accordian-body collapse' id='consulta-{$datos_curso['codigo']}'>";
-
+                        <div class='accordian-body collapse' id='consulta-{$datos_curso['codigo']}'>
+                            <div class='text-center'><h4>".$lenguaje['enviar_consulta_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</h4><br></div>";
                     $retorno .= '<form id="form-contacto-'.$datos_curso['codigo'].'" name="form-contacto-'.$datos_curso['codigo'].'" method="post" action="#">
 
                                     <input type="hidden" name="id_comision" value="'.$datos_curso['codigo'].'" />

@@ -1647,6 +1647,13 @@ margin-top: 45px;
 #cursos_contacto{
     width: 41.5%!important;
 }
+<<<<<<< Upstream, based on origin/master
+=======
+
+#cursos_contacto{
+    width: 41.5%!important;
+}
+>>>>>>> 6c1a1cf meto cambios del uruguayo
 .hiddenRow{
     background-color: beige;
 }

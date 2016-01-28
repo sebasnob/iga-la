@@ -162,6 +162,9 @@ $lenguaje['actualidad_ES'] = 'Toda la actualidad en gastronomía';
 
 $lenguaje['a_ES'] = ' a ';
 
+$lenguaje['enviar_reserva_ES'] = 'Complete los datos de su reserva';
+$lenguaje['enviar_consulta_ES'] = 'Envíe su consulta';
+
 //ingles
 $lenguaje['boton_cerrar_IN'] = 'Close';
 $lenguaje['ver_todas_IN'] = 'see all';
@@ -244,7 +247,7 @@ $lenguaje['Ingles_IN'] = "English";
 $lenguaje['Español_IN'] = "Spanish";
 $lenguaje['Portugues_IN'] = "Portuguese";
 
-$lenguaje['duracion_IN'] = 'Duration';
+$lenguaje['duracion_IN'] = 'Lenght';
 $lenguaje['cursado_IN'] = 'Programs and installment plans';
 $lenguaje['desc_cursado_IN'] = 'In order to see the beginning of classes, time schedules and payment options, please select a state and a branch.';
 $lenguaje['material_estudio_IN'] = 'Study materials';
@@ -265,11 +268,11 @@ $lenguaje['malla_comision_IN'] = 'Group';
 $lenguaje['malla_fecha_in_IN'] = 'Start';
 $lenguaje['malla_horarios_IN'] = 'Days and Timetable';
 $lenguaje['malla_matricula_IN'] = 'Enrollment';
-$lenguaje['malla_cuotas_IN'] = 'Monthly fee';
+$lenguaje['malla_cuotas_IN'] = 'Monthly Payment';
 $lenguaje['malla_vigencia_IN'] = 'Valid until';
 $lenguaje['malla_cupos_IN'] = 'Places available';
-$lenguaje['malla_boton_reserva_IN'] = 'Books Place';
-$lenguaje['malla_boton_consulta_IN'] = 'Check';
+$lenguaje['malla_boton_reserva_IN'] = 'Register Now';
+$lenguaje['malla_boton_consulta_IN'] = 'Inquiry';
 
 $lenguaje['domingo_IN'] = 'Sunday';
 $lenguaje['lunes_IN'] = "Monday";
@@ -294,6 +297,10 @@ $lenguaje['blog_IN'] = 'Blog IGA';
 $lenguaje['actualidad_IN'] = 'All the news in gastronomy';
 
 $lenguaje['a_IN'] = ' to ';
+
+$lenguaje['enviar_reserva_IN'] = 'Send information for your registration';
+$lenguaje['enviar_consulta_IN'] = 'Send information for your inquiry';
+
 //portugues
 
 $lenguaje['gastro_POR'] = "Gastronomia e Alta Cozinha";
@@ -432,3 +439,5 @@ $lenguaje['actualidad_POR'] = 'Todas as notícias na gastronomia';
 
 $lenguaje['a_POR'] = ' para';
 
+$lenguaje['enviar_reserva_POR'] = 'Conclua los datos de su reserva';
+$lenguaje['enviar_consulta_POR'] = 'Envie su consulta';
