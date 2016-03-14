@@ -15,6 +15,12 @@ if($logged == 'out'){
     exit();
 }
 
+if(filter_var($_GET['id'], FILTER_VALIDATE_INT) === false)
+{
+    header("Location:index.php");
+    exit();
+}
+
 $tiposCurso = getTiposCursos($mysqli);
 
 ?>

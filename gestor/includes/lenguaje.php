@@ -67,7 +67,7 @@ $lenguaje['quiero_trabajar_BO_ES'] = 'Trabajá en IGA';
 $lenguaje['quiero_trabajar_PY_ES'] = 'Trabaje en IGA';
 $lenguaje['quiero_trabajar_PA_ES'] = 'Trabaje en IGA';
 $lenguaje['quiero_trabajar_US_ES'] = 'Trabaje en IGA';
-
+$lenguaje['quiero_trabajar_BR_POR'] = 'Trabalhe Conosco';
 
 $lenguaje['quiero_una_franquicia_ES'] = "Franquicias";
 $lenguaje['contacto_ES'] = "Contacto";
@@ -162,7 +162,16 @@ $lenguaje['actualidad_ES'] = 'Toda la actualidad en gastronomía';
 
 $lenguaje['a_ES'] = ' a ';
 
+$lenguaje['enviar_reserva_ES'] = 'Complete los datos de su reserva';
+$lenguaje['enviar_consulta_ES'] = 'Envíe su consulta';
+
+$lenguaje['de_ES'] = "de";
+
+$lenguaje['id_no_valido_ES'] = "El Código del curso no es Válido";
+
+
 //ingles
+$lenguaje['id_no_valido_IN'] = "The Course Code is Invalid";
 $lenguaje['boton_cerrar_IN'] = 'Close';
 $lenguaje['ver_todas_IN'] = 'see all';
 $lenguaje['sin_novedad_IN'] = 'No news';
@@ -175,7 +184,7 @@ $lenguaje['cupo_disponible_IN'] = 'Seats available';
 $lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
 $lenguaje['titulo_IN'] = 'THE MOST IMPORTANT TRAINING NETWORK';
 $lenguaje['inicio_IN'] = 'Home';
-$lenguaje['curso_IN'] = 'Courses';
+$lenguaje['curso_IN'] = 'CONTINUOUS EDUCATION';
 $lenguaje['institucional_IN'] = 'Institutional';
 $lenguaje['pasion_US_IN'] = '<p style="font-size:42px">Follow your passion with us</p>
                           <p style="font-size:56px;font-weight:600">Study at IGA</p>';
@@ -244,7 +253,7 @@ $lenguaje['Ingles_IN'] = "English";
 $lenguaje['Español_IN'] = "Spanish";
 $lenguaje['Portugues_IN'] = "Portuguese";
 
-$lenguaje['duracion_IN'] = 'Duration';
+$lenguaje['duracion_IN'] = 'Lenght';
 $lenguaje['cursado_IN'] = 'Programs and installment plans';
 $lenguaje['desc_cursado_IN'] = 'In order to see the beginning of classes, time schedules and payment options, please select a state and a branch.';
 $lenguaje['material_estudio_IN'] = 'Study materials';
@@ -265,11 +274,11 @@ $lenguaje['malla_comision_IN'] = 'Group';
 $lenguaje['malla_fecha_in_IN'] = 'Start';
 $lenguaje['malla_horarios_IN'] = 'Days and Timetable';
 $lenguaje['malla_matricula_IN'] = 'Enrollment';
-$lenguaje['malla_cuotas_IN'] = 'Monthly fee';
+$lenguaje['malla_cuotas_IN'] = 'Monthly Payment';
 $lenguaje['malla_vigencia_IN'] = 'Valid until';
 $lenguaje['malla_cupos_IN'] = 'Places available';
-$lenguaje['malla_boton_reserva_IN'] = 'Books Place';
-$lenguaje['malla_boton_consulta_IN'] = 'Check';
+$lenguaje['malla_boton_reserva_IN'] = 'Register Now';
+$lenguaje['malla_boton_consulta_IN'] = 'Inquiry';
 
 $lenguaje['domingo_IN'] = 'Sunday';
 $lenguaje['lunes_IN'] = "Monday";
@@ -294,6 +303,11 @@ $lenguaje['blog_IN'] = 'Blog IGA';
 $lenguaje['actualidad_IN'] = 'All the news in gastronomy';
 
 $lenguaje['a_IN'] = ' to ';
+
+$lenguaje['enviar_reserva_IN'] = 'Send information for your registration';
+$lenguaje['enviar_consulta_IN'] = 'Send information for your inquiry';
+$lenguaje['de_IN'] = "from";
+
 //portugues
 
 $lenguaje['gastro_POR'] = "Gastronomia e Alta Cozinha";
@@ -432,3 +446,7 @@ $lenguaje['actualidad_POR'] = 'Todas as notícias na gastronomia';
 
 $lenguaje['a_POR'] = ' para';
 
+$lenguaje['enviar_reserva_POR'] = 'Conclua los datos de su reserva';
+$lenguaje['enviar_consulta_POR'] = 'Envie su consulta';
+$lenguaje['de_POR'] = "de";
+$lenguaje['id_no_valido_POR'] = "O Código do curso é inválido";

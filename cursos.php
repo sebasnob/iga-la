@@ -7,7 +7,13 @@ include_once 'gestor/includes/lenguaje.php';
 $pagina = 'cursos';
 
 //unset($_SESSION);
-if(!isset($_GET['cod_curso']) || $_GET['cod_curso'] == ''){
+if(!isset($_GET['cod_curso']) || $_GET['cod_curso'] == '')
+{
+    header("Location:index.php");
+    exit();
+}
+if(filter_var($_GET['cod_curso'], FILTER_VALIDATE_INT) === false)
+{
     header("Location:index.php");
     exit();
 }
@@ -28,7 +34,14 @@ if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 {
     $_SESSION['idioma_seleccionado']['id_idioma'] = $_SESSION['pais']['id_idioma'];
 }
-if(isset($_GET['id_filial'])){
+
+if(isset($_GET['id_filial']))
+{
+    if(filter_var($_GET['id_filial'], FILTER_VALIDATE_INT) === false)
+    {
+        header("Location:index.php");
+        exit();
+    }
     $_SESSION['id_filial'] = $_GET['id_filial'];
 }
 
@@ -60,7 +73,7 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
         
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
         <link rel="shortcut icon" href="images/favicon.ico" />
-        
+
         <?php
             
             function imprimirDuracion($datos_curso, $lenguaje)
@@ -129,24 +142,61 @@ $idiomas = getIdiomas($mysqli, false, $_SESSION['pais']['id']);
         
     </head><!--/head-->
     <body>
+<script type="text/javascript">
+  /* <![CDATA[ */
+  goog_snippet_vars = function() {
+    var w = window;
+    w.google_conversion_id = 960091823;
+    w.google_conversion_label = "nYifCKmmy2QQr63nyQM";
+    w.google_remarketing_only = false;
+  }
+  // DO NOT CHANGE THE CODE BELOW.
+  goog_report_conversion = function(url) {
+    goog_snippet_vars();
+    window.google_conversion_format = "3";
+    var opt = new Object();
+    opt.onload_callback = function() {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  }
+  var conv_handler = window['google_trackConversion'];
+  if (typeof(conv_handler) == 'function') {
+    conv_handler(opt);
+  }
+}
+/* ]]> */
+</script>
+<script type="text/javascript"
+  src="//www.googleadservices.com/pagead/conversion_async.js">
+</script>
 <?php
 if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 {
     $id_filial = (isset($_GET['id_filial'])) ? $_GET['id_filial'] : $_SESSION['id_filial'];
     $cod_curso = $_GET['cod_curso'];
+    $idioma = 'sin idioma';
     
-    $res_idioma = $mysqli->query("SELECT id FROM idiomas WHERE cod_idioma='{$_SESSION['idioma_seleccionado']['cod_idioma']}'");
-    $idioma = $res_idioma->fetch_assoc();
-    $id_idioma = $idioma['id'];
-    $showModal = 0;
+    if ($stmt = $mysqli->prepare("SELECT id FROM idiomas WHERE cod_idioma = ?")) {
     
-    $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
-    
-    $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
-    
-    $malla_curricular = getMallaCurricular($mysqli, $datos_curso['id_cfi']);
-    
-    $es_curso_corto = esCursosCortos($mysqli, $cod_curso, $_SESSION['pais']['id']);
+        $stmt->bind_param('s', $_SESSION['idioma_seleccionado']['cod_idioma']);
+        $stmt->execute();    // Execute the prepared query.
+        $stmt->store_result();
+ 
+        // get variables from result.
+        $stmt->bind_result($id_idioma);
+        $stmt->fetch();
+
+        $showModal = 0;
+
+        $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
+
+        $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
+
+        $malla_curricular = getMallaCurricular($mysqli, $datos_curso['id_cfi']);
+
+        $es_curso_corto = esCursosCortos($mysqli, $cod_curso, $_SESSION['pais']['id']);
+    }
 ?>
         <div id="fb-root"></div>
         
@@ -250,7 +300,13 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                                     
                                 </tbody>
                             </table>
+                            <div>
+                                <?php if($_SESSION['idioma_seleccionado']['cod_idioma'] == 'IN'){ ?>
+                                    <span id='inquire'>Inquire about available discounts</span>
+                                <?php } ?>
+                            </div>
                         </div>
+                        
                     </div>
                     <div id="meterial_curso" >
                         <h3><?=$lenguaje['material_estudio_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
@@ -416,7 +472,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
         <script type="text/javascript" src="js/lightbox.min.js"></script>
         <script type="text/javascript" src="js/phoneValidation/intlTelInput.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <!-- Plugins Facebook -->
+ 
+       <!-- Plugins Facebook -->
         <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
@@ -541,6 +598,7 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     btn.button('reset');
                     if(data.success){
                         $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.mensaje+"</div>");
+			goog_report_conversion();
                     }else{
                         $('#'+errorid).html(data.mensaje);
                     }
@@ -573,6 +631,8 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
                     $(boton).button('reset');
                     if(data.success){
                         $('#'+formid).html("<div class='text-center text-reserva-ok'>"+data.mensaje+"</div>");
+
+			goog_report_conversion();
                     }else{
                         $('#'+errorid).html(data.mensaje);
                     }
@@ -580,6 +640,18 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
             });
         }
         </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74312505-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
     </body>
 </html>
+
 

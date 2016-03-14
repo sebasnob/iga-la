@@ -154,7 +154,6 @@ section {
 #slider {
   overflow: hidden;
   position: relative;
-  //max-width: 1360px;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -197,7 +196,6 @@ section {
   bottom: 0;
   left: 0;
   right: 0;
-  //background: rgba(0,0,0,.7);
 }
 
 .carousel-fade .carousel-inner .active {
@@ -351,7 +349,6 @@ background-color: #002f5e;
 
 }
 .dropdown-menu li a{
-  //color: #010F2C;
   color: #FFFFFF;
 
 }
@@ -968,8 +965,8 @@ section#feature_cursos{
 }
 
 #google-map {
-  height: 400px;
-    margin-top: -100px;
+    height: 400px;
+    margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
 }
@@ -1034,7 +1031,7 @@ ul.address {
 }
 
 #filter-form{
-padding-bottom: 50px;
+padding-bottom: 1px;
 
 }
 
@@ -1386,7 +1383,7 @@ padding-bottom: 50px;
 .textos_grilla:hover{
     opacity: 0.8;
 }
-//ACCORDION
+/*ACCORDION*/
 
 #team col-xs-12{
     padding:0px;
@@ -1648,5 +1645,11 @@ margin-top: 45px;
     width: 41.5%!important;
 }
 .hiddenRow{
-    background-color: beige;
+    background-color: #F3F3F3;
 }
+
+#matricula_curso {
+    overflow-x: hidden !important;
+}    
+
+.recaptcha {transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;}

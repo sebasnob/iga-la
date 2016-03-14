@@ -1,5 +1,6 @@
 jQuery(function($) {
 
+
     //Preloader
     var preloader = $('.preloader');
     $(window).load(function(){
@@ -309,9 +310,9 @@ function filialSeleccionada()
         dataType:'json',
         success: function(data)
         {
-            $('#direccion').html(data.domicilio);
-            $('#telefono').html(data.telefono);
-            $('#mail').html(data.email);
+            $('.direccion').html(data.domicilio);
+            $('.telefono').html(data.telefono);
+            $('.mail').html(data.email);
             $('#correo').val(data.email);
             $('.contact-form').show('slow',function(){initialize_map(data.latitud, data.longitud);});
         },
@@ -433,23 +434,7 @@ $('.btn-submit').click(function(){
             if(data.success){
                 $('#mensaje_contacto').html("<div class='text-reserva-ok'>"+data.mensaje+"</div>");
                 $('#main-contact-form')[0].reset();
-                
-                (function() 
-                {
-                    var _fbq = window._fbq || (window._fbq = []);
-                    if (!_fbq.loaded) 
-                    {
-                        var fbds = document.createElement("script");
-                        fbds.async = true;
-                        fbds.src = "//connect.facebook.net/en_US/fbds.js";
-                        var s = document.getElementsByTagName("script")[0];
-                        s.parentNode.insertBefore(fbds, s);
-                        _fbq.loaded = true;
-                    }
-                })();
-                window._fbq = window._fbq || [];
-                window._fbq.push(["track", "6027258627986", {"value":"0.00","currency":"ARS"}]);
-                
+                $('#google_pixel').append('<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/960091823/?value=30.00&amp;currency_code=ARS&amp;label=JiQzCKXB4GMQr63nyQM&amp;guid=ON&amp;script=0"/>');
             }else{
                 $('#mensaje_contacto').html("<div class='text-reserva-error'>"+data.mensaje+"</div>");  
             }
@@ -542,3 +527,4 @@ function buscarNoticias()
     
     window.location.href = url;
 }
+

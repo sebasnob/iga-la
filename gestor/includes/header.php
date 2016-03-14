@@ -121,11 +121,14 @@
                         } ?>
                         title='<?= $slid['alt'];?>'>
                         <div class="container">
-                            <h2 style="position:absolute;padding-top:5%;left:10%">
+			<?php if($i < 1 ) : ?>                           
+				 <h2 style="position:absolute;padding-top:5%;left:10%">
                                 <span style="color: white;text-shadow: 1px 1px #333;">
                                   <?=$lenguaje['pasion_'.$_SESSION['pais']['cod_pais'].'_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
                                 </span>
                             </h2>
+			<?php endif; ?>
+
                         </div>
                         <img class="img-responsive" src="<?= $slid['url'];?>" style="margin: 0 auto;width: 100%">
                     </div>

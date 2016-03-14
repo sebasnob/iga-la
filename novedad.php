@@ -67,10 +67,27 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
             include_once 'gestor/includes/header.php';
         ?>
         
-        <section id="head_image_curso">
-            <div class="container-fluid">
-                <img class="img-responsive animated fadeInLeftBig" src="images/slider/20-de-descuento.jpg" alt="" style="width: 100%;">
+        <section id="head_novedades">
+            <div class="hidden-xs">
+                <div class="container">
+                    <h2 style="position:absolute;padding-top:4%;z-index: 99;">
+                        <span>
+                            <p style="font-size:70px;color:white;width:450px;font-weight:600;"><?=$lenguaje['blog_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                            <p style="font-size:50px;color:white;width:450px;font-weight:600;"><?=$lenguaje['actualidad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></p>
+                        </span>
+                    </h2>
+                </div>
+                <img class="img-responsive animated fadeInLeftBig" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
             </div>
+            
+            <div class="visible-xs" >
+                <img class="img-responsive animated fadeInLeftBig" src="images/slider-novedades.jpg" alt="" style="width: 100%;" />
+                <div class="row col-md-12 text-center">
+                    <h3><?=$lenguaje['blog_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?></h3>
+                    <?=$lenguaje['actualidad_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>
+                </div>
+            </div>
+            
         </section>
         
         <section id="novedades">

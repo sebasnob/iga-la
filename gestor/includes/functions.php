@@ -416,7 +416,7 @@ function detectCountry($mysqli, $cod_pais=''){
         
         $tablaPais = array('id'=>$tablaPaisdatos['id'], 'cod_pais'=>$cod_pais, 'pais'=>$tablaPaisdatos['pais'],'flag'=>$tablaPaisdatos['flag']);
         
-        if($cod_pais != 'us'){
+        if($cod_pais != 'US'){
             $query2 = "SELECT id, idioma, cod_idioma FROM idiomas WHERE idiomas.id = (select id_idioma from pais_idioma where pais_idioma.id_pais = {$tablaPaisdatos['id']})";
             $result2 = $mysqli->query($query2);
             $idioma = $result2->fetch_assoc();
@@ -898,12 +898,12 @@ function getSlider($mysqli, $id_pais = false, $cod_idioma = false)
                     {
                         if(in_array($cod_idioma, $arrayIdioma))
                         {
-                            $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
+                            $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background'], 'textoResponsive'=>$slider['textoResponsive']);
                         }
                     }
                     else
                     {
-                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
+                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background'], 'textoResponsive'=>$slider['textoResponsive']);
                     }
                 }
             }
@@ -913,12 +913,12 @@ function getSlider($mysqli, $id_pais = false, $cod_idioma = false)
                 {
                     if(in_array($cod_idioma, $arrayIdioma))
                     {
-                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
+                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background'], 'textoResponsive'=>$slider['textoResponsive']);
                     }
                 }
                 else
                 {
-                    $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
+                    $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background'], 'textoResponsive'=>$slider['textoResponsive']);
                 }
             }
         }
@@ -1217,6 +1217,8 @@ function guardarConsultaCurso($mysqli,$filial,$email,$nombre,$phone,$asunto,$cod
         $param['cod_plan'] = $cod_plan;
     }
 
+    return json_encode($param, true);
+    die();
     $wsc = new wsc_sistema("sincronizar_consulta_web", $param);
     $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
     if (is_array($respuesta) && isset($respuesta['success']) && $respuesta['success'] == "success"){

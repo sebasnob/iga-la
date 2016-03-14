@@ -137,6 +137,9 @@ text-align: center;
 		font-size: 14px;
 	}
 
+        .table-responsive>.table>tbody>tr>td{
+            white-space: normal;
+        }
  
 	.caption .btn-start {
 		font-size: 12px;

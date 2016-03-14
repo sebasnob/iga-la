@@ -753,7 +753,13 @@ if(isset($_POST['edicion_slider']))
                     $cod_pais = json_encode($_POST['pais']);
                     $cod_idioma = json_encode($_POST['idioma']);
                     
-                    $query = "INSERT INTO slider (alt, url, url_thumb, link, id_pais, cod_idioma, background) VALUES ('{$_POST['alt']}', '{$ruta}','{$ruta_thumb}', '{$_POST['link']}','{$cod_pais}','{$cod_idioma}','{$_POST['background']}')";
+                    $text = isset($_POST['textoNuevo']) ? trim($_POST['textoNuevo']) : '';
+                    $alt = isset($_POST['alt']) ? $_POST['alt'] : '';
+                    $link = isset($_POST['link']) ? $_POST['link'] : '';
+                    $background = isset($_POST['background']) ? $_POST['background'] : '';
+                    
+                    $query = "INSERT INTO slider (alt, url, url_thumb, link, id_pais, cod_idioma, background, textoResponsive) "
+                            . "      VALUES ('{$alt}', '{$ruta}','{$ruta_thumb}', '{$link}','{$cod_pais}','{$cod_idioma}','{$background}', '{$textoNuevo}')";
                     $mysqli->query($query);
                 }
             }
@@ -845,14 +851,20 @@ if(isset($_POST['edicion_slider']))
                         $cod_pais = json_encode($_POST['pais']);
                         $cod_idioma = json_encode($_POST['idioma']);
                         
+                        $text = isset($_POST['textEdicion']) ? trim($_POST['textEdicion']) : '';
+                        $alt = isset($_POST['alt']) ? $_POST['alt'] : '';
+                        $link = isset($_POST['link']) ? $_POST['link'] : '';
+                        $background = isset($_POST['background']) ? $_POST['background'] : '';
+                        
                         $query = "UPDATE slider "
-                                . "SET alt = '{$_POST['alt']}', "
+                                . "SET alt = '{$alt}', "
                                 . "url = '{$ruta}', "
                                 . "url_thumb = '{$ruta_thumb}', "
-                                . "link = '{$_POST['link']}', "
+                                . "link = '{$link}', "
                                 . "id_pais = '{$cod_pais}', "
                                 . "cod_idioma = '{$cod_idioma}', "
-                                . "background = '{$_POST['background']}' "
+                                . "background = '{$background}', "
+                                . "textoResponsive = '{$text}' "
                                 . "WHERE slider.id = {$_POST['id_img_slider']}";
                                     
                         $mysqli->query($query);
@@ -863,12 +875,19 @@ if(isset($_POST['edicion_slider']))
             {
                 $cod_pais = json_encode($_POST['pais']);
                 $cod_idioma = json_encode($_POST['idioma']);
+                
+                $text = isset($_POST['textEdicion']) ? trim($_POST['textEdicion']) : '';
+                $alt = isset($_POST['alt']) ? $_POST['alt'] : '';
+                $link = isset($_POST['link']) ? $_POST['link'] : '';
+                $background = isset($_POST['background']) ? $_POST['background'] : '';
+                
                 $query = "UPDATE slider "
-                                . "SET alt = '{$_POST['alt']}', "
-                                . "link = '{$_POST['link']}', "
+                                . "SET alt = '{$alt}', "
+                                . "link = '{$link}', "
                                 . "id_pais = '{$cod_pais}', "
                                 . "cod_idioma = '{$cod_idioma}', "
-                                . "background = '{$_POST['background']}' "
+                                . "background = '{$background}', "
+                                . "textoResponsive = '{$text}' "
                                 . "WHERE slider.id = {$_POST['id_img_slider']}";
                 $mysqli->query($query);
             }
