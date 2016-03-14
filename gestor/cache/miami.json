@@ -1,0 +1,290 @@
+[
+  {
+    "codigo": "1",
+    "cupo": "20",
+    "codigocurso": "29",
+    "inscriptos": "0",
+    "inicio_clases": "2016-08-01",
+    "nro_cuotas": "4",
+    "valor_cuota": "240.00",
+    "valor_cuota_neto": "240.00",
+    "valormatricula": "150.00",
+    "valormatriculaneto": "150.00",
+    "id_plan": "28",
+    "fechainicio": "2015-09-11",
+    "fechavigencia": "2016-03-15",
+    "dias_prorroga": null,
+    "mostrar_financiacion_web": "1",
+    "simbolo_moneda": "u$s",
+    "id_moneda": "0",
+    "dia": "",
+    "esquema_cuotas_mostrar": 0,
+    "horarios": [
+      {
+        "dia": 1,
+        "horadesde": "18:00:00",
+        "horahasta": "21:00:00"
+      }
+    ],
+    "detalle_cuotas": [
+      {
+        "cuota_inicio": "1",
+        "cuota_fin": 4,
+        "valor": "240.00"
+      }
+    ],
+    "mensaje_descuento": false
+  },
+  {
+    "codigo": "2",
+    "cupo": "20",
+    "codigocurso": "3",
+    "inscriptos": "8",
+    "inicio_clases": "2016-04-05",
+    "nro_cuotas": "4",
+    "valor_cuota": "285.00",
+    "valor_cuota_neto": "285.00",
+    "valormatricula": "150.00",
+    "valormatriculaneto": "150.00",
+    "id_plan": "32",
+    "fechainicio": "2015-09-29",
+    "fechavigencia": "2016-03-15",
+    "dias_prorroga": null,
+    "mostrar_financiacion_web": "1",
+    "simbolo_moneda": "u$s",
+    "id_moneda": "0",
+    "dia": "",
+    "esquema_cuotas_mostrar": 0,
+    "horarios": [
+      {
+        "dia": 2,
+        "horadesde": "09:00:00",
+        "horahasta": "11:30:00"
+      }
+    ],
+    "detalle_cuotas": [
+      {
+        "cuota_inicio": "1",
+        "cuota_fin": 4,
+        "valor": "285.00"
+      }
+    ],
+    "mensaje_descuento": false
+  },
+  {
+    "codigo": "5",
+    "cupo": "20",
+    "codigocurso": "8",
+    "inscriptos": "2",
+    "inicio_clases": "2016-04-06",
+    "nro_cuotas": "4",
+    "valor_cuota": "300.00",
+    "valor_cuota_neto": "300.00",
+    "valormatricula": "150.00",
+    "valormatriculaneto": "150.00",
+    "id_plan": "33",
+    "fechainicio": "2015-09-29",
+    "fechavigencia": "2016-03-15",
+    "dias_prorroga": null,
+    "mostrar_financiacion_web": "1",
+    "simbolo_moneda": "u$s",
+    "id_moneda": "0",
+    "dia": "",
+    "esquema_cuotas_mostrar": 0,
+    "horarios": [
+      {
+        "dia": 3,
+        "horadesde": "09:00:00",
+        "horahasta": "11:30:00"
+      }
+    ],
+    "detalle_cuotas": [
+      {
+        "cuota_inicio": "1",
+        "cuota_fin": 4,
+        "valor": "300.00"
+      }
+    ],
+    "mensaje_descuento": false
+  },
+  {
+    "codigo": "6",
+    "cupo": "20",
+    "codigocurso": "17",
+    "inscriptos": "5",
+    "inicio_clases": "2016-03-30",
+    "nro_cuotas": "8",
+    "valor_cuota": "232.50",
+    "valor_cuota_neto": "232.50",
+    "valormatricula": "150.00",
+    "valormatriculaneto": "150.00",
+    "id_plan": "34",
+    "fechainicio": "2015-09-29",
+    "fechavigencia": "2016-03-15",
+    "dias_prorroga": null,
+    "mostrar_financiacion_web": "1",
+    "simbolo_moneda": "u$s",
+    "id_moneda": "0",
+    "dia": "",
+    "esquema_cuotas_mostrar": 0,
+    "horarios": [
+      {
+        "dia": 3,
+        "horadesde": "18:00:00",
+        "horahasta": "20:00:00"
+      }
+    ],
+    "detalle_cuotas": [
+      {
+        "cuota_inicio": "1",
+        "cuota_fin": 8,
+        "valor": "232.50"
+      }
+    ],
+    "mensaje_descuento": false
+  },
+  {
+    "codigo": "7",
+    "cupo": "20",
+    "codigocurso": "25",
+    "inscriptos": "6",
+    "inicio_clases": "2016-04-07",
+    "nro_cuotas": "3",
+    "valor_cuota": "300.00",
+    "valor_cuota_neto": "300.00",
+    "valormatricula": "150.00",
+    "valormatriculaneto": "150.00",
+    "id_plan": "36",
+    "fechainicio": "2015-09-29",
+    "fechavigencia": "2016-03-15",
+    "dias_prorroga": null,
+    "mostrar_financiacion_web": "1",
+    "simbolo_moneda": "u$s",
+    "id_moneda": "0",
+    "dia": "",
+    "esquema_cuotas_mostrar": 0,
+    "horarios": [
+      {
+        "dia": 4,
+        "horadesde": "18:00:00",
+        "horahasta": "21:00:00"
+      }
+    ],
+    "detalle_cuotas": [
+      {
+        "cuota_inicio": "1",
+        "cuota_fin": 3,
+        "valor": "300.00"
+      }
+    ],
+    "mensaje_descuento": false
+  },
+  {
+    "codigo": "8",
+    "cupo": "20",
+    "codigocurso": "17",
+    "inscriptos": "4",
+    "inicio_clases": "2016-03-19",
+    "nro_cuotas": "8",
+    "valor_cuota": "232.50",
+    "valor_cuota_neto": "232.50",
+    "valormatricula": "150.00",
+    "valormatriculaneto": "150.00",
+    "id_plan": "34",
+    "fechainicio": "2015-09-29",
+    "fechavigencia": "2016-03-15",
+    "dias_prorroga": null,
+    "mostrar_financiacion_web": "1",
+    "simbolo_moneda": "u$s",
+    "id_moneda": "0",
+    "dia": "",
+    "esquema_cuotas_mostrar": 0,
+    "horarios": [
+      {
+        "dia": 6,
+        "horadesde": "10:30:00",
+        "horahasta": "12:30:00"
+      }
+    ],
+    "detalle_cuotas": [
+      {
+        "cuota_inicio": "1",
+        "cuota_fin": 8,
+        "valor": "232.50"
+      }
+    ],
+    "mensaje_descuento": false
+  },
+  {
+    "codigo": "9",
+    "cupo": "20",
+    "codigocurso": "26",
+    "inscriptos": "7",
+    "inicio_clases": "2016-04-07",
+    "nro_cuotas": "3",
+    "valor_cuota": "260.00",
+    "valor_cuota_neto": "260.00",
+    "valormatricula": "150.00",
+    "valormatriculaneto": "150.00",
+    "id_plan": "35",
+    "fechainicio": "2015-09-29",
+    "fechavigencia": "2016-03-15",
+    "dias_prorroga": "5",
+    "mostrar_financiacion_web": "1",
+    "simbolo_moneda": "u$s",
+    "id_moneda": "0",
+    "dia": "",
+    "esquema_cuotas_mostrar": 0,
+    "horarios": [
+      {
+        "dia": 4,
+        "horadesde": "09:00:00",
+        "horahasta": "12:00:00"
+      }
+    ],
+    "detalle_cuotas": [
+      {
+        "cuota_inicio": "1",
+        "cuota_fin": 3,
+        "valor": "260.00"
+      }
+    ],
+    "mensaje_descuento": false
+  },
+  {
+    "codigo": "27",
+    "cupo": "16",
+    "codigocurso": "3",
+    "inscriptos": "0",
+    "inicio_clases": "2016-03-30",
+    "nro_cuotas": "4",
+    "valor_cuota": "285.00",
+    "valor_cuota_neto": "285.00",
+    "valormatricula": "150.00",
+    "valormatriculaneto": "150.00",
+    "id_plan": "32",
+    "fechainicio": "2015-09-29",
+    "fechavigencia": "2016-03-15",
+    "dias_prorroga": null,
+    "mostrar_financiacion_web": "0",
+    "simbolo_moneda": "u$s",
+    "id_moneda": "0",
+    "dia": "",
+    "esquema_cuotas_mostrar": 0,
+    "horarios": [
+      {
+        "dia": 3,
+        "horadesde": "18:00:00",
+        "horahasta": "20:30:00"
+      }
+    ],
+    "detalle_cuotas": [
+      {
+        "cuota_inicio": "1",
+        "cuota_fin": 4,
+        "valor": "285.00"
+      }
+    ],
+    "mensaje_descuento": false
+  }
+]

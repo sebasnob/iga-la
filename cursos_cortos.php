@@ -23,13 +23,7 @@ if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 {
     $_SESSION['idioma_seleccionado']['id_idioma'] = $_SESSION['pais']['id_idioma'];
 }
-if(isset($_GET['id_filial']))
-{
-    if(filter_var($_GET['id_filial'], FILTER_VALIDATE_INT) === false)
-    {
-        header("Location:index.php");
-        exit();
-    }
+if(isset($_GET['id_filial'])){
     $_SESSION['id_filial'] = $_GET['id_filial'];
 }
 
@@ -67,23 +61,15 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 {
     $id_filial = (isset($_GET['id_filial'])) ? $_GET['id_filial'] : $_SESSION['id_filial'];
     
-    if ($stmt = $mysqli->prepare("SELECT id FROM idiomas WHERE cod_idioma = ?")) {
+    $res_idioma = $mysqli->query("SELECT id FROM idiomas WHERE cod_idioma='{$_SESSION['idioma_seleccionado']['cod_idioma']}'");
+    $idioma = $res_idioma->fetch_assoc();
+    $id_idioma = $idioma['id'];
+    $showModal = 0;
     
-        $stmt->bind_param('s', $_SESSION['idioma_seleccionado']['cod_idioma']);
-        $stmt->execute();    // Execute the prepared query.
-        $stmt->store_result();
- 
-        // get variables from result.
-        $stmt->bind_result($id_idioma);
-        $stmt->fetch();
+    $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
     
-        $showModal = 0;
-    
-        $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
-    
-        $cursos_cortos = getCursosCortos($mysqli,false,$_SESSION['pais']['id']);
-        $categorias_cursos_cortos = getCategoriasCursosCortos($mysqli);
-    }
+    $cursos_cortos = getCursosCortos($mysqli,false,$_SESSION['pais']['id']);
+    $categorias_cursos_cortos = getCategoriasCursosCortos($mysqli);
 ?>
         <div id="fb-root"></div>
         <?php 

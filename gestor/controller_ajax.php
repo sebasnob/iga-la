@@ -665,13 +665,16 @@ switch($_POST['option']){
 
 
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
-
             if(count($curso_cupo) > 0)
             {
                 $texto = $lenguaje['planilla_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                 $head = "<tr><th colspan='9' class='text-center'>{$texto}</th></tr>";
                 
-                $retorno = "<tr>
+                $retorno = '';
+
+                foreach($curso_cupo as $id=>$datos_curso){
+
+                    $retorno .= "<tr>
 
                                 <th>".$lenguaje['malla_fecha_in_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
 
@@ -680,9 +683,7 @@ switch($_POST['option']){
                                 <th>".$lenguaje['malla_matricula_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
 
                             </tr>";
-
-                foreach($curso_cupo as $id=>$datos_curso){
-
+                    
                     // Obtenemos las vacantes reales de la comision
 
                     $vacante = $datos_curso['cupo'] - $datos_curso['inscriptos'];
@@ -757,8 +758,14 @@ switch($_POST['option']){
 
                             foreach($datos_curso['detalle_cuotas'] as $cuotas){
 
-                                $retorno .= $lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]." ".$cuotas['cuota_inicio'].$lenguaje['a_'.$_SESSION['idioma_seleccionado']['cod_idioma']].$cuotas['cuota_fin']." <b> $".$cuotas['valor']."</b><br/><br/>";
-
+                                $cuotasString = $lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]." ".$cuotas['cuota_inicio'].$lenguaje['a_'.$_SESSION['idioma_seleccionado']['cod_idioma']].$cuotas['cuota_fin']." <b> $".$cuotas['valor']."</b><br/><br/>";
+                                
+                                if($cod_pais == 'us')
+                                {
+                                    $cuotasString = $cuotas['cuota_fin'] . " x " . "<b>&#36;" . $cuotas['valor'] . "</b>";
+                                }
+                                
+                                $retorno .= $cuotasString;
                             }
 
                             $retorno .= "</td>";
@@ -843,9 +850,9 @@ switch($_POST['option']){
 
                                     <div class="form-group">
 
-                                        <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this, \'error-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this, \'error-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
 
-                                        <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm">'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn-sm">'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
 
                                         &nbsp;&nbsp;<span id="error-'.$datos_curso['codigo'].'" class="error text-center text-consulta-error"></span>
 
@@ -1142,4 +1149,9 @@ switch($_POST['option']){
     break;
 
 }
+
+
+
 ?>
+
+

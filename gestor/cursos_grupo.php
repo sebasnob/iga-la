@@ -15,8 +15,7 @@ if($logged == 'out'){
     exit();
 }
 
-if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != '' && (filter_var($_GET['cod_curso'], FILTER_VALIDATE_INT)))
-{
+if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
     $datos_curso = getCursos($mysqli, $_GET['cod_curso']);
 }else{
     header("Location: list_cursos.php");

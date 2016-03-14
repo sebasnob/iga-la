@@ -67,7 +67,7 @@ $lenguaje['quiero_trabajar_BO_ES'] = 'Trabajá en IGA';
 $lenguaje['quiero_trabajar_PY_ES'] = 'Trabaje en IGA';
 $lenguaje['quiero_trabajar_PA_ES'] = 'Trabaje en IGA';
 $lenguaje['quiero_trabajar_US_ES'] = 'Trabaje en IGA';
-
+$lenguaje['quiero_trabajar_BR_POR'] = 'Trabalhe Conosco';
 
 $lenguaje['quiero_una_franquicia_ES'] = "Franquicias";
 $lenguaje['contacto_ES'] = "Contacto";
@@ -180,7 +180,7 @@ $lenguaje['cupo_disponible_IN'] = 'Seats available';
 $lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
 $lenguaje['titulo_IN'] = 'THE MOST IMPORTANT TRAINING NETWORK';
 $lenguaje['inicio_IN'] = 'Home';
-$lenguaje['curso_IN'] = 'Courses';
+$lenguaje['curso_IN'] = 'CONTINUOUS EDUCATION';
 $lenguaje['institucional_IN'] = 'Institutional';
 $lenguaje['pasion_US_IN'] = '<p style="font-size:42px">Follow your passion with us</p>
                           <p style="font-size:56px;font-weight:600">Study at IGA</p>';

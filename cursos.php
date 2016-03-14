@@ -7,13 +7,7 @@ include_once 'gestor/includes/lenguaje.php';
 $pagina = 'cursos';
 
 //unset($_SESSION);
-if(!isset($_GET['cod_curso']) || $_GET['cod_curso'] == '')
-{
-    header("Location:index.php");
-    exit();
-}
-if(filter_var($_GET['cod_curso'], FILTER_VALIDATE_INT) === false)
-{
+if(!isset($_GET['cod_curso']) || $_GET['cod_curso'] == ''){
     header("Location:index.php");
     exit();
 }
@@ -34,14 +28,7 @@ if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 {
     $_SESSION['idioma_seleccionado']['id_idioma'] = $_SESSION['pais']['id_idioma'];
 }
-
-if(isset($_GET['id_filial']))
-{
-    if(filter_var($_GET['id_filial'], FILTER_VALIDATE_INT) === false)
-    {
-        header("Location:index.php");
-        exit();
-    }
+if(isset($_GET['id_filial'])){
     $_SESSION['id_filial'] = $_GET['id_filial'];
 }
 
@@ -175,28 +162,19 @@ if(isset($_GET['id_filial']) || isset($_SESSION['id_filial']))
 {
     $id_filial = (isset($_GET['id_filial'])) ? $_GET['id_filial'] : $_SESSION['id_filial'];
     $cod_curso = $_GET['cod_curso'];
-    $idioma = 'sin idioma';
     
-    if ($stmt = $mysqli->prepare("SELECT id FROM idiomas WHERE cod_idioma = ?")) {
+    $res_idioma = $mysqli->query("SELECT id FROM idiomas WHERE cod_idioma='{$_SESSION['idioma_seleccionado']['cod_idioma']}'");
+    $idioma = $res_idioma->fetch_assoc();
+    $id_idioma = $idioma['id'];
+    $showModal = 0;
     
-        $stmt->bind_param('s', $_SESSION['idioma_seleccionado']['cod_idioma']);
-        $stmt->execute();    // Execute the prepared query.
-        $stmt->store_result();
- 
-        // get variables from result.
-        $stmt->bind_result($id_idioma);
-        $stmt->fetch();
-
-        $showModal = 0;
-
-        $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
-
-        $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
-
-        $malla_curricular = getMallaCurricular($mysqli, $datos_curso['id_cfi']);
-
-        $es_curso_corto = esCursosCortos($mysqli, $cod_curso, $_SESSION['pais']['id']);
-    }
+    $prov = getProvinciaFromFilial($mysqli,$_SESSION['id_filial']);
+    
+    $datos_curso = getDatosCurso($mysqli, $cod_curso, $id_idioma, $id_filial);
+    
+    $malla_curricular = getMallaCurricular($mysqli, $datos_curso['id_cfi']);
+    
+    $es_curso_corto = esCursosCortos($mysqli, $cod_curso, $_SESSION['pais']['id']);
 ?>
         <div id="fb-root"></div>
         

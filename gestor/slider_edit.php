@@ -73,11 +73,6 @@ $idiomas = getIdiomas($mysqli);
                                             <input style="min-height:50px" type="file" accept="file_extension|image" class="form-control" id="photo" name="photo" required autofocus>
                                         </div>
                                         <div class="form-inline">
-                                            <label class="col-sm-2 col-sm-2 control-label">Texto: </label></br>
-                                            <textarea type="text" id="textoNuevo" name="textoNuevo" class="form-control">
-                                            </textarea>
-                                        </div>
-                                        <div class="form-inline">
                                             <label class="col-sm-2 col-sm-2 control-label">Link: </label>
                                             <input type="text" id="link" name="link" class="form-control">
                                         </div>
@@ -129,17 +124,11 @@ $idiomas = getIdiomas($mysqli);
                                             <input type="hidden" name="edicion_slider" id="edicion_slider" value="true" />
                                             <input type="hidden" name="edicion_slider_editar" id="edicion_slider_editar" value="true" />
                                             <input type="hidden" name="id_img_slider" id="id_img_slider" value="<?php echo $imgSlider['id']?>" />
-                                            <input type="hidden" name="textoResponsive" id="textoResponsivetextEdicion<?=$imgSlider['id']?>" value="<?php echo $imgSlider['textoResponsive']?>" />
                                             <div class="form-group">
                                                 <div class="form-img">
                                                     <img src="../<?=$imgSlider['thumb']?>">
                                                 </div>
                                                 <input type="file" accept="file_extension|image" name="photo" autofocus>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Texto:</label></br>
-                                                <textarea type="text" id="textEdicion<?=$imgSlider['id']?>" name="textEdicion<?=$imgSlider['id']?>" class="form-control textEdicion">
-                                                </textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Link:</label>
@@ -221,30 +210,7 @@ $idiomas = getIdiomas($mysqli);
         <script src="assets/js/common-scripts.js"></script>
         
         <!--script for this page-->
-        <script type="text/javascript" src="assets/js/ckeditor/ckeditor.js"></script>
-        <script>
-            CKEDITOR.replace( 'textoNuevo', {
-                customConfig: 'config.js',
-                toolbar: [
-                    [ 'Bold', 'Italic', 'FontSize']
-                ]
-            });
-            
-            $('.textEdicion').each(function()
-            {
-                var id = this.id;
-                CKEDITOR.replace( id, {
-                    customConfig: 'config.js',
-                    toolbar: [
-                        [ 'Bold', 'Italic', 'FontSize']
-                    ]
-                });
-                console.log('#textoResponsive'+id);
-                CKEDITOR.instances[this.id].setData($('#textoResponsive'+id).val());
-            
-            });
-            
-            
-        </script>
+        
+        
     </body>
 </html>
