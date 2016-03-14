@@ -898,12 +898,12 @@ function getSlider($mysqli, $id_pais = false, $cod_idioma = false)
                     {
                         if(in_array($cod_idioma, $arrayIdioma))
                         {
-                            $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background'], 'textoResponsive'=>$slider['textoResponsive']);
+                            $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
                         }
                     }
                     else
                     {
-                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background'], 'textoResponsive'=>$slider['textoResponsive']);
+                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
                     }
                 }
             }
@@ -913,12 +913,12 @@ function getSlider($mysqli, $id_pais = false, $cod_idioma = false)
                 {
                     if(in_array($cod_idioma, $arrayIdioma))
                     {
-                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background'], 'textoResponsive'=>$slider['textoResponsive']);
+                        $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
                     }
                 }
                 else
                 {
-                    $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background'], 'textoResponsive'=>$slider['textoResponsive']);
+                    $sliders[] = array('id'=>$slider['id'],'alt'=>$slider['alt'], 'url'=>$slider['url'], 'link'=>$slider['link'], 'thumb'=>$slider['url_thumb'], 'id_pais'=>$arrayPais, 'cod_idioma'=>$arrayIdioma, 'background'=>$slider['background']);
                 }
             }
         }
@@ -1217,8 +1217,6 @@ function guardarConsultaCurso($mysqli,$filial,$email,$nombre,$phone,$asunto,$cod
         $param['cod_plan'] = $cod_plan;
     }
 
-    return json_encode($param, true);
-    die();
     $wsc = new wsc_sistema("sincronizar_consulta_web", $param);
     $respuesta = $wsc->exec(WSC_RETURN_ARRAY);
     if (is_array($respuesta) && isset($respuesta['success']) && $respuesta['success'] == "success"){

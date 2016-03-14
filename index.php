@@ -65,9 +65,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
         <link rel="shortcut icon" href="images/favicon.ico" />
         <script src='https://www.google.com/recaptcha/api.js'></script>
-
-
-
     </head><!--/head-->
     
     <body>
@@ -289,26 +286,7 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                     </div>    
                     <div class="row">        
                         <div class="container contact-form" style="display: none">
-							<div class="visible-xs">
-								<div class="contact-info col-sm-6">
-									<ul class="address" style="font-size:22px;font-weight: bold; color: #002D6D;">
-										<li>
-											<!--span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span-->
-											<span class="direccion"></span> 
-										</li>
-										<li>
-											<!--span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span-->
-											<span class="telefono"></span>
-										</li>
-										<li>
-											<!-- span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span-->
-											<span class="mail"></span>
-										</li>
-									</ul>
-								</div>
-							</div>
                             <div class="row">
-									 
                                 <form id="main-contact-form" name="contact-form">
                                     <div class="col-sm-6">
                                         <input type="hidden" value="" id="correo" name="correo" />
@@ -473,22 +451,22 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
                                     <div id="google-map"></div>
                                 </div>
                                 <div class="col-md-6 col-sm-12" id="direccion_filial">
-                                    <div class="col-md-8" style="padding: 10px;">
+                                    <div class="col-md-8" style="padding: 0;">
                                         <div id="pano"></div>
                                     </div>
-                                    <div class="contact-info col-md-4 hidden-xs">
+                                    <div class="contact-info col-md-4">
                                         <ul class="address">
                                             <li>
                                                 <span><?=$lenguaje['direccion_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><br>
-                                                <span class="direccion"></span> 
+                                                <span id="direccion"></span> 
                                             </li>
                                             <li>
                                                 <span><?=$lenguaje['telefono_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><br>
-                                                <span class="telefono"></span>
+                                                <span id="telefono"></span>
                                             </li>
                                             <li>
                                                 <span><?=$lenguaje['mail_'.$_SESSION['idioma_seleccionado']['cod_idioma']] ?>: </span><br>
-                                                <span class="mail"></span>
+                                                <span id="mail"></span>
                                             </li>
                                         </ul>
                                     </div> 
@@ -596,16 +574,6 @@ $gridArrayCursos = getImagenesGrilla($mysqli, $_SESSION['idioma_seleccionado']['
         </script>
         <noscript>
             <img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6027258627986&amp;cd[value]=0.00&amp;cd[currency]=ARS&amp;noscript=1" />
-        </noscript>'
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-74312505-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+        </noscript>';
     </body>
 </html>

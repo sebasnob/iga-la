@@ -67,7 +67,7 @@ $lenguaje['quiero_trabajar_BO_ES'] = 'Trabajá en IGA';
 $lenguaje['quiero_trabajar_PY_ES'] = 'Trabaje en IGA';
 $lenguaje['quiero_trabajar_PA_ES'] = 'Trabaje en IGA';
 $lenguaje['quiero_trabajar_US_ES'] = 'Trabaje en IGA';
-$lenguaje['quiero_trabajar_BR_POR'] = 'Trabalhe Conosco';
+
 
 $lenguaje['quiero_una_franquicia_ES'] = "Franquicias";
 $lenguaje['contacto_ES'] = "Contacto";
@@ -167,11 +167,7 @@ $lenguaje['enviar_consulta_ES'] = 'Envíe su consulta';
 
 $lenguaje['de_ES'] = "de";
 
-$lenguaje['id_no_valido_ES'] = "El Código del curso no es Válido";
-
-
 //ingles
-$lenguaje['id_no_valido_IN'] = "The Course Code is Invalid";
 $lenguaje['boton_cerrar_IN'] = 'Close';
 $lenguaje['ver_todas_IN'] = 'see all';
 $lenguaje['sin_novedad_IN'] = 'No news';
@@ -184,7 +180,7 @@ $lenguaje['cupo_disponible_IN'] = 'Seats available';
 $lenguaje['inscripcion_abierta_ES'] = ' - OPEN ENROLLMENT';
 $lenguaje['titulo_IN'] = 'THE MOST IMPORTANT TRAINING NETWORK';
 $lenguaje['inicio_IN'] = 'Home';
-$lenguaje['curso_IN'] = 'CONTINUOUS EDUCATION';
+$lenguaje['curso_IN'] = 'Courses';
 $lenguaje['institucional_IN'] = 'Institutional';
 $lenguaje['pasion_US_IN'] = '<p style="font-size:42px">Follow your passion with us</p>
                           <p style="font-size:56px;font-weight:600">Study at IGA</p>';
@@ -449,4 +445,3 @@ $lenguaje['a_POR'] = ' para';
 $lenguaje['enviar_reserva_POR'] = 'Conclua los datos de su reserva';
 $lenguaje['enviar_consulta_POR'] = 'Envie su consulta';
 $lenguaje['de_POR'] = "de";
-$lenguaje['id_no_valido_POR'] = "O Código do curso é inválido";

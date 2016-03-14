@@ -116,17 +116,13 @@ switch($_POST['option']){
 
         if(isset($_POST['id_noticia'])){
 
-            $stmt = $mysqli->prepare("SELECT estado FROM novedades WHERE id = ?");
-            $stmt->bind_param('s', $_POST['id_noticia']);
-            $stmt->execute();    // Execute the prepared query.
-            $stmt->store_result();
-            
-            if($stmt->num_rows > 0){
+            $res_sel = $mysqli->query("SELECT estado FROM novedades WHERE id={$_POST['id_noticia']}");
 
-                $stmt->bind_result($estado);
-                $stmt->fetch();
+            if($res_sel->num_rows > 0){
 
-                if($estado == 1){
+                $estado = $res_sel->fetch_assoc();
+
+                if($estado['estado'] == 1){
 
                     $nuevo_estado = 0;
 
@@ -165,23 +161,17 @@ switch($_POST['option']){
         $retorno = array();
 
         if(isset($_POST['id_noticia'])){
-            
-            $stmt = $mysqli->prepare("SELECT imagen FROM novedades WHERE id = ?");
-            $stmt->bind_param('s', $_POST['id_noticia']);
-            $stmt->execute();    // Execute the prepared query.
-            $stmt->store_result();
 
-            if($stmt->num_rows > 0){
+            $res_sel = $mysqli->query("SELECT id, imagen FROM novedades WHERE id={$_POST['id_noticia']}");
 
-                $stmt->bind_result($novedad);
-                $stmt->fetch();
+            if($res_sel->num_rows > 0){
 
-                unlink('../images/novedades/'.$novedad);
+                $novedad = $res_sel->fetch_assoc();
 
-                $stmt = $mysqli->prepare("DELETE FROM novedades WHERE id = ?");
-                $stmt->bind_param('s', $_POST['id_noticia']);
-                $stmt->execute();    // Execute the prepared query.
-                
+                unlink('../images/novedades/'.$novedad['imagen']);
+
+                $resultado = $mysqli->query("DELETE FROM novedades WHERE id={$_POST['id_noticia']}");
+
                 $retorno['result'] = 'ok';
 
             }else{
@@ -208,10 +198,10 @@ switch($_POST['option']){
 
         if(isset($_POST['cod_curso']) && isset($_POST['id_idioma']) && isset($_POST['id_filial']) && isset($_POST['estado'])){
 
-            $stmt = $mysqli->prepare("UPDATE curso_filial_idioma SET estado=? WHERE cod_curso=? AND id_filial=? AND id_idioma=?");
-            $stmt->bind_param('iiii', $_POST['estado'], $_POST['cod_curso'], $_POST['id_filial'],$_POST['id_idioma']);
-            $resultado = $stmt->execute();    // Execute the prepared query.
-            
+            $query = "UPDATE curso_filial_idioma SET estado={$_POST['estado']} WHERE cod_curso={$_POST['cod_curso']} AND id_filial={$_POST['id_filial']} AND id_idioma={$_POST['id_idioma']}";
+
+            $resultado = $mysqli->query($query);
+
             if($resultado){
 
                 $retorno['result'] = 'ok';
@@ -238,10 +228,8 @@ switch($_POST['option']){
 
         $retorno = array();
 
-        $stmt = $mysqli->prepare("INSERT INTO tipos SET nombre_es = ?, nombre_in = ?, nombre_pt = ?, padre = ?");
-        $stmt->bind_param('ssss', $_POST['nombre_es'], $_POST['nombre_in'], $_POST['nombre_pt'], $_POST['tipo_curso']);
-        $resultado = $stmt->execute();    // Execute the prepared query.
-        
+        $resultado = $mysqli->query("INSERT INTO tipos SET nombre_es='{$_POST['nombre_es']}', nombre_in='{$_POST['nombre_in']}', nombre_pt='{$_POST['nombre_pt']}', padre='{$_POST['tipo_curso']}'");
+
         if($resultado){
 
             $retorno['result'] = 'ok';
@@ -408,12 +396,6 @@ switch($_POST['option']){
 
         $coursecontact="";
 
-        $dsaorno = guardarConsultaCurso($mysqli,$_POST['filial'], $_POST['email'], $_POST['nombre'], $_POST['phone'], $asunto, $_POST['tipo'], $_POST['message'], $_POST['cod_curso'], $coursecontact, $cod_comision, $cod_plan);
-        $retorno = array("success" => true, "mensaje" => $dsaorno);
-//        $asunto = $lenguaje['atencion_alumno_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
-        print(json_encode($retorno));
-        die();
-        
         if(isset($_POST['tipo']) && $_POST['tipo'] != 0){
 
             if($_POST['tipo'] == '3'){
@@ -683,16 +665,13 @@ switch($_POST['option']){
 
 
             $curso_cupo = getCursoConCupo($_POST['id_filial'], $_POST['cod_curso']);
+
             if(count($curso_cupo) > 0)
             {
                 $texto = $lenguaje['planilla_'.$_SESSION['idioma_seleccionado']['cod_idioma']];
                 $head = "<tr><th colspan='9' class='text-center'>{$texto}</th></tr>";
                 
-                $retorno = '';
-
-                foreach($curso_cupo as $id=>$datos_curso){
-
-                    $retorno .= "<tr>
+                $retorno = "<tr>
 
                                 <th>".$lenguaje['malla_fecha_in_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
 
@@ -701,7 +680,9 @@ switch($_POST['option']){
                                 <th>".$lenguaje['malla_matricula_'.$_SESSION['idioma_seleccionado']['cod_idioma']]."</th>
 
                             </tr>";
-                    
+
+                foreach($curso_cupo as $id=>$datos_curso){
+
                     // Obtenemos las vacantes reales de la comision
 
                     $vacante = $datos_curso['cupo'] - $datos_curso['inscriptos'];
@@ -776,14 +757,8 @@ switch($_POST['option']){
 
                             foreach($datos_curso['detalle_cuotas'] as $cuotas){
 
-                                $cuotasString = $lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]." ".$cuotas['cuota_inicio'].$lenguaje['a_'.$_SESSION['idioma_seleccionado']['cod_idioma']].$cuotas['cuota_fin']." <b> $".$cuotas['valor']."</b><br/><br/>";
-                                
-                                if($cod_pais == 'us')
-                                {
-                                    $cuotasString = $cuotas['cuota_fin'] . " x " . "<b>&#36;" . $cuotas['valor'] . "</b>";
-                                }
-                                
-                                $retorno .= $cuotasString;
+                                $retorno .= $lenguaje['malla_cuotas_'.$_SESSION['idioma_seleccionado']['cod_idioma']]." ".$cuotas['cuota_inicio'].$lenguaje['a_'.$_SESSION['idioma_seleccionado']['cod_idioma']].$cuotas['cuota_fin']." <b> $".$cuotas['valor']."</b><br/><br/>";
+
                             }
 
                             $retorno .= "</td>";
@@ -868,9 +843,9 @@ switch($_POST['option']){
 
                                     <div class="form-group">
 
-                                        <button type="button" class="btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this, \'error-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" class="btn btn-sm" onclick="reservarCupo(\'form-reserva-'.$datos_curso['codigo'].'\', this, \'error-'.$datos_curso['codigo'].'\')" data-loading-text="'.$lenguaje['enviando_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'">'.$lenguaje['malla_boton_reserva_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
 
-                                        <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn-sm">'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
+                                        <button type="button" data-toggle="collapse" data-target="#reserva-'.$datos_curso['codigo'].'" class="btn btn-sm">'.$lenguaje['boton_cerrar_'.$_SESSION['idioma_seleccionado']['cod_idioma']].'</button>
 
                                         &nbsp;&nbsp;<span id="error-'.$datos_curso['codigo'].'" class="error text-center text-consulta-error"></span>
 
@@ -1167,9 +1142,4 @@ switch($_POST['option']){
     break;
 
 }
-
-
-
 ?>
-
-
