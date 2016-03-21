@@ -157,7 +157,13 @@ $categoria = getCategoriasNovedades($mysqli, $novedad['categoria']);
                         </span>
                         <div style="text-align: justify;">
                             <span itemprop="description">
+                                <?php if($_GET['id'] == 132) {
+				$html_pagar = '<form action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add" method="post"><!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO --><input type="hidden" name="itemCode" value="97F4B405656514D1144C4FBD33332431" /><input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-pagar-cinza.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" /></form>';
+					 $novedad['descripcion'] = str_replace('|boton|', $html_pagar, $novedad['descripcion']);
+				}
+				?>
                                 <?=$novedad['descripcion']?>
+
                             </span>    
                         </div>
                         <div class="row">
