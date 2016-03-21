@@ -5,6 +5,13 @@ include_once 'gestor/includes/lenguaje.php';
 
 $pagina = 'novedades';
 
+if(isset($_GET['id']) && $_GET['id'] != ''){
+    if(!filter_var($_GET['id'], FILTER_VALIDATE_INT)){
+        header("Location:index.php");
+        exit();
+    }
+}
+
 //unset($_SESSION);
 if(!isset($_SESSION['pais']))
 {

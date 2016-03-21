@@ -6,6 +6,20 @@ include_once 'gestor/includes/lenguaje.php';
 
 $pagina = 'cursos';
 
+if(isset($_GET['id_filial']) && $_GET['id_filial'] != ''){
+    if(!filter_var($_GET['id_filial'], FILTER_VALIDATE_INT)){
+        header("Location:index.php");
+        exit();
+    }
+}
+
+if(isset($_GET['cod_curso']) && $_GET['cod_curso'] != ''){
+    if(!filter_var($_GET['cod_curso'], FILTER_VALIDATE_INT)){
+        header("Location:index.php");
+        exit();
+    }
+}
+
 //unset($_SESSION);
 if(!isset($_GET['cod_curso']) || $_GET['cod_curso'] == ''){
     header("Location:index.php");

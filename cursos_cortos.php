@@ -23,8 +23,14 @@ if(!isset($_SESSION['idioma_seleccionado']['id_idioma']))
 {
     $_SESSION['idioma_seleccionado']['id_idioma'] = $_SESSION['pais']['id_idioma'];
 }
-if(isset($_GET['id_filial'])){
-    $_SESSION['id_filial'] = $_GET['id_filial'];
+
+if(isset($_GET['id_filial']) && $_GET['id_filial'] != ''){
+    if(filter_var($_GET['id_filial'], FILTER_VALIDATE_INT)){
+        $_SESSION['id_filial'] = $_GET['id_filial'];
+    }else{
+        header("Location:index.php");
+        exit();
+    }
 }
 
 $paises = getPaises($mysqli);
